@@ -1,0 +1,842 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Révision DS Statique</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout : cahier d'ingénieur — colonne de lecture unique, sommaire collant, modules numérotés car l'ordre compte */
+:root{
+  --bg:#f5f6f8; --paper:#ffffff; --ink:#18202e; --muted:#5b6474; --line:#dde1e8;
+  --vec:#2453b8; --force:#c2410c; --ok:#16794a; --okbg:#e7f4ec; --warn:#8a5a00; --warnbg:#fbf1dc;
+  --tint:#eef2fa; --code:#f0f2f6;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11151d; --paper:#181e29; --ink:#e6e9ef; --muted:#9aa3b2; --line:#2a3242;
+  --vec:#7fa6ff; --force:#ff9a62; --ok:#5fd39a; --okbg:#173326; --warn:#f0c060; --warnbg:#3a2e14;
+  --tint:#1d2638; --code:#202838; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11151d; --paper:#181e29; --ink:#e6e9ef; --muted:#9aa3b2; --line:#2a3242;
+  --vec:#7fa6ff; --force:#ff9a62; --ok:#5fd39a; --okbg:#173326; --warn:#f0c060; --warnbg:#3a2e14;
+  --tint:#1d2638; --code:#202838; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.wrap{max-width:780px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.65rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.2rem;font-weight:700;margin-top:28px}
+h4{font-size:1rem;font-weight:700;margin-top:18px}
+p{margin:10px 0}
+a{color:var(--vec)}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header.hero{padding-block:40px 24px}
+header.hero p{max-width:62ch;color:var(--muted)}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:8px max(16px,env(safe-area-inset-left,0px));overflow-x:auto;white-space:nowrap}
+nav.toc .in{max-width:780px;margin:0 auto;display:flex;gap:6px}
+nav.toc a{font-family:var(--display);font-size:.85rem;font-weight:500;text-decoration:none;color:var(--ink);padding:5px 10px;border-radius:999px;border:1px solid var(--line);display:inline-flex;gap:6px;align-items:center}
+nav.toc a.done{border-color:var(--ok);color:var(--ok)}
+nav.toc a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--vec);outline-offset:2px}
+section{padding-block:36px 8px;border-bottom:1px solid var(--line)}
+.mhead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.num{font-family:var(--mono);font-weight:600;color:var(--vec);font-size:1rem}
+.meta{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.intuition{background:var(--tint);border-radius:10px;padding:14px 18px;margin:16px 0}
+.intuition b:first-child{font-family:var(--display)}
+.formula{font-family:var(--mono);font-size:.95rem;background:var(--code);border-radius:8px;padding:12px 14px;margin:12px 0;overflow-x:auto;white-space:pre;line-height:1.7}
+.formula.key{border-left:3px solid var(--vec)}
+code,.m{font-family:var(--mono);font-size:.9em}
+.v{font-weight:700;color:var(--vec);font-family:var(--mono);font-size:.92em}
+.f{color:var(--force)}
+.trap{background:var(--warnbg);color:var(--ink);border-radius:10px;padding:12px 16px;margin:14px 0}
+.trap b{color:var(--warn)}
+ol.steps{padding-left:22px}
+ol.steps li{margin:6px 0}
+.example{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:16px 18px;margin:18px 0}
+.example .eyebrow{color:var(--force)}
+figure{margin:16px 0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+figure svg{display:block;margin:0 auto;max-width:100%;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+details{border:1px solid var(--line);border-radius:8px;margin:8px 0;background:var(--paper)}
+details>summary{cursor:pointer;padding:8px 12px;font-family:var(--display);font-weight:500;font-size:.95rem;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--vec)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 12px}
+details.sol>summary{color:var(--ok)}
+details.hint>summary{color:var(--warn)}
+.ex{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:14px 0}
+.ex h4{margin-top:0;display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+.tag{font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:999px;background:var(--tint);color:var(--vec);font-weight:600}
+.quiz{margin:16px 0}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}
+.q p{margin:0 0 8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-family:var(--mono);font-size:.88rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button.right{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opts button.wrong{text-decoration:line-through;opacity:.6}
+.fb{font-size:.92rem;margin-top:8px;color:var(--muted)}
+.checkrow{display:flex;align-items:center;gap:10px;margin:22px 0 10px;font-family:var(--display);font-weight:500}
+.checkrow input{width:20px;height:20px;accent-color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tw{overflow-x:auto;margin:12px 0}
+th,td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--display);font-weight:700}
+td.mono{font-family:var(--mono);font-size:.88rem;white-space:nowrap}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
+.plan>div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 18px;min-width:0}
+.plan ul{margin:8px 0 0;padding-left:18px}
+.calc{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.vrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+.vrow label{font-family:var(--mono);font-weight:600;min-width:2.2em}
+.vrow input{width:5.2em;font-family:var(--mono);font-size:.95rem;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.out{font-family:var(--mono);font-size:.9rem;background:var(--code);border-radius:8px;padding:12px 14px;margin-top:12px;white-space:pre;overflow-x:auto;line-height:1.75;font-variant-numeric:tabular-nums}
+.timer{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.timer .t{font-family:var(--mono);font-size:1.6rem;font-weight:600;font-variant-numeric:tabular-nums}
+.btn{font-family:var(--display);font-weight:500;font-size:.92rem;padding:7px 14px;border-radius:8px;border:1px solid var(--vec);background:var(--vec);color:var(--paper);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--vec)}
+.fiche{columns:2 300px;column-gap:24px}
+.fiche>div{break-inside:avoid;margin-bottom:16px}
+.fiche h4{margin-top:0;color:var(--vec)}
+.fiche .formula{font-size:.84rem;white-space:pre-wrap}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow"><a href="../../">← Toutes les révisions</a> · Statique · chapitres 1 à 3</div>
+  <h1>Révision DS Statique</h1>
+  <p>Huit modules pour comprendre le cours depuis zéro : vecteurs et forces, vecteur position, produit scalaire, équilibre, produit vectoriel, moments. Ensuite viennent des exercices avec indices et corrections cachées, un mini-DS chronométré et une fiche à relire samedi matin. Coche chaque module quand tu l'as compris : ta progression reste enregistrée dans ce navigateur.</p>
+</header>
+</div>
+
+<nav class="toc" aria-label="Sommaire"><div class="in" id="toc">
+  <a href="#plan">Plan</a>
+  <a href="#m1" data-m="m1">1 Forces 2D</a>
+  <a href="#m2" data-m="m2">2 Vecteurs 3D</a>
+  <a href="#m3" data-m="m3">3 Vecteur position</a>
+  <a href="#m4" data-m="m4">4 Produit scalaire</a>
+  <a href="#m5" data-m="m5">5 Équilibre</a>
+  <a href="#m6" data-m="m6">6 Produit vectoriel</a>
+  <a href="#m7" data-m="m7">7 Moment</a>
+  <a href="#m8" data-m="m8">8 Moment / axe</a>
+  <a href="#exos">Exercices</a>
+  <a href="#ds">Mini-DS</a>
+  <a href="#fiche">Fiche</a>
+  <a href="#calc">Calculatrice</a>
+</div></nav>
+
+<div class="wrap">
+
+<section id="plan">
+  <h2>Ton plan jusqu'à samedi</h2>
+  <div class="plan">
+    <div>
+      <div class="eyebrow">Jeudi après-midi · comprendre</div>
+      <ul>
+        <li>Modules 1 à 4 (environ 2 h) : tout repose sur les vecteurs.</li>
+        <li>Module 5, l'équilibre (40 min).</li>
+        <li>Modules 6 à 8, produit vectoriel et moments (1 h 30).</li>
+        <li>Pour chaque module : lire l'intuition, refaire l'exemple sur papier sans regarder, répondre aux questions rapides.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow">Vendredi soir · s'entraîner</div>
+      <ul>
+        <li>Exercices 1 à 12 (1 h 30). Cherche 10 min avant d'ouvrir l'indice.</li>
+        <li>Mini-DS en 1 h, sans regarder le cours.</li>
+        <li>Corrige-toi, puis refais les exercices de tes PDF du prof sur tes points faibles.</li>
+        <li>Fiche récap en dernier, puis dors.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="trap"><b>Règle d'or pour le DS.</b> Toujours : un schéma, un repère, les vecteurs écrits en composantes (i, j, k), les unités, et un résultat encadré. La moitié des points perdus en statique vient d'un signe ou d'un angle mal lu, pas d'une notion incomprise.</div>
+</section>
+
+<!-- ============ MODULE 1 ============ -->
+<section id="m1">
+  <div class="mhead"><span class="num">01</span><h2>Forces et vecteurs en 2D</h2><span class="meta">chapitre 1 · 30 min</span></div>
+
+  <div class="intuition"><b>L'idée.</b> Une force, c'est une poussée ou une traction. Pour la décrire, il faut trois choses : son <i>intensité</i> (combien, en newtons), sa <i>direction</i> (dans quel sens elle pousse) et son <i>point d'application</i>. Un nombre seul ne suffit pas, d'où le vecteur. Toute la statique consiste à additionner des flèches.</div>
+
+  <h3>Scalaire ou vecteur ?</h3>
+  <p>Un <b>scalaire</b> n'a qu'une valeur : masse, longueur, temps. Un <b>vecteur</b> a une intensité et une direction : force, position, moment. On écrit un vecteur en gras (<span class="v">F</span>) et son intensité en maigre (F ou |<span class="v">F</span>|).</p>
+
+  <h3>Unités à connaître</h3>
+  <p>Système SI : longueur en m, masse en kg, temps en s, force en newtons. 1 N = 1 kg·m/s². Le <b>poids</b> d'une masse m vaut <span class="m">W = m·g</span> avec g = 9,81 m/s². Une caisse de 20 kg pèse donc 196,2 N et non 20 N. C'est l'erreur n°1.</p>
+
+  <h3>Décomposer une force</h3>
+  <p>On remplace la flèche oblique par deux flèches le long des axes x et y. Si θ est l'angle mesuré <b>depuis l'axe x</b> :</p>
+  <div class="formula key">Fx = F·cos θ        Fy = F·sin θ</div>
+  <figure>
+    <svg viewBox="0 0 320 200" width="320" role="img" aria-label="Force F décomposée en Fx et Fy">
+      <line x1="40" y1="170" x2="300" y2="170" stroke="var(--muted)" stroke-width="1.5"/>
+      <line x1="40" y1="170" x2="40" y2="15" stroke="var(--muted)" stroke-width="1.5"/>
+      <text x="292" y="188" fill="var(--muted)" font-family="var(--mono)" font-size="13">x</text>
+      <text x="26" y="22" fill="var(--muted)" font-family="var(--mono)" font-size="13">y</text>
+      <line x1="40" y1="170" x2="220" y2="170" stroke="var(--vec)" stroke-width="3"/>
+      <polygon points="220,164 232,170 220,176" fill="var(--vec)"/>
+      <line x1="232" y1="170" x2="232" y2="62" stroke="var(--vec)" stroke-width="3" stroke-dasharray="6 4"/>
+      <polygon points="226,62 232,50 238,62" fill="var(--vec)"/>
+      <line x1="40" y1="170" x2="224" y2="56" stroke="var(--force)" stroke-width="3.5"/>
+      <polygon points="220,48 234,50 226,61" fill="var(--force)"/>
+      <path d="M 95 170 A 55 55 0 0 0 87 141" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="100" y="158" fill="var(--ink)" font-family="var(--mono)" font-size="14">θ</text>
+      <text x="120" y="100" fill="var(--force)" font-family="var(--mono)" font-size="15" font-weight="600">F</text>
+      <text x="120" y="190" fill="var(--vec)" font-family="var(--mono)" font-size="13">Fx = F cos θ</text>
+      <text x="240" y="115" fill="var(--vec)" font-family="var(--mono)" font-size="13">Fy = F sin θ</text>
+    </svg>
+    <figcaption>Le cosinus va avec le côté adjacent à l'angle, le sinus avec le côté opposé.</figcaption>
+  </figure>
+  <div class="trap"><b>Piège.</b> Si l'angle est donné par rapport à l'axe y, les rôles s'inversent : Fx = F sin θ et Fy = F cos θ. Regarde toujours <i>où</i> est l'angle sur le dessin. Et donne un signe à chaque composante : une force qui va vers la gauche a Fx &lt; 0.</div>
+  <p><b>Pente donnée par un petit triangle</b> (souvent 3-4-5) : on n'a pas besoin de l'angle. Si le triangle a pour côtés 3 (vertical), 4 (horizontal), 5 (hypoténuse), alors <span class="m">Fx = F·4/5</span> et <span class="m">Fy = F·3/5</span>.</p>
+
+  <h3>Résultante de plusieurs forces</h3>
+  <ol class="steps">
+    <li>Décompose chaque force en Fx et Fy, avec leurs signes.</li>
+    <li>Additionne : <span class="m">FRx = ΣFx</span> et <span class="m">FRy = ΣFy</span>.</li>
+    <li>Intensité : <span class="m">FR = √(FRx² + FRy²)</span>.</li>
+    <li>Direction : <span class="m">θ = arctan(FRy / FRx)</span>, puis vérifie le quadrant avec les signes de FRx et FRy.</li>
+  </ol>
+  <p>Écriture vectorielle équivalente : <span class="m"><span class="v">F</span> = Fx <span class="v">i</span> + Fy <span class="v">j</span></span>, où <span class="v">i</span> et <span class="v">j</span> sont les vecteurs unitaires des axes.</p>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé</div>
+    <p>Deux forces tirent sur une vis : F1 = 100 N à 15° au-dessus de l'axe x, F2 = 150 N à 80° au-dessus de l'axe x. Trouve la résultante.</p>
+    <div class="formula">F1x = 100 cos15° = 96,59 N     F1y = 100 sin15° = 25,88 N
+F2x = 150 cos80° = 26,05 N     F2y = 150 sin80° = 147,72 N
+FRx = 122,64 N                 FRy = 173,60 N
+FR  = √(122,64² + 173,60²) = 212,6 N
+θ   = arctan(173,60 / 122,64) = 54,8°  (au-dessus de x)</div>
+  </div>
+
+  <div class="quiz" data-q>
+    <div class="q"><p>Une force de 50 N fait 30° avec l'axe <b>y</b>. Que vaut Fx ?</p>
+      <div class="opts"><button data-ok="1">25 N</button><button>43,3 N</button><button>50 N</button></div>
+      <div class="fb" hidden>L'angle est mesuré depuis y, donc Fx = F sin30° = 25 N (et Fy = F cos30° = 43,3 N).</div></div>
+    <div class="q"><p>Quel est le poids d'une lampe de 8 kg ?</p>
+      <div class="opts"><button>8 N</button><button data-ok="1">78,5 N</button><button>0,82 N</button></div>
+      <div class="fb" hidden>W = m g = 8 × 9,81 = 78,48 N.</div></div>
+    <div class="q"><p>FRx = −30 N et FRy = 40 N. Dans quel quadrant pointe la résultante ?</p>
+      <div class="opts"><button>En haut à droite</button><button data-ok="1">En haut à gauche</button><button>En bas à gauche</button></div>
+      <div class="fb" hidden>x négatif, y positif : en haut à gauche. FR = 50 N et elle fait 53,1° avec l'axe −x (126,9° depuis +x). La calculatrice donnerait −53,1° : c'est pour ça qu'on vérifie les signes.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m1" data-m="m1"> J'ai compris le module 1</label>
+</section>
+
+<!-- ============ MODULE 2 ============ -->
+<section id="m2">
+  <div class="mhead"><span class="num">02</span><h2>Vecteurs cartésiens en 3D</h2><span class="meta">chapitre 1 · 30 min</span></div>
+  <div class="intuition"><b>L'idée.</b> Même chose qu'en 2D, avec un troisième axe z. Un vecteur, c'est trois nombres : combien il avance selon x, selon y, selon z.</div>
+
+  <div class="formula key">A = Ax i + Ay j + Az k
+|A| = √(Ax² + Ay² + Az²)</div>
+
+  <h3>Les angles directeurs α, β, γ</h3>
+  <p>Ce sont les angles entre le vecteur et les axes <b>positifs</b> x, y, z. Chacun est entre 0° et 180°.</p>
+  <div class="formula key">cos α = Ax / A      cos β = Ay / A      cos γ = Az / A
+cos²α + cos²β + cos²γ = 1</div>
+  <p>Le <b>vecteur unitaire</b> (longueur 1) dans la direction de <span class="v">A</span> est <span class="m"><span class="v">u</span>A = <span class="v">A</span> / A = cos α <span class="v">i</span> + cos β <span class="v">j</span> + cos γ <span class="v">k</span></span>. Il sert à « porter » une direction : une force F dans cette direction s'écrit <span class="m"><span class="v">F</span> = F·<span class="v">u</span></span>.</p>
+  <div class="trap"><b>Piège.</b> Si on te donne seulement deux angles, la relation cos²α + cos²β + cos²γ = 1 donne le troisième, mais avec deux solutions possibles (γ et 180° − γ). Le dessin dit lequel : si la force pointe vers le bas, cos γ &lt; 0, donc γ &gt; 90°.</div>
+
+  <h3>Autre façon de donner une direction : θ et φ</h3>
+  <p>Parfois la figure donne un angle φ avec l'axe z et un angle θ dans le plan x-y. On projette en deux temps :</p>
+  <div class="formula">Fz = F cos φ          F' = F sin φ   (projection dans le plan x-y)
+Fx = F' cos θ         Fy = F' sin θ</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 1</div>
+    <p>F = 200 N avec α = 60°, β = 45°, et F pointe vers le bas (z négatif). Écris F en vecteur cartésien.</p>
+    <div class="formula">cos²γ = 1 − cos²60° − cos²45° = 1 − 0,25 − 0,5 = 0,25  →  cos γ = ±0,5
+F pointe vers le bas  →  cos γ = −0,5  →  γ = 120°
+F = 200(0,5 i + 0,707 j − 0,5 k) = {100 i + 141,4 j − 100 k} N</div>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 2</div>
+    <p>La résultante sur un anneau vaut <span class="m"><span class="v">F</span>R = {50 i − 40 j + 180 k} N</span>. Intensité et angles directeurs ?</p>
+    <div class="formula">FR = √(50² + 40² + 180²) = 191,0 N
+α = arccos(50/191,0)  = 74,8°
+β = arccos(−40/191,0) = 102,1°
+γ = arccos(180/191,0) = 19,6°
+Vérif : 0,262² + 0,209² + 0,942² ≈ 1  ✓</div>
+  </div>
+
+  <div class="quiz" data-q>
+    <div class="q"><p>Un vecteur a α = 90°. Que peut-on dire ?</p>
+      <div class="opts"><button data-ok="1">Ax = 0</button><button>Il est parallèle à x</button><button>|A| = 0</button></div>
+      <div class="fb" hidden>cos 90° = 0 donc Ax = 0 : le vecteur est perpendiculaire à l'axe x (il est dans le plan y-z).</div></div>
+    <div class="q"><p>Norme de A = {2 i − 3 j + 6 k} ?</p>
+      <div class="opts"><button>5</button><button data-ok="1">7</button><button>11</button></div>
+      <div class="fb" hidden>√(4 + 9 + 36) = √49 = 7.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m2" data-m="m2"> J'ai compris le module 2</label>
+</section>
+
+<!-- ============ MODULE 3 ============ -->
+<section id="m3">
+  <div class="mhead"><span class="num">03</span><h2>Vecteur position et force le long d'une droite</h2><span class="meta">chapitre 1 · 25 min</span></div>
+  <div class="intuition"><b>L'idée.</b> Dans les exercices, on te donne rarement les angles. On te donne des <b>coordonnées de points</b> (où est accroché le câble, où il arrive). Le vecteur position transforme deux points en une direction, et cette direction dit où tire le câble.</div>
+
+  <div class="formula key">r_AB = (xB − xA) i + (yB − yA) j + (zB − zA) k      « arrivée moins départ »</div>
+  <p>La longueur du câble AB est |<span class="v">r</span>AB|. Une force F qui tire <b>de A vers B</b> (le long du câble) s'écrit :</p>
+  <div class="formula key">F = F · u_AB = F · r_AB / |r_AB|</div>
+  <ol class="steps">
+    <li>Lis les coordonnées de A et de B sur la figure (attention aux cotes sur les axes négatifs).</li>
+    <li>Calcule <span class="v">r</span>AB = B − A.</li>
+    <li>Calcule sa norme.</li>
+    <li>Multiplie le vecteur par F / |<span class="v">r</span>AB|.</li>
+  </ol>
+  <div class="trap"><b>Piège.</b> Un câble <i>tire</i> sur le point où il est accroché, vers l'autre extrémité. La force sur A dirigée vers B se calcule avec <span class="v">r</span>AB, pas <span class="v">r</span>BA. Inverser donne un signe faux sur toutes les composantes.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé</div>
+    <p>Un homme tire une corde avec 70 N. La corde va de A(0 ; 0 ; 30) m à B(12 ; −8 ; 6) m. Écris la force exercée en A, vers B, et ses angles directeurs.</p>
+    <div class="formula">r_AB = (12 − 0) i + (−8 − 0) j + (6 − 30) k = {12 i − 8 j − 24 k} m
+|r_AB| = √(144 + 64 + 576) = √784 = 28 m
+u_AB  = (12/28) i − (8/28) j − (24/28) k
+F     = 70 · u_AB = {30 i − 20 j − 60 k} N
+α = arccos(30/70) = 64,6°   β = arccos(−20/70) = 106,6°   γ = arccos(−60/70) = 149,0°</div>
+  </div>
+  <div class="quiz" data-q>
+    <div class="q"><p>A(1 ; 2 ; 0), B(4 ; 6 ; 0). Longueur AB ?</p>
+      <div class="opts"><button data-ok="1">5</button><button>7</button><button>√52</button></div>
+      <div class="fb" hidden><span class="v">r</span>AB = {3 i + 4 j} → √(9 + 16) = 5.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m3" data-m="m3"> J'ai compris le module 3</label>
+</section>
+
+<!-- ============ MODULE 4 ============ -->
+<section id="m4">
+  <div class="mhead"><span class="num">04</span><h2>Produit scalaire</h2><span class="meta">chapitre 1 · 30 min</span></div>
+  <div class="intuition"><b>L'idée.</b> Le produit scalaire répond à la question « combien de A va dans la direction de B ? ». Le résultat est un <b>nombre</b>, pas un vecteur. Il sert à deux choses : trouver l'angle entre deux droites et projeter une force sur un axe.</div>
+
+  <div class="formula key">A · B = |A| |B| cos θ                     (définition géométrique)
+A · B = Ax Bx + Ay By + Az Bz             (calcul en composantes)</div>
+  <p>Règles : <span class="m">i·i = j·j = k·k = 1</span> et <span class="m">i·j = j·k = k·i = 0</span>. Le produit scalaire est commutatif : A·B = B·A. Si A·B = 0 (avec A et B non nuls), les vecteurs sont perpendiculaires.</p>
+
+  <h3>Application 1 : angle entre deux vecteurs</h3>
+  <div class="formula">θ = arccos( A·B / (|A| |B|) )        0° ≤ θ ≤ 180°</div>
+
+  <h3>Application 2 : projection d'une force sur un axe</h3>
+  <p>Soit un axe de vecteur unitaire <span class="v">u</span>a. La composante de <span class="v">F</span> <b>parallèle</b> à l'axe et la composante <b>perpendiculaire</b> sont :</p>
+  <div class="formula key">F∥ = F · u_a                       (scalaire, peut être négatif)
+F∥ (vecteur) = (F · u_a) u_a
+F⊥ = √(F² − F∥²)          ou    F⊥ (vecteur) = F − F∥ u_a</div>
+  <div class="trap"><b>Piège.</b> On projette sur un vecteur <b>unitaire</b>. Si tu fais F · r au lieu de F · u, ton résultat est multiplié par la longueur |r|. Divise toujours par la norme.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 1 · angle</div>
+    <p>Une tige va de A à C avec <span class="v">r</span>AC = {−3 j} m, un câble va de A à B avec <span class="v">r</span>AB = {2 i − j − 2 k} m. Angle entre la tige et le câble ?</p>
+    <div class="formula">r_AB · r_AC = 2·0 + (−1)(−3) + (−2)·0 = 3
+|r_AB| = √(4 + 1 + 4) = 3      |r_AC| = 3
+θ = arccos(3 / (3·3)) = arccos(1/3) = 70,5°</div>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 2 · projection</div>
+    <p><span class="v">F</span> = {−6 i + 9 j + 3 k} kN et un axe AO de direction <span class="v">u</span> = (−1/3) i + (2/3) j − (2/3) k. Composantes parallèle et perpendiculaire ?</p>
+    <div class="formula">F∥ = (−6)(−1/3) + 9(2/3) + 3(−2/3) = 2 + 6 − 2 = 6 kN
+|F| = √(36 + 81 + 9) = √126 = 11,22 kN
+F⊥ = √(126 − 36) = √90 = 9,49 kN
+Angle entre F et l'axe : arccos(6/11,22) = 57,7°</div>
+  </div>
+  <div class="quiz" data-q>
+    <div class="q"><p>(1, 2, 3) · (4, −1, 2) = ?</p>
+      <div class="opts"><button>(4, −2, 6)</button><button data-ok="1">8</button><button>12</button></div>
+      <div class="fb" hidden>4 − 2 + 6 = 8. Le produit scalaire donne un nombre, jamais un vecteur.</div></div>
+    <div class="q"><p>F∥ est négatif. Qu'est-ce que ça veut dire ?</p>
+      <div class="opts"><button>Erreur de calcul</button><button data-ok="1">F pointe dans le sens opposé à u</button><button>F est perpendiculaire à l'axe</button></div>
+      <div class="fb" hidden>θ &gt; 90° : la composante le long de l'axe est dans le sens −u. C'est un résultat valable.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m4" data-m="m4"> J'ai compris le module 4</label>
+</section>
+
+<!-- ============ MODULE 5 ============ -->
+<section id="m5">
+  <div class="mhead"><span class="num">05</span><h2>Équilibre d'une particule</h2><span class="meta">chapitre 2 · 40 min</span></div>
+  <div class="intuition"><b>L'idée.</b> Un objet immobile (ou à vitesse constante) a une accélération nulle. D'après Newton, ΣF = m a = 0 : <b>toutes les forces s'annulent</b>. On écrit cette équation axe par axe, et chaque axe donne une équation pour trouver une inconnue.</div>
+  <div class="formula key">ΣF = 0      ⇔     ΣFx = 0,  ΣFy = 0  (,  ΣFz = 0 en 3D)</div>
+  <p>En 2D on a donc <b>2 équations</b>, donc au plus 2 inconnues. En 3D on a <b>3 équations</b>, donc 3 inconnues.</p>
+
+  <h3>Le diagramme du corps libre (DCL)</h3>
+  <p>C'est l'étape la plus importante, et elle est notée. On isole le point (le nœud où se rejoignent les câbles) et on dessine <b>toutes</b> les forces qui agissent dessus :</p>
+  <ol class="steps">
+    <li>Dessine le point seul, « coupé » de tout ce qui le touche.</li>
+    <li>Fais le tour : chaque câble coupé devient une force. Ajoute le poids (vers le bas).</li>
+    <li>Note les forces connues avec leur valeur et leur angle, et les inconnues avec une lettre (T_AB, F…).</li>
+  </ol>
+  <div class="tw"><table>
+    <tr><th>Élément</th><th>Force qu'il exerce</th></tr>
+    <tr><td>Câble</td><td>Une <b>tension</b> T, toujours dans l'axe du câble, toujours en traction (le câble tire, il ne pousse jamais).</td></tr>
+    <tr><td>Poulie sans frottement</td><td>La tension est la même des deux côtés du câble.</td></tr>
+    <tr><td>Ressort</td><td><span class="m">F = k·s</span> avec <span class="m">s = l − l₀</span> (longueur actuelle moins longueur à vide). s &gt; 0 : le ressort est étiré et tire.</td></tr>
+    <tr><td>Masse suspendue</td><td>Son poids <span class="m">W = m·g</span>, vertical vers le bas.</td></tr>
+  </table></div>
+
+  <h3>Méthode complète</h3>
+  <ol class="steps">
+    <li>DCL du nœud.</li>
+    <li>Choisis les axes x et y (en général horizontal et vertical).</li>
+    <li>Décompose chaque force (module 1), ou en 3D écris chaque force comme F·<span class="v">u</span> (module 3).</li>
+    <li>Écris ΣFx = 0, ΣFy = 0 (ΣFz = 0) et résous le système.</li>
+    <li>Une tension négative signifie qu'il y a une erreur : un câble ne pousse pas.</li>
+  </ol>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 1 · 2D</div>
+    <p>Une caisse de 550 kg pend au nœud A. Le câble AB monte vers la droite selon une pente 3-4-5 (4 à l'horizontale, 3 à la verticale). Le câble AC monte vers la gauche à 30° de l'horizontale. Tensions ?</p>
+    <div class="formula">W = 550 × 9,81 = 5395,5 N
+ΣFx = 0 :  (4/5) T_AB − T_AC cos30° = 0
+ΣFy = 0 :  (3/5) T_AB + T_AC sin30° − 5395,5 = 0
+De (1) : T_AC = 0,8 T_AB / 0,866 = 0,924 T_AB
+Dans (2) : 0,6 T_AB + 0,462 T_AB = 5395,5  →  T_AB = 5081 N ≈ 5,08 kN
+T_AC = 4694 N ≈ 4,69 kN</div>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 2 · avec ressort</div>
+    <p>Une lampe de 8 kg pend au nœud A. Un ressort AB horizontal (k = 300 N/m, longueur à vide 0,4 m) relie A au mur. Un câble AC monte à 30° au-dessus de l'horizontale vers C. Le mur et C sont à 2 m l'un de l'autre horizontalement. Longueur du câble AC ?</p>
+    <div class="formula">W = 8 × 9,81 = 78,48 N
+ΣFy = 0 : T_AC sin30° = 78,48         →  T_AC = 156,96 N
+ΣFx = 0 : T_AB = T_AC cos30°          →  T_AB = 135,9 N
+Ressort : s = T_AB / k = 135,9 / 300 = 0,453 m  →  l_AB = 0,4 + 0,453 = 0,853 m
+Horizontale restante : 2 − 0,853 = 1,147 m
+l_AC = 1,147 / cos30° = 1,32 m</div>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 3 · 3D</div>
+    <p>Un poids de 40 N pend en A (origine). Trois câbles le retiennent : AB vers B(−3 ; −4 ; 8) m, AC vers C(−3 ; 4 ; 8) m, et AD horizontal selon +x. Tensions ?</p>
+    <div class="formula">|r_AB| = |r_AC| = √(9 + 16 + 64) = √89 = 9,434 m
+F_B = F_B (−3 i − 4 j + 8 k)/9,434      F_C = F_C (−3 i + 4 j + 8 k)/9,434
+F_D = F_D i                             W = −40 k
+ΣFy : −4F_B/9,434 + 4F_C/9,434 = 0           →  F_B = F_C
+ΣFz : 8F_B/9,434 + 8F_C/9,434 − 40 = 0      →  F_B = F_C = 23,6 N
+ΣFx : −3(2 × 23,6)/9,434 + F_D = 0           →  F_D = 15,0 N</div>
+  </div>
+  <div class="quiz" data-q>
+    <div class="q"><p>En 2D, combien d'inconnues peut-on trouver avec l'équilibre d'un seul point ?</p>
+      <div class="opts"><button>1</button><button data-ok="1">2</button><button>3</button></div>
+      <div class="fb" hidden>Deux équations (ΣFx = 0 et ΣFy = 0), donc deux inconnues au plus.</div></div>
+    <div class="q"><p>Un ressort de longueur à vide 2 m mesure 2,5 m, k = 300 N/m. Force ?</p>
+      <div class="opts"><button>750 N</button><button data-ok="1">150 N</button><button>600 N</button></div>
+      <div class="fb" hidden>s = 2,5 − 2 = 0,5 m, F = 300 × 0,5 = 150 N. On utilise l'allongement, pas la longueur.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m5" data-m="m5"> J'ai compris le module 5</label>
+</section>
+
+<!-- ============ MODULE 6 ============ -->
+<section id="m6">
+  <div class="mhead"><span class="num">06</span><h2>Produit vectoriel</h2><span class="meta">chapitre 3 · 40 min · indispensable</span></div>
+  <div class="intuition"><b>L'idée.</b> Le produit vectoriel de deux vecteurs donne un <b>troisième vecteur</b>, perpendiculaire aux deux premiers. On l'utilise pour une seule raison en statique : calculer les moments (la tendance à faire tourner). C'est l'outil central du chapitre 3.</div>
+
+  <div class="formula key">C = A × B
+|C| = |A| |B| sin θ        (θ = angle entre A et B)
+Direction : perpendiculaire au plan de A et B, sens donné par la main droite</div>
+
+  <figure>
+    <svg viewBox="0 0 320 220" width="320" role="img" aria-label="A croix B est perpendiculaire au plan de A et B">
+      <polygon points="40,170 200,170 280,120 120,120" fill="var(--tint)" stroke="var(--line)"/>
+      <line x1="110" y1="160" x2="230" y2="160" stroke="var(--vec)" stroke-width="3"/>
+      <polygon points="230,154 242,160 230,166" fill="var(--vec)"/>
+      <text x="236" y="182" fill="var(--vec)" font-family="var(--mono)" font-size="15" font-weight="600">A</text>
+      <line x1="110" y1="160" x2="172" y2="128" stroke="var(--force)" stroke-width="3"/>
+      <polygon points="168,122 182,123 174,134" fill="var(--force)"/>
+      <text x="178" y="118" fill="var(--force)" font-family="var(--mono)" font-size="15" font-weight="600">B</text>
+      <line x1="110" y1="160" x2="110" y2="40" stroke="var(--ink)" stroke-width="3"/>
+      <polygon points="104,42 110,28 116,42" fill="var(--ink)"/>
+      <text x="120" y="42" fill="var(--ink)" font-family="var(--mono)" font-size="15" font-weight="600">C = A × B</text>
+      <path d="M 150 160 A 40 40 0 0 0 140 145" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="152" y="152" fill="var(--ink)" font-family="var(--mono)" font-size="13">θ</text>
+    </svg>
+    <figcaption>Main droite : les doigts tournent de A vers B, le pouce donne C.</figcaption>
+  </figure>
+
+  <h3>Propriétés à connaître par cœur</h3>
+  <ul>
+    <li><b>Pas commutatif</b> : <span class="m">A × B = −(B × A)</span>. L'ordre compte.</li>
+    <li>Distributif : <span class="m">A × (B + D) = A × B + A × D</span>.</li>
+    <li>Scalaire : <span class="m">a(A × B) = (aA) × B</span>.</li>
+    <li>Deux vecteurs parallèles : <span class="m">A × B = 0</span> (sin 0° = 0).</li>
+  </ul>
+  <div class="formula key">i × j = k     j × k = i     k × i = j      (sens du cercle i → j → k → i : signe +)
+j × i = −k    k × j = −i    i × k = −j     (sens inverse : signe −)
+i × i = j × j = k × k = 0</div>
+
+  <h3>Calcul en composantes : le déterminant</h3>
+  <div class="formula key">          | i    j    k  |
+A × B  =  | Ax   Ay   Az |
+          | Bx   By   Bz |
+
+       =  (Ay Bz − Az By) i  −  (Ax Bz − Az Bx) j  +  (Ax By − Ay Bx) k</div>
+  <p><b>Comment le retenir.</b> Pour la composante i, cache la colonne i et fais le « produit en croix » du carré restant (Ay Bz − Az By). Pareil pour j et k, <b>sans oublier le signe moins devant j</b>.</p>
+  <div class="trap"><b>Le moins devant j</b> est la source d'erreur n°1 du chapitre. Astuce de contrôle gratuite : le résultat C doit être perpendiculaire à A et à B, donc <span class="m">C·A = 0</span> et <span class="m">C·B = 0</span>. Vérifie toujours, ça prend 20 secondes.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé</div>
+    <p>A = {i + 2 j + 3 k}, B = {4 i − j + 2 k}. Calcule A × B.</p>
+    <div class="formula">i :   (2)(2) − (3)(−1)   = 4 + 3    = 7
+j : −[(1)(2) − (3)(4)]   = −(2 − 12) = 10
+k :   (1)(−1) − (2)(4)   = −1 − 8   = −9
+A × B = {7 i + 10 j − 9 k}
+Vérif : C·A = 7 + 20 − 27 = 0 ✓      C·B = 28 − 10 − 18 = 0 ✓</div>
+  </div>
+  <div class="quiz" data-q>
+    <div class="q"><p>k × i = ?</p>
+      <div class="opts"><button data-ok="1">j</button><button>−j</button><button>0</button></div>
+      <div class="fb" hidden>k → i suit le cercle i → j → k → i, donc signe + : k × i = j.</div></div>
+    <div class="q"><p>Si A × B = {2 i − k}, que vaut B × A ?</p>
+      <div class="opts"><button>{2 i − k}</button><button data-ok="1">{−2 i + k}</button><button>0</button></div>
+      <div class="fb" hidden>B × A = −(A × B).</div></div>
+    <div class="q"><p>Le produit vectoriel de deux forces parallèles vaut :</p>
+      <div class="opts"><button>Le produit des normes</button><button data-ok="1">Le vecteur nul</button><button>Un vecteur parallèle aux deux</button></div>
+      <div class="fb" hidden>|A × B| = AB sin 0° = 0.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m6" data-m="m6"> J'ai compris le module 6</label>
+</section>
+
+<!-- ============ MODULE 7 ============ -->
+<section id="m7">
+  <div class="mhead"><span class="num">07</span><h2>Moment d'une force</h2><span class="meta">chapitre 3 · 45 min</span></div>
+  <div class="intuition"><b>L'idée.</b> Pousse une porte près des gonds : elle bouge à peine. Pousse près de la poignée : elle s'ouvre facilement. Le <b>moment</b> mesure cette tendance à faire tourner. Il dépend de la force <i>et</i> de la distance au point de rotation. « Donnez-moi un levier et je soulèverai le monde. »</div>
+
+  <h3>En 2D : moment scalaire</h3>
+  <div class="formula key">M_O = F · d        (en N·m)
+d = bras de levier = distance PERPENDICULAIRE de O à la ligne d'action de F</div>
+  <figure>
+    <svg viewBox="0 0 340 190" width="340" role="img" aria-label="Bras de levier d perpendiculaire à la ligne d'action">
+      <line x1="60" y1="20" x2="300" y2="175" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="5 5"/>
+      <text x="250" y="168" fill="var(--muted)" font-family="var(--mono)" font-size="11">ligne d'action</text>
+      <line x1="150" y1="78" x2="222" y2="124" stroke="var(--force)" stroke-width="3.5"/>
+      <polygon points="218,131 232,130 225,119" fill="var(--force)"/>
+      <text x="196" y="94" fill="var(--force)" font-family="var(--mono)" font-size="15" font-weight="600">F</text>
+      <circle cx="80" cy="140" r="5" fill="var(--ink)"/>
+      <text x="62" y="160" fill="var(--ink)" font-family="var(--mono)" font-size="14">O</text>
+      <line x1="80" y1="140" x2="137" y2="52" stroke="var(--vec)" stroke-width="2.5"/>
+      <text x="90" y="88" fill="var(--vec)" font-family="var(--mono)" font-size="15" font-weight="600">d</text>
+      <polyline points="129,47 125,54 133,59" fill="none" stroke="var(--vec)" stroke-width="1.5"/>
+    </svg>
+    <figcaption>d se mesure à angle droit avec la ligne d'action, pas jusqu'au point d'application.</figcaption>
+  </figure>
+  <p><b>Convention de signe</b> : un moment qui fait tourner dans le sens <b>anti-horaire</b> est positif (son vecteur sort de la page, selon +k). Horaire : négatif.</p>
+  <p>Si la force est inclinée d'un angle θ par rapport à la barre de longueur L, le bras de levier devient <span class="m">d = L sin θ</span>.</p>
+  <h4>Théorème de Varignon (le raccourci le plus utile)</h4>
+  <p>Le moment d'une force est égal à la somme des moments de ses composantes. Donc, au lieu de chercher d, tu décomposes F en Fx et Fy et tu fais :</p>
+  <div class="formula key">M_O = x·Fy − y·Fx       (x, y = coordonnées du point d'application, O à l'origine)</div>
+
+  <h3>En 3D : moment vectoriel</h3>
+  <div class="formula key">M_O = r × F
+r = vecteur position de O vers N'IMPORTE QUEL point de la ligne d'action de F
+
+        | i    j    k  |
+M_O  =  | rx   ry   rz |  =  (ry Fz − rz Fy) i − (rx Fz − rz Fx) j + (rx Fy − ry Fx) k
+        | Fx   Fy   Fz |</div>
+  <p><b>Principe de transmissibilité</b> : on peut faire glisser la force le long de sa ligne d'action sans changer le moment. Choisis le point qui donne le <b>r le plus simple</b> (avec des zéros).</p>
+  <p><b>Moment résultant</b> de plusieurs forces : <span class="m">M_RO = Σ (r × F)</span>. Si elles s'appliquent au même point, additionne d'abord les forces, puis fais un seul produit vectoriel.</p>
+  <div class="trap"><b>Piège.</b> L'ordre est <b>r × F</b>, jamais F × r (sinon tout change de signe). Et r part de O (le point autour duquel on calcule le moment) vers la force.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 1 · 2D avec Varignon</div>
+    <p>Une force de 500 N s'applique au point A(3 ; 2) m et fait 60° au-dessus de l'horizontale (vers la droite). Moment autour de O ?</p>
+    <div class="formula">Fx = 500 cos60° = 250 N      Fy = 500 sin60° = 433,0 N
+M_O = x·Fy − y·Fx = 3(433,0) − 2(250) = 1299 − 500 = 799 N·m
+Positif → sens anti-horaire. En vecteur : M_O = {799 k} N·m</div>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 2 · 3D</div>
+    <p>Un câble tire sur le sommet A(0 ; 0 ; 12) m d'un poteau avec F = 2000 N, vers le point B(4 ; 12 ; 0) m au sol. Moment autour de la base O ?</p>
+    <div class="formula">r_AB = {4 i + 12 j − 12 k} m, |r_AB| = √304 = 17,44 m
+F = 2000 · r_AB/17,44 = {458,8 i + 1376,5 j − 1376,5 k} N
+Avec r_OA = {12 k} :
+  i :  (0)(−1376,5) − (12)(1376,5)   = −16 518
+  j : −[(0)(−1376,5) − (12)(458,8)] = +5 506
+  k :  (0)(1376,5) − (0)(458,8)      = 0
+M_O = {−16,5 i + 5,51 j} kN·m      |M_O| = 17,4 kN·m
+Contrôle avec r_OB = {4 i + 12 j} : même résultat (transmissibilité) ✓</div>
+  </div>
+  <div class="quiz" data-q>
+    <div class="q"><p>Une force de 40 N passe exactement par le point O. Son moment autour de O ?</p>
+      <div class="opts"><button data-ok="1">0</button><button>40 N·m</button><button>On ne peut pas savoir</button></div>
+      <div class="fb" hidden>Le bras de levier est nul : d = 0, donc M = 0.</div></div>
+    <div class="q"><p>Clé de 0,3 m, force de 100 N perpendiculaire à la clé. Moment ?</p>
+      <div class="opts"><button>333 N·m</button><button data-ok="1">30 N·m</button><button>100 N·m</button></div>
+      <div class="fb" hidden>M = F d = 100 × 0,3 = 30 N·m.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m7" data-m="m7"> J'ai compris le module 7</label>
+</section>
+
+<!-- ============ MODULE 8 ============ -->
+<section id="m8">
+  <div class="mhead"><span class="num">08</span><h2>Moment par rapport à un axe</h2><span class="meta">chapitre 3 · 30 min</span></div>
+  <div class="intuition"><b>L'idée.</b> Une porte ne tourne pas autour d'un point, mais autour de l'axe de ses gonds. Seule la partie du moment qui est <b>dans la direction de l'axe</b> la fait tourner. On combine donc produit vectoriel (le moment) et produit scalaire (la projection sur l'axe).</div>
+  <div class="formula key">M_a = u_a · (r × F)           (produit mixte : un NOMBRE)
+
+           | uax  uay  uaz |
+M_a   =    | rx   ry   rz  |
+           | Fx   Fy   Fz  |
+
+M_a (vecteur) = M_a · u_a</div>
+  <ol class="steps">
+    <li>Trouve <span class="v">u</span>a, le vecteur unitaire de l'axe (à partir de deux points de l'axe, module 3).</li>
+    <li>Choisis <span class="v">r</span> : de <b>n'importe quel point de l'axe</b> vers n'importe quel point de la ligne d'action de F.</li>
+    <li>Calcule le déterminant 3×3 (ou r × F, puis le produit scalaire avec <span class="v">u</span>a).</li>
+    <li>Signe positif : le moment tourne autour de +<span class="v">u</span>a (main droite). Négatif : dans l'autre sens.</li>
+  </ol>
+  <p><b>Cas simple</b> : si l'axe est x, y ou z, M_a est juste la composante correspondante de <span class="v">M</span>O = r × F.</p>
+  <div class="trap"><b>Piège.</b> Si la force est parallèle à l'axe ou que sa ligne d'action coupe l'axe, le moment par rapport à l'axe est nul. Pratique pour vérifier.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 1 · axe y</div>
+    <p><span class="v">F</span> = {−50 k} N s'applique au point (3 ; 2 ; 0) m. Moment autour de l'axe y ?</p>
+    <div class="formula">r × F = (2·(−50) − 0·0) i − (3·(−50) − 0·0) j + (0) k = {−100 i + 150 j} N·m
+M_y = composante j = 150 N·m</div>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé 2 · axe quelconque</div>
+    <p>Axe passant par A, de direction <span class="v">u</span> = (4/5) i + (3/5) j. Le vecteur de A au point d'application vaut <span class="v">r</span> = {−2 k} m et <span class="v">F</span> = {4 i + 12 j − 3 k} N. Moment par rapport à l'axe ?</p>
+    <div class="formula">        | 0,8   0,6   0  |
+M_a  =  | 0     0    −2  |  = 0,8(0·(−3) − (−2)(12)) − 0,6(0·(−3) − (−2)(4)) + 0
+        | 4     12   −3  |  = 0,8(24) − 0,6(8) = 19,2 − 4,8 = 14,4 N·m
+M_a (vecteur) = 14,4 (0,8 i + 0,6 j) = {11,5 i + 8,64 j} N·m</div>
+  </div>
+  <label class="checkrow"><input type="checkbox" id="c-m8" data-m="m8"> J'ai compris le module 8</label>
+</section>
+
+<!-- ============ EXERCICES ============ -->
+<section id="exos">
+  <h2>Exercices d'entraînement</h2>
+  <p>Fais-les sur papier. Cherche au moins 10 minutes avant d'ouvrir l'indice, puis la correction. Les données sont toutes dans l'énoncé.</p>
+
+  <div class="ex"><h4>Exercice 1 <span class="tag">Module 1</span></h4>
+    <p>F1 = 600 N fait 30° au-dessus de l'axe +x. F2 = 400 N fait 45° à gauche de l'axe +y (elle monte vers la gauche). Intensité et direction de la résultante ?</p>
+    <details class="hint"><summary>Indice</summary><div><p>Pour F2, l'angle est mesuré depuis y : F2x = −400 sin45°, F2y = +400 cos45°.</p></div></details>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">FRx = 600 cos30° − 400 sin45° = 519,6 − 282,8 = 236,8 N
+FRy = 600 sin30° + 400 cos45° = 300 + 282,8 = 582,8 N
+FR = 629 N     θ = arctan(582,8/236,8) = 67,9° au-dessus de +x</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 2 <span class="tag">Module 1</span></h4>
+    <p>Trois forces (en kN) : F1 = {12 i − 9 j}, F2 = {20 j}, F3 = {12 i + 9 j}. Résultante ?</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">FR = {24 i + 20 j} kN    FR = √(576 + 400) = 31,2 kN    θ = arctan(20/24) = 39,8°</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 3 <span class="tag">Module 2</span></h4>
+    <p>Une force de 60 N agit sur un mandrin avec α = 60°, γ = 45°, et une composante y négative. Trouve β et écris F en vecteur cartésien.</p>
+    <details class="hint"><summary>Indice</summary><div><p>cos²β = 1 − cos²α − cos²γ, et Fy &lt; 0 impose cos β &lt; 0.</p></div></details>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">cos²β = 1 − 0,25 − 0,5 = 0,25  →  cos β = −0,5  →  β = 120°
+F = 60(0,5 i − 0,5 j + 0,707 k) = {30 i − 30 j + 42,4 k} N</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 4 <span class="tag">Module 3</span></h4>
+    <p>Un élastique est tendu entre A(3 ; 0 ; 0) m et B(0 ; 2 ; 6) m. Longueur de l'élastique et angles directeurs de AB ?</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">r_AB = {−3 i + 2 j + 6 k} m    |r_AB| = √(9 + 4 + 36) = 7 m
+α = arccos(−3/7) = 115,4°   β = arccos(2/7) = 73,4°   γ = arccos(6/7) = 31,0°</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 5 <span class="tag">Module 4</span></h4>
+    <p>Une force <span class="v">F</span> = {300 j} N. Un segment AB a pour direction <span class="v">u</span>AB = (2/7) i + (6/7) j + (3/7) k. Composantes de F parallèle et perpendiculaire à AB ?</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">F∥ = F · u = 300 × 6/7 = 257 N
+F⊥ = √(300² − 257,1²) = 155 N</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 6 <span class="tag">Module 4</span></h4>
+    <p><span class="v">F</span> = {10 i + 20 j − 5 k} N, axe de direction <span class="v">u</span> = (2/3) i − (1/3) j + (2/3) k. Calcule F∥ et F⊥. Que signifie le signe de F∥ ?</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">F∥ = (20 − 20 − 10)/3 = −3,33 N     (négatif : la projection est dans le sens −u)
+|F| = √(100 + 400 + 25) = √525 = 22,91 N
+F⊥ = √(525 − 11,11) = 22,7 N</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 7 <span class="tag">Module 5</span></h4>
+    <p>Un cylindre de 10 kg pend au nœud C. Le câble CA monte vers la gauche à 30° de l'horizontale ; le câble CB monte vers la droite à un angle θ de l'horizontale. La tension dans CB est le double de celle dans CA. Trouve θ, T_CA et T_CB.</p>
+    <details class="hint"><summary>Indice</summary><div><p>Écris T_CB = 2 T_CA dès le début. L'équation en x donne cos θ directement.</p></div></details>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">ΣFx : −T_CA cos30° + 2 T_CA cos θ = 0  →  cos θ = 0,866/2 = 0,433  →  θ = 64,3°
+ΣFy : T_CA sin30° + 2 T_CA sin64,3° − 98,1 = 0
+      T_CA (0,5 + 1,802) = 98,1  →  T_CA = 42,6 N    T_CB = 85,2 N</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 8 <span class="tag">Module 5 · 3D</span></h4>
+    <p>Une charge de 600 N pend au point A (origine). Câbles : AB vers B(−4 ; −2 ; 4) m, AC vers C(−4 ; 2 ; 4) m, et AD horizontal selon +x. Tensions ?</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">|r_AB| = |r_AC| = √(16 + 4 + 16) = 6 m
+ΣFy : −2F_B/6 + 2F_C/6 = 0           →  F_B = F_C
+ΣFz : 4F_B/6 + 4F_C/6 − 600 = 0      →  F_B = F_C = 450 N
+ΣFx : −4(450)/6 × 2 + F_D = 0        →  F_D = 600 N</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 9 <span class="tag">Module 6</span></h4>
+    <p>A = {2 i − 3 j + k}, B = {4 i − 2 k}. Calcule A × B, puis B × A, et vérifie ton résultat. Quelle est l'aire du parallélogramme formé par A et B ?</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">i :   (−3)(−2) − (1)(0)    = 6
+j : −[(2)(−2) − (1)(4)]   = −(−8) = 8
+k :   (2)(0) − (−3)(4)     = 12
+A × B = {6 i + 8 j + 12 k}       B × A = {−6 i − 8 j − 12 k}
+Vérif : C·A = 12 − 24 + 12 = 0 ✓    C·B = 24 + 0 − 24 = 0 ✓
+Aire = |A × B| = √(36 + 64 + 144) = 15,6</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 10 <span class="tag">Module 7 · 2D</span></h4>
+    <p>Sur la pointe des pieds, le sol pousse sur le pied avec Nt = 400 N, avec un bras de levier de 0,100 m autour de la cheville A. Le tendon d'Achille tire avec Ft, avec un bras de levier de 0,065 cos5° m, en sens opposé. Le moment résultant en A doit être nul. Calcule Ft.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">ΣM_A = 0 :  400 × 0,100 − Ft × 0,065 cos5° = 0
+Ft = 40 / 0,0648 = 618 N</div><p>Remarque : le tendon a un bras de levier plus petit, il doit donc tirer plus fort que la réaction du sol.</p></div></details></div>
+
+  <div class="ex"><h4>Exercice 11 <span class="tag">Module 7 · 3D</span></h4>
+    <p>Un mât vertical a son sommet en A(0 ; 0 ; 6) m. Deux câbles tirent sur A : FB = 780 N vers B(0 ; 2,5 ; 0) m et FC = 420 N vers C(3 ; −2 ; 0) m. Moment résultant autour de la base O, en vecteur cartésien ?</p>
+    <details class="hint"><summary>Indice</summary><div><p>Les deux forces s'appliquent au même point A : additionne-les d'abord, puis un seul produit vectoriel avec r_OA = {6 k}.</p></div></details>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">r_AB = {2,5 j − 6 k}, |r_AB| = 6,5     FB = 780/6,5 × (2,5 j − 6 k) = {300 j − 720 k} N
+r_AC = {3 i − 2 j − 6 k}, |r_AC| = 7   FC = 60 × (3 i − 2 j − 6 k) = {180 i − 120 j − 360 k} N
+F = {180 i + 180 j − 1080 k} N
+M_O = (6 k) × F :  i : 0·(−1080) − 6·180 = −1080     j : −[0 − 6·180] = 1080     k : 0
+M_O = {−1080 i + 1080 j} N·m</div></div></details></div>
+
+  <div class="ex"><h4>Exercice 12 <span class="tag">Module 8</span></h4>
+    <p>Une force <span class="v">F</span> = {10 i − 20 j + 30 k} N s'applique au point P(2 ; 1 ; −1) m. Calcule le moment de F autour de l'axe x, puis autour de l'axe z.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">r × F :  i : (1)(30) − (−1)(−20) = 10
+         j : −[(2)(30) − (−1)(10)] = −70
+         k : (2)(−20) − (1)(10) = −50
+M_x = 10 N·m      M_z = −50 N·m   (sens horaire vu depuis +z)</div></div></details></div>
+
+  <div class="trap"><b>Après ces 12 exercices</b>, reprends les PDF d'exercices complémentaires de ton prof (vecteur position, produit scalaire, statique, moment). Ils ressemblent davantage au DS car il faut lire les données sur la figure. Commence par ceux du chapitre où tu as le plus hésité.</div>
+</section>
+
+<!-- ============ MINI DS ============ -->
+<section id="ds">
+  <h2>Mini-DS · 1 heure</h2>
+  <p>Sans le cours, avec calculatrice. Lance le chrono, fais tout, puis corrige-toi avec le barème.</p>
+  <div class="timer"><span class="t" id="tm">60:00</span><button class="btn" id="tstart">Lancer</button><button class="btn ghost" id="treset">Remettre à zéro</button></div>
+
+  <div class="ex"><h4>Q1 · 3 pts</h4><p>F1 = 200 N à 30° au-dessus de +x et F2 = 150 N à 135° depuis +x. Intensité et direction de la résultante.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">FRx = 173,2 − 106,1 = 67,1 N      FRy = 100 + 106,1 = 206,1 N
+FR = 217 N     θ = 72,0° depuis +x</div><p>1 pt composantes, 1 pt intensité, 1 pt angle avec quadrant justifié.</p></div></details></div>
+
+  <div class="ex"><h4>Q2 · 3 pts</h4><p>Une force de 500 N est dirigée de A(2 ; 0 ; 0) m vers B(0 ; 3 ; 6) m. Écris-la en vecteur cartésien et donne ses angles directeurs.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">r_AB = {−2 i + 3 j + 6 k}, |r_AB| = 7 m
+F = 500/7 × r_AB = {−142,9 i + 214,3 j + 428,6 k} N
+α = 106,6°   β = 64,6°   γ = 31,0°</div></div></details></div>
+
+  <div class="ex"><h4>Q3 · 3 pts</h4><p>Angle entre <span class="v">a</span> = {3 i − 2 j + 6 k} et <span class="v">b</span> = {i + 4 j − 2 k}.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">a·b = 3 − 8 − 12 = −17     |a| = 7     |b| = √21 = 4,583
+θ = arccos(−17/32,08) = 122,0°</div></div></details></div>
+
+  <div class="ex"><h4>Q4 · 4 pts</h4><p>Un sac de 20 kg pend à un nœud. Le câble gauche monte à 40° de l'horizontale, le câble droit monte à 60° de l'horizontale. Fais le DCL et calcule les deux tensions.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">W = 196,2 N
+ΣFx : −T_G cos40° + T_D cos60° = 0
+ΣFy :  T_G sin40° + T_D sin60° − 196,2 = 0
+T_G = 99,6 N      T_D = 152,6 N</div><p>1 pt DCL, 1 pt équations, 2 pts résultats.</p></div></details></div>
+
+  <div class="ex"><h4>Q5 · 4 pts</h4><p><span class="v">F</span> = {4 i − 2 k} N s'applique en P(1 ; −2 ; 3) m. Calcule <span class="v">M</span>O, sa norme, et le moment autour de l'axe x. Vérifie ton résultat par un produit scalaire.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">i :   (−2)(−2) − (3)(0)   = 4
+j : −[(1)(−2) − (3)(4)]  = 14
+k :   (1)(0) − (−2)(4)    = 8
+M_O = {4 i + 14 j + 8 k} N·m     |M_O| = √276 = 16,6 N·m     M_x = 4 N·m
+Vérif : M·r = 4 − 28 + 24 = 0 ✓</div><p>1 pt méthode (r × F dans le bon ordre), 2 pts composantes, 1 pt norme et M_x.</p></div></details></div>
+
+  <div class="ex"><h4>Q6 · 3 pts</h4><p>Une force <span class="v">F</span> = {−50 k} N s'applique au point (3 ; 2 ; 0) m. Moment autour de l'axe passant par O et de direction <span class="v">u</span> = (3/5) i + (4/5) j.</p>
+    <details class="sol"><summary>Correction</summary><div><div class="formula">r × F = {−100 i + 150 j} N·m
+M_a = 0,6(−100) + 0,8(150) = −60 + 120 = 60 N·m</div></div></details></div>
+</section>
+
+<!-- ============ FICHE ============ -->
+<section id="fiche">
+  <h2>Fiche récap · à relire samedi matin</h2>
+  <div class="fiche">
+    <div><h4>Forces 2D</h4><div class="formula">Fx = F cos θ, Fy = F sin θ  (θ depuis x)
+FR = √(ΣFx² + ΣFy²), θ = arctan(ΣFy/ΣFx)
+W = m g, g = 9,81</div></div>
+    <div><h4>Vecteurs 3D</h4><div class="formula">|A| = √(Ax² + Ay² + Az²)
+cos α = Ax/A ...
+cos²α + cos²β + cos²γ = 1
+u = A/|A|</div></div>
+    <div><h4>Force le long d'un câble</h4><div class="formula">r_AB = B − A
+F = F · r_AB / |r_AB|</div></div>
+    <div><h4>Produit scalaire</h4><div class="formula">A·B = AxBx + AyBy + AzBz = AB cos θ
+θ = arccos(A·B / AB)
+F∥ = F·u,  F⊥ = √(F² − F∥²)</div></div>
+    <div><h4>Équilibre</h4><div class="formula">DCL d'abord !
+ΣFx = ΣFy = ΣFz = 0
+Ressort F = k(l − l₀), câble = traction</div></div>
+    <div><h4>Produit vectoriel</h4><div class="formula">|A×B| = AB sin θ,  A×B = −B×A
+i×j = k, j×k = i, k×i = j
+(AyBz−AzBy) i − (AxBz−AzBx) j + (AxBy−AyBx) k
+Vérif : C·A = C·B = 0</div></div>
+    <div><h4>Moment</h4><div class="formula">2D : M = F d (d ⟂), + anti-horaire
+Varignon : M = x Fy − y Fx
+3D : M_O = r × F (r de O vers la ligne d'action)</div></div>
+    <div><h4>Moment / axe</h4><div class="formula">M_a = u_a · (r × F) = det(u ; r ; F)
+M_a vecteur = M_a u_a
+Axe x, y, z : composante de M_O</div></div>
+  </div>
+</section>
+
+<!-- ============ CALCULATRICE ============ -->
+<section id="calc">
+  <h2>Calculatrice vectorielle</h2>
+  <p>Pour vérifier tes calculs, pas pour les remplacer : le jour du DS, tu fais tout à la main. Entre deux vecteurs (et un axe si tu veux un moment par rapport à un axe, avec A = r et B = F).</p>
+  <div class="calc">
+    <div class="vrow"><label>A</label><input id="ax" type="number" step="any" value="2" aria-label="Ax"><input id="ay" type="number" step="any" value="1" aria-label="Ay"><input id="az" type="number" step="any" value="-1" aria-label="Az"></div>
+    <div class="vrow"><label>B</label><input id="bx" type="number" step="any" value="10" aria-label="Bx"><input id="by" type="number" step="any" value="-20" aria-label="By"><input id="bz" type="number" step="any" value="30" aria-label="Bz"></div>
+    <div class="vrow"><label>axe</label><input id="ux" type="number" step="any" value="1" aria-label="axe x"><input id="uy" type="number" step="any" value="0" aria-label="axe y"><input id="uz" type="number" step="any" value="0" aria-label="axe z"></div>
+    <div class="out" id="out"></div>
+  </div>
+</section>
+
+<p class="meta" style="margin-top:28px">Exemple pré-rempli : l'exercice 12 (A = r, B = F, axe = x).</p>
+</div>
+
+<script>
+// Progression
+(function(){
+  const get=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+  const set=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  document.querySelectorAll('.checkrow input').forEach(cb=>{
+    const m=cb.dataset.m;
+    if(get('rev-'+m)==='1'){cb.checked=true}
+    const sync=()=>{const a=document.querySelector('#toc a[data-m="'+m+'"]');if(a)a.classList.toggle('done',cb.checked)};
+    sync();
+    cb.addEventListener('change',()=>{set('rev-'+m,cb.checked?'1':'0');sync()});
+  });
+})();
+// Quiz
+document.querySelectorAll('.q').forEach(q=>{
+  const fb=q.querySelector('.fb');
+  q.querySelectorAll('.opts button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      if(b.dataset.ok){b.classList.add('right');q.querySelectorAll('.opts button').forEach(x=>x.disabled=true);fb.hidden=false}
+      else{b.classList.add('wrong');b.disabled=true}
+    });
+  });
+});
+// Chrono
+(function(){
+  let left=3600,iv=null;const el=document.getElementById('tm'),st=document.getElementById('tstart');
+  const draw=()=>{const m=Math.floor(left/60),s=left%60;el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')};
+  st.addEventListener('click',()=>{
+    if(iv){clearInterval(iv);iv=null;st.textContent='Reprendre';return}
+    st.textContent='Pause';
+    iv=setInterval(()=>{if(left>0){left--;draw()}else{clearInterval(iv);iv=null;el.textContent='Terminé';st.textContent='Lancer'}},1000);
+  });
+  document.getElementById('treset').addEventListener('click',()=>{clearInterval(iv);iv=null;left=3600;draw();st.textContent='Lancer'});
+})();
+// Calculatrice
+(function(){
+  const ids=['ax','ay','az','bx','by','bz','ux','uy','uz'];
+  const f=n=>{const r=Math.round(n*1000)/1000;return (Object.is(r,-0)?0:r).toString().replace('.',',')};
+  const vec=v=>'{ '+f(v[0])+' i  '+(v[1]<0?'− ':'+ ')+f(Math.abs(v[1]))+' j  '+(v[2]<0?'− ':'+ ')+f(Math.abs(v[2]))+' k }';
+  function run(){
+    const g=id=>parseFloat(document.getElementById(id).value)||0;
+    const A=[g('ax'),g('ay'),g('az')],B=[g('bx'),g('by'),g('bz')],U=[g('ux'),g('uy'),g('uz')];
+    const n=v=>Math.hypot(v[0],v[1],v[2]);
+    const dot=A[0]*B[0]+A[1]*B[1]+A[2]*B[2];
+    const C=[A[1]*B[2]-A[2]*B[1],-(A[0]*B[2]-A[2]*B[0]),A[0]*B[1]-A[1]*B[0]];
+    const nA=n(A),nB=n(B),nU=n(U);
+    let ang=(nA&&nB)?Math.acos(Math.max(-1,Math.min(1,dot/(nA*nB))))*180/Math.PI:NaN;
+    let lines=[
+      '|A| = '+f(nA)+'      |B| = '+f(nB),
+      'A + B = '+vec([A[0]+B[0],A[1]+B[1],A[2]+B[2]]),
+      'A · B = '+f(dot)+(isNaN(ang)?'':'      angle = '+f(ang)+'°'),
+      'A × B = '+vec(C)+'      |A × B| = '+f(n(C)),
+      'contrôle : (A×B)·A = '+f(C[0]*A[0]+C[1]*A[1]+C[2]*A[2])+'   (A×B)·B = '+f(C[0]*B[0]+C[1]*B[1]+C[2]*B[2])
+    ];
+    if(nA)lines.push('u_A = '+vec(A.map(x=>x/nA)));
+    if(nU){const u=U.map(x=>x/nU);const Ma=u[0]*C[0]+u[1]*C[1]+u[2]*C[2];
+      const Fp=u[0]*B[0]+u[1]*B[1]+u[2]*B[2];
+      lines.push('axe unitaire u = '+vec(u));
+      lines.push('moment / axe  u·(A×B) = '+f(Ma));
+      lines.push('projection de B sur l\'axe  B·u = '+f(Fp));}
+    document.getElementById('out').textContent=lines.join('\n');
+  }
+  ids.forEach(id=>document.getElementById(id).addEventListener('input',run));run();
+})();
+</script>
+</body></html>
