@@ -45,6 +45,23 @@ nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:va
 nav.toc .in{max-width:780px;margin:0 auto;display:flex;gap:6px}
 nav.toc a{font-family:var(--display);font-size:.85rem;font-weight:500;text-decoration:none;color:var(--ink);padding:5px 10px;border-radius:999px;border:1px solid var(--line);display:inline-flex;gap:6px;align-items:center}
 nav.toc a.done{border-color:var(--ok);color:var(--ok)}
+nav.toc a.cur{background:var(--tint);border-color:var(--vec);color:var(--vec)}
+nav.toc .ttl{display:none}
+/* Grand écran : sommaire fixe à gauche, toujours visible */
+@media (min-width:1080px){
+  body{padding-left:calc(250px + 24px)}
+  body::before{display:none}
+  nav.toc{position:fixed;top:0;left:0;bottom:0;width:250px;margin:0;padding:24px 14px;border-bottom:0;border-right:1px solid var(--line);overflow-y:auto;white-space:normal}
+  nav.toc .in{flex-direction:column;gap:2px;max-width:none}
+  nav.toc .ttl{display:block;margin:0 10px 10px}
+  nav.toc .ttl a{border:0;padding:0;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  nav.toc .grp{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 10px 4px}
+  nav.toc a{border-radius:8px;border-color:transparent;padding:6px 10px;font-size:.92rem}
+  nav.toc a:hover{background:var(--tint)}
+  nav.toc a.done::after{content:"✓";margin-left:auto}
+  html{scroll-padding-top:16px}
+}
+@media (max-width:1079px){nav.toc .grp{display:none}}
 nav.toc a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--vec);outline-offset:2px}
 section{padding-block:36px 8px;border-bottom:1px solid var(--line)}
 .mhead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
@@ -123,7 +140,9 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 </div>
 
 <nav class="toc" aria-label="Sommaire"><div class="in" id="toc">
+  <div class="ttl"><a href="../../">← Toutes les révisions</a></div>
   <a href="#plan">Plan</a>
+  <div class="grp">Cours</div>
   <a href="#m1" data-m="m1">1 Forces 2D</a>
   <a href="#m2" data-m="m2">2 Vecteurs 3D</a>
   <a href="#m3" data-m="m3">3 Vecteur position</a>
@@ -132,6 +151,7 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
   <a href="#m6" data-m="m6">6 Produit vectoriel</a>
   <a href="#m7" data-m="m7">7 Moment</a>
   <a href="#m8" data-m="m8">8 Moment / axe</a>
+  <div class="grp">S'entraîner</div>
   <a href="#exos">Exercices</a>
   <a href="#ds">Mini-DS</a>
   <a href="mini-ds/">Mini-DS corrigé ▸</a>
@@ -806,6 +826,15 @@ document.querySelectorAll('.q').forEach(q=>{
     });
   });
 });
+// Sommaire : surligne la partie en cours de lecture
+(function(){
+  const links=[...document.querySelectorAll('#toc a[href^="#"]')];
+  const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  function upd(){let cur=secs[0];for(const s of secs){if(s.getBoundingClientRect().top<120)cur=s}
+    let last=null;links.forEach(a=>{const on=a.getAttribute('href')==='#'+cur.id;a.classList.toggle('cur',on);if(on)last=a});
+    const nav=document.querySelector('nav.toc');if(last&&nav&&window.innerWidth<1080&&last!==nav._cur){nav._cur=last;nav.scrollTo({left:last.offsetLeft-16,behavior:'smooth'})}}
+  addEventListener('scroll',upd,{passive:true});upd();
+})();
 // Chrono
 (function(){
   let left=3600,iv=null;const el=document.getElementById('tm'),st=document.getElementById('tstart');
