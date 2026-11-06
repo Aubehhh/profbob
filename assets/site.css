@@ -46,7 +46,7 @@ footer.site{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);fo
 /* Barre du haut commune : marque à gauche, liens à droite */
 .topbar{background:var(--paper);border-bottom:1px solid var(--line);
   margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(16px,env(safe-area-inset-left,0px))}
-.topbar .in{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:6px;min-height:56px;flex-wrap:wrap}
+.topbar .in{max-width:var(--page,780px);margin:0 auto;display:flex;align-items:center;gap:6px;min-height:56px;flex-wrap:wrap}
 .topbar .brand{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.02em;color:var(--ink);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:8px}
 .topbar .brand i{font-style:normal;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--vec);color:var(--paper);font-size:.95rem}
 .topbar nav{display:flex;gap:2px;flex-wrap:wrap}

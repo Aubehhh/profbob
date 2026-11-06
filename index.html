@@ -11,6 +11,16 @@
 <style>
 /* Accueil : une colonne, les matières en sections, chaque DS est une carte */
 h2{margin:40px 0 12px;font-size:1.3rem}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.mcard{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.mcard:hover{border-color:var(--vec)}
+.mcard .t{flex:1;min-width:0}
+.mcard b{font-family:var(--display);font-weight:700;display:block;line-height:1.2}
+.mcard small{font-family:var(--mono);font-size:.72rem;color:var(--ok)}
+.mcard.empty small{color:var(--muted)}
+.mcard .go{color:var(--muted)}
+.mono{flex:none;display:inline-grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--c) 14%,var(--paper));color:var(--c);font-family:var(--display);font-weight:800;font-size:.95rem}
+@media (prefers-color-scheme:dark){.mono{color:color-mix(in srgb,var(--c) 55%,#fff)}}
 .list{display:grid;gap:12px}
 .dscard{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
 .dscard h3 a{color:var(--vec);text-decoration:none}
@@ -28,12 +38,12 @@ h2{margin:40px 0 12px;font-size:1.3rem}
 </head>
 <body>
 <header class="topbar"><div class="in">
-  <a class="brand" href=""><i>p</i>profbob</a>
+  <a class="brand" href="/"><i>p</i>profbob</a>
   <nav aria-label="Navigation du site">
-    <a href="" aria-current="page">Accueil</a>
-    <a class="opt" href="ds/statique/">Statique</a>
-    <a class="opt" href="ds/statique/mini-ds/">Mini-DS</a>
-    <a href="contact/">Contact</a>
+    <a href="/" aria-current="page">Accueil</a>
+    <a href="/#matieres">Matières</a>
+    <a class="opt" href="/ds/statique/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
   </nav>
 </div></header>
 <div class="wrap">
@@ -43,23 +53,33 @@ h2{margin:40px 0 12px;font-size:1.3rem}
     <p class="lead">Toutes nos révisions au même endroit, matière par matière. Pour chaque DS : le cours réexpliqué simplement, des exercices corrigés, une fiche à relire et un mini-DS corrigé automatiquement, avec de nouvelles valeurs à chaque essai. Ta progression reste enregistrée dans ton navigateur, sans compte à créer.</p>
   </header>
 
-  <h2>Mécanique</h2>
+  <h2 id="matieres">Les matières</h2>
+  <div class="mgrid">
+    <a class="mcard" href="/matieres/mecanique/"><span class="mono" style="--c:#2453b8;width:40px;height:40px">Mé</span><span class="t"><b>Mécanique</b><small>1 DS</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/mathematiques/"><span class="mono" style="--c:#7c3aed;width:40px;height:40px">Ma</span><span class="t"><b>Mathématiques</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/analyse/"><span class="mono" style="--c:#0e7490;width:40px;height:40px">An</span><span class="t"><b>Analyse</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/thermodynamique/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">Th</span><span class="t"><b>Thermodynamique</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/electricite/"><span class="mono" style="--c:#b45309;width:40px;height:40px">Él</span><span class="t"><b>Bases de l&#x27;électricité</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/pages-web/"><span class="mono" style="--c:#be185d;width:40px;height:40px">We</span><span class="t"><b>Pages Web</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/informatique-embarquee/"><span class="mono" style="--c:#15803d;width:40px;height:40px">IE</span><span class="t"><b>Informatique embarquée</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    <a class="mcard empty" href="/matieres/chimie/"><span class="mono" style="--c:#0f766e;width:40px;height:40px">Ch</span><span class="t"><b>Chimie</b><small>Bientôt</small></span><span class="go">▸</span></a>
+  </div>
+
+  <h2>Dernier DS ajouté</h2>
   <div class="list">
     <div class="dscard">
       <div class="eyebrow">DS · novembre 2026</div>
-      <h3><a href="ds/statique/">Statique : chapitres 1 à 3</a></h3>
+      <h3><a href="/ds/statique/">Statique : chapitres 1 à 3</a></h3>
       <p>Vecteurs et forces, vecteur position, produit scalaire, équilibre d'une particule, produit vectoriel, moments.</p>
       <div class="links">
-        <a href="ds/statique/">Cours · 8 modules</a>
-        <a href="ds/statique/#exos">12 exercices</a>
-        <a href="ds/statique/#fiche">Fiche récap</a>
-        <a class="hot" href="ds/statique/mini-ds/">Mini-DS corrigé ▸</a>
+        <a href="/ds/statique/">Cours · 8 modules</a>
+        <a href="/ds/statique/#exos">12 exercices</a>
+        <a href="/ds/statique/#fiche">Fiche récap</a>
+        <a class="hot" href="/ds/statique/mini-ds/">Mini-DS corrigé ▸</a>
       </div>
     </div>
   </div>
-
-  <h2>Les autres matières</h2>
-  <p class="soon">Les prochains chapitres arrivent au fil des DS. Il manque une matière ou un chapitre ? <a href="contact/?type=chapitre">Propose-le ici</a> : indique la matière, le chapitre et un lien vers le cours, et une page sera créée.</p>
+  <p class="soon" style="margin-top:14px">Il manque un chapitre ? <a href="/contact/?type=chapitre">Propose-le ici</a> avec un lien vers le cours, et une page sera créée.</p>
 
   <h2>Comment réviser avec le site</h2>
   <div class="how">
@@ -69,7 +89,7 @@ h2{margin:40px 0 12px;font-size:1.3rem}
   </div>
 
   <footer class="site">
-    Une erreur, une idée, une question ? <a href="contact/">Écris-nous via le formulaire</a>.
+    Une erreur, une idée, une question ? <a href="/contact/">Écris-nous via le formulaire</a>.
   </footer>
 </div>
 </body>

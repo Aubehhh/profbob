@@ -11,6 +11,7 @@
 <style>
 /* Layout : barre du haut, puis deux colonnes sur grand écran (explications à gauche, formulaire à droite),
    une seule colonne sur téléphone. Après l'envoi, le formulaire laisse place à un écran de confirmation. */
+:root{--page:980px}
 .page{max-width:980px;margin:0 auto}
 .hero2{padding-block:36px 8px}
 .grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:18px;align-items:start}
@@ -78,12 +79,12 @@
 </head>
 <body>
 <header class="topbar"><div class="in">
-  <a class="brand" href="../"><i>p</i>profbob</a>
+  <a class="brand" href="/"><i>p</i>profbob</a>
   <nav aria-label="Navigation du site">
-    <a href="../">Accueil</a>
-    <a class="opt" href="../ds/statique/">Statique</a>
-    <a class="opt" href="../ds/statique/mini-ds/">Mini-DS</a>
-    <a href="./" aria-current="page">Contact</a>
+    <a href="/">Accueil</a>
+    <a href="/#matieres">Matières</a>
+    <a class="opt" href="/ds/statique/mini-ds/">Mini-DS</a>
+    <a href="/contact/" aria-current="page">Contact</a>
   </nav>
 </div></header>
 
