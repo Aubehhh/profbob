@@ -82,7 +82,7 @@ td .track i{display:block;height:100%;background:var(--vec)}
   const PAGES=[['p-accueil','Accueil'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)'],
     ['p-matieres_mecanique','Mécanique'],['p-matieres_mathematiques','Mathématiques'],['p-matieres_analyse','Analyse'],['p-matieres_thermodynamique','Thermodynamique'],
     ['p-matieres_electricite','Bases de l\'électricité'],['p-matieres_pages_web','Pages Web'],['p-matieres_informatique_embarquee','Informatique embarquée'],['p-matieres_chimie','Chimie']];
-  const OTHER=[['app-mobile','Visites sur téléphone'],['app-ordi','Visites sur ordinateur'],['ev-minids','Mini-DS rendus'],['ev-contact','Messages envoyés'],['ev-notes','Simulateurs de notes utilisés']];
+  const OTHER=[['app-mobile','Visites sur téléphone'],['app-ordi','Visites sur ordinateur'],['ev-minids','Mini-DS rendus'],['ev-contact','Messages envoyés'],['ev-notes','Simulateurs de notes utilisés'],['ev-404signal','Liens cassés signalés']];
   const $=id=>document.getElementById(id);
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}

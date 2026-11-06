@@ -32,6 +32,9 @@
 .go b{font-family:var(--display);color:var(--vec);display:block}
 .go span{font-family:var(--display);font-size:.88rem;color:var(--muted)}
 .foot{font-family:var(--display);font-size:.92rem;color:var(--muted);margin-top:22px}
+.lnk{font:inherit;color:var(--vec);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+.lnk:disabled{color:var(--muted);text-decoration:none;cursor:default}
+.foot.ok{color:var(--ok)}
 </style>
 </head>
 <body>
@@ -69,14 +72,27 @@
     <a href="/mini-ds/"><b>Mini-DS ▸</b><span>S'entraîner, corrigé auto</span></a>
   </div>
 
-  <p class="foot">Tu es arrivé ici en cliquant sur un lien du site ? <a id="rep" href="/contact/?type=erreur">Signale le lien cassé</a>, il sera réparé.</p>
+  <p class="foot" id="foot">Tu es arrivé ici en cliquant sur un lien du site ? <button class="lnk" id="rep" type="button">Signale le lien cassé</button>, il sera réparé.</p>
   <footer class="site"><a href="/">← Retour à l'accueil</a></footer>
 </main>
 
 <script>
 (function(){
   var p=decodeURIComponent(location.pathname);document.getElementById('p').textContent=p;
-  document.getElementById('rep').href='/contact/?type=erreur&page='+encodeURIComponent('Lien cassé vers '+p+(document.referrer?' (depuis '+document.referrer+')':''));
+  // Signalement en un clic : envoie directement un mail via Web3Forms (même clé que le formulaire de contact)
+  var btn=document.getElementById('rep'),foot=document.getElementById('foot');
+  var KEY='63a20375-3c41-4214-9ab8-e731a888fd8d',done='pb-404-'+p;
+  try{if(sessionStorage.getItem(done)){foot.className='foot ok';foot.textContent='Lien cassé déjà signalé, merci !'}}catch(e){}
+  btn&&btn.addEventListener('click',function(){
+    btn.disabled=true;btn.textContent='Envoi…';
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:KEY,subject:'[profbob.fr] Lien cassé : '+p,from_name:'Page 404 profbob.fr',
+        'Adresse demandée':location.href,'Page d\'origine':document.referrer||'inconnue (lien tapé ou favori)',
+        'Appareil':navigator.userAgent,'Date':new Date().toLocaleString('fr-FR',{timeZone:'Europe/Paris'})})})
+    .then(function(r){return r.json().then(function(j){if(!r.ok||!j.success)throw 0})})
+    .then(function(){try{sessionStorage.setItem(done,'1')}catch(e){}foot.className='foot ok';foot.textContent='Merci, le lien cassé a été signalé ✓ Il sera réparé bientôt.';if(window.pbStat)pbStat('ev-404signal')})
+    .catch(function(){btn.disabled=false;btn.textContent='Réessayer l\'envoi';});
+  });
 })();
 window.PB_PAGE='404';
 </script>
