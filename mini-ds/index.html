@@ -15,21 +15,35 @@
    Au lancement, les réglages disparaissent et l'épreuve s'affiche à la place. */
 .step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
 .step h2{font-size:1.1rem;display:flex;gap:10px;align-items:center;margin-bottom:12px}
-.step h2 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--vec);font-family:var(--mono);font-size:.8rem}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.step h2 .n{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--vec);font-family:var(--mono);font-size:.8rem}
+.mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:8px}
+@media (max-width:520px){.mats{grid-template-columns:1fr 1fr}.mats .mono{display:none}.mats .choice .box{padding:9px 11px}.mats .name{font-size:.9rem;overflow-wrap:anywhere}}
+.list{display:grid;gap:8px}
 .choice{position:relative;display:block;cursor:pointer}
 .choice input{position:absolute;opacity:0;pointer-events:none}
-.choice>span{display:flex;flex-direction:column;gap:2px;height:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);font-family:var(--display);font-weight:500;line-height:1.25}
-.choice>span small{font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--muted)}
-.choice:hover>span{border-color:var(--vec)}
-.choice input:checked+span{border-color:var(--vec);background:var(--tint);color:var(--vec);box-shadow:inset 0 0 0 1px var(--vec)}
-.choice input:focus-visible+span{outline:2px solid var(--vec);outline-offset:2px}
-.choice input:disabled+span{opacity:.5;cursor:not-allowed;border-style:dashed}
-.choice .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:6px}
-.choice.check>span{padding-left:38px}
-.choice.check>span::before{content:"";position:absolute;left:12px;top:12px;width:16px;height:16px;border:1.5px solid var(--muted);border-radius:4px;background:var(--paper)}
-.choice.check input:checked+span::before{background:var(--vec);border-color:var(--vec)}
-.choice.check input:checked+span::after{content:"✓";position:absolute;left:15px;top:9px;color:var(--paper);font-size:.8rem;font-weight:700}
+.choice .box{display:flex;align-items:center;gap:12px;height:100%;border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--bg);transition:border-color .15s,background .15s}
+.choice .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.choice .name{font-family:var(--display);font-weight:600;font-size:.98rem;line-height:1.25;color:var(--ink)}
+.choice .sub{font-family:var(--display);font-weight:400;font-size:.82rem;line-height:1.35;color:var(--muted)}
+.choice:hover .box{border-color:var(--vec)}
+.choice input:checked+.box{border-color:var(--vec);background:var(--tint);box-shadow:inset 0 0 0 1px var(--vec)}
+.choice input:checked+.box .name{color:var(--vec)}
+.choice input:focus-visible+.box{outline:2px solid var(--vec);outline-offset:2px}
+.choice input:disabled+.box{cursor:not-allowed;border-style:dashed;background:transparent}
+.choice input:disabled+.box .name{color:var(--muted)}
+.choice input:disabled+.box .mono{filter:grayscale(1);opacity:.55}
+.mono{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;background:color-mix(in srgb,var(--c) 16%,var(--paper));color:var(--c);font-family:var(--display);font-weight:800;font-size:.85rem}
+@media (prefers-color-scheme:dark){.mono{color:color-mix(in srgb,var(--c) 55%,#fff)}}
+.ind{flex:none;width:20px;height:20px;border:1.5px solid var(--muted);background:var(--paper);display:grid;place-items:center;color:transparent;transition:background .15s,border-color .15s}
+.ind svg{width:13px;height:13px}
+.check .ind{border-radius:5px}
+.radio .ind{border-radius:50%}
+.radio .ind::after{content:"";width:8px;height:8px;border-radius:50%;background:transparent}
+.choice input:checked+.box .ind{border-color:var(--vec);background:var(--vec);color:var(--paper)}
+.radio input:checked+.box .ind::after{background:var(--paper)}
+.links2{margin-top:10px;display:flex;gap:8px}
+.links2 button{font:inherit;font-family:var(--display);font-size:.85rem;border:1px solid var(--line);background:transparent;color:var(--vec);padding:5px 12px;border-radius:999px;cursor:pointer}
+.links2 button:hover{border-color:var(--vec)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;background:var(--bg);margin-bottom:12px;flex-wrap:wrap}
 .seg button{font:inherit;font-family:var(--display);font-weight:500;font-size:.92rem;border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:7px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--paper);color:var(--vec);box-shadow:0 0 0 1px var(--line)}
@@ -41,11 +55,12 @@
 .stepper button:disabled{color:var(--muted);cursor:default}
 .stepper output{min-width:52px;text-align:center;font-family:var(--mono);font-weight:600;font-size:1.05rem}
 .pills{display:flex;gap:6px;flex-wrap:wrap}
-.pills button{font:inherit;font-family:var(--mono);font-size:.85rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:8px 12px;border-radius:999px;cursor:pointer}
+.pills button{font:inherit;font-family:var(--display);font-weight:500;font-size:.9rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:8px 12px;border-radius:999px;cursor:pointer}
 .pills button[aria-pressed="true"]{background:var(--vec);border-color:var(--vec);color:var(--paper)}
-.hint{font-size:.85rem;color:var(--muted);margin-top:8px}
+.hint{font-family:var(--display);font-size:.85rem;color:var(--muted);margin-top:8px}
 .go{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--tint);border-radius:14px;padding:16px 20px;margin:16px 0}
-.go .sum{flex:1;min-width:220px;font-size:.95rem}
+.go .sum{flex:1;min-width:220px;font-family:var(--display);font-size:.95rem;color:var(--muted)}
+.go .sum b{color:var(--ink);font-size:1.05rem}
 .go .sum b{font-family:var(--display)}
 .go .btn{font-size:1.05rem;padding:11px 22px}
 .shared{background:var(--warnbg);border:1px solid var(--warn);border-radius:10px;padding:10px 14px;font-size:.92rem;margin:12px 0}
@@ -77,7 +92,7 @@
 
     <section class="step">
       <h2><span class="n">1</span>Matière</h2>
-      <div class="chips" id="mat"></div>
+      <div class="mats" id="mat"></div>
     </section>
 
     <section class="step">
@@ -125,6 +140,7 @@
   const DUR=[[15,'15 min'],[30,'30 min'],[45,'45 min'],[60,'1 h'],[0,'Sans chrono']];
   const has=m=>!!(m.banque&&m.banque());
   const MAXQ=12;
+  const mono=m=>{const w=m.nom.replace(/^(Bases de l'|Pages )/,'').split(' ');const x=w.length>1?(w[0][0]+w[1][0]).toUpperCase():w[0].slice(0,2);return x[0].toUpperCase()+x.slice(1)};
   const q=new URLSearchParams(location.search);
 
   // --- état ---
@@ -149,7 +165,7 @@
 
   // --- rendu ---
   function renderMat(){
-    document.getElementById('mat').innerHTML=MAT.map(m=>`<label class="choice"><input type="radio" name="mat" value="${m.id}" ${m.id===S.m?'checked':''} ${has(m)?'':'disabled'}><span style="--c:${m.couleur}"><span><i class="dot"></i>${esc(m.nom)}</span><small>${has(m)?(m.ds.length+' DS · '+m.chapitres.length+' chapitres'):'Bientôt'}</small></span></label>`).join('');
+    document.getElementById('mat').innerHTML=MAT.map(m=>`<label class="choice"><input type="radio" name="mat" value="${m.id}" ${m.id===S.m?'checked':''} ${has(m)?'':'disabled'}><span class="box"><span class="mono" style="--c:${m.couleur}">${mono(m)}</span><span class="txt"><span class="name">${esc(m.nom)}</span><span class="sub">${has(m)?(m.ds.length+' DS · '+m.chapitres.length+' chapitres'):'Bientôt'}</span></span></span></label>`).join('');
   }
   function renderWhat(){
     const m=mat();
@@ -158,13 +174,13 @@
     if(S.mode==='ds'){
       if(!m.ds.length){w.innerHTML='<p class="empty">Pas encore de DS pour cette matière.</p>';return}
       if(!m.ds.find(d=>d.id===S.ds))S.ds=m.ds[0].id;
-      w.innerHTML='<div class="chips">'+m.ds.map(d=>`<label class="choice"><input type="radio" name="ds" value="${d.id}" ${d.id===S.ds?'checked':''}><span>${esc(d.nom)}<small>${esc(d.detail||'')}</small></span></label>`).join('')+'</div>';
+      w.innerHTML='<div class="list">'+m.ds.map(d=>`<label class="choice radio"><input type="radio" name="ds" value="${d.id}" ${d.id===S.ds?'checked':''}><span class="box"><span class="ind"></span><span class="txt"><span class="name">${esc(d.nom)}</span><span class="sub">${esc(d.detail||'')}</span></span></span></label>`).join('')+'</div>';
     }else{
       if(!S.ch.size)m.chapitres.forEach(c=>S.ch.add(c.id));
-      w.innerHTML='<div class="chips">'+m.chapitres.map(c=>`<label class="choice check"><input type="checkbox" name="ch" value="${c.id}" ${S.ch.has(c.id)?'checked':''}><span>${esc(c.nom)}<small>${esc(c.detail||'')}</small></span></label>`).join('')+'</div>'+
-        '<div class="hint"><a href="#" id="all">Tout cocher</a> · <a href="#" id="none">Tout décocher</a></div>';
-      w.querySelector('#all').onclick=e=>{e.preventDefault();m.chapitres.forEach(c=>S.ch.add(c.id));renderWhat();update()};
-      w.querySelector('#none').onclick=e=>{e.preventDefault();S.ch.clear();renderWhat();update()};
+      w.innerHTML='<div class="list">'+m.chapitres.map(c=>`<label class="choice check"><input type="checkbox" name="ch" value="${c.id}" ${S.ch.has(c.id)?'checked':''}><span class="box"><span class="ind"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><span class="txt"><span class="name">${esc(c.nom)}</span><span class="sub">${esc(c.detail||'')}</span></span></span></label>`).join('')+'</div>'+
+        '<div class="links2"><button type="button" id="all">Tout cocher</button><button type="button" id="none">Tout décocher</button></div>';
+      w.querySelector('#all').onclick=()=>{m.chapitres.forEach(c=>S.ch.add(c.id));renderWhat();update()};
+      w.querySelector('#none').onclick=()=>{S.ch.clear();renderWhat();update()};
     }
   }
   function renderDur(){
