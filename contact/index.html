@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Contact · profbob.fr</title>
+<meta name="description" content="Proposer un chapitre, signaler une erreur ou envoyer une idée pour le site de révision.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+/* Formulaire : une colonne, gros boutons de choix pour le type de demande */
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:8px 0 4px;border:0;padding:0}
+.types legend{font-family:var(--display);font-weight:700;margin-bottom:8px;padding:0}
+.types label{display:block;cursor:pointer}
+.types input{position:absolute;opacity:0;pointer-events:none}
+.types span{display:block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:var(--display);font-weight:500}
+.types span small{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:2px}
+.types input:checked+span{border-color:var(--vec);box-shadow:inset 0 0 0 1px var(--vec);color:var(--vec)}
+.types input:focus-visible+span{outline:2px solid var(--vec);outline-offset:2px}
+.f{margin:18px 0}
+.f label{display:block;font-family:var(--display);font-weight:700;margin-bottom:6px}
+.f label small{font-family:var(--body);font-weight:400;color:var(--muted)}
+.f input,.f textarea,.f select{width:100%;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+.f textarea{min-height:150px;resize:vertical}
+.f input:focus,.f textarea:focus,.f select:focus{outline:2px solid var(--vec);outline-offset:1px;border-color:var(--vec)}
+.hp{position:absolute;left:-9999px}
+.msg{border-radius:10px;padding:14px 16px;margin:16px 0}
+.msg.ok{background:var(--okbg);color:var(--ink);border:1px solid var(--ok)}
+.msg.ko{background:var(--badbg);color:var(--ink);border:1px solid var(--bad)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><a href="../">← Toutes les révisions</a> · contact</div>
+    <h1>Écrire au site</h1>
+    <p class="lead">Une matière à ajouter, une erreur dans une page, une idée ? Remplis ce formulaire, le message arrive directement par mail.</p>
+  </header>
+
+  <form id="form" class="card" novalidate>
+    <fieldset class="types">
+      <legend>C'est pour…</legend>
+      <label><input type="radio" name="Type" value="Proposer un chapitre" checked><span>Proposer un chapitre<small>Une matière ou un DS à ajouter</small></span></label>
+      <label><input type="radio" name="Type" value="Signaler une erreur"><span>Signaler une erreur<small>Cours, exercice, mini-DS</small></span></label>
+      <label><input type="radio" name="Type" value="Idée pour le site"><span>Une idée<small>Une fonction qui t'aiderait</small></span></label>
+      <label><input type="radio" name="Type" value="Autre"><span>Autre<small>Tout le reste</small></span></label>
+    </fieldset>
+
+    <div class="f" id="f-matiere"><label for="matiere">Matière et chapitre <small>(ex. Maths · intégrales, DS du 20 novembre)</small></label>
+      <input id="matiere" name="Matière / chapitre" autocomplete="off"></div>
+
+    <div class="f" id="f-page" hidden><label for="page">Où est l'erreur ? <small>(page, question, numéro du sujet du mini-DS)</small></label>
+      <input id="page" name="Page concernée" autocomplete="off"></div>
+
+    <div class="f"><label for="message">Ton message</label>
+      <textarea id="message" name="Message" required placeholder="Explique en quelques lignes. Pour un chapitre, tu peux coller un lien vers le cours ou les exercices (Google Drive, ENT…)."></textarea></div>
+
+    <div class="f"><label for="nom">Ton prénom <small>(facultatif)</small></label>
+      <input id="nom" name="Prénom" autocomplete="given-name"></div>
+
+    <div class="f"><label for="email">Ton e-mail <small>(facultatif, seulement si tu veux une réponse)</small></label>
+      <input id="email" type="email" name="email" autocomplete="email"></div>
+
+    <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div id="out" role="status" aria-live="polite"></div>
+    <button class="btn" type="submit" id="send">Envoyer</button>
+  </form>
+
+  <footer class="site">Tu préfères écrire directement ? <a href="mailto:contact@profbob.fr">contact@profbob.fr</a></footer>
+</div>
+
+<script>
+(function(){
+  const ENDPOINT='https://formsubmit.co/ajax/contact@profbob.fr';
+  const form=document.getElementById('form'),out=document.getElementById('out'),btn=document.getElementById('send');
+  const q=new URLSearchParams(location.search);
+  const typeMap={chapitre:'Proposer un chapitre',erreur:'Signaler une erreur',idee:'Idée pour le site',autre:'Autre'};
+
+  function sync(){
+    const t=form.querySelector('input[name="Type"]:checked').value;
+    document.getElementById('f-page').hidden=(t!=='Signaler une erreur');
+    document.getElementById('f-matiere').hidden=(t==='Idée pour le site');
+  }
+  form.querySelectorAll('input[name="Type"]').forEach(r=>r.addEventListener('change',sync));
+  // pré-remplissage depuis un lien : ?type=erreur&page=...
+  if(typeMap[q.get('type')]){form.querySelector('input[value="'+typeMap[q.get('type')]+'"]').checked=true}
+  if(q.get('page'))document.getElementById('page').value=q.get('page');
+  if(q.get('matiere'))document.getElementById('matiere').value=q.get('matiere');
+  sync();
+
+  const show=(cls,html)=>{out.className='msg '+cls;out.innerHTML=html};
+
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const msg=document.getElementById('message');
+    if(msg.value.trim().length<5){show('ko','Écris au moins quelques mots dans ton message.');msg.focus();return}
+    const em=document.getElementById('email');
+    if(em.value&&!em.checkValidity()){show('ko','L\'adresse e-mail n\'a pas l\'air valide.');em.focus();return}
+    const data={};
+    new FormData(form).forEach((v,k)=>{const el=form.querySelector('[name="'+k+'"]');if(el&&el.closest('[hidden]'))return;if(v!=='')data[k]=v});
+    if(data._honey)return; // robot
+    const t=data.Type;
+    data._subject='[profbob.fr] '+t+(data['Matière / chapitre']?' · '+data['Matière / chapitre']:'');
+    data._template='table';
+    data['Envoyé depuis']=document.referrer||location.href;
+    btn.disabled=true;btn.textContent='Envoi…';
+    try{
+      const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+      const j=await r.json().catch(()=>({}));
+      if(r.ok&&String(j.success)!=='false'){
+        form.querySelectorAll('textarea,input:not([type=radio])').forEach(i=>i.value='');
+        show('ok','<b>Message envoyé, merci !</b> '+(data.email?'Tu recevras une réponse sur '+data.email.replace(/[<>&]/g,'')+'.':'Il est bien arrivé.'));
+      }else{throw new Error(j.message||('HTTP '+r.status))}
+    }catch(err){
+      show('ko','L\'envoi n\'a pas marché. Réessaie dans un instant, ou écris directement à <a href="mailto:contact@profbob.fr">contact@profbob.fr</a>.');
+    }finally{btn.disabled=false;btn.textContent='Envoyer'}
+  });
+})();
+</script>
+</body>
+</html>

@@ -162,7 +162,7 @@
       const d=new Date();const date=d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
       const list=store.get(KEY)||[];list.push({date,seed,fmt:fmt.label,note});store.set(KEY,list.slice(-50));
       const mm=Math.floor(usedSec/60),ss=usedSec%60;
-      const mail=cfg.contact?`mailto:${cfg.contact}?subject=${encodeURIComponent('Erreur mini-DS '+cfg.id+' · sujet '+seed+' ('+fmt.label+')')}&body=${encodeURIComponent('Question concernée :\n\nCe qui ne va pas :\n')}`:null;
+      const mail=cfg.report?cfg.report+'?type=erreur&page='+encodeURIComponent('Mini-DS '+cfg.id+' · sujet '+seed+' ('+fmt.label+') · question n° '):null;
       const bar=root.querySelector('.mds-bar');if(bar)bar.remove();
       root.querySelector('#mds-submit2').parentElement.remove();
       const sc=h(`<div class="mds-score">
