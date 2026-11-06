@@ -55,15 +55,16 @@
 
   function start(cfg){
     const root=cfg.mount;
-    const KEY='minids-'+cfg.id;
+    const KEY=cfg.histKey||('minids-'+cfg.id);
+    const home=()=>cfg.onHome?(state='intro',stopTimer(),window.onbeforeunload=null,cfg.onHome()):intro();
     const params=new URLSearchParams(location.search);
     let fmt=cfg.formats.find(f=>f.id===params.get('format'))||cfg.formats[cfg.defaultFormat||0];
     let seed=parseInt(params.get('sujet'),10);
     if(!(seed>0))seed=1000+Math.floor(Math.random()*9000);
-    let state='intro',timerIv=null,endAt=0,subject=null;
+    let state='intro',timerIv=null,endAt=0,startAt=0,subject=null;
 
     function setURL(){const u=new URL(location.href);u.searchParams.set('sujet',seed);u.searchParams.set('format',fmt.id);history.replaceState(null,'',u)}
-    function shareURL(){const u=new URL(location.href);u.search='';u.hash='';u.searchParams.set('sujet',seed);u.searchParams.set('format',fmt.id);return u.toString()}
+    function shareURL(){const u=new URL(location.href);u.hash='';u.searchParams.set('sujet',seed);u.searchParams.set('format',fmt.id);return u.toString()}
 
     function build(){
       const R=makeR(hash(cfg.id+':'+seed+':'+fmt.id));
@@ -126,14 +127,15 @@
         const empty=[...el.querySelectorAll('.mds-field input')].filter(i=>i.value.trim()==='').length;
         if(empty&&!confirm(empty+' case'+(empty>1?'s':'')+' vide'+(empty>1?'s':'')+'. Rendre quand même ?'))return;
         grade(false)};
-      el.querySelector('#mds-quit').onclick=()=>{if(confirm('Abandonner ce mini-DS ? Ta copie ne sera pas notée.'))intro()};
+      el.querySelector('#mds-quit').onclick=()=>{if(confirm('Abandonner ce mini-DS ? Ta copie ne sera pas notée.'))home()};
       window.onbeforeunload=()=>'Ton mini-DS est en cours.';
-      endAt=Date.now()+fmt.min*60000;tick();timerIv=setInterval(tick,500);
+      startAt=Date.now();endAt=startAt+fmt.min*60000;tick();timerIv=setInterval(tick,500);
       window.scrollTo({top:root.offsetTop-10});
     }
     function stopTimer(){if(timerIv){clearInterval(timerIv);timerIv=null}}
     function tick(){
       const t=document.getElementById('mds-t');if(!t)return;
+      if(!fmt.min){const up=Math.round((Date.now()-startAt)/1000);t.textContent=String(Math.floor(up/60)).padStart(2,'0')+':'+String(up%60).padStart(2,'0');return}
       const left=Math.max(0,Math.round((endAt-Date.now())/1000));
       t.textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');
       t.classList.toggle('low',left<=300);
@@ -143,7 +145,7 @@
     // --- correction ---
     function grade(timeout){
       state='done';stopTimer();window.onbeforeunload=null;
-      const usedSec=Math.round((fmt.min*60000-(endAt-Date.now()))/1000);
+      const usedSec=Math.round((Date.now()-startAt)/1000);
       let earned=0,total=0;const rows=[];
       subject.forEach(q=>{
         const box=root.querySelector(`.mds-q[data-q="${q.num}"]`);let ok=0;
@@ -172,7 +174,8 @@
         <div class="mds-row">
           <button class="btn" id="mds-again">Nouveau sujet</button>
           <button class="btn ghost" id="mds-redo">Refaire ce sujet</button>
-          <button class="btn ghost" id="mds-home">Retour</button>
+          <button class="btn ghost" id="mds-share2">Partager ce sujet</button>
+          <button class="btn ghost" id="mds-home">${cfg.onHome?'Changer les réglages':'Retour'}</button>
           ${mail?`<a class="btn ghost" href="${mail}">Signaler une erreur</a>`:''}
         </div>
         <p class="mds-note">Les cases rouges montrent la valeur attendue. Lis la correction de chaque question ratée, puis refais le même sujet sans regarder.</p>
@@ -180,11 +183,12 @@
       root.prepend(sc);
       sc.querySelector('#mds-again').onclick=()=>{let s;do{s=1000+Math.floor(Math.random()*9000)}while(s===seed);seed=s;run()};
       sc.querySelector('#mds-redo').onclick=run;
-      sc.querySelector('#mds-home').onclick=intro;
+      sc.querySelector('#mds-home').onclick=home;
+      const sh=sc.querySelector('#mds-share2');if(sh)sh.onclick=()=>{const url=shareURL();const done=()=>{sh.textContent='Lien copié ✓';setTimeout(()=>sh.textContent='Partager ce sujet',1800)};if(navigator.clipboard)navigator.clipboard.writeText(url).then(done,()=>prompt('Copie ce lien :',url));else prompt('Copie ce lien :',url)};
       window.scrollTo({top:root.offsetTop-10});
     }
 
-    intro();
+    if(cfg.startNow)run();else intro();
   }
 
   window.MiniDS={start,F,makeR,_test:{parse,correct}};

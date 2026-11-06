@@ -53,4 +53,4 @@ footer.site{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);fo
 .topbar nav a{font-family:var(--display);font-weight:500;font-size:.92rem;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:8px}
 .topbar nav a:hover{background:var(--tint);color:var(--vec)}
 .topbar nav a[aria-current="page"]{color:var(--vec);background:var(--tint)}
-@media (max-width:520px){.topbar nav a.opt{display:none}}
+@media (max-width:520px){.topbar nav a{padding:7px 8px;font-size:.88rem}}

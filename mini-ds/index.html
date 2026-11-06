@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<title>Mini-DS · profbob.fr</title>
+<meta name="description" content="Mini-DS corrigés automatiquement : choisis une matière, un DS ou des chapitres, le nombre de questions et la durée.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/minids.css">
+<style>
+/* Page de réglages du mini-DS : 3 étapes (matière, quoi réviser, réglages) puis un récap avec le bouton.
+   Au lancement, les réglages disparaissent et l'épreuve s'affiche à la place. */
+.step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.step h2{font-size:1.1rem;display:flex;gap:10px;align-items:center;margin-bottom:12px}
+.step h2 .n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--vec);font-family:var(--mono);font-size:.8rem}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.choice{position:relative;display:block;cursor:pointer}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice>span{display:flex;flex-direction:column;gap:2px;height:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);font-family:var(--display);font-weight:500;line-height:1.25}
+.choice>span small{font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--muted)}
+.choice:hover>span{border-color:var(--vec)}
+.choice input:checked+span{border-color:var(--vec);background:var(--tint);color:var(--vec);box-shadow:inset 0 0 0 1px var(--vec)}
+.choice input:focus-visible+span{outline:2px solid var(--vec);outline-offset:2px}
+.choice input:disabled+span{opacity:.5;cursor:not-allowed;border-style:dashed}
+.choice .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);margin-right:6px}
+.choice.check>span{padding-left:38px}
+.choice.check>span::before{content:"";position:absolute;left:12px;top:12px;width:16px;height:16px;border:1.5px solid var(--muted);border-radius:4px;background:var(--paper)}
+.choice.check input:checked+span::before{background:var(--vec);border-color:var(--vec)}
+.choice.check input:checked+span::after{content:"✓";position:absolute;left:15px;top:9px;color:var(--paper);font-size:.8rem;font-weight:700}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;background:var(--bg);margin-bottom:12px;flex-wrap:wrap}
+.seg button{font:inherit;font-family:var(--display);font-weight:500;font-size:.92rem;border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:7px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--vec);box-shadow:0 0 0 1px var(--line)}
+.row{display:flex;gap:28px;flex-wrap:wrap}
+.row>div{min-width:220px}
+.lbl{font-family:var(--display);font-weight:700;font-size:.95rem;margin-bottom:8px}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.stepper button{font:inherit;font-size:1.2rem;width:42px;height:40px;border:0;background:var(--bg);color:var(--vec);cursor:pointer}
+.stepper button:disabled{color:var(--muted);cursor:default}
+.stepper output{min-width:52px;text-align:center;font-family:var(--mono);font-weight:600;font-size:1.05rem}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pills button{font:inherit;font-family:var(--mono);font-size:.85rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:8px 12px;border-radius:999px;cursor:pointer}
+.pills button[aria-pressed="true"]{background:var(--vec);border-color:var(--vec);color:var(--paper)}
+.hint{font-size:.85rem;color:var(--muted);margin-top:8px}
+.go{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--tint);border-radius:14px;padding:16px 20px;margin:16px 0}
+.go .sum{flex:1;min-width:220px;font-size:.95rem}
+.go .sum b{font-family:var(--display)}
+.go .btn{font-size:1.05rem;padding:11px 22px}
+.shared{background:var(--warnbg);border:1px solid var(--warn);border-radius:10px;padding:10px 14px;font-size:.92rem;margin:12px 0}
+.empty{color:var(--muted);font-size:.95rem;border:1px dashed var(--line);border-radius:10px;padding:14px}
+#run[hidden],#config[hidden]{display:none}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/#matieres">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/" aria-current="page">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <header class="hero" style="padding-top:32px">
+    <div class="eyebrow">Mini-DS · corrigé automatiquement</div>
+    <h1>Mini-DS</h1>
+    <p class="lead">Choisis une matière, puis un DS entier ou les chapitres que tu veux travailler, et règle la durée. Chaque sujet a de nouvelles valeurs, une note sur 20 et la correction détaillée.</p>
+  </header>
+
+  <div id="config">
+    <div class="shared" id="shared" hidden></div>
+
+    <section class="step">
+      <h2><span class="n">1</span>Matière</h2>
+      <div class="chips" id="mat"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="n">2</span>Quoi réviser</h2>
+      <div class="seg" role="group" aria-label="Type de révision">
+        <button type="button" data-mode="ds" aria-pressed="true">Un DS</button>
+        <button type="button" data-mode="ch" aria-pressed="false">Un ou plusieurs chapitres</button>
+      </div>
+      <div id="what"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="n">3</span>Réglages</h2>
+      <div class="row">
+        <div><div class="lbl">Nombre de questions</div>
+          <div class="stepper"><button type="button" id="nm" aria-label="Moins de questions">−</button><output id="nv">5</output><button type="button" id="np" aria-label="Plus de questions">+</button></div>
+          <div class="hint" id="nmax"></div></div>
+        <div><div class="lbl">Durée</div>
+          <div class="pills" id="dur"></div>
+          <div class="hint">« Sans chrono » : le temps passé est quand même affiché.</div></div>
+      </div>
+    </section>
+
+    <div class="go">
+      <div class="sum" id="sum"></div>
+      <button class="btn" type="button" id="start">Lancer le mini-DS ▸</button>
+    </div>
+
+    <h2 style="font-size:1.1rem;margin-top:28px">Tes derniers résultats</h2>
+    <div id="hist"></div>
+  </div>
+
+  <div id="run" hidden></div>
+
+  <footer class="site">Une erreur dans une question ? <a href="/contact/?type=erreur&amp;page=Mini-DS">Signale-la ici</a> avec le numéro du sujet.</footer>
+</div>
+
+<script src="/assets/minids.js"></script>
+<script src="/ds/statique/mini-ds/banque.js"></script>
+<script src="matieres.js"></script>
+<script>
+(function(){
+  const MAT=window.MINIDS_MATIERES;
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const DUR=[[15,'15 min'],[30,'30 min'],[45,'45 min'],[60,'1 h'],[0,'Sans chrono']];
+  const has=m=>!!(m.banque&&m.banque());
+  const MAXQ=12;
+  const q=new URLSearchParams(location.search);
+
+  // --- état ---
+  let S={m:null,mode:'ds',ds:null,ch:new Set(),n:5,t:30,seed:null};
+  const mat=()=>MAT.find(x=>x.id===S.m);
+  function pool(){const m=mat();if(!m||!has(m))return [];
+    const ids=new Set();const chs=S.mode==='ds'?((m.ds.find(d=>d.id===S.ds)||{}).chapitres||[]):[...S.ch];
+    chs.forEach(c=>{const C=m.chapitres.find(x=>x.id===c);if(C)C.q.forEach(i=>ids.add(i))});
+    return m.banque().filter(b=>ids.has(b.id))}
+  function chapsSel(){const m=mat();return S.mode==='ds'?((m.ds.find(d=>d.id===S.ds)||{}).chapitres||[]):[...S.ch]}
+
+  // --- préremplissage depuis un lien partagé ---
+  const first=MAT.find(has);
+  S.m=(MAT.find(x=>x.id===q.get('m')&&has(x))||first).id;
+  if(q.get('ch')){S.mode='ch';q.get('ch').split(',').forEach(c=>S.ch.add(c))}
+  else{S.mode='ds';S.ds=q.get('ds')||null;if(!q.get('n')){const m0=MAT.find(x=>x.id===S.m),d0=(m0.ds.find(d=>d.id===S.ds)||m0.ds[0]);if(d0){S.n=d0.n;S.t=d0.min}}}
+  if(q.get('n'))S.n=parseInt(q.get('n'),10)||5;
+  if(q.has('t'))S.t=parseInt(q.get('t'),10)||0;
+  if(parseInt(q.get('sujet'),10)>0)S.seed=parseInt(q.get('sujet'),10);
+  if(S.seed){const b=document.getElementById('shared');b.hidden=false;
+    b.innerHTML='<b>Sujet partagé n° '+S.seed+'.</b> Les réglages sont déjà faits : clique sur « Lancer » pour avoir exactement le même sujet que la personne qui t\'a envoyé le lien.'}
+
+  // --- rendu ---
+  function renderMat(){
+    document.getElementById('mat').innerHTML=MAT.map(m=>`<label class="choice"><input type="radio" name="mat" value="${m.id}" ${m.id===S.m?'checked':''} ${has(m)?'':'disabled'}><span style="--c:${m.couleur}"><span><i class="dot"></i>${esc(m.nom)}</span><small>${has(m)?(m.ds.length+' DS · '+m.chapitres.length+' chapitres'):'Bientôt'}</small></span></label>`).join('');
+  }
+  function renderWhat(){
+    const m=mat();
+    document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===S.mode));
+    const w=document.getElementById('what');
+    if(S.mode==='ds'){
+      if(!m.ds.length){w.innerHTML='<p class="empty">Pas encore de DS pour cette matière.</p>';return}
+      if(!m.ds.find(d=>d.id===S.ds))S.ds=m.ds[0].id;
+      w.innerHTML='<div class="chips">'+m.ds.map(d=>`<label class="choice"><input type="radio" name="ds" value="${d.id}" ${d.id===S.ds?'checked':''}><span>${esc(d.nom)}<small>${esc(d.detail||'')}</small></span></label>`).join('')+'</div>';
+    }else{
+      if(!S.ch.size)m.chapitres.forEach(c=>S.ch.add(c.id));
+      w.innerHTML='<div class="chips">'+m.chapitres.map(c=>`<label class="choice check"><input type="checkbox" name="ch" value="${c.id}" ${S.ch.has(c.id)?'checked':''}><span>${esc(c.nom)}<small>${esc(c.detail||'')}</small></span></label>`).join('')+'</div>'+
+        '<div class="hint"><a href="#" id="all">Tout cocher</a> · <a href="#" id="none">Tout décocher</a></div>';
+      w.querySelector('#all').onclick=e=>{e.preventDefault();m.chapitres.forEach(c=>S.ch.add(c.id));renderWhat();update()};
+      w.querySelector('#none').onclick=e=>{e.preventDefault();S.ch.clear();renderWhat();update()};
+    }
+  }
+  function renderDur(){
+    document.getElementById('dur').innerHTML=DUR.map(([v,l])=>`<button type="button" data-t="${v}" aria-pressed="${v===S.t}">${l}</button>`).join('');
+  }
+  function update(){
+    const P=pool(),types=P.length,max=types?MAXQ:0;
+    if(max)S.n=Math.max(1,Math.min(S.n,max));
+    document.getElementById('nv').textContent=max?S.n:0;
+    document.getElementById('nm').disabled=S.n<=1||!max;
+    document.getElementById('np').disabled=S.n>=max;
+    document.getElementById('nmax').textContent=types?(types+' type'+(types>1?'s':'')+' de questions dans ce choix'+(S.n>types?' : certains reviendront avec d\'autres valeurs.':'.')):'';
+    const m=mat(),chs=chapsSel().map(id=>(m.chapitres.find(c=>c.id===id)||{}).nom).filter(Boolean);
+    const quoi=S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?'Chapitre « '+chs[0]+' »':chs.length+' chapitres');
+    document.getElementById('sum').innerHTML=max
+      ?`<b>${esc(m.nom)} · ${esc(quoi||'')}</b><br>${S.n} question${S.n>1?'s':''} · ${S.t?S.t+' min':'sans chrono'}`
+      :'<b>Coche au moins un chapitre.</b>';
+    document.getElementById('start').disabled=!max;
+  }
+
+  // --- événements ---
+  document.getElementById('mat').addEventListener('change',e=>{S.m=e.target.value;S.ds=null;S.ch.clear();S.seed=null;renderWhat();update()});
+  document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{S.mode=b.dataset.mode;S.seed=null;
+    if(S.mode==='ds'){const d=mat().ds[0];if(d){S.n=d.n;S.t=d.min;renderDur()}}
+    renderWhat();update()});
+  document.getElementById('what').addEventListener('change',e=>{S.seed=null;
+    if(e.target.name==='ds'){S.ds=e.target.value;const d=mat().ds.find(x=>x.id===S.ds);if(d){S.n=d.n;S.t=d.min;renderDur()}}
+    if(e.target.name==='ch'){e.target.checked?S.ch.add(e.target.value):S.ch.delete(e.target.value)}
+    update()});
+  document.getElementById('nm').onclick=()=>{S.n--;S.seed=null;update()};
+  document.getElementById('np').onclick=()=>{S.n++;S.seed=null;update()};
+  document.getElementById('dur').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.t=+b.dataset.t;renderDur();update()});
+
+  function hist(){
+    let list=[];try{list=JSON.parse(localStorage.getItem('minids-'+S.m)||'[]')||[]}catch(e){}
+    document.getElementById('hist').innerHTML=list.length
+      ?'<ul class="mds-hist">'+list.slice(-6).reverse().map(x=>'<li>'+esc(x.date)+' · '+esc(x.fmt)+' · sujet '+x.seed+' · <b>'+String(x.note).replace('.',',')+'/20</b></li>').join('')+'</ul>'
+      :'<p class="mds-note">Pas encore de copie rendue sur ce navigateur.</p>';
+  }
+
+  // --- lancement ---
+  const cfgEl=document.getElementById('config'),runEl=document.getElementById('run');
+  document.getElementById('start').onclick=()=>{
+    const m=mat(),base=pool();if(!base.length)return;
+    // si on demande plus de questions que de types, on répète des types (avec d'autres valeurs)
+    const P=S.n<=base.length?base:Array.from({length:S.n},(_,i)=>i<base.length?base[i]:Object.assign({},base[i%base.length],{id:base[i%base.length].id+'~'+Math.floor(i/base.length)}));
+    const chs=chapsSel().slice().sort();
+    const seed=S.seed||1000+Math.floor(Math.random()*9000);
+    const u=new URL(location.href);u.search='';
+    u.searchParams.set('m',S.m);
+    if(S.mode==='ds')u.searchParams.set('ds',S.ds);else u.searchParams.set('ch',chs.join(','));
+    u.searchParams.set('n',S.n);u.searchParams.set('t',S.t);u.searchParams.set('sujet',seed);u.searchParams.set('format','c');
+    history.replaceState(null,'',u);
+    const label=(S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?(m.chapitres.find(c=>c.id===chs[0])||{}).nom:chs.length+' chapitres'))+' · '+S.n+' q · '+(S.t?S.t+' min':'sans chrono');
+    cfgEl.hidden=true;runEl.hidden=false;document.getElementById('shared').hidden=true;
+    MiniDS.start({
+      id:S.m+':'+chs.join('+')+':'+S.n, histKey:'minids-'+S.m,
+      mount:runEl, bank:P, report:'/contact/', startNow:true,
+      formats:[{id:'c',label,min:S.t,n:S.n}],
+      onHome(){runEl.hidden=true;runEl.innerHTML='';cfgEl.hidden=false;S.seed=null;
+        const v=new URL(location.href);v.searchParams.delete('sujet');history.replaceState(null,'',v);hist();window.scrollTo({top:0})}
+    });
+  };
+
+  renderMat();renderWhat();renderDur();update();hist();
+})();
+</script>
+</body>
+</html>
