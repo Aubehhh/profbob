@@ -24,8 +24,8 @@
 .dcl .fh{fill:var(--force)}
 .dcl .lbl{font-family:var(--mono);font-size:15px;fill:var(--force);font-weight:600}
 .dcl .eq{font-family:var(--mono);font-size:14px;fill:var(--muted)}
-.go{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}
-@media (min-width:860px){.go{grid-template-columns:repeat(4,1fr)}}
+.go{display:grid;grid-template-columns:1fr;gap:10px;margin-top:28px}
+@media (min-width:640px){.go{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:759px){.dcl{max-width:240px}}
 .go a{display:block;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .go a:hover{border-color:var(--vec)}
@@ -64,10 +64,9 @@
   </div>
 
   <div class="go">
-    <a href="/"><b>Accueil ▸</b><span>Toutes les matières</span></a>
+    <a href="/"><b>Accueil ▸</b><span>Retour au début</span></a>
+    <a href="/#matieres"><b>Matières ▸</b><span>Tous les cours</span></a>
     <a href="/mini-ds/"><b>Mini-DS ▸</b><span>S'entraîner, corrigé auto</span></a>
-    <a href="/notes/"><b>Simulateur de notes ▸</b><span>Est-ce que je valide ?</span></a>
-    <a href="/ds/statique/"><b>DS Statique ▸</b><span>Cours et exercices</span></a>
   </div>
 
   <p class="foot">Tu es arrivé ici en cliquant sur un lien du site ? <a id="rep" href="/contact/?type=erreur">Signale le lien cassé</a>, il sera réparé.</p>
