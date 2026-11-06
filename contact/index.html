@@ -113,7 +113,9 @@
         show('ok','<b>Message envoyé, merci !</b> '+(data.email?'Tu recevras une réponse sur '+data.email.replace(/[<>&]/g,'')+'.':'Il est bien arrivé.'));
       }else{throw new Error(j.message||('HTTP '+r.status))}
     }catch(err){
-      show('ko','L\'envoi n\'a pas marché. Réessaie dans un instant, ou écris directement à <a href="mailto:contact@profbob.fr">contact@profbob.fr</a>.');
+      const m=String(err&&err.message||err).replace(/[<>&]/g,'');
+      if(/activat/i.test(m)){show('ko','<b>Le formulaire n\'est pas encore activé.</b> Un mail de confirmation vient d\'être envoyé à contact@profbob.fr : il faut cliquer sur le lien qu\'il contient, puis renvoyer le message.');return}
+      show('ko','L\'envoi n\'a pas marché. Réessaie dans un instant, ou écris directement à <a href="mailto:contact@profbob.fr">contact@profbob.fr</a>.<br><small class="m">Détail technique : '+m+'</small>');
     }finally{btn.disabled=false;btn.textContent='Envoyer'}
   });
 })();
