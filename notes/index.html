@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<title>Simulateur de notes S1 · profbob.fr</title>
+<meta name="description" content="Entre tes notes du semestre 1 et vois tout de suite si tu valides chaque UE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+/* Simulateur : un bilan en haut, puis une carte par UE (bande de couleur à gauche),
+   chaque module sur une ligne avec ses cases de notes. */
+:root{--page:880px}
+.page{max-width:880px;margin:0 auto}
+.hero2{padding-block:32px 4px}
+.bilan{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:20px 0 8px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .l{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:.5em;color:var(--muted);font-weight:500}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0 4px}
+.tools .meta{flex:1;min-width:220px}
+
+.ue{background:var(--paper);border:1px solid var(--line);border-radius:14px;margin:18px 0;overflow:hidden;position:relative}
+.ue::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.ue-h{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;padding:16px 18px 12px 24px;border-bottom:1px solid var(--line)}
+.ue-h .t{flex:1;min-width:200px}
+.ue-h h2{font-size:1.2rem}
+.ue-h .ects{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.ue-h .moy{text-align:right}
+.ue-h .moy b{font-family:var(--display);font-size:1.7rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.ue-h .moy b small{font-size:.5em;color:var(--muted);font-weight:500}
+.badge{display:inline-block;font-family:var(--mono);font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;margin-top:6px;background:var(--tint);color:var(--muted)}
+.badge.ok{background:var(--okbg);color:var(--ok)}
+.badge.warn{background:var(--warnbg);color:var(--warn)}
+.badge.ko{background:var(--badbg);color:var(--bad)}
+.need{padding:10px 18px 10px 24px;font-size:.92rem;background:var(--bg);border-bottom:1px solid var(--line)}
+.need:empty{display:none}
+.need b{font-family:var(--mono)}
+
+.mod{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;padding:12px 18px 12px 24px;border-bottom:1px solid var(--line);align-items:center}
+.mod:last-child{border-bottom:0}
+.mod .n{font-family:var(--display);font-weight:500;line-height:1.25}
+.mod .n small{display:block;font-family:var(--mono);font-size:.72rem;color:var(--muted);font-weight:400;margin-top:2px}
+.mod .avg{font-family:var(--mono);font-weight:600;text-align:right;min-width:62px;font-variant-numeric:tabular-nums}
+.mod .avg.lo{color:var(--bad)}
+.eps{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px}
+.ep{display:flex;flex-direction:column;gap:3px;width:108px}
+.ep label{font-family:var(--mono);font-size:.7rem;color:var(--muted);line-height:1.25;min-height:2.5em;display:flex;align-items:flex-end}
+.ep input{width:100%;font-family:var(--mono);font-size:1rem;padding:7px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);text-align:center}
+.ep input:focus{outline:2px solid var(--vec);outline-offset:1px;border-color:var(--vec);background:var(--paper)}
+.ep input.bad{border-color:var(--bad);background:var(--badbg)}
+.mod.zero{opacity:.6}
+.mod.zero .eps{display:none}
+@media (min-width:700px){.mod{grid-template-columns:minmax(0,260px) 1fr auto}.eps{grid-column:auto}}
+.note{font-size:.88rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/#matieres">Matières</a>
+    <a href="/notes/" aria-current="page">Notes</a>
+    <a class="opt" href="/ds/statique/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+  </nav>
+</div></header>
+
+<main class="page">
+  <div class="hero2">
+    <div class="eyebrow">Simulateur · semestre 1</div>
+    <h1>Est-ce que je valide&nbsp;?</h1>
+    <p class="lead">Entre tes notes sur 20 au fur et à mesure. Chaque UE se valide avec <b>10 de moyenne</b>, et les notes se compensent à l'intérieur d'une UE. Pour chaque UE, le site te dit quelle moyenne il te faut sur les épreuves qui restent.</p>
+  </div>
+
+  <div class="bilan" id="bilan"></div>
+  <div class="tools">
+    <span class="meta">Tes notes restent dans ce navigateur : rien n'est envoyé, personne d'autre ne les voit.</span>
+    <button class="btn ghost" id="reset" type="button">Effacer mes notes</button>
+  </div>
+
+  <div id="ues"></div>
+
+  <p class="note">Calcul d'après la maquette officielle du S1 : chaque épreuve compte pour le pourcentage indiqué dans son UE. Les modules à 0 % ne comptent pas dans la moyenne. Ce simulateur donne une idée, seul le relevé officiel fait foi. Une erreur dans les coefficients ? <a href="/contact/?type=erreur&amp;page=Simulateur%20de%20notes">Signale-la</a>.</p>
+  <footer class="site"><a href="/">← Retour à l'accueil</a></footer>
+</main>
+
+<script src="maquette-s1.js"></script>
+<script>
+(function(){
+  const M=window.MAQUETTE_S1,SEUIL=M.seuil,KEY='notes-s1';
+  let notes={};try{notes=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
+  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(notes))}catch(e){}};
+  const fmt=(x,d=2)=>{const p=Math.pow(10,d);return (Math.round(x*p)/p).toString().replace('.',',')};
+  const pct=x=>fmt(x,1)+' %';
+  const parse=s=>{s=String(s).trim().replace(',','.');if(s==='')return null;const v=Number(s);return (isFinite(v)&&v>=0&&v<=20)?v:NaN};
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // --- construction des cartes ---
+  const box=document.getElementById('ues');
+  box.innerHTML=M.ue.map(u=>`
+    <section class="ue" id="ue-${u.id}" style="--c:${u.couleur}">
+      <div class="ue-h">
+        <div class="t"><h2>${esc(u.nom)}</h2><div class="ects">${u.ects} ECTS</div></div>
+        <div class="moy"><b data-ue-avg>–</b><br><span class="badge" data-ue-badge>Pas encore de note</span></div>
+      </div>
+      <div class="need" data-ue-need></div>
+      ${u.modules.map(m=>`
+        <div class="mod${m.poids?'':' zero'}">
+          <div class="n">${esc(m.nom)}<small>${m.poids?m.poids+' % de l\'UE':'non noté'}</small></div>
+          <div class="eps">${m.ep.map(([k,lab,w])=>{const id=u.id+'.'+m.id+'.'+k;const v=notes[id];
+            return `<div class="ep"><label for="n-${id}">${esc(lab)}<br>${fmt(w,1)} %</label><input id="n-${id}" data-id="${id}" inputmode="decimal" autocomplete="off" placeholder="/20" value="${v!=null?String(v).replace('.',','):''}"></div>`}).join('')}</div>
+          <div class="avg" data-mod-avg="${u.id}.${m.id}">${m.poids?'–':''}</div>
+        </div>`).join('')}
+    </section>`).join('');
+
+  // --- calculs ---
+  function compute(){
+    let ectsOk=0,ectsTot=0,ueOk=0,sumGen=0,ectsGen=0,ueDone=0;
+    M.ue.forEach(u=>{
+      ectsTot+=u.ects;
+      let W=0,We=0,S=0;
+      u.modules.forEach(m=>{
+        let mw=0,ms=0;
+        m.ep.forEach(([k,,w])=>{W+=w;const v=notes[u.id+'.'+m.id+'.'+k];if(typeof v==='number'){We+=w;S+=w*v;mw+=w;ms+=w*v}});
+        const el=document.querySelector(`[data-mod-avg="${u.id}.${m.id}"]`);
+        if(m.poids){const a=mw?ms/mw:null;el.textContent=a==null?'–':fmt(a)+'/20';el.classList.toggle('lo',a!=null&&a<SEUIL)}
+      });
+      const card=document.getElementById('ue-'+u.id);
+      const avgEl=card.querySelector('[data-ue-avg]'),badge=card.querySelector('[data-ue-badge]'),need=card.querySelector('[data-ue-need]');
+      const R=W-We;
+      if(!We){avgEl.innerHTML='–';badge.className='badge';badge.textContent='Pas encore de note';
+        need.innerHTML='';return}
+      const avg=S/We;sumGen+=u.ects*avg;ectsGen+=u.ects;
+      avgEl.innerHTML=fmt(avg)+'<small>/20</small>';
+      if(R<1e-9){ueDone++;
+        if(avg>=SEUIL){badge.className='badge ok';badge.textContent='UE validée ✓';ectsOk+=u.ects;ueOk++}
+        else{badge.className='badge ko';badge.textContent='UE non validée'}
+        need.innerHTML='';return}
+      const req=(SEUIL*W-S)/R;
+      if(req<=0){badge.className='badge ok';badge.textContent='Déjà assurée ✓';ectsOk+=u.ects;ueOk++;
+        need.innerHTML='Même avec 0 partout sur ce qui reste ('+pct(R)+' de l\'UE), tu valides.';}
+      else if(req>20){badge.className='badge ko';badge.textContent='Plus atteignable';
+        need.innerHTML='Il faudrait <b>'+fmt(req)+'/20</b> sur ce qui reste ('+pct(R)+' de l\'UE) : impossible, même avec 20 partout.';}
+      else{badge.className='badge '+(avg>=SEUIL?'ok':'warn');badge.textContent=avg>=SEUIL?'En bonne voie':'À surveiller';
+        need.innerHTML='Il te faut <b>'+fmt(req)+'/20</b> de moyenne sur les épreuves restantes ('+pct(R)+' de l\'UE) pour valider.';}
+    });
+    const gen=ectsGen?sumGen/ectsGen:null;
+    document.getElementById('bilan').innerHTML=`
+      <div class="kpi"><div class="l">Moyenne générale</div><div class="v">${gen==null?'–':fmt(gen)}<small>${gen==null?'':' /20'}</small></div></div>
+      <div class="kpi"><div class="l">UE assurées</div><div class="v">${ueOk}<small> / ${M.ue.length}</small></div></div>
+      <div class="kpi"><div class="l">ECTS assurés</div><div class="v">${ectsOk}<small> / ${ectsTot}</small></div></div>`;
+  }
+
+  box.addEventListener('input',e=>{
+    const i=e.target.closest('input[data-id]');if(!i)return;
+    const v=parse(i.value);
+    i.classList.toggle('bad',Number.isNaN(v));
+    if(v==null||Number.isNaN(v))delete notes[i.dataset.id];else notes[i.dataset.id]=v;
+    save();compute();
+  });
+  document.getElementById('reset').onclick=()=>{
+    if(!confirm('Effacer toutes tes notes du semestre 1 ?'))return;
+    notes={};save();box.querySelectorAll('input').forEach(i=>{i.value='';i.classList.remove('bad')});compute();
+  };
+  compute();
+})();
+</script>
+</body>
+</html>

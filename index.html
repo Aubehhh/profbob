@@ -35,6 +35,10 @@ h2{margin:40px 0 12px;font-size:1.3rem}
 .how div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.95rem}
 .how b{font-family:var(--display);display:block;margin-bottom:4px}
 .soon{color:var(--muted);font-size:.95rem;border:1px dashed var(--line);border-radius:10px;padding:14px 16px}
+.promo{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--vec);color:var(--paper);border-radius:14px;padding:18px 20px;text-decoration:none;margin-top:8px}
+.promo b{font-family:var(--display);font-size:1.15rem;display:block;margin-bottom:2px}
+.promo span:first-child{flex:1;min-width:220px;font-size:.95rem;opacity:.95}
+.promo .go{font-family:var(--display);font-weight:700;background:var(--paper);color:var(--vec);padding:8px 14px;border-radius:8px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -43,6 +47,7 @@ h2{margin:40px 0 12px;font-size:1.3rem}
   <nav aria-label="Navigation du site">
     <a href="/" aria-current="page">Accueil</a>
     <a href="/#matieres">Matières</a>
+    <a href="/notes/">Notes</a>
     <a class="opt" href="/ds/statique/mini-ds/">Mini-DS</a>
     <a href="/contact/">Contact</a>
   </nav>
@@ -53,6 +58,8 @@ h2{margin:40px 0 12px;font-size:1.3rem}
     <h1>Révisions de zgeg</h1>
     <p class="lead">Toutes nos révisions au même endroit, matière par matière. Pour chaque DS : le cours réexpliqué simplement, des exercices corrigés, une fiche à relire et un mini-DS corrigé automatiquement, avec de nouvelles valeurs à chaque essai. Ta progression reste enregistrée dans ton navigateur, sans compte à créer.</p>
   </header>
+
+  <a class="promo" href="/notes/"><span><b>Est-ce que je valide mon semestre&nbsp;?</b>Entre tes notes, le simulateur calcule ta moyenne par UE et ce qu'il te faut pour avoir 10.</span><span class="go">Simulateur de notes ▸</span></a>
 
   <h2 id="matieres">Les matières</h2>
   <div class="mgrid">
