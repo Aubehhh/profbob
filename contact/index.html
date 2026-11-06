@@ -91,31 +91,36 @@
 
   const show=(cls,html)=>{out.className='msg '+cls;out.innerHTML=html};
 
-  // Envoi classique (pas de fetch) : le navigateur poste le formulaire chez FormSubmit,
-  // qui envoie le mail puis nous renvoie ici avec ?envoye=1.
-  form.action='https://formsubmit.co/contact@profbob.fr';
-  form.method='POST';
-  if(q.get('envoye')==='1'){show('ok','<b>Message envoyé, merci !</b> Il est bien arrivé.')}
+  // Envoi via Web3Forms : le message part en arrière-plan et arrive par mail sur contact@profbob.fr.
+  // La clé ci-dessous est publique par conception (elle sert seulement à dire « envoie à cette adresse »).
+  const ACCESS_KEY='';
 
-  form.addEventListener('submit',e=>{
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
     const msg=document.getElementById('message');
-    if(msg.value.trim().length<5){e.preventDefault();show('ko','Écris au moins quelques mots dans ton message.');msg.focus();return}
+    if(msg.value.trim().length<5){show('ko','Écris au moins quelques mots dans ton message.');msg.focus();return}
     const em=document.getElementById('email');
-    if(em.value&&!em.checkValidity()){e.preventDefault();show('ko','L\'adresse e-mail n\'a pas l\'air valide.');em.focus();return}
-    // les champs masqués ne sont pas envoyés
-    form.querySelectorAll('[hidden] input').forEach(i=>i.disabled=true);
-    const t=form.querySelector('input[name="Type"]:checked').value;
-    const mat=document.getElementById('matiere');
-    const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;form.appendChild(i)};
-    add('_subject','[profbob.fr] '+t+(mat.value&&!mat.disabled?' · '+mat.value:''));
-    add('_template','table');
-    add('_captcha','false');
-    add('_next',location.origin+location.pathname+'?envoye=1');
-    add('Envoyé depuis',document.referrer||location.href);
+    if(em.value&&!em.checkValidity()){show('ko','L\'adresse e-mail n\'a pas l\'air valide.');em.focus();return}
+    if(form.elements._honey.value)return; // robot
+    const data={};
+    new FormData(form).forEach((v,k)=>{if(k==='_honey')return;const el=form.querySelector('[name="'+k+'"]');if(el&&el.closest('[hidden]'))return;if(v!=='')data[k]=v});
+    const subject='[profbob.fr] '+data.Type+(data['Matière / chapitre']?' · '+data['Matière / chapitre']:'');
+    if(!ACCESS_KEY){
+      const body=Object.entries(data).map(([k,v])=>k+' : '+v).join('\n\n');
+      location.href='mailto:contact@profbob.fr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);return}
+    const payload=Object.assign({access_key:ACCESS_KEY,subject,from_name:data['Prénom']||'Visiteur profbob.fr','Envoyé depuis':document.referrer||location.href},data);
+    if(data.email)payload.replyto=data.email;
     btn.disabled=true;btn.textContent='Envoi…';
+    try{
+      const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
+      const j=await r.json().catch(()=>({}));
+      if(!r.ok||!j.success)throw new Error(j.message||('HTTP '+r.status));
+      form.querySelectorAll('textarea,input:not([type=radio])').forEach(i=>i.value='');
+      show('ok','<b>Message envoyé, merci !</b> '+(data.email?'Tu recevras une réponse sur '+data.email.replace(/[<>&]/g,'')+'.':'Il est bien arrivé.'));
+    }catch(err){
+      show('ko','L\'envoi n\'a pas marché. Réessaie dans un instant, ou écris directement à <a href="mailto:contact@profbob.fr">contact@profbob.fr</a>.<br><small class="m">Détail technique : '+String(err.message||err).replace(/[<>&]/g,'')+'</small>');
+    }finally{btn.disabled=false;btn.textContent='Envoyer'}
   });
-  // retour arrière après envoi : on réactive le bouton
-  addEventListener('pageshow',()=>{btn.disabled=false;btn.textContent='Envoyer';form.querySelectorAll('input:disabled').forEach(i=>i.disabled=false)});
 })();
 </script>
 </body>
