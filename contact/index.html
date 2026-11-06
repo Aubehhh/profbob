@@ -104,9 +104,6 @@
     const data={};
     new FormData(form).forEach((v,k)=>{if(k==='_honey')return;const el=form.querySelector('[name="'+k+'"]');if(el&&el.closest('[hidden]'))return;if(v!=='')data[k]=v});
     const subject='[profbob.fr] '+data.Type+(data['Matière / chapitre']?' · '+data['Matière / chapitre']:'');
-    if(!ACCESS_KEY){
-      const body=Object.entries(data).map(([k,v])=>k+' : '+v).join('\n\n');
-      location.href='mailto:contact@profbob.fr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);return}
     const payload=Object.assign({access_key:ACCESS_KEY,subject,from_name:data['Prénom']||'Visiteur profbob.fr','Envoyé depuis':document.referrer||location.href},data);
     if(data.email)payload.replyto=data.email;
     btn.disabled=true;btn.textContent='Envoi…';
