@@ -9,72 +9,177 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="../assets/site.css">
 <style>
-/* Formulaire : une colonne, gros boutons de choix pour le type de demande */
-.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:8px 0 4px;border:0;padding:0}
-.types legend{font-family:var(--display);font-weight:700;margin-bottom:8px;padding:0}
-.types label{display:block;cursor:pointer}
+/* Layout : barre du haut, puis deux colonnes sur grand écran (explications à gauche, formulaire à droite),
+   une seule colonne sur téléphone. Après l'envoi, le formulaire laisse place à un écran de confirmation. */
+.page{max-width:980px;margin:0 auto}
+.hero2{padding-block:36px 8px}
+.grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:18px;align-items:start}
+@media (min-width:860px){.grid{grid-template-columns:280px 1fr;gap:36px}.side{position:sticky;top:20px}}
+.side{order:2}
+@media (min-width:860px){.side{order:0}}
+.side h2{font-size:1rem;margin:0 0 10px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.steps li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:.95rem;color:var(--muted)}
+.steps li b{color:var(--ink);font-family:var(--display);display:block}
+.steps .n{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--tint);color:var(--vec);font-family:var(--mono);font-weight:600;font-size:.8rem}
+.side .direct{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(18px,4vw,28px)}
+
+.types{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0;border:0;padding:0}
+@media (min-width:640px){.types{grid-template-columns:repeat(4,1fr)}}
+.types legend{font-family:var(--display);font-weight:700;margin-bottom:10px;padding:0}
+.types label{display:block;cursor:pointer;height:100%}
 .types input{position:absolute;opacity:0;pointer-events:none}
-.types span{display:block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:var(--display);font-weight:500}
-.types span small{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:2px}
-.types input:checked+span{border-color:var(--vec);box-shadow:inset 0 0 0 1px var(--vec);color:var(--vec)}
+.types span{display:flex;flex-direction:column;gap:6px;height:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;font-family:var(--display);font-weight:500;font-size:.95rem;line-height:1.25;transition:border-color .15s,background .15s}
+.types span svg{width:22px;height:22px;color:var(--muted)}
+.types span small{font-family:var(--body);font-weight:400;font-size:.8rem;color:var(--muted)}
+.types label:hover span{border-color:var(--vec)}
+.types input:checked+span{border-color:var(--vec);background:var(--tint);color:var(--vec);box-shadow:inset 0 0 0 1px var(--vec)}
+.types input:checked+span svg{color:var(--vec)}
 .types input:focus-visible+span{outline:2px solid var(--vec);outline-offset:2px}
-.f{margin:18px 0}
-.f label{display:block;font-family:var(--display);font-weight:700;margin-bottom:6px}
+
+.f{margin:20px 0}
+.row2{display:grid;grid-template-columns:1fr;gap:0 16px}
+@media (min-width:640px){.row2{grid-template-columns:1fr 1fr}}
+.f label{display:block;font-family:var(--display);font-weight:700;font-size:.95rem;margin-bottom:6px}
 .f label small{font-family:var(--body);font-weight:400;color:var(--muted)}
-.f input,.f textarea,.f select{width:100%;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
-.f textarea{min-height:150px;resize:vertical}
-.f input:focus,.f textarea:focus,.f select:focus{outline:2px solid var(--vec);outline-offset:1px;border-color:var(--vec)}
+.f input,.f textarea{width:100%;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.f textarea{min-height:160px;resize:vertical;line-height:1.5}
+.f input:focus,.f textarea:focus{outline:2px solid var(--vec);outline-offset:1px;border-color:var(--vec);background:var(--paper)}
+.count{font-family:var(--mono);font-size:.75rem;color:var(--muted);text-align:right;margin-top:4px}
+.actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px}
+.actions .meta{flex:1;min-width:200px}
+.btn.lg{font-size:1rem;padding:11px 22px}
 .hp{position:absolute;left:-9999px}
-.msg{border-radius:10px;padding:14px 16px;margin:16px 0}
-.msg.ok{background:var(--okbg);color:var(--ink);border:1px solid var(--ok)}
-.msg.ko{background:var(--badbg);color:var(--ink);border:1px solid var(--bad)}
+.msg{border-radius:10px;padding:12px 14px;margin:14px 0;font-size:.95rem}
+.msg.ko{background:var(--badbg);border:1px solid var(--bad)}
+.msg:empty{display:none}
+
+/* écran après envoi */
+.done{text-align:center;padding-block:clamp(24px,5vw,40px)}
+.done .check{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;background:var(--okbg);display:grid;place-items:center;color:var(--ok)}
+.done .check svg{width:38px;height:38px}
+.done h2{font-size:clamp(1.6rem,4vw,2.1rem);outline:none}
+.done .sub{color:var(--muted);max-width:46ch;margin:8px auto 0}
+.recap{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:22px auto 0;max-width:520px;font-size:.92rem}
+.recap dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
+.recap dt{font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:3px}
+.recap dd{margin:0;overflow-wrap:anywhere;white-space:pre-line}
+.done .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.next{margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+.next .eyebrow{margin-bottom:10px}
+.next .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;text-align:left}
+.next a.c{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.next a.c:hover{border-color:var(--vec)}
+.next a.c b{font-family:var(--display);color:var(--vec);display:block}
+.next a.c span{font-size:.88rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.done{animation:pop .35s ease-out}@keyframes pop{from{opacity:0;transform:translateY(8px)}}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="hero">
-    <div class="eyebrow"><a href="../">← Toutes les révisions</a> · contact</div>
-    <h1>Écrire au site</h1>
-    <p class="lead">Une matière à ajouter, une erreur dans une page, une idée ? Remplis ce formulaire, le message arrive directement par mail.</p>
-  </header>
+<header class="topbar"><div class="in">
+  <a class="brand" href="../"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="../">Accueil</a>
+    <a class="opt" href="../ds/statique/">Statique</a>
+    <a class="opt" href="../ds/statique/mini-ds/">Mini-DS</a>
+    <a href="./" aria-current="page">Contact</a>
+  </nav>
+</div></header>
 
-  <form id="form" class="card" novalidate accept-charset="UTF-8">
-    <fieldset class="types">
-      <legend>C'est pour…</legend>
-      <label><input type="radio" name="Type" value="Proposer un chapitre" checked><span>Proposer un chapitre<small>Une matière ou un DS à ajouter</small></span></label>
-      <label><input type="radio" name="Type" value="Signaler une erreur"><span>Signaler une erreur<small>Cours, exercice, mini-DS</small></span></label>
-      <label><input type="radio" name="Type" value="Idée pour le site"><span>Une idée<small>Une fonction qui t'aiderait</small></span></label>
-      <label><input type="radio" name="Type" value="Autre"><span>Autre<small>Tout le reste</small></span></label>
-    </fieldset>
+<main class="page">
+  <div class="hero2">
+    <div class="eyebrow">Contact</div>
+    <h1>Une idée, une erreur, un chapitre&nbsp;?</h1>
+    <p class="lead">Ce formulaire arrive directement dans la boîte mail du site. Pas besoin de compte ni d'appli mail.</p>
+  </div>
 
-    <div class="f" id="f-matiere"><label for="matiere">Matière et chapitre <small>(ex. Maths · intégrales, DS du 20 novembre)</small></label>
-      <input id="matiere" name="Matière / chapitre" autocomplete="off"></div>
+  <div class="grid">
+    <aside class="side">
+      <h2>Comment ça se passe</h2>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Tu écris</b>Choisis le type de demande, deux ou trois lignes suffisent.</div></li>
+        <li><span class="n">2</span><div><b>Le message arrive par mail</b>Il est lu, en général sous quelques jours.</div></li>
+        <li><span class="n">3</span><div><b>Le site est mis à jour</b>Erreur corrigée, chapitre ajouté. Laisse ton e-mail si tu veux être prévenu.</div></li>
+      </ol>
+      <p class="direct">Tu préfères un vrai mail&nbsp;? <a href="mailto:contact@profbob.fr">contact@profbob.fr</a></p>
+    </aside>
 
-    <div class="f" id="f-page" hidden><label for="page">Où est l'erreur ? <small>(page, question, numéro du sujet du mini-DS)</small></label>
-      <input id="page" name="Page concernée" autocomplete="off"></div>
+    <section class="panel" id="panel" aria-live="polite">
+      <form id="form" novalidate>
+        <fieldset class="types">
+          <legend>C'est pour…</legend>
+          <label><input type="radio" name="Type" value="Proposer un chapitre" checked><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M12 8v6M9 11h6"/></svg>Proposer un chapitre<small>Une matière, un DS</small></span></label>
+          <label><input type="radio" name="Type" value="Signaler une erreur"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17h.01"/></svg>Signaler une erreur<small>Cours, exo, mini-DS</small></span></label>
+          <label><input type="radio" name="Type" value="Idée pour le site"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></svg>Une idée<small>Une fonction utile</small></span></label>
+          <label><input type="radio" name="Type" value="Autre"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>Autre<small>Tout le reste</small></span></label>
+        </fieldset>
 
-    <div class="f"><label for="message">Ton message</label>
-      <textarea id="message" name="Message" required placeholder="Explique en quelques lignes. Pour un chapitre, tu peux coller un lien vers le cours ou les exercices (Google Drive, ENT…)."></textarea></div>
+        <div class="f" id="f-matiere"><label for="matiere">Matière et chapitre <small>· ex. Maths, intégrales, DS du 20/11</small></label>
+          <input id="matiere" name="Matière / chapitre" autocomplete="off"></div>
 
-    <div class="f"><label for="nom">Ton prénom <small>(facultatif)</small></label>
-      <input id="nom" name="Prénom" autocomplete="given-name"></div>
+        <div class="f" id="f-page" hidden><label for="page">Où est l'erreur&nbsp;? <small>· page, question, n° de sujet</small></label>
+          <input id="page" name="Page concernée" autocomplete="off"></div>
 
-    <div class="f"><label for="email">Ton e-mail <small>(facultatif, seulement si tu veux une réponse)</small></label>
-      <input id="email" type="email" name="email" autocomplete="email"></div>
+        <div class="f"><label for="message">Ton message</label>
+          <textarea id="message" name="Message" required maxlength="3000" placeholder="Explique en quelques lignes. Pour un chapitre, colle un lien vers le cours ou les exercices (Drive, ENT…)."></textarea>
+          <div class="count" id="count">0 / 3000</div></div>
 
-    <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
-    <div id="out" role="status" aria-live="polite"></div>
-    <button class="btn" type="submit" id="send">Envoyer</button>
-  </form>
+        <div class="row2">
+          <div class="f"><label for="nom">Prénom <small>· facultatif</small></label>
+            <input id="nom" name="Prénom" autocomplete="given-name"></div>
+          <div class="f"><label for="email">E-mail <small>· pour avoir une réponse</small></label>
+            <input id="email" type="email" name="email" autocomplete="email" placeholder="facultatif"></div>
+        </div>
 
-  <footer class="site">Tu préfères écrire directement ? <a href="mailto:contact@profbob.fr">contact@profbob.fr</a></footer>
-</div>
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="msg" id="out" role="alert"></div>
+        <div class="actions">
+          <button class="btn lg" type="submit" id="send">Envoyer le message</button>
+          <span class="meta">Arrive sur contact@profbob.fr</span>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <footer class="site"><a href="../">← Retour à l'accueil</a></footer>
+</main>
+
+<template id="done-tpl">
+  <div class="done">
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+    <h2 tabindex="-1">Message envoyé&nbsp;!</h2>
+    <p class="sub" data-sub></p>
+    <div class="recap"><dl data-recap></dl></div>
+    <div class="btns">
+      <a class="btn" href="../">Retour à l'accueil</a>
+      <a class="btn ghost" data-back hidden>Revenir à la page d'avant</a>
+      <button class="btn ghost" type="button" data-again>Envoyer un autre message</button>
+    </div>
+    <div class="next">
+      <div class="eyebrow">En attendant</div>
+      <div class="cards">
+        <a class="c" href="../ds/statique/mini-ds/"><b>Lancer un mini-DS ▸</b><span>Statique, corrigé automatiquement</span></a>
+        <a class="c" href="../ds/statique/#fiche"><b>Relire la fiche récap ▸</b><span>Toutes les formules en une page</span></a>
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 (function(){
-  const form=document.getElementById('form'),out=document.getElementById('out'),btn=document.getElementById('send');
+  // Envoi via Web3Forms : le message part en arrière-plan et arrive par mail sur contact@profbob.fr.
+  // La clé est publique par conception (elle sert seulement à dire « envoie à cette adresse »).
+  const ACCESS_KEY='63a20375-3c41-4214-9ab8-e731a888fd8d';
+  const panel=document.getElementById('panel'),form=document.getElementById('form');
+  const out=document.getElementById('out'),btn=document.getElementById('send'),msg=document.getElementById('message');
   const q=new URLSearchParams(location.search);
   const typeMap={chapitre:'Proposer un chapitre',erreur:'Signaler une erreur',idee:'Idée pour le site',autre:'Autre'};
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  // page d'où l'on vient (même site, autre que contact) pour le bouton « Revenir »
+  let from=null;
+  try{const r=new URL(document.referrer);if(r.origin===location.origin&&!r.pathname.startsWith('/contact'))from=r.href}catch(e){}
 
   function sync(){
     const t=form.querySelector('input[name="Type"]:checked').value;
@@ -82,40 +187,54 @@
     document.getElementById('f-matiere').hidden=(t==='Idée pour le site');
   }
   form.querySelectorAll('input[name="Type"]').forEach(r=>r.addEventListener('change',sync));
-  // pré-remplissage depuis un lien : ?type=erreur&page=...
-  if(typeMap[q.get('type')]){form.querySelector('input[value="'+typeMap[q.get('type')]+'"]').checked=true}
+  if(typeMap[q.get('type')])form.querySelector('input[value="'+typeMap[q.get('type')]+'"]').checked=true;
   if(q.get('page'))document.getElementById('page').value=q.get('page');
   if(q.get('matiere'))document.getElementById('matiere').value=q.get('matiere');
   sync();
+  const count=()=>document.getElementById('count').textContent=msg.value.length+' / 3000';
+  msg.addEventListener('input',count);count();
 
-  const show=(cls,html)=>{out.className='msg '+cls;out.innerHTML=html};
-
-  // Envoi via Web3Forms : le message part en arrière-plan et arrive par mail sur contact@profbob.fr.
-  // La clé ci-dessous est publique par conception (elle sert seulement à dire « envoie à cette adresse »).
-  const ACCESS_KEY='63a20375-3c41-4214-9ab8-e731a888fd8d';
+  function showDone(data){
+    const node=document.getElementById('done-tpl').content.firstElementChild.cloneNode(true);
+    const who=data['Prénom']?'Merci '+esc(data['Prénom'])+' ! ':'Merci ! ';
+    node.querySelector('[data-sub]').innerHTML=who+(data.email
+      ?'Ton message est bien arrivé. La réponse sera envoyée à <b>'+esc(data.email)+'</b>.'
+      :'Ton message est bien arrivé. Tu n\'as pas laissé d\'e-mail, donc pas de réponse directe, mais il sera lu.');
+    const rows=[['Type',data.Type],['Matière',data['Matière / chapitre']],['Page',data['Page concernée']],
+      ['Message',data.Message.length>220?data.Message.slice(0,220)+'…':data.Message]].filter(r=>r[1]);
+    node.querySelector('[data-recap]').innerHTML=rows.map(r=>'<dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd>').join('');
+    if(from){const b=node.querySelector('[data-back]');b.href=from;b.hidden=false}
+    node.querySelector('[data-again]').onclick=()=>{
+      node.remove();form.hidden=false;form.reset();
+      form.querySelector('input[value="'+data.Type+'"]').checked=true;sync();count();
+      msg.focus();
+    };
+    form.hidden=true;panel.appendChild(node);
+    panel.scrollIntoView({behavior:'smooth',block:'start'});
+    node.querySelector('h2').focus({preventScroll:true});
+  }
 
   form.addEventListener('submit',async e=>{
-    e.preventDefault();
-    const msg=document.getElementById('message');
-    if(msg.value.trim().length<5){show('ko','Écris au moins quelques mots dans ton message.');msg.focus();return}
+    e.preventDefault();out.textContent='';out.className='msg';
+    if(msg.value.trim().length<5){out.className='msg ko';out.textContent='Écris au moins quelques mots dans ton message.';msg.focus();return}
     const em=document.getElementById('email');
-    if(em.value&&!em.checkValidity()){show('ko','L\'adresse e-mail n\'a pas l\'air valide.');em.focus();return}
+    if(em.value&&!em.checkValidity()){out.className='msg ko';out.textContent='L\'adresse e-mail n\'a pas l\'air valide.';em.focus();return}
     if(form.elements._honey.value)return; // robot
     const data={};
-    new FormData(form).forEach((v,k)=>{if(k==='_honey')return;const el=form.querySelector('[name="'+k+'"]');if(el&&el.closest('[hidden]'))return;if(v!=='')data[k]=v});
+    new FormData(form).forEach((v,k)=>{if(k==='_honey')return;const el=form.querySelector('[name="'+k+'"]');if(el&&el.closest('[hidden]'))return;if(String(v).trim()!=='')data[k]=String(v).trim()});
     const subject='[profbob.fr] '+data.Type+(data['Matière / chapitre']?' · '+data['Matière / chapitre']:'');
-    const payload=Object.assign({access_key:ACCESS_KEY,subject,from_name:data['Prénom']||'Visiteur profbob.fr','Envoyé depuis':document.referrer||location.href},data);
+    const payload=Object.assign({access_key:ACCESS_KEY,subject,from_name:data['Prénom']||'Visiteur profbob.fr','Envoyé depuis':from||location.href},data);
     if(data.email)payload.replyto=data.email;
-    btn.disabled=true;btn.textContent='Envoi…';
+    btn.disabled=true;btn.textContent='Envoi en cours…';
     try{
       const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
       const j=await r.json().catch(()=>({}));
       if(!r.ok||!j.success)throw new Error(j.message||('HTTP '+r.status));
-      form.querySelectorAll('textarea,input:not([type=radio])').forEach(i=>i.value='');
-      show('ok','<b>Message envoyé, merci !</b> '+(data.email?'Tu recevras une réponse sur '+data.email.replace(/[<>&]/g,'')+'.':'Il est bien arrivé.'));
+      showDone(data);
     }catch(err){
-      show('ko','L\'envoi n\'a pas marché. Réessaie dans un instant, ou écris directement à <a href="mailto:contact@profbob.fr">contact@profbob.fr</a>.<br><small class="m">Détail technique : '+String(err.message||err).replace(/[<>&]/g,'')+'</small>');
-    }finally{btn.disabled=false;btn.textContent='Envoyer'}
+      out.className='msg ko';
+      out.innerHTML='<b>L\'envoi n\'a pas marché.</b> Ton texte est toujours là : réessaie dans un instant, ou écris à <a href="mailto:contact@profbob.fr">contact@profbob.fr</a>.<br><small class="m">Détail : '+esc(err.message||err)+'</small>';
+    }finally{btn.disabled=false;btn.textContent='Envoyer le message'}
   });
 })();
 </script>
