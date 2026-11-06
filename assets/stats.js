@@ -12,7 +12,7 @@
 
   var day=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Paris'}).replace(/-/g,'');
   var path=location.pathname.replace(/index\.html$/,'').replace(/^\/|\/$/g,'');
-  var page='p-'+(path?path.replace(/[^a-z0-9]+/gi,'_').toLowerCase():'accueil');
+  var page=window.PB_PAGE?'p-'+window.PB_PAGE:'p-'+(path?path.replace(/[^a-z0-9]+/gi,'_').toLowerCase():'accueil');
   var mobile=matchMedia('(max-width:820px)').matches||/Mobi|Android|iPhone/i.test(navigator.userAgent);
 
   hit('total');hit('j-'+day);hit(page.slice(0,60));hit(mobile?'app-mobile':'app-ordi');
