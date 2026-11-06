@@ -1,0 +1,37 @@
+/* Mini-DS interactif */
+.mds-formats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.mds-format{text-align:left;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;cursor:pointer}
+.mds-format:hover,.mds-format[aria-pressed="true"]{border-color:var(--vec)}
+.mds-format[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--vec)}
+.mds-format b{font-family:var(--display);font-size:1.05rem;display:block;color:var(--vec)}
+.mds-format span{font-size:.9rem;color:var(--muted)}
+.mds-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.mds-bar{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-left,0px))}
+.mds-bar .in{max-width:780px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.mds-time{font-family:var(--mono);font-size:1.5rem;font-weight:600;font-variant-numeric:tabular-nums}
+.mds-time.low{color:var(--force)}
+.mds-bar .grow{flex:1}
+.mds-q{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:16px 0}
+.mds-q h3{display:flex;gap:10px;flex-wrap:wrap;align-items:baseline}
+.mds-q .tag{font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:999px;background:var(--tint);color:var(--vec);font-weight:600}
+.mds-fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:12px}
+.mds-field label{display:block;font-family:var(--mono);font-size:.85rem;font-weight:600;margin-bottom:4px}
+.mds-field .box{display:flex;align-items:center;gap:6px}
+.mds-field input{width:100%;min-width:0;font-family:var(--mono);font-size:1rem;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink)}
+.mds-field .unit{font-family:var(--mono);font-size:.85rem;color:var(--muted);white-space:nowrap}
+.mds-field.ok input{border-color:var(--ok);background:var(--okbg)}
+.mds-field.ko input{border-color:var(--bad);background:var(--badbg)}
+.mds-field .exp{font-family:var(--mono);font-size:.8rem;margin-top:4px}
+.mds-field.ok .exp{color:var(--ok)}
+.mds-field.ko .exp{color:var(--bad)}
+.mds-pts{font-family:var(--mono);font-size:.85rem;font-weight:600;margin-left:auto}
+.mds-score{background:var(--tint);border-radius:12px;padding:20px 22px;margin:20px 0}
+.mds-score .big{font-family:var(--display);font-size:clamp(2.4rem,9vw,3.6rem);font-weight:800;line-height:1;color:var(--vec)}
+.mds-score .big small{font-size:.45em;color:var(--muted)}
+.mds-score table{border-collapse:collapse;width:100%;margin-top:12px;font-size:.92rem}
+.mds-score td{padding:5px 8px;border-bottom:1px solid var(--line)}
+.mds-score td:last-child{text-align:right;font-family:var(--mono);white-space:nowrap}
+.mds-hist{font-size:.92rem}
+.mds-hist li{font-family:var(--mono);font-size:.85rem}
+.mds-note{font-size:.9rem;color:var(--muted)}

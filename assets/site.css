@@ -1,0 +1,44 @@
+/* Styles communs du site profbob.fr : couleurs, typographie, composants.
+   Les nouvelles pages chargent ce fichier pour garder le même look partout. */
+:root{
+  --bg:#f5f6f8; --paper:#ffffff; --ink:#18202e; --muted:#5b6474; --line:#dde1e8;
+  --vec:#2453b8; --force:#c2410c; --ok:#16794a; --okbg:#e7f4ec; --bad:#b42318; --badbg:#fdecea;
+  --warn:#8a5a00; --warnbg:#fbf1dc; --tint:#eef2fa; --code:#f0f2f6;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11151d; --paper:#181e29; --ink:#e6e9ef; --muted:#9aa3b2; --line:#2a3242;
+  --vec:#7fa6ff; --force:#ff9a62; --ok:#5fd39a; --okbg:#173326; --bad:#ff8a80; --badbg:#3a1d1b;
+  --warn:#f0c060; --warnbg:#3a2e14; --tint:#1d2638; --code:#202838; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:780px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:10px 0}
+a{color:var(--vec)}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lead{color:var(--muted);max-width:62ch}
+header.hero{padding-block:40px 20px}
+.meta{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.m,code{font-family:var(--mono);font-size:.9em}
+.v{font-weight:700;color:var(--vec);font-family:var(--mono);font-size:.92em}
+.formula{font-family:var(--mono);font-size:.92rem;background:var(--code);border-radius:8px;padding:12px 14px;margin:10px 0;overflow-x:auto;white-space:pre;line-height:1.7}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.btn{font-family:var(--display);font-weight:500;font-size:.95rem;padding:8px 16px;border-radius:8px;border:1px solid var(--vec);background:var(--vec);color:var(--paper);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--vec)}
+.btn:disabled{opacity:.5;cursor:default}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--vec);outline-offset:2px}
+details{border:1px solid var(--line);border-radius:8px;margin:10px 0;background:var(--paper)}
+details>summary{cursor:pointer;padding:8px 12px;font-family:var(--display);font-weight:500;font-size:.95rem;list-style:none;color:var(--ok)}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--vec)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 12px}
+footer.site{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}

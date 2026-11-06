@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mini-DS Statique · profbob.fr</title>
+<meta name="description" content="Mini-DS de statique corrigé automatiquement : nouvelles valeurs à chaque sujet, chrono et note sur 20.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="../../../assets/site.css">
+<link rel="stylesheet" href="../../../assets/minids.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow"><a href="../../../">← Toutes les révisions</a> · <a href="../">Statique</a> · mini-DS</div>
+    <h1>Mini-DS Statique</h1>
+    <p class="lead">Un sujet tiré au hasard dans les chapitres 1 à 3, avec un chrono. Tu tapes tes résultats, le site corrige, te donne une note sur 20 et la correction détaillée. Chaque nouveau sujet a d'autres valeurs : impossible d'apprendre les réponses par cœur.</p>
+  </header>
+
+  <div id="minids"></div>
+
+  <footer class="site">Une erreur dans une question ? <a href="mailto:contact@profbob.fr?subject=Erreur%20mini-DS%20Statique">Écris à contact@profbob.fr</a> en donnant le numéro du sujet.</footer>
+</div>
+
+<script src="../../../assets/minids.js"></script>
+<script src="banque.js"></script>
+<script>
+MiniDS.start({
+  id:'statique',
+  mount:document.getElementById('minids'),
+  bank:window.BANQUE_STATIQUE,
+  contact:'contact@profbob.fr',
+  defaultFormat:1,
+  formats:[
+    {id:'express', label:'Express',  min:15, n:3},
+    {id:'standard',label:'Standard', min:30, n:5},
+    {id:'blanc',   label:'DS blanc', min:60, n:8}
+  ]
+});
+</script>
+</body>
+</html>
