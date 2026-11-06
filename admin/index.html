@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<title>Admin · profbob.fr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+/* Page admin : écran de mot de passe, puis tableau de stats (chiffres clés, 14 derniers jours, pages, appareils).
+   Le mot de passe protège juste des curieux : le site n'a pas de serveur, ce n'est pas une vraie sécurité. */
+.lock{max-width:380px;margin:12vh auto 0;text-align:center}
+.lock input{width:100%;font:inherit;font-size:1rem;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);margin:14px 0 10px;text-align:center}
+.lock .err{color:var(--bad);font-family:var(--display);font-size:.9rem;min-height:1.3em}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.kpi .l{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+.card{margin:16px 0}
+.card h2{font-size:1.05rem;margin-bottom:12px}
+.chart{display:grid;grid-template-columns:repeat(14,1fr);gap:6px;align-items:end;height:170px;padding-top:18px}
+.bar{position:relative;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bar .b{background:var(--vec);border-radius:4px 4px 0 0;min-height:2px;position:relative}
+.bar .u{position:absolute;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--vec) 45%,var(--paper));border-radius:4px 4px 0 0}
+.bar .n{font-family:var(--mono);font-size:.68rem;text-align:center;color:var(--muted);margin-bottom:3px}
+.days{display:grid;grid-template-columns:repeat(14,1fr);gap:6px;margin-top:6px}
+.days span{font-family:var(--mono);font-size:.64rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;font-family:var(--display);font-size:.82rem;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-family:var(--display);font-size:.92rem}
+td{padding:7px 4px;border-bottom:1px solid var(--line)}
+td.v{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;width:70px}
+td .track{height:6px;border-radius:3px;background:var(--tint);margin-top:4px;overflow:hidden}
+td .track i{display:block;height:100%;background:var(--vec)}
+.row2{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:760px){.row2{grid-template-columns:1.4fr 1fr}}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:24px}
+.muted{color:var(--muted);font-family:var(--display);font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="lock" class="lock">
+    <div class="eyebrow">profbob.fr</div>
+    <h1 style="font-size:2rem">Espace admin</h1>
+    <form id="f"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password" autofocus>
+      <div class="err" id="err"></div>
+      <button class="btn" type="submit" style="width:100%">Entrer</button></form>
+    <p class="muted" style="margin-top:22px"><a href="/">← Retour au site</a></p>
+  </div>
+
+  <div id="app" hidden>
+    <header class="hero" style="padding-top:28px">
+      <div class="eyebrow"><a href="/">profbob.fr</a> · admin</div>
+      <h1 style="font-size:2.2rem">Statistiques de visites</h1>
+      <p class="muted" id="state">Chargement…</p>
+    </header>
+    <div class="kpis" id="kpis"></div>
+    <div class="card"><h2>14 derniers jours</h2>
+      <div class="chart" id="chart"></div><div class="days" id="days"></div>
+      <div class="legend"><span><i style="background:var(--vec)"></i>Pages vues</span><span><i style="background:color-mix(in srgb,var(--vec) 45%,var(--paper))"></i>Visiteurs du jour</span></div></div>
+    <div class="row2">
+      <div class="card"><h2>Pages les plus vues</h2><table id="pages"></table></div>
+      <div class="card"><h2>Appareils et actions</h2><table id="other"></table></div>
+    </div>
+    <div class="tools">
+      <button class="btn ghost" id="me" type="button"></button>
+      <button class="btn ghost" id="reload" type="button">Actualiser</button>
+      <button class="btn ghost" id="out" type="button">Se déconnecter</button>
+    </div>
+    <p class="muted" style="margin-top:14px">Comptage anonyme, sans cookie. « Visiteurs » = appareils différents (repérés par le navigateur, donc approximatif). Les chiffres démarrent le jour où le compteur a été installé.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const HASH='32ff356229ec50b7453a9bf8a7d6d3e7103e2da2a0ebf6ce2bfc9c526a6c269e';
+  const API='https://abacus.jasoncameron.dev/get/profbob-fr/';
+  const PAGES=[['p-accueil','Accueil'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],
+    ['p-matieres_mecanique','Mécanique'],['p-matieres_mathematiques','Mathématiques'],['p-matieres_analyse','Analyse'],['p-matieres_thermodynamique','Thermodynamique'],
+    ['p-matieres_electricite','Bases de l\'électricité'],['p-matieres_pages_web','Pages Web'],['p-matieres_informatique_embarquee','Informatique embarquée'],['p-matieres_chimie','Chimie']];
+  const OTHER=[['app-mobile','Visites sur téléphone'],['app-ordi','Visites sur ordinateur'],['ev-minids','Mini-DS rendus'],['ev-contact','Messages envoyés'],['ev-notes','Simulateurs de notes utilisés']];
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+  const ok=()=>{try{return sessionStorage.getItem('pb-admin')==='1'}catch(e){return false}};
+
+  $('f').addEventListener('submit',async e=>{e.preventDefault();
+    if(await sha($('pw').value)===HASH){try{sessionStorage.setItem('pb-admin','1')}catch(e){}open()}
+    else{$('err').textContent='Mot de passe incorrect.';$('pw').select()}});
+
+  async function get(k){try{const r=await fetch(API+k,{cache:'no-store'});if(!r.ok)return 0;const j=await r.json();return j.value||0}catch(e){return null}}
+  async function getAll(keys){const out={};for(let i=0;i<keys.length;i+=6){const part=keys.slice(i,i+6);const v=await Promise.all(part.map(get));part.forEach((k,j)=>out[k]=v[j])}return out}
+
+  function days14(){const [y,m,d]=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Paris'}).split('-').map(Number);const out=[];for(let i=13;i>=0;i--){const t=new Date(Date.UTC(y,m-1,d-i,12));const p=n=>String(n).padStart(2,'0');out.push({key:t.getUTCFullYear()+p(t.getUTCMonth()+1)+p(t.getUTCDate()),lab:p(t.getUTCDate())+'/'+p(t.getUTCMonth()+1)})}return out}
+
+  async function load(){
+    $('state').textContent='Chargement…';
+    const D=days14();
+    const keys=['total','visiteurs',...D.map(d=>'j-'+d.key),...D.map(d=>'u-'+d.key),...PAGES.map(p=>p[0]),...OTHER.map(o=>o[0])];
+    const v=await getAll(keys);
+    if(Object.values(v).every(x=>x===null)){$('state').textContent='Impossible de joindre le service de compteurs. Réessaie plus tard.';return}
+    const today=D[D.length-1].key,week=D.slice(-7).reduce((s,d)=>s+(v['j-'+d.key]||0),0);
+    $('kpis').innerHTML=[['Pages vues (total)',v.total],['Visiteurs (total)',v.visiteurs],['Visiteurs aujourd\'hui',v['u-'+today]],['Pages vues · 7 jours',week]]
+      .map(([l,n])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${(n||0).toLocaleString('fr-FR')}</div></div>`).join('');
+    const max=Math.max(1,...D.map(d=>v['j-'+d.key]||0));
+    $('chart').innerHTML=D.map(d=>{const pv=v['j-'+d.key]||0,u=v['u-'+d.key]||0;
+      return `<div class="bar" title="${d.lab} : ${pv} pages vues, ${u} visiteurs"><div class="n">${pv||''}</div><div class="b" style="height:${pv/max*100}%"><div class="u" style="height:${pv?Math.min(100,u/pv*100):0}%"></div></div></div>`}).join('');
+    $('days').innerHTML=D.map(d=>`<span>${d.lab}</span>`).join('');
+    const P=PAGES.map(([k,n])=>[n,v[k]||0]).sort((a,b)=>b[1]-a[1]);const pm=Math.max(1,...P.map(p=>p[1]));
+    $('pages').innerHTML=P.map(([n,x])=>`<tr><td>${esc(n)}<div class="track"><i style="width:${x/pm*100}%"></i></div></td><td class="v">${x}</td></tr>`).join('');
+    $('other').innerHTML=OTHER.map(([k,n])=>`<tr><td>${esc(n)}</td><td class="v">${v[k]||0}</td></tr>`).join('');
+    $('state').textContent='Mis à jour à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'.';
+  }
+
+  function meLabel(){let off=false;try{off=localStorage.getItem('pb-nostats')==='1'}catch(e){}
+    $('me').textContent=off?'Mes visites ne sont pas comptées ✓ (réactiver)':'Ne plus compter mes visites sur cet appareil'}
+  $('me').onclick=()=>{try{localStorage.getItem('pb-nostats')==='1'?localStorage.removeItem('pb-nostats'):localStorage.setItem('pb-nostats','1')}catch(e){}meLabel()};
+  $('reload').onclick=load;
+  $('out').onclick=()=>{try{sessionStorage.removeItem('pb-admin')}catch(e){}location.reload()};
+
+  function open(){$('lock').hidden=true;$('app').hidden=false;meLabel();load()}
+  if(ok())open();
+})();
+</script>
+</body>
+</html>

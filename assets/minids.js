@@ -162,6 +162,7 @@
       });
       const note=Math.round(earned/total*20*2)/2;
       const d=new Date();const date=d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+      if(window.pbStat)pbStat('ev-minids');
       const list=store.get(KEY)||[];list.push({date,seed,fmt:fmt.label,note});store.set(KEY,list.slice(-50));
       const mm=Math.floor(usedSec/60),ss=usedSec%60;
       const mail=cfg.report?cfg.report+'?type=erreur&page='+encodeURIComponent('Mini-DS '+cfg.id+' · sujet '+seed+' ('+fmt.label+') · question n° '):null;
