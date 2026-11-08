@@ -40,7 +40,7 @@ const HEAD=(title,desc)=>`<!doctype html>
 const TOPBAR=cur=>`<header class="topbar"><div class="in">
   <a class="brand" href="/"><i>p</i>profbob</a>
   <nav aria-label="Navigation du site">
-    ${[['Accueil','/','home',''],['Matières','/#matieres','matieres',''],['Notes','/notes/','notes',''],['Mini-DS','/mini-ds/','minids','opt'],['Contact','/contact/','contact','']]
+    ${[['Accueil','/','home',''],['Matières','/matieres/','matieres',''],['Notes','/notes/','notes',''],['Mini-DS','/mini-ds/','minids','opt'],['Contact','/contact/','contact','']]
       .map(([t,h,k,c])=>`<a${c?` class="${c}"`:''} href="${h}"${k===cur?' aria-current="page"':''}>${t}</a>`).join('\n    ')}
   </nav>
 </div></header>`;
@@ -72,7 +72,7 @@ for(const u of UES)for(const m of u.modules){
 <body>
 ${TOPBAR('matieres')}
 <div class="wrap">
-  <div class="eyebrow" style="margin-top:28px"><a href="/#matieres">← Toutes les matières</a></div>
+  <div class="eyebrow" style="margin-top:28px"><a href="/matieres/">← Toutes les matières</a></div>
   <header class="mhero">${mono(m,60)}<div><div class="eyebrow">UE ${esc(u.nom)} · ${u.ects} ECTS</div><h1>${esc(m.nom)}</h1></div></header>
   ${notes}
 
@@ -93,16 +93,40 @@ ${FOOT}`;
   const dir=path.join(ROOT,'matieres',m.slug);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'index.html'),html);
 }
 
-// --- accueil ---
+// --- page /matieres/ ---
+const SEM=MAQ.semestre||'Semestre 1';
+const ueCard=u=>`<section class="uecard" style="--c:${u.couleur}">
+      <div class="ueh"><h2>${esc(u.nom)}</h2><span>${u.ects} ECTS</span></div>
+      <ul class="mods">
+        ${u.modules.map(m=>`<li><a href="/matieres/${m.slug}/"${statut(m)==='Bientôt'?' class="empty"':''}>${mono(m,30)}<span class="nm">${esc(m.nom)}</span><span class="st">${statut(m)}</span><span class="go">▸</span></a></li>`).join('\n        ')}
+      </ul>
+    </section>`;
+const idx=`${HEAD('Matières · '+SEM+' · profbob.fr','Toutes les matières du '+SEM.toLowerCase()+' de HEI 1, rangées par UE.')}
+<body>
+${TOPBAR('matieres')}
+<div class="wrap wide">
+  <header class="hero" style="padding-top:32px">
+    <div class="eyebrow">HEI 1 · ${esc(SEM)}</div>
+    <h1>Matières</h1>
+    <div class="sems"><span class="pill strong">${esc(SEM)}</span><span class="pill off">Semestre 2 · bientôt</span></div>
+  </header>
+  <div class="uegrid">
+    ${UES.map(ueCard).join('\n    ')}
+  </div>
+  <footer class="site">Il manque un chapitre ? <a href="/contact/?type=chapitre">Propose-le ici</a>.</footer>
+</div>
+${FOOT}`;
+fs.writeFileSync(path.join(ROOT,'matieres','index.html'),idx);
+
+// --- accueil : raccourcis + dernier DS ---
 const latest=ALL.flatMap(m=>m.ds)[0];
+const nDS=ALL.reduce((n,m)=>n+m.ds.length,0);
 const homeBlock=`<!-- MATIERES:debut (généré par outils/build.js, ne pas modifier à la main) -->
-  <h2 id="matieres">Les matières</h2>
-  ${UES.map(u=>`<section class="ueblock" style="--c:${u.couleur}">
-    <div class="ueh"><h3>${esc(u.nom)}</h3><span>${u.ects} ECTS</span></div>
-    <div class="mgrid">
-      ${u.modules.map(mcard).join('\n      ')}
-    </div>
-  </section>`).join('\n  ')}
+  <div class="shortcuts">
+    <a class="sc" href="/matieres/"><b>Matières ▸</b><span>${esc(SEM)} · ${ALL.length} modules · ${UES.length} UE</span></a>
+    <a class="sc" href="/mini-ds/"><b>Mini-DS ▸</b><span>Par DS, par chapitre ou tes erreurs</span></a>
+    <a class="sc" href="/notes/"><b>Simulateur de notes ▸</b><span>Est-ce que je valide mon semestre ?</span></a>
+  </div>
 ${latest?`
   <h2>Dernier DS ajouté</h2>
   <div class="list">
@@ -116,7 +140,7 @@ h=h.slice(0,a)+homeBlock+h.slice(b+'<!-- MATIERES:fin -->'.length);fs.writeFileS
 
 // --- admin : pages suivies ---
 const ap=path.join(ROOT,'admin/index.html');let ad=fs.readFileSync(ap,'utf8');
-const base=[['p-accueil','Accueil'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)']];
+const base=[['p-accueil','Accueil'],['p-matieres','Matières (liste)'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)']];
 const pages=base.concat(ALL.map(m=>['p-matieres_'+m.slug.replace(/[^a-z0-9]+/g,'_'),m.nom]));
 const pa=ad.indexOf('/*PAGES:debut*/'),pb=ad.indexOf('/*PAGES:fin*/');
 if(pa>=0&&pb>=0){ad=ad.slice(0,pa)+'/*PAGES:debut*/'+JSON.stringify(pages)+ad.slice(pb);fs.writeFileSync(ap,ad)}

@@ -20,10 +20,6 @@ h2{margin:40px 0 12px;font-size:1.3rem}
 .how div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.95rem}
 .how b{font-family:var(--display);display:block;margin-bottom:4px}
 .soon{color:var(--muted);font-size:.95rem;border:1px dashed var(--line);border-radius:10px;padding:14px 16px}
-.promo{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--vec);color:var(--paper);border-radius:14px;padding:18px 20px;text-decoration:none;margin-top:8px}
-.promo b{font-family:var(--display);font-size:1.15rem;display:block;margin-bottom:2px}
-.promo span:first-child{flex:1;min-width:220px;font-size:.95rem;opacity:.95}
-.promo .go{font-family:var(--display);font-weight:700;background:var(--paper);color:var(--vec);padding:8px 14px;border-radius:8px;white-space:nowrap}
 .install{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:12px;font-family:var(--display);font-size:.92rem;color:var(--muted)}
 .install[hidden]{display:none}
 .install span{flex:1;min-width:220px}
@@ -35,7 +31,7 @@ h2{margin:40px 0 12px;font-size:1.3rem}
   <a class="brand" href="/"><i>p</i>profbob</a>
   <nav aria-label="Navigation du site">
     <a href="/" aria-current="page">Accueil</a>
-    <a href="/#matieres">Matières</a>
+    <a href="/matieres/">Matières</a>
     <a href="/notes/">Notes</a>
     <a class="opt" href="/mini-ds/">Mini-DS</a>
     <a href="/contact/">Contact</a>
@@ -48,57 +44,14 @@ h2{margin:40px 0 12px;font-size:1.3rem}
     <p class="lead">Toutes nos révisions au même endroit, matière par matière. Pour chaque DS : le cours réexpliqué simplement, des exercices corrigés, une fiche à relire et un mini-DS corrigé automatiquement, avec de nouvelles valeurs à chaque essai. Ta progression reste enregistrée dans ton navigateur, sans compte à créer.</p>
   </header>
 
-  <a class="promo" href="/notes/"><span><b>Est-ce que je valide mon semestre&nbsp;?</b>Entre tes notes, le simulateur calcule ta moyenne par UE et ce qu'il te faut pour avoir 10.</span><span class="go">Simulateur de notes ▸</span></a>
-
   <div class="install" id="install" hidden><span data-txt><b>Installe profbob sur ton téléphone</b> : il s'ouvre comme une appli et marche même sans réseau.</span><button class="btn" type="button">Installer l'appli</button></div>
 
 <!-- MATIERES:debut (généré par outils/build.js, ne pas modifier à la main) -->
-  <h2 id="matieres">Les matières</h2>
-  <section class="ueblock" style="--c:#7c3aed">
-    <div class="ueh"><h3>Mathématiques</h3><span>4 ECTS</span></div>
-    <div class="mgrid">
-      <a class="mcard empty" href="/matieres/mathematiques/"><span class="mono" style="--c:#7c3aed;width:40px;height:40px">OM</span><span class="t"><b>Outils mathématiques pour l'ingénieur 1</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/analyse/"><span class="mono" style="--c:#7c3aed;width:40px;height:40px">An</span><span class="t"><b>Analyse</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    </div>
-  </section>
-  <section class="ueblock" style="--c:#0f766e">
-    <div class="ueh"><h3>Chimie et Électricité</h3><span>6 ECTS</span></div>
-    <div class="mgrid">
-      <a class="mcard empty" href="/matieres/chimie/"><span class="mono" style="--c:#0f766e;width:40px;height:40px">Ch</span><span class="t"><b>Chimie 1</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/electricite/"><span class="mono" style="--c:#0f766e;width:40px;height:40px">Él</span><span class="t"><b>Bases de l'électricité</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    </div>
-  </section>
-  <section class="ueblock" style="--c:#2453b8">
-    <div class="ueh"><h3>Mécanique</h3><span>7 ECTS</span></div>
-    <div class="mgrid">
-      <a class="mcard" href="/matieres/mecanique/"><span class="mono" style="--c:#2453b8;width:40px;height:40px">Mé</span><span class="t"><b>Mécanique 1 (Statique)</b><small>3 chapitres · 1 DS</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/thermodynamique/"><span class="mono" style="--c:#2453b8;width:40px;height:40px">Th</span><span class="t"><b>Thermodynamique</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    </div>
-  </section>
-  <section class="ueblock" style="--c:#be185d">
-    <div class="ueh"><h3>Informatique</h3><span>4 ECTS</span></div>
-    <div class="mgrid">
-      <a class="mcard empty" href="/matieres/informatique-embarquee/"><span class="mono" style="--c:#be185d;width:40px;height:40px">IE</span><span class="t"><b>Informatique embarquée</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/pages-web/"><span class="mono" style="--c:#be185d;width:40px;height:40px">We</span><span class="t"><b>Création de page Web</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    </div>
-  </section>
-  <section class="ueblock" style="--c:#c2410c">
-    <div class="ueh"><h3>Humanités et Langues</h3><span>5 ECTS</span></div>
-    <div class="mgrid">
-      <a class="mcard empty" href="/matieres/anglais/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">En</span><span class="t"><b>Anglais</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/lv2/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">L2</span><span class="t"><b>LV2</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/competences-relationnelles/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">CR</span><span class="t"><b>Compétences relationnelles</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/expression-orale/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">EO</span><span class="t"><b>Expression orale</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/expression-ecrite/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">EÉ</span><span class="t"><b>Expression écrite</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    </div>
-  </section>
-  <section class="ueblock" style="--c:#b45309">
-    <div class="ueh"><h3>Organisation et Management des Entreprises</h3><span>4 ECTS</span></div>
-    <div class="mgrid">
-      <a class="mcard empty" href="/matieres/creativite-innovation/"><span class="mono" style="--c:#b45309;width:40px;height:40px">CI</span><span class="t"><b>Créativité et Innovation</b><small>Bientôt</small></span><span class="go">▸</span></a>
-      <a class="mcard empty" href="/matieres/outils-bureautiques/"><span class="mono" style="--c:#b45309;width:40px;height:40px">OB</span><span class="t"><b>Outils bureautiques</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    </div>
-  </section>
+  <div class="shortcuts">
+    <a class="sc" href="/matieres/"><b>Matières ▸</b><span>Semestre 1 · 15 modules · 6 UE</span></a>
+    <a class="sc" href="/mini-ds/"><b>Mini-DS ▸</b><span>Par DS, par chapitre ou tes erreurs</span></a>
+    <a class="sc" href="/notes/"><b>Simulateur de notes ▸</b><span>Est-ce que je valide mon semestre ?</span></a>
+  </div>
 
   <h2>Dernier DS ajouté</h2>
   <div class="list">
