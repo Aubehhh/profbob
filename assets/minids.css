@@ -36,3 +36,9 @@
 .mds-hist{font-size:.92rem}
 .mds-hist li{font-family:var(--mono);font-size:.85rem}
 .mds-note{font-size:.9rem;color:var(--muted)}
+.mds-force{font-family:var(--display);font-size:.78rem;margin-top:6px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--vec);cursor:pointer}
+.mds-force:hover{border-color:var(--vec)}
+.mds-field.forced input{border-color:var(--warn);background:var(--warnbg)}
+.mds-field.forced .exp{color:var(--warn)}
+.mds-forced{font-family:var(--display);font-size:.85rem;color:var(--warn);margin-top:6px}
+.mds-forced:empty{display:none}

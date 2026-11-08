@@ -220,7 +220,7 @@
   function hist(){
     let list=[];try{list=JSON.parse(localStorage.getItem('minids-'+S.m)||'[]')||[]}catch(e){}
     document.getElementById('hist').innerHTML=list.length
-      ?'<ul class="mds-hist">'+list.slice(-6).reverse().map(x=>'<li>'+esc(x.date)+' · '+esc(x.fmt)+' · sujet '+x.seed+' · <b>'+String(x.note).replace('.',',')+'/20</b></li>').join('')+'</ul>'
+      ?'<ul class="mds-hist">'+list.slice(-6).reverse().map(x=>'<li>'+esc(x.date)+' · '+esc(x.fmt)+' · sujet '+x.seed+' · <b>'+String(x.note).replace('.',',')+'/20</b>'+(x.manuel?' <span class="mds-note">('+x.manuel+' validée'+(x.manuel>1?'s':'')+' à la main)</span>':'')+'</li>').join('')+'</ul>'
       :'<p class="mds-note">Pas encore de copie rendue sur ce navigateur.</p>';
   }
 

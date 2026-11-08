@@ -147,32 +147,43 @@
     function grade(timeout){
       state='done';stopTimer();window.onbeforeunload=null;
       const usedSec=Math.round((Date.now()-startAt)/1000);
-      let earned=0,total=0;const rows=[];
-      subject.forEach(q=>{
-        const box=root.querySelector(`.mds-q[data-q="${q.num}"]`);let ok=0;
-        q.fields.forEach((f,j)=>{
+      // état de chaque case : 'ok' (juste), 'ko' (faux), 'force' (faux pour le site mais validé à la main)
+      const res=subject.map(q=>{
+        const box=root.querySelector(`.mds-q[data-q="${q.num}"]`);
+        const r=q.fields.map((f,j)=>{
           const wrap=box.querySelectorAll('.mds-field')[j],inp=wrap.querySelector('input');
-          const v=parse(inp.value),good=correct(f,v);if(good)ok++;
+          const raw=inp.value.trim(),v=parse(raw),good=correct(f,v);
           inp.readOnly=true;wrap.classList.add(good?'ok':'ko');
-          wrap.appendChild(h(`<div class="exp">${good?'✓ ':'✗ attendu '}${F.n(f.ans,f.d??2)} ${f.unit||''}</div>`));
+          const exp=h(`<div class="exp">${good?'✓ ':'✗ attendu '}${F.n(f.ans,f.d??2)} ${f.unit||''}</div>`);
+          wrap.appendChild(exp);
+          const cell={st:good?'ok':'ko',wrap,exp,f};
+          if(!good&&raw!==''){ // réponse écrite mais refusée : on peut la valider soi-même
+            const b=h(`<button type="button" class="mds-force" title="Ta réponse est juste mais le site ne l'a pas comprise (format, unité, arrondi)">Compter comme juste</button>`);
+            b.onclick=()=>{cell.st=cell.st==='force'?'ko':'force';paint(cell);rescore()};
+            cell.btn=b;wrap.appendChild(b);
+          }
+          return cell;
         });
-        const e=q.pts*ok/q.fields.length;earned+=e;total+=q.pts;
-        box.querySelector('.mds-pts').textContent=F.n(e,2)+' / '+q.pts+' pt'+(q.pts>1?'s':'');
         box.appendChild(h(`<details open><summary>Correction</summary><div><div class="formula">${q.sol}</div><div data-nota>${q.note||''}</div></div></details>`));
-        rows.push(`<tr><td>Q${q.num} · ${esc(q.chap)}</td><td>${F.n(e,2)} / ${q.pts}</td></tr>`);
+        return {q,box,r};
       });
-      const note=Math.round(earned/total*20*2)/2;
+      function paint(c){
+        c.wrap.classList.toggle('ok',c.st!=='ko');c.wrap.classList.toggle('ko',c.st==='ko');c.wrap.classList.toggle('forced',c.st==='force');
+        c.exp.textContent=(c.st==='force'?'✓ validée par toi · attendu ':'✗ attendu ')+F.n(c.f.ans,c.f.d??2)+' '+(c.f.unit||'');
+        if(c.btn)c.btn.textContent=c.st==='force'?'Annuler':'Compter comme juste';
+      }
       const d=new Date();const date=d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
       if(window.pbStat)pbStat('ev-minids');
-      const list=store.get(KEY)||[];list.push({date,seed,fmt:fmt.label,note});store.set(KEY,list.slice(-50));
+      const list=store.get(KEY)||[];const entry={date,seed,fmt:fmt.label,note:0};list.push(entry);
       const mm=Math.floor(usedSec/60),ss=usedSec%60;
       const mail=cfg.report?cfg.report+'?type=erreur&page='+encodeURIComponent('Mini-DS '+cfg.id+' · sujet '+seed+' ('+fmt.label+') · question n° '):null;
       const bar=root.querySelector('.mds-bar');if(bar)bar.remove();
       root.querySelector('#mds-submit2').parentElement.remove();
       const sc=h(`<div class="mds-score">
         <div class="eyebrow">${timeout?'Temps écoulé · copie ramassée':'Copie rendue'} · sujet ${seed} · ${esc(fmt.label)} · ${mm} min ${String(ss).padStart(2,'0')}</div>
-        <div class="big">${F.n(note,1)}<small> / 20</small></div>
-        <table>${rows.join('')}</table>
+        <div class="big" data-note></div>
+        <div class="mds-forced" data-forced></div>
+        <table data-rows></table>
         <div class="mds-row">
           <button class="btn" id="mds-again">Nouveau sujet</button>
           <button class="btn ghost" id="mds-redo">Refaire ce sujet</button>
@@ -180,9 +191,23 @@
           <button class="btn ghost" id="mds-home">${cfg.onHome?'Changer les réglages':'Retour'}</button>
           ${mail?`<a class="btn ghost" href="${mail}">Signaler une erreur</a>`:''}
         </div>
-        <p class="mds-note">Les cases rouges montrent la valeur attendue. Lis la correction de chaque question ratée, puis refais le même sujet sans regarder.</p>
+        <p class="mds-note">Les cases rouges montrent la valeur attendue. Si ta réponse était juste mais écrite autrement (unité, arrondi, format), clique sur « Compter comme juste » sous la case : la note se recalcule. Lis la correction de chaque question ratée, puis refais le même sujet sans regarder.</p>
       </div>`);
-      root.prepend(sc);
+      function rescore(){
+        let earned=0,total=0,forced=0;const rows=[];
+        res.forEach(({q,box,r})=>{
+          const ok=r.filter(c=>c.st!=='ko').length;forced+=r.filter(c=>c.st==='force').length;
+          const e=q.pts*ok/q.fields.length;earned+=e;total+=q.pts;
+          box.querySelector('.mds-pts').textContent=F.n(e,2)+' / '+q.pts+' pt'+(q.pts>1?'s':'');
+          rows.push(`<tr><td>Q${q.num} · ${esc(q.chap)}</td><td>${F.n(e,2)} / ${q.pts}</td></tr>`);
+        });
+        const note=Math.round(earned/total*20*2)/2;
+        sc.querySelector('[data-note]').innerHTML=F.n(note,1)+'<small> / 20</small>';
+        sc.querySelector('[data-forced]').textContent=forced?`dont ${forced} réponse${forced>1?'s':''} validée${forced>1?'s':''} par toi`:'';
+        sc.querySelector('[data-rows]').innerHTML=rows.join('');
+        entry.note=note;entry.manuel=forced||undefined;store.set(KEY,list.slice(-50));
+      }
+      root.prepend(sc);rescore();
       if(window.Nota)Nota.apply(root);
       sc.querySelector('#mds-again').onclick=()=>{let s;do{s=1000+Math.floor(Math.random()*9000)}while(s===seed);seed=s;run()};
       sc.querySelector('#mds-redo').onclick=run;
