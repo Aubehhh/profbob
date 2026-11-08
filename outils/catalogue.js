@@ -16,7 +16,7 @@ module.exports={
     {date:'6 nov.',texte:'DS Statique : cours, 12 exercices, fiche et mini-DS',url:'/ds/statique/'}
   ],
   // petit mot sous le titre de l'accueil (HTML autorisé)
-  dedicace:'big up à squige, polo, mashmash et tagrandmere, RDV sur <a href="https://richup.io" target="_blank" rel="noopener">monopoly</a>',
+  dedicace:'big up à squige, polo, pouletpaki, mashmash et tagrandmere, RDV sur <a href="https://richup.io" target="_blank" rel="noopener">monopoly</a>',
   ue:[
     {id:'maths',couleur:'#7c3aed',modules:[
       {id:'outils',slug:'mathematiques',mono:'OM',chapitres:[],ds:[]},
