@@ -12,6 +12,8 @@ const ROOT=path.join(__dirname,'..');
 global.window={};require(path.join(ROOT,'notes/maquette-s1.js'));
 const MAQ=window.MAQUETTE_S1;
 const CAT=require('./catalogue.js');
+require(path.join(ROOT,'mini-ds/matieres.js'));require(path.join(ROOT,'flashcards/cartes.js'));
+const MD=window.MINIDS_MATIERES||[],FC=window.FLASHCARDS||{};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fr=x=>String(x).replace('.',',');
 
@@ -37,11 +39,13 @@ const HEAD=(title,desc)=>`<!doctype html>
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/matieres.css">
 </head>`;
+const SRCH='<a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>';
 const TOPBAR=cur=>`<header class="topbar"><div class="in">
   <a class="brand" href="/"><i>p</i>profbob</a>
   <nav aria-label="Navigation du site">
     ${[['Accueil','/','home',''],['Matières','/matieres/','matieres',''],['Notes','/notes/','notes',''],['Mini-DS','/mini-ds/','minids','opt'],['Contact','/contact/','contact','']]
       .map(([t,h,k,c])=>`<a${c?` class="${c}"`:''} href="${h}"${k===cur?' aria-current="page"':''}>${t}</a>`).join('\n    ')}
+    ${SRCH}
   </nav>
 </div></header>`;
 const FOOT=`<script src="/assets/stats.js" defer></script>
@@ -65,16 +69,19 @@ const dscard=d=>`<div class="dscard">
 for(const u of UES)for(const m of u.modules){
   const others=u.modules.filter(x=>x!==m);
   const notes=m.poids?`<div class="poids"><span class="pill strong">${fr(m.poids)} % de l'UE</span>${m.ep.map(([k,lab,w])=>`<span class="pill">${esc(lab)} · ${fr(w)} %</span>`).join('')}<a class="pill link" href="/notes/#ue-${u.id}">Simuler mes notes ▸</a></div>`:'<div class="poids"><span class="pill">Module non noté</span></div>';
-  const chap=m.chapitres.length?`<ol class="chaps">${m.chapitres.map((c,i)=>c.url?`<li><a href="${c.url}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="go">▸</span></a></li>`:`<li class="soon"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="tag">bientôt</span></li>`).join('')}</ol>`
+  const md=MD.find(x=>x.module===m.id);
+  const outils=md?`<div class="tools2"><a class="btn" href="/mini-ds/?m=${md.id}">Mini-DS ▸</a>${FC[md.id]?`<a class="btn ghost" href="/flashcards/?m=${md.id}">Flashcards · ${FC[md.id].length} formules</a>`:''}</div>`:'';
+  const chap=m.chapitres.length?`<div class="progsum" id="prog-sum" hidden></div><ol class="chaps">${m.chapitres.map((c,i)=>c.url?`<li data-chap="${c.id}"><a href="${c.url}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="go">▸</span></a></li>`:`<li class="soon" data-chap="${c.id}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="tag">bientôt</span></li>`).join('')}</ol>`
     :`<div class="empty-state"><b>Les chapitres arrivent bientôt.</b><p>Le cours de ${esc(m.nom)} sera ajouté chapitre par chapitre.</p><a class="btn ghost" href="/contact/?type=chapitre&amp;matiere=${encodeURIComponent(m.nom)}%20%C2%B7%20">Proposer un chapitre ou envoyer un cours</a></div>`;
   const ds=m.ds.length?`<div class="list">\n    ${m.ds.map(dscard).join('\n    ')}\n  </div>`:`<p class="soon">Pas encore de DS pour ce module.</p>`;
   const html=`${HEAD(m.nom+' · profbob.fr','Révisions de '+m.nom+' : cours chapitre par chapitre, DS, exercices corrigés et mini-DS.')}
 <body>
 ${TOPBAR('matieres')}
-<div class="wrap">
+<div class="wrap" data-module="${m.id}">
   <div class="eyebrow" style="margin-top:28px"><a href="/matieres/">← Toutes les matières</a></div>
   <header class="mhero">${mono(m,60)}<div><div class="eyebrow">UE ${esc(u.nom)} · ${u.ects} ECTS</div><h1>${esc(m.nom)}</h1></div></header>
   ${notes}
+  ${outils}
 
   <h2>Chapitres</h2>
   ${chap}
@@ -89,7 +96,7 @@ ${others.length?`
 `:''}
   <footer class="site">Une erreur, une idée ? <a href="/contact/">Écris-nous via le formulaire</a>.</footer>
 </div>
-${FOOT}`;
+${md?'<script src="/mini-ds/matieres.js"></script>\n<script src="/assets/progression.js"></script>\n':''}${FOOT}`;
   const dir=path.join(ROOT,'matieres',m.slug);fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'index.html'),html);
 }
 
@@ -167,9 +174,38 @@ fs.writeFileSync(path.join(ROOT,'index.html'),home);
 // --- liste UE/modules pour le mini-DS ---
 fs.writeFileSync(path.join(ROOT,'assets','ue-s1.js'),'/* Généré par outils/build.js : UE et modules du semestre (utilisé par le mini-DS). */\nwindow.UE_S1='+JSON.stringify(UES.map(u=>({id:u.id,nom:u.nom,ects:u.ects,couleur:u.couleur,modules:u.modules.map(m=>({id:m.id,slug:m.slug,nom:m.nom,mono:m.mono}))})))+';\n');
 
+// --- index de recherche (page /recherche/) ---
+{
+  const strip=h=>h.replace(/<(script|style|svg)[\s\S]*?<\/\1>/g,' ').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#x27;|&#39;/g,"'").replace(/&quot;/g,'"').replace(/\s+/g,' ').trim();
+  const IDX=[];const add=(t,s,u,x,k)=>IDX.push({t,s,u,x:(x||'').slice(0,1200),k});
+  add('Mini-DS','Outil','/mini-ds/','mini-DS corrigé automatiquement, par DS, par chapitre ou mes erreurs, chrono, note sur 20','page');
+  add('Simulateur de notes','Outil','/notes/','moyenne par UE, valider le semestre, ECTS, coefficients, note nécessaire','page');
+  add('Flashcards','Outil','/flashcards/','cartes de révision des formules à connaître','page');
+  add('Matières','Semestre 1','/matieres/','toutes les matières du semestre 1 rangées par UE','page');
+  add('Contact','Page','/contact/','proposer un chapitre, signaler une erreur, idée','page');
+  for(const u of UES)for(const m of u.modules){
+    add(m.nom,'Module · UE '+u.nom,'/matieres/'+m.slug+'/',m.nom+' '+u.nom+' '+m.ep.map(e=>e[1]).join(' '),'module');
+    m.chapitres.forEach(c=>add(c.titre,'Chapitre · '+m.nom,c.url||'/matieres/'+m.slug+'/','','chapitre'));
+    m.ds.forEach(d=>add(d.titre,'DS · '+m.nom,d.url,d.desc||'','ds'));
+  }
+  // page de cours Statique : une entrée par section et par sous-titre
+  const st=fs.readFileSync(path.join(ROOT,'ds/statique/index.html'),'utf8');
+  const re=/<section id="([a-z0-9]+)"[^>]*>([\s\S]*?)<\/section>/g;let mm;
+  while((mm=re.exec(st))){const id=mm[1],body=mm[2];if(id==='calc')continue;
+    const h2=strip((/<h2[^>]*>([\s\S]*?)<\/h2>/.exec(body)||[,''])[1])||id;
+    const parts=body.split(/<h3[^>]*>/);
+    add(h2,'Cours · Statique','/ds/statique/#'+id,strip(parts[0]),'cours');
+    parts.slice(1).forEach(p=>{const i=p.indexOf('</h3>');const t=strip(p.slice(0,i));if(t)add(t,'Statique · '+h2,'/ds/statique/#'+id,strip(p.slice(i+5)),'cours')});
+  }
+  // flashcards
+  Object.entries(FC).forEach(([mid,cards])=>{const M=MD.find(x=>x.id===mid)||{nom:mid,chapitres:[]};
+    cards.forEach(c=>{const ch=(M.chapitres.find(x=>x.id===c.ch)||{}).nom||'';add(c.q,'Formule · '+ch,'/flashcards/?m='+mid+'&ch='+c.ch,c.r,'formule')})});
+  fs.writeFileSync(path.join(ROOT,'assets','recherche-index.js'),'/* Généré par outils/build.js : index de la recherche. */\nwindow.RECHERCHE='+JSON.stringify(IDX)+';\n');
+}
+
 // --- admin : pages suivies ---
 const ap=path.join(ROOT,'admin/index.html');let ad=fs.readFileSync(ap,'utf8');
-const base=[['p-accueil','Accueil'],['p-matieres','Matières (liste)'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)']];
+const base=[['p-accueil','Accueil'],['p-matieres','Matières (liste)'],['p-flashcards','Flashcards'],['p-recherche','Recherche'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)']];
 const pages=base.concat(ALL.map(m=>['p-matieres_'+m.slug.replace(/[^a-z0-9]+/g,'_'),m.nom]));
 const pa=ad.indexOf('/*PAGES:debut*/'),pb=ad.indexOf('/*PAGES:fin*/');
 if(pa>=0&&pb>=0){ad=ad.slice(0,pa)+'/*PAGES:debut*/'+JSON.stringify(pages)+ad.slice(pb);fs.writeFileSync(ap,ad)}

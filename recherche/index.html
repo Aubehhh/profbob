@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Recherche · profbob.fr</title>
+<meta name="description" content="Chercher une formule, une notion ou un chapitre dans tous les cours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<style>
+/* Recherche : un grand champ, des suggestions, puis les résultats avec un extrait où le mot cherché est surligné */
+.sbox{position:relative;margin:18px 0 10px}
+.sbox svg{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--muted)}
+.sbox input{width:100%;font:inherit;font-family:var(--display);font-size:1.15rem;padding:14px 16px 14px 48px;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink)}
+.sbox input:focus{outline:2px solid var(--vec);outline-offset:1px;border-color:var(--vec)}
+.sugg{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.sugg button{font:inherit;font-family:var(--display);font-size:.84rem;border:1px solid var(--line);background:var(--paper);color:var(--vec);padding:5px 11px;border-radius:999px;cursor:pointer}
+.count{font-family:var(--display);font-size:.88rem;color:var(--muted);margin:14px 0 8px}
+.res{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.res a{display:block;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;text-decoration:none;color:var(--ink)}
+.res a:hover,.res a:focus{border-color:var(--vec);outline:none}
+.res .k{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.res .t{font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--vec);margin:2px 0}
+.res .x{font-size:.9rem;color:var(--muted);line-height:1.5}
+.res mark{background:color-mix(in srgb,var(--warn) 25%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.none{color:var(--muted);border:1px dashed var(--line);border-radius:12px;padding:16px;font-family:var(--display)}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" aria-current="page" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+<div class="wrap">
+  <header class="hero" style="padding-top:30px;padding-bottom:0">
+    <div class="eyebrow">Recherche</div>
+    <h1>Chercher dans les cours</h1>
+  </header>
+  <div class="sbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Une formule, une notion, un chapitre… (ex. moment, ressort, angle)" autocomplete="off" autofocus aria-label="Rechercher"></div>
+  <div class="sugg" id="sugg"></div>
+  <div class="count" id="count" aria-live="polite"></div>
+  <ul class="res" id="res"></ul>
+  <footer class="site">Tu ne trouves pas ? <a href="/contact/?type=chapitre">Dis-nous ce qui manque</a>.</footer>
+</div>
+<script src="/assets/recherche-index.js"></script>
+<script src="/assets/notation.js"></script>
+<script>
+(function(){
+  const IDX=window.RECHERCHE||[];
+  const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const KIND={page:'Outil',module:'Module',chapitre:'Chapitre',ds:'DS',cours:'Cours',formule:'Formule'};
+  const data=IDX.map(e=>Object.assign({},e,{nt:norm(e.t),ns:norm(e.s),nx:norm(e.x)}));
+  const input=document.getElementById('q');
+  ['moment','ressort','produit vectoriel','angle','résultante','équilibre','vecteur unitaire'].forEach(w=>{const b=document.createElement('button');b.textContent=w;b.onclick=()=>{input.value=w;run()};document.getElementById('sugg').appendChild(b)});
+
+  function hl(text,terms){ // surligne en ignorant les accents
+    const n=norm(text);let marks=[];terms.forEach(t=>{let i=0;while((i=n.indexOf(t,i))>=0){marks.push([i,i+t.length]);i+=t.length}});
+    marks.sort((a,b)=>a[0]-b[0]);let out='',p=0;marks.forEach(([a,b])=>{if(a<p)return;out+=esc(text.slice(p,a))+'<mark>'+esc(text.slice(a,b))+'</mark>';p=b});return out+esc(text.slice(p));
+  }
+  function snippet(e,terms){
+    const x=e.x||'';if(!x)return '';const n=norm(x);let i=-1;for(const t of terms){i=n.indexOf(t);if(i>=0)break}
+    if(i<0)return hl(x.slice(0,150),terms)+(x.length>150?'…':'');
+    const a=Math.max(0,i-60),b=Math.min(x.length,i+110);return (a?'…':'')+hl(x.slice(a,b),terms)+(b<x.length?'…':'');
+  }
+  function run(){
+    const raw=input.value.trim();const u=new URL(location.href);raw?u.searchParams.set('q',raw):u.searchParams.delete('q');history.replaceState(null,'',u);
+    const terms=norm(raw).split(/\s+/).filter(t=>t.length>1);
+    const cnt=document.getElementById('count'),ul=document.getElementById('res');
+    if(!terms.length){cnt.textContent='';ul.innerHTML='';return}
+    const found=data.map(e=>{let s=0;for(const t of terms){const inT=e.nt.includes(t),inS=e.ns.includes(t),inX=e.nx.includes(t);if(!inT&&!inS&&!inX)return null;s+=inT?10:0;s+=inS?3:0;s+=inX?1:0;if(e.nt.startsWith(t))s+=4}
+      s+=({formule:3,chapitre:2,cours:1}[e.k]||0);return {e,s}}).filter(Boolean).sort((a,b)=>b.s-a.s).slice(0,40);
+    cnt.textContent=found.length?found.length+' résultat'+(found.length>1?'s':''):'';
+    ul.innerHTML=found.length?found.map(({e})=>`<li><a href="${e.u}"><div class="k">${esc(e.s)}</div><div class="t">${hl(e.t,terms)}</div><div class="x"${e.k==='formule'?' data-nota':''}>${snippet(e,terms)}</div></a></li>`).join('')
+      :`<li class="none">Rien trouvé pour « ${esc(raw)} ». Essaie un autre mot, ou sans accent.</li>`;
+    if(window.Nota)Nota.apply(ul);
+    if(found.length&&window.pbStat&&!run.c){run.c=1;pbStat('ev-search')}
+  }
+  let tmr;input.addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(run,120)});
+  const q0=new URLSearchParams(location.search).get('q');if(q0){input.value=q0;run()}
+})();
+</script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

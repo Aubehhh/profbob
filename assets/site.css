@@ -54,3 +54,8 @@ footer.site{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);fo
 .topbar nav a:hover{background:var(--tint);color:var(--vec)}
 .topbar nav a[aria-current="page"]{color:var(--vec);background:var(--tint)}
 @media (max-width:520px){.topbar nav a{padding:7px 8px;font-size:.88rem}}
+.topbar .srch{display:inline-grid;place-items:center;width:36px;height:36px;padding:0!important;border-radius:8px;color:var(--muted);margin-left:2px}
+.topbar .srch:hover,.topbar .srch[aria-current="page"]{background:var(--tint);color:var(--vec)}
+.topbar .srch svg{width:18px;height:18px}
+.topbar .in{position:relative}
+@media (max-width:520px){.topbar .srch{position:absolute;right:0;top:10px}}

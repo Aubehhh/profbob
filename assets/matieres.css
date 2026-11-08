@@ -67,3 +67,17 @@
 .sc:first-child{background:var(--vec);border-color:var(--vec)}
 .sc:first-child b,.sc:first-child span{color:var(--paper)}
 .ueh span{white-space:nowrap}
+.tools2{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.progsum{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px}
+.progsum[hidden]{display:none}
+.progsum div{flex:1;min-width:200px;display:flex;flex-direction:column}
+.progsum b{font-family:var(--display)}
+.progsum span{font-family:var(--display);font-size:.85rem;color:var(--muted)}
+.prog{display:flex;align-items:center;gap:8px;margin-left:auto}
+.prog .bar,.progsum .bar{display:block;width:90px;height:7px;border-radius:4px;background:var(--line);overflow:hidden}
+.progsum .bar.big{width:160px}
+.prog .bar i,.progsum .bar i{display:block;height:100%;background:var(--vec);border-radius:4px}
+.prog.full .bar i{background:var(--ok)}
+.prog .pv{font-family:var(--mono);font-size:.75rem;color:var(--muted);white-space:nowrap}
+.prog .pv.none{font-family:var(--display)}
+@media (max-width:520px){.prog .bar{width:50px}.prog .pv.none{display:none}}

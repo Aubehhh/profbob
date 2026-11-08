@@ -1,6 +1,8 @@
 /* Appli installable : enregistre le service worker et gère le bouton « Installer l'appli » de l'accueil. */
 (function(){
   if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('/sw.js').catch(function(){})}
+  // touche / : ouvrir la recherche
+  addEventListener('keydown',function(e){if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||'')&&location.pathname.indexOf('/recherche')!==0){e.preventDefault();location.href='/recherche/'}});
   var box=document.getElementById('install');if(!box)return;
   var standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
   if(standalone)return;

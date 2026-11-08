@@ -23,15 +23,17 @@
     <a href="/notes/">Notes</a>
     <a class="opt" href="/mini-ds/">Mini-DS</a>
     <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
   </nav>
 </div></header>
-<div class="wrap">
+<div class="wrap" data-module="statique">
   <div class="eyebrow" style="margin-top:28px"><a href="/matieres/">← Toutes les matières</a></div>
   <header class="mhero"><span class="mono" style="--c:#2453b8;width:60px;height:60px">Mé</span><div><div class="eyebrow">UE Mécanique · 7 ECTS</div><h1>Mécanique 1 (Statique)</h1></div></header>
   <div class="poids"><span class="pill strong">50 % de l'UE</span><span class="pill">DS · 20 %</span><span class="pill">Épreuve finale · 30 %</span><a class="pill link" href="/notes/#ue-meca">Simuler mes notes ▸</a></div>
+  <div class="tools2"><a class="btn" href="/mini-ds/?m=meca">Mini-DS ▸</a><a class="btn ghost" href="/flashcards/?m=meca">Flashcards · 23 formules</a></div>
 
   <h2>Chapitres</h2>
-  <ol class="chaps"><li><a href="/ds/statique/#m1"><span class="n">1</span><span class="tt">Vecteurs force</span><span class="go">▸</span></a></li><li><a href="/ds/statique/#m5"><span class="n">2</span><span class="tt">Équilibre d'une particule</span><span class="go">▸</span></a></li><li><a href="/ds/statique/#m7"><span class="n">3</span><span class="tt">Moments</span><span class="go">▸</span></a></li></ol>
+  <div class="progsum" id="prog-sum" hidden></div><ol class="chaps"><li data-chap="vecteurs"><a href="/ds/statique/#m1"><span class="n">1</span><span class="tt">Vecteurs force</span><span class="go">▸</span></a></li><li data-chap="equilibre"><a href="/ds/statique/#m5"><span class="n">2</span><span class="tt">Équilibre d'une particule</span><span class="go">▸</span></a></li><li data-chap="moments"><a href="/ds/statique/#m7"><span class="n">3</span><span class="tt">Moments</span><span class="go">▸</span></a></li></ol>
 
   <h2>DS</h2>
   <div class="list">
@@ -55,6 +57,8 @@
 
   <footer class="site">Une erreur, une idée ? <a href="/contact/">Écris-nous via le formulaire</a>.</footer>
 </div>
+<script src="/mini-ds/matieres.js"></script>
+<script src="/assets/progression.js"></script>
 <script src="/assets/stats.js" defer></script>
 <script src="/assets/pwa.js" defer></script>
 </body>

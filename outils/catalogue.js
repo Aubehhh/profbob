@@ -10,7 +10,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'8 nov.',texte:'Mode « Mes erreurs » dans le mini-DS',url:'/mini-ds/',nouveau:true},
+    {date:'8 nov.',texte:'Flashcards des formules, recherche dans les cours et progression par chapitre',url:'/flashcards/?m=meca',nouveau:true},
+    {date:'8 nov.',texte:'Mode « Mes erreurs » dans le mini-DS',url:'/mini-ds/'},
     {date:'8 nov.',texte:'Toutes les matières du S1 rangées par UE',url:'/matieres/'},
     {date:'8 nov.',texte:'Le site s\'installe comme une appli sur ton téléphone',url:'/'},
     {date:'6 nov.',texte:'DS Statique : cours, 12 exercices, fiche et mini-DS',url:'/ds/statique/'}
