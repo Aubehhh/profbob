@@ -8,23 +8,12 @@
 <meta name="theme-color" content="#2453b8">
 <link rel="apple-touch-icon" href="/assets/icon-192.png">
 <title>profbob · Révisions de zgeg</title>
-<meta name="description" content="Le site de révision de la classe : cours expliqués, exercices corrigés et mini-DS corrigés automatiquement, matière par matière.">
+<meta name="description" content="Le site de révision de la classe HEI 1 : cours expliqués, exercices corrigés, mini-DS corrigés automatiquement et simulateur de notes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/matieres.css">
-<style>
-/* Accueil : une colonne, les matières en sections, chaque DS est une carte */
-h2{margin:40px 0 12px;font-size:1.3rem}
-.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}
-.how div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.95rem}
-.how b{font-family:var(--display);display:block;margin-bottom:4px}
-.soon{color:var(--muted);font-size:.95rem;border:1px dashed var(--line);border-radius:10px;padding:14px 16px}
-.install{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:12px;font-family:var(--display);font-size:.92rem;color:var(--muted)}
-.install[hidden]{display:none}
-.install span{flex:1;min-width:220px}
-.install b{color:var(--ink)}
-</style>
+<link rel="stylesheet" href="/assets/accueil.css">
 </head>
 <body>
 <header class="topbar"><div class="in">
@@ -37,43 +26,50 @@ h2{margin:40px 0 12px;font-size:1.3rem}
     <a href="/contact/">Contact</a>
   </nav>
 </div></header>
-<div class="wrap">
-  <header class="hero" style="padding-top:36px">
-    <div class="eyebrow">profbob.fr · révisions partagées</div>
+<div class="wrap home">
+  <header class="hero">
+    <div class="eyebrow">HEI 1 · Semestre 1</div>
     <h1>Révisions de zgeg</h1>
-    <p class="lead">Toutes nos révisions au même endroit, matière par matière. Pour chaque DS : le cours réexpliqué simplement, des exercices corrigés, une fiche à relire et un mini-DS corrigé automatiquement, avec de nouvelles valeurs à chaque essai. Ta progression reste enregistrée dans ton navigateur, sans compte à créer.</p>
+    <p class="dedi">big up à squige, polo, mashmash et tagrandmere, RDV sur <a href="https://richup.io" target="_blank" rel="noopener">monopoly</a></p>
   </header>
+
+  <div class="banner">
+    <div class="t"><div class="eyebrow">En ce moment · DS de novembre 2026</div><h3><a href="/ds/statique/">Statique : chapitres 1 à 3</a></h3><p>Vecteurs et forces, vecteur position, produit scalaire, équilibre d'une particule, produit vectoriel, moments.</p></div>
+    <div class="row"><a class="chip" href="/ds/statique/">Cours · 8 modules</a><a class="chip" href="/ds/statique/#exos">12 exercices</a><a class="chip" href="/ds/statique/#fiche">Fiche récap</a><a class="chip hot" href="/mini-ds/?m=meca&amp;ds=statique">Mini-DS ▸</a></div>
+  </div>
 
   <div class="install" id="install" hidden><span data-txt><b>Installe profbob sur ton téléphone</b> : il s'ouvre comme une appli et marche même sans réseau.</span><button class="btn" type="button">Installer l'appli</button></div>
 
-<!-- MATIERES:debut (généré par outils/build.js, ne pas modifier à la main) -->
-  <div class="shortcuts">
-    <a class="sc" href="/matieres/"><b>Matières ▸</b><span>Semestre 1 · 15 modules · 6 UE</span></a>
-    <a class="sc" href="/mini-ds/"><b>Mini-DS ▸</b><span>Par DS, par chapitre ou tes erreurs</span></a>
-    <a class="sc" href="/notes/"><b>Simulateur de notes ▸</b><span>Est-ce que je valide mon semestre ?</span></a>
+  <h2 class="sec">Ton tableau de bord <small>calculé avec tes résultats sur ce navigateur</small></h2>
+  <div class="stats">
+    <a class="st" id="st-notes" href="/notes/"><div class="l">Moyenne simulée</div><div class="v empty">—</div></a>
+    <a class="st" id="st-ds" href="/mini-ds/"><div class="l">Dernier mini-DS</div><div class="v empty">—</div></a>
+    <a class="st" id="st-err" href="/mini-ds/"><div class="l">À retravailler</div><div class="v empty">—</div></a>
   </div>
 
-  <h2>Dernier DS ajouté</h2>
-  <div class="list">
-    <div class="dscard">
-      <div class="eyebrow">DS · novembre 2026</div>
-      <h3><a href="/ds/statique/">Statique : chapitres 1 à 3</a></h3>
-      <p>Vecteurs et forces, vecteur position, produit scalaire, équilibre d'une particule, produit vectoriel, moments.</p>
-      <div class="links">
-        <a href="/ds/statique/">Cours · 8 modules</a>
-        <a href="/ds/statique/#exos">12 exercices</a>
-        <a href="/ds/statique/#fiche">Fiche récap</a>
-        <a class="hot" href="/mini-ds/?m=meca&amp;ds=statique">Mini-DS corrigé ▸</a>
-      </div>
-    </div>
+  <h2 class="sec">Matières <small><a href="/matieres/">tout voir ▸</a></small></h2>
+  <div class="uerows">
+    <div class="uer" style="--c:#7c3aed"><div class="n"><b>Mathématiques</b><span>4 ECTS</span></div><div class="ms"><a href="/matieres/mathematiques/">Outils maths</a><a href="/matieres/analyse/">Analyse</a></div></div>
+    <div class="uer" style="--c:#0f766e"><div class="n"><b>Chimie et Électricité</b><span>6 ECTS</span></div><div class="ms"><a href="/matieres/chimie/">Chimie 1</a><a href="/matieres/electricite/">Électricité</a></div></div>
+    <div class="uer" style="--c:#2453b8"><div class="n"><b>Mécanique</b><span>7 ECTS</span></div><div class="ms"><a href="/matieres/mecanique/" class="on">Statique <em>1 DS</em></a><a href="/matieres/thermodynamique/">Thermodynamique</a></div></div>
+    <div class="uer" style="--c:#be185d"><div class="n"><b>Informatique</b><span>4 ECTS</span></div><div class="ms"><a href="/matieres/informatique-embarquee/">Info embarquée</a><a href="/matieres/pages-web/">Page Web</a></div></div>
+    <div class="uer" style="--c:#c2410c"><div class="n"><b>Humanités et Langues</b><span>5 ECTS</span></div><div class="ms"><a href="/matieres/anglais/">Anglais</a><a href="/matieres/lv2/">LV2</a><a href="/matieres/competences-relationnelles/">Comp. relationnelles</a><a href="/matieres/expression-orale/">Expression orale</a><a href="/matieres/expression-ecrite/">Expression écrite</a></div></div>
+    <div class="uer" style="--c:#b45309"><div class="n"><b>OME</b><span>4 ECTS</span></div><div class="ms"><a href="/matieres/creativite-innovation/">Créativité</a><a href="/matieres/outils-bureautiques/">Bureautique</a></div></div>
   </div>
-  <!-- MATIERES:fin -->
-  <p class="soon" style="margin-top:14px">Il manque un chapitre ? <a href="/contact/?type=chapitre">Propose-le ici</a> avec un lien vers le cours, et une page sera créée.</p>
 
-  <footer class="site">
-    Une erreur, une idée, une question ? <a href="/contact/">Écris-nous via le formulaire</a>.
-  </footer>
+  <h2 class="sec">Nouveautés</h2>
+  <div class="news">
+    <a href="/mini-ds/"><time>8 nov.</time>Mode « Mes erreurs » dans le mini-DS<span class="tag">nouveau</span><span class="go">▸</span></a>
+    <a href="/matieres/"><time>8 nov.</time>Toutes les matières du S1 rangées par UE<span class="go">▸</span></a>
+    <a href="/"><time>8 nov.</time>Le site s'installe comme une appli sur ton téléphone<span class="go">▸</span></a>
+    <a href="/ds/statique/"><time>6 nov.</time>DS Statique : cours, 12 exercices, fiche et mini-DS<span class="go">▸</span></a>
+  </div>
+
+  <footer class="site">Une erreur, une idée, une question ? <a href="/contact/">Écris-nous via le formulaire</a>.</footer>
 </div>
+<script src="/notes/maquette-s1.js"></script>
+<script src="/mini-ds/matieres.js"></script>
+<script src="/assets/accueil.js"></script>
 <script src="/assets/stats.js" defer></script>
 <script src="/assets/pwa.js" defer></script>
 </body>

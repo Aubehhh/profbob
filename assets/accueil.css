@@ -1,0 +1,62 @@
+/* Accueil : titre, bandeau du DS en cours, tableau de bord perso, matières par UE (une ligne chacune), nouveautés */
+.wrap.home{max-width:960px}
+body:has(.wrap.home){--page:960px}
+.home .hero{padding-top:34px;padding-bottom:6px}
+.home .hero h1{font-size:clamp(2.2rem,6vw,3.2rem)}
+.dedi{font-family:var(--display);font-size:.92rem;color:var(--muted);margin:8px 0 0}
+.dedi a{font-weight:600}
+.sec{font-size:1.05rem;margin:30px 0 12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sec small{font-family:var(--display);font-weight:400;font-size:.82rem;color:var(--muted)}
+.banner{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:var(--vec);color:#fff;border-radius:16px;padding:18px 22px;margin-top:18px}
+.banner .t{flex:1;min-width:240px}
+.banner .eyebrow{color:rgba(255,255,255,.75)}
+.banner h3{font-size:1.3rem;margin:4px 0 2px;color:#fff}
+.banner h3 a{color:inherit;text-decoration:none}
+.banner p{margin:0;font-family:var(--display);font-size:.9rem;opacity:.85}
+.banner .row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--display);font-size:.84rem;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;text-decoration:none}
+.chip:hover{background:rgba(255,255,255,.28)}
+.chip.hot{background:#fff;color:#2453b8;font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.st{display:block;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-width:0}
+.st:hover{border-color:var(--vec)}
+.st .l{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.st .v{font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.st .v small{font-size:.45em;color:var(--muted);font-weight:500}
+.st .v.empty{color:var(--line)}
+.st .d{font-family:var(--display);font-size:.85rem;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+.st .go{font-family:var(--display);font-size:.85rem;color:var(--vec);margin-top:10px;display:block}
+.st.warn .v{color:var(--force)}
+.st.ok .v{color:var(--ok)}
+@media (max-width:620px){
+  .stats{gap:6px}
+  .st{padding:10px 10px 12px;border-radius:12px}
+  .st .l{font-size:.6rem;letter-spacing:.03em}
+  .st .v{font-size:1.5rem}
+  .st .d{font-size:.72rem;white-space:nowrap}
+  .st .go{display:none}
+}
+.uerows{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.uer{display:grid;grid-template-columns:240px 1fr;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+.uer:first-child{border-top:0}
+.uer .n{display:flex;align-items:baseline;gap:8px;border-left:4px solid var(--c);padding-left:10px}
+.uer .n b{font-family:var(--display);font-size:.92rem}
+.uer .n span{font-family:var(--mono);font-size:.7rem;color:var(--muted);white-space:nowrap}
+.uer .ms{display:flex;flex-wrap:wrap;gap:6px}
+.uer .ms a{font-family:var(--display);font-size:.84rem;padding:5px 11px;border-radius:999px;border:1px dashed var(--line);color:var(--muted);text-decoration:none}
+.uer .ms a:hover{border-color:var(--vec);color:var(--vec)}
+.uer .ms a.on{border:1px solid transparent;background:color-mix(in srgb,var(--c) 14%,var(--paper));color:var(--c);font-weight:600}
+@media (prefers-color-scheme:dark){.uer .ms a.on{color:color-mix(in srgb,var(--c) 55%,#fff)}}
+.uer .ms a em{font-style:normal;font-weight:400;opacity:.8;font-size:.76rem}
+@media (max-width:620px){.uer{grid-template-columns:1fr;gap:8px}}
+.news{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.news a{display:flex;gap:14px;align-items:baseline;padding:12px 18px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);font-family:var(--display);font-size:.95rem}
+.news a:first-child{border-top:0}
+.news a:hover{background:var(--tint)}
+.news time{font-family:var(--mono);font-size:.75rem;color:var(--muted);flex:none;width:58px}
+.news .go{margin-left:auto;color:var(--muted)}
+.news .tag{font-family:var(--mono);font-size:.68rem;padding:2px 8px;border-radius:999px;background:var(--tint);color:var(--vec);margin-left:6px;white-space:nowrap}
+.install{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:12px;font-family:var(--display);font-size:.92rem;color:var(--muted)}
+.install[hidden]{display:none}
+.install span{flex:1;min-width:220px}
+.install b{color:var(--ink)}

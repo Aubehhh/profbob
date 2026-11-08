@@ -118,25 +118,51 @@ ${TOPBAR('matieres')}
 ${FOOT}`;
 fs.writeFileSync(path.join(ROOT,'matieres','index.html'),idx);
 
-// --- accueil : raccourcis + dernier DS ---
-const latest=ALL.flatMap(m=>m.ds)[0];
-const nDS=ALL.reduce((n,m)=>n+m.ds.length,0);
-const homeBlock=`<!-- MATIERES:debut (généré par outils/build.js, ne pas modifier à la main) -->
-  <div class="shortcuts">
-    <a class="sc" href="/matieres/"><b>Matières ▸</b><span>${esc(SEM)} · ${ALL.length} modules · ${UES.length} UE</span></a>
-    <a class="sc" href="/mini-ds/"><b>Mini-DS ▸</b><span>Par DS, par chapitre ou tes erreurs</span></a>
-    <a class="sc" href="/notes/"><b>Simulateur de notes ▸</b><span>Est-ce que je valide mon semestre ?</span></a>
-  </div>
+// --- accueil (page entièrement générée) ---
+const now=ALL.find(m=>m.ds.length);const latest=now&&now.ds[0];
+const short={'outils':'Outils maths','elec':'Électricité','statique':'Statique','embarque':'Info embarquée','web':'Page Web','relation':'Comp. relationnelles','crea':'Créativité','bureau':'Bureautique'};
+const tagMod=m=>{const c=m.chapitres.filter(x=>x.url).length,d=m.ds.length;return d?d+' DS':c?c+' chap.':''};
+const home=`${HEAD('profbob · Révisions de zgeg','Le site de révision de la classe HEI 1 : cours expliqués, exercices corrigés, mini-DS corrigés automatiquement et simulateur de notes.').replace('<link rel="stylesheet" href="/assets/matieres.css">','<link rel="stylesheet" href="/assets/matieres.css">\n<link rel="stylesheet" href="/assets/accueil.css">')}
+<body>
+${TOPBAR('home')}
+<div class="wrap home">
+  <header class="hero">
+    <div class="eyebrow">HEI 1 · ${esc(SEM)}</div>
+    <h1>Révisions de zgeg</h1>
+    ${CAT.dedicace?`<p class="dedi">${CAT.dedicace}</p>`:''}
+  </header>
 ${latest?`
-  <h2>Dernier DS ajouté</h2>
-  <div class="list">
-    ${dscard(latest)}
+  <div class="banner">
+    <div class="t"><div class="eyebrow">En ce moment · DS de ${esc(latest.quand||'')}</div><h3><a href="${latest.url}">${esc(latest.titre)}</a></h3>${latest.desc?`<p>${esc(latest.desc)}</p>`:''}</div>
+    <div class="row">${(latest.liens||[]).map(([t,u])=>`<a class="chip" href="${u}">${esc(t)}</a>`).join('')}${latest.minids?`<a class="chip hot" href="${esc(latest.minids)}">Mini-DS ▸</a>`:''}</div>
   </div>`:''}
-  <!-- MATIERES:fin -->`;
-const hp=path.join(ROOT,'index.html');let h=fs.readFileSync(hp,'utf8');
-const a=h.indexOf('<!-- MATIERES:debut'),b=h.indexOf('<!-- MATIERES:fin -->');
-if(a<0||b<0)throw new Error('marqueurs MATIERES absents de index.html');
-h=h.slice(0,a)+homeBlock+h.slice(b+'<!-- MATIERES:fin -->'.length);fs.writeFileSync(hp,h);
+
+  <div class="install" id="install" hidden><span data-txt><b>Installe profbob sur ton téléphone</b> : il s'ouvre comme une appli et marche même sans réseau.</span><button class="btn" type="button">Installer l'appli</button></div>
+
+  <h2 class="sec">Ton tableau de bord <small>calculé avec tes résultats sur ce navigateur</small></h2>
+  <div class="stats">
+    <a class="st" id="st-notes" href="/notes/"><div class="l">Moyenne simulée</div><div class="v empty">—</div></a>
+    <a class="st" id="st-ds" href="/mini-ds/"><div class="l">Dernier mini-DS</div><div class="v empty">—</div></a>
+    <a class="st" id="st-err" href="/mini-ds/"><div class="l">À retravailler</div><div class="v empty">—</div></a>
+  </div>
+
+  <h2 class="sec">Matières <small><a href="/matieres/">tout voir ▸</a></small></h2>
+  <div class="uerows">
+    ${UES.map(u=>`<div class="uer" style="--c:${u.couleur}"><div class="n"><b>${esc(u.nom.replace('Organisation et Management des Entreprises','OME'))}</b><span>${u.ects} ECTS</span></div><div class="ms">${u.modules.map(m=>{const t=tagMod(m);return `<a href="/matieres/${m.slug}/"${t?' class="on"':''}>${esc(short[m.id]||m.nom)}${t?` <em>${t}</em>`:''}</a>`}).join('')}</div></div>`).join('\n    ')}
+  </div>
+${(CAT.nouveautes||[]).length?`
+  <h2 class="sec">Nouveautés</h2>
+  <div class="news">
+    ${CAT.nouveautes.slice(0,4).map(n=>`<a href="${n.url}"><time>${esc(n.date)}</time>${esc(n.texte)}${n.nouveau?'<span class="tag">nouveau</span>':''}<span class="go">▸</span></a>`).join('\n    ')}
+  </div>`:''}
+
+  <footer class="site">Une erreur, une idée, une question ? <a href="/contact/">Écris-nous via le formulaire</a>.</footer>
+</div>
+<script src="/notes/maquette-s1.js"></script>
+<script src="/mini-ds/matieres.js"></script>
+<script src="/assets/accueil.js"></script>
+${FOOT}`;
+fs.writeFileSync(path.join(ROOT,'index.html'),home);
 
 // --- liste UE/modules pour le mini-DS ---
 fs.writeFileSync(path.join(ROOT,'assets','ue-s1.js'),'/* Généré par outils/build.js : UE et modules du semestre (utilisé par le mini-DS). */\nwindow.UE_S1='+JSON.stringify(UES.map(u=>({id:u.id,nom:u.nom,ects:u.ects,couleur:u.couleur,modules:u.modules.map(m=>({id:m.id,slug:m.slug,nom:m.nom,mono:m.mono}))})))+';\n');
