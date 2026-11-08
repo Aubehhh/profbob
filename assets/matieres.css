@@ -67,3 +67,4 @@
 .sc:first-child{background:var(--vec);border-color:var(--vec)}
 .sc:first-child b,.sc:first-child span{color:var(--paper)}
 body:has(.wrap.wide){--page:1000px}
+.ueh span{white-space:nowrap}

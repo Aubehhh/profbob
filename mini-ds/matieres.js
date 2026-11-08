@@ -2,7 +2,7 @@
    Pour ajouter une matière : charger sa banque dans mini-ds/index.html, puis remplir banque/chapitres/ds ici.
    Une matière sans banque apparaît en « bientôt ». */
 window.MINIDS_MATIERES=[
-  {id:'meca',nom:'Mécanique',couleur:'#2453b8',
+  {id:'meca',module:'statique',nom:'Mécanique 1 (Statique)',couleur:'#2453b8',
    banque:()=>window.BANQUE_STATIQUE,
    noms:{resultante:'Résultante de deux forces',cable:'Force portée par un câble',angles:'Norme et angles directeurs',angle2:'Angle entre deux vecteurs',projection:'Projection sur un axe',
      equilibre:'Équilibre : deux câbles',ressort:'Équilibre : câble et ressort',vectoriel:'Produit vectoriel',varignon:'Moment 2D (Varignon)',moment3d:'Moment 3D',momentaxe:'Moment par rapport à un axe'},

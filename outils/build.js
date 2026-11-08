@@ -138,6 +138,9 @@ const a=h.indexOf('<!-- MATIERES:debut'),b=h.indexOf('<!-- MATIERES:fin -->');
 if(a<0||b<0)throw new Error('marqueurs MATIERES absents de index.html');
 h=h.slice(0,a)+homeBlock+h.slice(b+'<!-- MATIERES:fin -->'.length);fs.writeFileSync(hp,h);
 
+// --- liste UE/modules pour le mini-DS ---
+fs.writeFileSync(path.join(ROOT,'assets','ue-s1.js'),'/* Généré par outils/build.js : UE et modules du semestre (utilisé par le mini-DS). */\nwindow.UE_S1='+JSON.stringify(UES.map(u=>({id:u.id,nom:u.nom,ects:u.ects,couleur:u.couleur,modules:u.modules.map(m=>({id:m.id,slug:m.slug,nom:m.nom,mono:m.mono}))})))+';\n');
+
 // --- admin : pages suivies ---
 const ap=path.join(ROOT,'admin/index.html');let ad=fs.readFileSync(ap,'utf8');
 const base=[['p-accueil','Accueil'],['p-matieres','Matières (liste)'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)']];

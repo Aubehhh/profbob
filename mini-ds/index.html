@@ -14,14 +14,13 @@
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/minids.css">
 <link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/matieres.css">
 <style>
 /* Page de réglages du mini-DS : 3 étapes (matière, quoi réviser, réglages) puis un récap avec le bouton.
    Au lancement, les réglages disparaissent et l'épreuve s'affiche à la place. */
 .step{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
 .step h2{font-size:1.1rem;display:flex;gap:10px;align-items:center;margin-bottom:12px}
 .step h2 .n{flex:none;display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--tint);color:var(--vec);font-family:var(--mono);font-size:.8rem}
-.mats{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:8px}
-@media (max-width:520px){.mats{grid-template-columns:1fr 1fr}.mats .mono{display:none}.mats .choice .box{padding:9px 11px}.mats .name{font-size:.9rem;overflow-wrap:anywhere}}
 .list{display:grid;gap:8px}
 .choice{position:relative;display:block;cursor:pointer}
 .choice input{position:absolute;opacity:0;pointer-events:none}
@@ -74,6 +73,25 @@
 .shared{background:var(--warnbg);border:1px solid var(--warn);border-radius:10px;padding:10px 14px;font-size:.92rem;margin:12px 0}
 .empty{color:var(--muted);font-size:.95rem;border:1px dashed var(--line);border-radius:10px;padding:14px}
 #run[hidden],#config[hidden]{display:none}
+.step .uegrid{margin-top:0}
+.step .uecard{background:var(--bg)}
+.step .uecard .ueh h2{font-size:.95rem;display:block;margin:0}
+.mrow{display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;position:relative}
+.mrow input{position:absolute;opacity:0;pointer-events:none}
+.mrow:hover{background:var(--tint)}
+.mrow .mono{width:30px;height:30px;font-size:.72rem;border-radius:8px}
+.mrow .nm{flex:1;min-width:0;font-family:var(--display);font-weight:600;font-size:.92rem;line-height:1.25}
+.mrow .st{font-family:var(--display);font-size:.76rem;color:var(--ok);white-space:nowrap}
+.mrow .ind{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--muted);background:var(--paper);display:grid;place-items:center}
+.mrow:has(input:checked){background:var(--tint)}
+.mrow:has(input:checked) .nm{color:var(--vec)}
+.mrow:has(input:checked) .ind{border-color:var(--vec);background:var(--vec)}
+.mrow:has(input:checked) .ind::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--paper)}
+.mrow:has(input:focus-visible){outline:2px solid var(--vec);outline-offset:-2px}
+.mrow.off{cursor:default;opacity:.55}
+.mrow.off:hover{background:transparent}
+.mrow.off .st{color:var(--muted)}
+.mrow.off .ind{display:none}
 </style>
 </head>
 <body>
@@ -100,7 +118,7 @@
 
     <section class="step">
       <h2><span class="n">1</span>Matière</h2>
-      <div class="mats" id="mat"></div>
+      <div class="uegrid" id="mat"></div>
     </section>
 
     <section class="step">
@@ -143,6 +161,7 @@
 <script src="/assets/notations.js"></script>
 <script src="/assets/minids.js"></script>
 <script src="/ds/statique/mini-ds/banque.js"></script>
+<script src="/assets/ue-s1.js"></script>
 <script src="matieres.js"></script>
 <script>
 (function(){
@@ -180,7 +199,13 @@
 
   // --- rendu ---
   function renderMat(){
-    document.getElementById('mat').innerHTML=MAT.map(m=>`<label class="choice"><input type="radio" name="mat" value="${m.id}" ${m.id===S.m?'checked':''} ${has(m)?'':'disabled'}><span class="box"><span class="mono" style="--c:${m.couleur}">${mono(m)}</span><span class="txt"><span class="name">${esc(m.nom)}</span><span class="sub">${has(m)?(m.ds.length+' DS · '+m.chapitres.length+' chapitres'):'Bientôt'}</span></span></span></label>`).join('');
+    // même présentation que la page Matières : une carte par UE, une ligne par module
+    const UE=window.UE_S1||[];
+    document.getElementById('mat').innerHTML=UE.map(u=>`<section class="uecard" style="--c:${u.couleur}">
+      <div class="ueh"><h2>${esc(u.nom)}</h2><span>${u.ects} ECTS</span></div>
+      <ul class="mods">${u.modules.map(md=>{const m=MAT.find(x=>x.module===md.id);const ok=m&&has(m);
+        return `<li><label class="mrow${ok?'':' off'}"><input type="radio" name="mat" value="${ok?m.id:''}" ${ok&&m.id===S.m?'checked':''} ${ok?'':'disabled'}><span class="mono" style="--c:${u.couleur}">${esc(md.mono)}</span><span class="nm">${esc(md.nom)}</span><span class="st">${ok?(m.ds.length+' DS · '+m.chapitres.length+' chap.'):'Bientôt'}</span><span class="ind"></span></label></li>`}).join('')}</ul>
+    </section>`).join('');
   }
   function renderWhat(){
     const m=mat();
