@@ -1,0 +1,20 @@
+{
+  "name": "profbob · Révisions",
+  "short_name": "profbob",
+  "description": "Cours, mini-DS corrigés automatiquement et simulateur de notes de la classe.",
+  "lang": "fr",
+  "start_url": "/?source=appli",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#2453b8",
+  "icons": [
+    {"src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png"},
+    {"src": "/assets/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Mini-DS", "url": "/mini-ds/"},
+    {"name": "Simulateur de notes", "url": "/notes/"}
+  ]
+}

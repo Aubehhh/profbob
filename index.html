@@ -4,33 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
 <title>profbob · Révisions de zgeg</title>
 <meta name="description" content="Le site de révision de la classe : cours expliqués, exercices corrigés et mini-DS corrigés automatiquement, matière par matière.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/matieres.css">
 <style>
 /* Accueil : une colonne, les matières en sections, chaque DS est une carte */
 h2{margin:40px 0 12px;font-size:1.3rem}
-.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.mcard{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink)}
-.mcard:hover{border-color:var(--vec)}
-.mcard .t{flex:1;min-width:0}
-.mcard b{font-family:var(--display);font-weight:700;display:block;line-height:1.2}
-.mcard small{font-family:var(--mono);font-size:.72rem;color:var(--ok)}
-.mcard.empty small{color:var(--muted)}
-.mcard .go{color:var(--muted)}
-.mono{flex:none;display:inline-grid;place-items:center;border-radius:10px;background:color-mix(in srgb,var(--c) 14%,var(--paper));color:var(--c);font-family:var(--display);font-weight:800;font-size:.95rem}
-@media (prefers-color-scheme:dark){.mono{color:color-mix(in srgb,var(--c) 55%,#fff)}}
-.list{display:grid;gap:12px}
-.dscard{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
-.dscard h3 a{color:var(--vec);text-decoration:none}
-.dscard h3 a:hover{text-decoration:underline}
-.dscard p{margin:6px 0 0;color:var(--muted);font-size:.95rem}
-.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.links a{font-family:var(--mono);font-size:.78rem;padding:4px 10px;border-radius:999px;background:var(--tint);color:var(--vec);text-decoration:none;border:1px solid transparent}
-.links a:hover{border-color:var(--vec)}
-.links a.hot{background:var(--vec);color:var(--paper)}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:12px}
 .how div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:.95rem}
 .how b{font-family:var(--display);display:block;margin-bottom:4px}
@@ -39,6 +24,10 @@ h2{margin:40px 0 12px;font-size:1.3rem}
 .promo b{font-family:var(--display);font-size:1.15rem;display:block;margin-bottom:2px}
 .promo span:first-child{flex:1;min-width:220px;font-size:.95rem;opacity:.95}
 .promo .go{font-family:var(--display);font-weight:700;background:var(--paper);color:var(--vec);padding:8px 14px;border-radius:8px;white-space:nowrap}
+.install{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-top:12px;font-family:var(--display);font-size:.92rem;color:var(--muted)}
+.install[hidden]{display:none}
+.install span{flex:1;min-width:220px}
+.install b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -61,17 +50,55 @@ h2{margin:40px 0 12px;font-size:1.3rem}
 
   <a class="promo" href="/notes/"><span><b>Est-ce que je valide mon semestre&nbsp;?</b>Entre tes notes, le simulateur calcule ta moyenne par UE et ce qu'il te faut pour avoir 10.</span><span class="go">Simulateur de notes ▸</span></a>
 
+  <div class="install" id="install" hidden><span data-txt><b>Installe profbob sur ton téléphone</b> : il s'ouvre comme une appli et marche même sans réseau.</span><button class="btn" type="button">Installer l'appli</button></div>
+
+<!-- MATIERES:debut (généré par outils/build.js, ne pas modifier à la main) -->
   <h2 id="matieres">Les matières</h2>
-  <div class="mgrid">
-    <a class="mcard" href="/matieres/mecanique/"><span class="mono" style="--c:#2453b8;width:40px;height:40px">Mé</span><span class="t"><b>Mécanique</b><small>1 DS</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/mathematiques/"><span class="mono" style="--c:#7c3aed;width:40px;height:40px">Ma</span><span class="t"><b>Mathématiques</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/analyse/"><span class="mono" style="--c:#0e7490;width:40px;height:40px">An</span><span class="t"><b>Analyse</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/thermodynamique/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">Th</span><span class="t"><b>Thermodynamique</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/electricite/"><span class="mono" style="--c:#b45309;width:40px;height:40px">Él</span><span class="t"><b>Bases de l&#x27;électricité</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/pages-web/"><span class="mono" style="--c:#be185d;width:40px;height:40px">We</span><span class="t"><b>Pages Web</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/informatique-embarquee/"><span class="mono" style="--c:#15803d;width:40px;height:40px">IE</span><span class="t"><b>Informatique embarquée</b><small>Bientôt</small></span><span class="go">▸</span></a>
-    <a class="mcard empty" href="/matieres/chimie/"><span class="mono" style="--c:#0f766e;width:40px;height:40px">Ch</span><span class="t"><b>Chimie</b><small>Bientôt</small></span><span class="go">▸</span></a>
-  </div>
+  <section class="ueblock" style="--c:#7c3aed">
+    <div class="ueh"><h3>Mathématiques</h3><span>4 ECTS</span></div>
+    <div class="mgrid">
+      <a class="mcard empty" href="/matieres/mathematiques/"><span class="mono" style="--c:#7c3aed;width:40px;height:40px">OM</span><span class="t"><b>Outils mathématiques pour l'ingénieur 1</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/analyse/"><span class="mono" style="--c:#7c3aed;width:40px;height:40px">An</span><span class="t"><b>Analyse</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    </div>
+  </section>
+  <section class="ueblock" style="--c:#0f766e">
+    <div class="ueh"><h3>Chimie et Électricité</h3><span>6 ECTS</span></div>
+    <div class="mgrid">
+      <a class="mcard empty" href="/matieres/chimie/"><span class="mono" style="--c:#0f766e;width:40px;height:40px">Ch</span><span class="t"><b>Chimie 1</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/electricite/"><span class="mono" style="--c:#0f766e;width:40px;height:40px">Él</span><span class="t"><b>Bases de l'électricité</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    </div>
+  </section>
+  <section class="ueblock" style="--c:#2453b8">
+    <div class="ueh"><h3>Mécanique</h3><span>7 ECTS</span></div>
+    <div class="mgrid">
+      <a class="mcard" href="/matieres/mecanique/"><span class="mono" style="--c:#2453b8;width:40px;height:40px">Mé</span><span class="t"><b>Mécanique 1 (Statique)</b><small>3 chapitres · 1 DS</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/thermodynamique/"><span class="mono" style="--c:#2453b8;width:40px;height:40px">Th</span><span class="t"><b>Thermodynamique</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    </div>
+  </section>
+  <section class="ueblock" style="--c:#be185d">
+    <div class="ueh"><h3>Informatique</h3><span>4 ECTS</span></div>
+    <div class="mgrid">
+      <a class="mcard empty" href="/matieres/informatique-embarquee/"><span class="mono" style="--c:#be185d;width:40px;height:40px">IE</span><span class="t"><b>Informatique embarquée</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/pages-web/"><span class="mono" style="--c:#be185d;width:40px;height:40px">We</span><span class="t"><b>Création de page Web</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    </div>
+  </section>
+  <section class="ueblock" style="--c:#c2410c">
+    <div class="ueh"><h3>Humanités et Langues</h3><span>5 ECTS</span></div>
+    <div class="mgrid">
+      <a class="mcard empty" href="/matieres/anglais/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">En</span><span class="t"><b>Anglais</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/lv2/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">L2</span><span class="t"><b>LV2</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/competences-relationnelles/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">CR</span><span class="t"><b>Compétences relationnelles</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/expression-orale/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">EO</span><span class="t"><b>Expression orale</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/expression-ecrite/"><span class="mono" style="--c:#c2410c;width:40px;height:40px">EÉ</span><span class="t"><b>Expression écrite</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    </div>
+  </section>
+  <section class="ueblock" style="--c:#b45309">
+    <div class="ueh"><h3>Organisation et Management des Entreprises</h3><span>4 ECTS</span></div>
+    <div class="mgrid">
+      <a class="mcard empty" href="/matieres/creativite-innovation/"><span class="mono" style="--c:#b45309;width:40px;height:40px">CI</span><span class="t"><b>Créativité et Innovation</b><small>Bientôt</small></span><span class="go">▸</span></a>
+      <a class="mcard empty" href="/matieres/outils-bureautiques/"><span class="mono" style="--c:#b45309;width:40px;height:40px">OB</span><span class="t"><b>Outils bureautiques</b><small>Bientôt</small></span><span class="go">▸</span></a>
+    </div>
+  </section>
 
   <h2>Dernier DS ajouté</h2>
   <div class="list">
@@ -87,6 +114,7 @@ h2{margin:40px 0 12px;font-size:1.3rem}
       </div>
     </div>
   </div>
+  <!-- MATIERES:fin -->
   <p class="soon" style="margin-top:14px">Il manque un chapitre ? <a href="/contact/?type=chapitre">Propose-le ici</a> avec un lien vers le cours, et une page sera créée.</p>
 
   <footer class="site">
@@ -94,5 +122,6 @@ h2{margin:40px 0 12px;font-size:1.3rem}
   </footer>
 </div>
 <script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
 </body>
 </html>
