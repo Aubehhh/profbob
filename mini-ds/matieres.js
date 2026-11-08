@@ -4,6 +4,8 @@
 window.MINIDS_MATIERES=[
   {id:'meca',nom:'Mécanique',couleur:'#2453b8',
    banque:()=>window.BANQUE_STATIQUE,
+   noms:{resultante:'Résultante de deux forces',cable:'Force portée par un câble',angles:'Norme et angles directeurs',angle2:'Angle entre deux vecteurs',projection:'Projection sur un axe',
+     equilibre:'Équilibre : deux câbles',ressort:'Équilibre : câble et ressort',vectoriel:'Produit vectoriel',varignon:'Moment 2D (Varignon)',moment3d:'Moment 3D',momentaxe:'Moment par rapport à un axe'},
    chapitres:[
      {id:'vecteurs',nom:'Vecteurs force',detail:'Résultante, vecteur position, angles directeurs, produit scalaire, projection',q:['resultante','cable','angles','angle2','projection']},
      {id:'equilibre',nom:'Équilibre d\'une particule',detail:'DCL, câbles, ressorts',q:['equilibre','ressort']},

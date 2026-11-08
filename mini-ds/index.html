@@ -47,6 +47,10 @@
 .links2 button:hover{border-color:var(--vec)}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;background:var(--bg);margin-bottom:12px;flex-wrap:wrap}
 .seg button{font:inherit;font-family:var(--display);font-weight:500;font-size:.92rem;border:0;background:transparent;color:var(--muted);padding:7px 14px;border-radius:7px;cursor:pointer}
+.seg .cnt{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--force);color:#fff;font-size:.72rem;font-weight:700;margin-left:4px}
+.seg .cnt:empty{display:none}
+.errlist .sub b{color:var(--bad);font-weight:600}
+.errlist .choice{cursor:default}.errlist .choice:hover .box{border-color:var(--line)}
 .seg button[aria-pressed="true"]{background:var(--paper);color:var(--vec);box-shadow:0 0 0 1px var(--line)}
 .row{display:flex;gap:28px;flex-wrap:wrap}
 .row>div{min-width:220px}
@@ -101,6 +105,7 @@
       <div class="seg" role="group" aria-label="Type de révision">
         <button type="button" data-mode="ds" aria-pressed="true">Un DS</button>
         <button type="button" data-mode="ch" aria-pressed="false">Un ou plusieurs chapitres</button>
+        <button type="button" data-mode="err" aria-pressed="false">Mes erreurs <span class="cnt" id="errcnt"></span></button>
       </div>
       <div id="what"></div>
     </section>
@@ -149,16 +154,20 @@
   // --- état ---
   let S={m:null,mode:'ds',ds:null,ch:new Set(),n:5,t:30,seed:null};
   const mat=()=>MAT.find(x=>x.id===S.m);
+  const errMap=()=>{try{return JSON.parse(localStorage.getItem('minids-err-'+S.m)||'{}')||{}}catch(e){return {}}};
+  const errIds=()=>{const m=errMap(),b=mat()&&has(mat())?mat().banque().map(x=>x.id):[];return Object.keys(m).filter(k=>m[k].last===0&&b.includes(k))};
   function pool(){const m=mat();if(!m||!has(m))return [];
+    if(S.mode==='err'){const e=errIds();return m.banque().filter(b=>e.includes(b.id))}
     const ids=new Set();const chs=S.mode==='ds'?((m.ds.find(d=>d.id===S.ds)||{}).chapitres||[]):[...S.ch];
     chs.forEach(c=>{const C=m.chapitres.find(x=>x.id===c);if(C)C.q.forEach(i=>ids.add(i))});
     return m.banque().filter(b=>ids.has(b.id))}
-  function chapsSel(){const m=mat();return S.mode==='ds'?((m.ds.find(d=>d.id===S.ds)||{}).chapitres||[]):[...S.ch]}
+  function chapsSel(){const m=mat();if(S.mode==='err')return [];return S.mode==='ds'?((m.ds.find(d=>d.id===S.ds)||{}).chapitres||[]):[...S.ch]}
 
   // --- préremplissage depuis un lien partagé ---
   const first=MAT.find(has);
   S.m=(MAT.find(x=>x.id===q.get('m')&&has(x))||first).id;
-  if(q.get('ch')){S.mode='ch';q.get('ch').split(',').forEach(c=>S.ch.add(c))}
+  if(q.get('err')){S.mode='err'}
+  else if(q.get('ch')){S.mode='ch';q.get('ch').split(',').forEach(c=>S.ch.add(c))}
   else{S.mode='ds';S.ds=q.get('ds')||null;if(!q.get('n')){const m0=MAT.find(x=>x.id===S.m),d0=(m0.ds.find(d=>d.id===S.ds)||m0.ds[0]);if(d0){S.n=d0.n;S.t=d0.min}}}
   if(q.get('n'))S.n=parseInt(q.get('n'),10)||5;
   if(q.has('t'))S.t=parseInt(q.get('t'),10)||0;
@@ -174,6 +183,15 @@
     const m=mat();
     document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===S.mode));
     const w=document.getElementById('what');
+    const ec=errIds().length;document.getElementById('errcnt').textContent=ec||'';
+    if(S.mode==='err'){
+      const M=errMap(),ids=errIds();
+      if(!ids.length){w.innerHTML='<p class="empty">Rien à retravailler pour l\'instant. Fais un mini-DS : les types de questions que tu rates apparaîtront ici, et disparaîtront dès que tu les réussis.</p>';return}
+      w.innerHTML='<div class="list errlist">'+ids.map(id=>{const e=M[id];return `<div class="choice"><span class="box"><span class="txt"><span class="name">${esc((m.noms&&m.noms[id])||e.chap||id)}</span><span class="sub"><b>Ratée ${e.fails} fois</b>${e.wins?' · réussie '+e.wins+' fois':''} · ${esc(e.chap||'')}</span></span></span></div>`}).join('')+'</div>'+
+        '<div class="hint">Une question sort de la liste dès que tu la réussis entièrement.</div><div class="links2"><button type="button" id="clear">Vider la liste</button></div>';
+      w.querySelector('#clear').onclick=()=>{if(!confirm('Vider ta liste d\'erreurs pour cette matière ?'))return;try{localStorage.removeItem('minids-err-'+S.m)}catch(e){}renderWhat();update()};
+      return;
+    }
     if(S.mode==='ds'){
       if(!m.ds.length){w.innerHTML='<p class="empty">Pas encore de DS pour cette matière.</p>';return}
       if(!m.ds.find(d=>d.id===S.ds))S.ds=m.ds[0].id;
@@ -197,10 +215,10 @@
     document.getElementById('np').disabled=S.n>=max;
     document.getElementById('nmax').textContent=types?(types+' type'+(types>1?'s':'')+' de questions dans ce choix'+(S.n>types?' : certains reviendront avec d\'autres valeurs.':'.')):'';
     const m=mat(),chs=chapsSel().map(id=>(m.chapitres.find(c=>c.id===id)||{}).nom).filter(Boolean);
-    const quoi=S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?'Chapitre « '+chs[0]+' »':chs.length+' chapitres');
+    const quoi=S.mode==='err'?'Mes erreurs ('+P.length+' type'+(P.length>1?'s':'')+')':S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?'Chapitre « '+chs[0]+' »':chs.length+' chapitres');
     document.getElementById('sum').innerHTML=max
       ?`<b>${esc(m.nom)} · ${esc(quoi||'')}</b><br>${S.n} question${S.n>1?'s':''} · ${S.t?S.t+' min':'sans chrono'}`
-      :'<b>Coche au moins un chapitre.</b>';
+      :(S.mode==='err'?'<b>Pas d\'erreur à retravailler.</b>':'<b>Coche au moins un chapitre.</b>');
     document.getElementById('start').disabled=!max;
   }
 
@@ -234,18 +252,18 @@
     const seed=S.seed||1000+Math.floor(Math.random()*9000);
     const u=new URL(location.href);u.search='';
     u.searchParams.set('m',S.m);
-    if(S.mode==='ds')u.searchParams.set('ds',S.ds);else u.searchParams.set('ch',chs.join(','));
+    if(S.mode==='err')u.searchParams.set('err','1');else if(S.mode==='ds')u.searchParams.set('ds',S.ds);else u.searchParams.set('ch',chs.join(','));
     u.searchParams.set('n',S.n);u.searchParams.set('t',S.t);u.searchParams.set('sujet',seed);u.searchParams.set('format','c');
     history.replaceState(null,'',u);
-    const label=(S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?(m.chapitres.find(c=>c.id===chs[0])||{}).nom:chs.length+' chapitres'))+' · '+S.n+' q · '+(S.t?S.t+' min':'sans chrono');
+    const label=(S.mode==='err'?'Mes erreurs':S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?(m.chapitres.find(c=>c.id===chs[0])||{}).nom:chs.length+' chapitres'))+' · '+S.n+' q · '+(S.t?S.t+' min':'sans chrono');
     cfgEl.hidden=true;runEl.hidden=false;document.getElementById('shared').hidden=true;
     MiniDS.start({
-      id:S.m+':'+chs.join('+')+':'+S.n, histKey:'minids-'+S.m,
+      id:S.m+':'+(S.mode==='err'?'err-'+base.map(b=>b.id).join('+'):chs.join('+'))+':'+S.n, histKey:'minids-'+S.m, errKey:'minids-err-'+S.m,
       mount:runEl, bank:P, report:'/contact/', startNow:true,
       notations:window.Notations?Notations.html(S.m,{howto:true,title:'Notations et comment répondre'}):'',
       formats:[{id:'c',label,min:S.t,n:S.n}],
       onHome(){runEl.hidden=true;runEl.innerHTML='';cfgEl.hidden=false;S.seed=null;
-        const v=new URL(location.href);v.searchParams.delete('sujet');history.replaceState(null,'',v);hist();window.scrollTo({top:0})}
+        const v=new URL(location.href);v.searchParams.delete('sujet');history.replaceState(null,'',v);renderWhat();update();hist();window.scrollTo({top:0})}
     });
   };
 

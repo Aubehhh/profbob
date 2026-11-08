@@ -175,6 +175,7 @@
       const d=new Date();const date=d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
       if(window.pbStat)pbStat('ev-minids');
       const list=store.get(KEY)||[];const entry={date,seed,fmt:fmt.label,note:0};list.push(entry);
+      const errPrev=cfg.errKey?(store.get(cfg.errKey)||{}):{};
       const mm=Math.floor(usedSec/60),ss=usedSec%60;
       const mail=cfg.report?cfg.report+'?type=erreur&page='+encodeURIComponent('Mini-DS '+cfg.id+' · sujet '+seed+' ('+fmt.label+') · question n° '):null;
       const bar=root.querySelector('.mds-bar');if(bar)bar.remove();
@@ -206,6 +207,13 @@
         sc.querySelector('[data-forced]').textContent=forced?`dont ${forced} réponse${forced>1?'s':''} validée${forced>1?'s':''} par toi`:'';
         sc.querySelector('[data-rows]').innerHTML=rows.join('');
         entry.note=note;entry.manuel=forced||undefined;store.set(KEY,list.slice(-50));
+        // suivi des types de questions ratés (mode « mes erreurs ») : réussi = toutes les cases justes
+        if(cfg.errKey){
+          const m=JSON.parse(JSON.stringify(errPrev));const seen={};
+          res.forEach(({q,r})=>{const id=String(q.id).split('~')[0];const ok=r.every(c=>c.st!=='ko');seen[id]=(seen[id]===undefined?ok:seen[id]&&ok)});
+          Object.entries(seen).forEach(([id,ok])=>{const e=m[id]||{fails:0,wins:0};if(ok)e.wins++;else e.fails++;e.last=ok?1:0;e.chap=(subject.find(q=>String(q.id).split('~')[0]===id)||{}).chap;m[id]=e});
+          store.set(cfg.errKey,m);
+        }
       }
       root.prepend(sc);rescore();
       if(window.Nota)Nota.apply(root);
