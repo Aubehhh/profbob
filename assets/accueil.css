@@ -1,6 +1,5 @@
 /* Accueil : titre, bandeau du DS en cours, tableau de bord perso, matières par UE (une ligne chacune), nouveautés */
 .wrap.home{max-width:960px}
-body:has(.wrap.home){--page:960px}
 .home .hero{padding-top:34px;padding-bottom:6px}
 .home .hero h1{font-size:clamp(2.2rem,6vw,3.2rem)}
 .dedi{font-family:var(--display);font-size:.92rem;color:var(--muted);margin:8px 0 0}
