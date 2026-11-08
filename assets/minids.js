@@ -32,7 +32,7 @@
     n(x,d=2){if(!isFinite(x))return '—';const p=Math.pow(10,d);let v=Math.round(x*p)/p;if(Object.is(v,-0)||v===0)v=0;
       const s=Math.abs(v).toString().replace('.',',');return (v<0?'−':'')+s},
     vec(v,d=2){const n=['i','j','k'];let out='';v.forEach((c,i)=>{if(Math.abs(c)<1e-9)return;let s=F.n(Math.abs(c),d);if(s==='1')s='';
-      const t=(s?s+' ':'')+n[i];if(out==='')out+=(c<0?'−':'')+t;else out+=(c<0?' − ':' + ')+t});return '{'+(out||'0')+'}'},
+      const t2=(s?s+' ':'')+'<span class="vec">'+n[i]+'</span>';if(out==='')out+=(c<0?'−':'')+t2;else out+=(c<0?' − ':' + ')+t2});return '{'+(out||'0')+'}'},
     pt(p,d=2){return '('+p.map(c=>F.n(c,d)).join(' ; ')+')'},
     deg:Math.PI/180
   };
@@ -115,14 +115,15 @@
       const el=h(`<div>
         <div class="mds-bar"><div class="in"><span class="mds-time" id="mds-t">--:--</span><span class="meta grow">Sujet ${seed} · ${esc(fmt.label)} · ${total} pts</span>
           <button class="btn ghost" id="mds-quit">Abandonner</button><button class="btn" id="mds-submit">Rendre ma copie</button></div></div>
-        <div id="mds-qs">${subject.map(q=>`<div class="mds-q" data-q="${q.num}">
+        <div id="mds-qs">${cfg.notations||''}${subject.map(q=>`<div class="mds-q" data-q="${q.num}">
           <h3>Question ${q.num} <span class="tag">${esc(q.chap)}</span><span class="mds-pts">${q.pts} pt${q.pts>1?'s':''}</span></h3>
           ${q.text}
-          <div class="mds-fields">${q.fields.map((f,j)=>`<div class="mds-field"><label for="f${q.num}_${j}">${f.label}</label><div class="box"><input id="f${q.num}_${j}" inputmode="decimal" autocomplete="off" spellcheck="false"><span class="unit">${f.unit||''}</span></div></div>`).join('')}</div>
+          <div class="mds-fields">${q.fields.map((f,j)=>`<div class="mds-field"><label for="f${q.num}_${j}" data-nota>${f.label}</label><div class="box"><input id="f${q.num}_${j}" inputmode="decimal" autocomplete="off" spellcheck="false"><span class="unit">${f.unit||''}</span></div>${(f.hint||(f.type==='angle'?'en degrés':(f.s?'avec son signe (+ ou −)':'')))?`<div class="fh">${f.hint||(f.type==='angle'?'en degrés':'avec son signe (+ ou −)')}</div>`:''}</div>`).join('')}</div>
         </div>`).join('')}</div>
         <div class="mds-row"><button class="btn" id="mds-submit2">Rendre ma copie</button></div>
       </div>`);
       root.appendChild(el);
+      if(window.Nota)Nota.apply(el);
       el.querySelector('#mds-submit').onclick=el.querySelector('#mds-submit2').onclick=()=>{
         const empty=[...el.querySelectorAll('.mds-field input')].filter(i=>i.value.trim()==='').length;
         if(empty&&!confirm(empty+' case'+(empty>1?'s':'')+' vide'+(empty>1?'s':'')+'. Rendre quand même ?'))return;
@@ -157,7 +158,7 @@
         });
         const e=q.pts*ok/q.fields.length;earned+=e;total+=q.pts;
         box.querySelector('.mds-pts').textContent=F.n(e,2)+' / '+q.pts+' pt'+(q.pts>1?'s':'');
-        box.appendChild(h(`<details open><summary>Correction</summary><div><div class="formula">${q.sol}</div>${q.note||''}</div></details>`));
+        box.appendChild(h(`<details open><summary>Correction</summary><div><div class="formula">${q.sol}</div><div data-nota>${q.note||''}</div></div></details>`));
         rows.push(`<tr><td>Q${q.num} · ${esc(q.chap)}</td><td>${F.n(e,2)} / ${q.pts}</td></tr>`);
       });
       const note=Math.round(earned/total*20*2)/2;
@@ -182,6 +183,7 @@
         <p class="mds-note">Les cases rouges montrent la valeur attendue. Lis la correction de chaque question ratée, puis refais le même sujet sans regarder.</p>
       </div>`);
       root.prepend(sc);
+      if(window.Nota)Nota.apply(root);
       sc.querySelector('#mds-again').onclick=()=>{let s;do{s=1000+Math.floor(Math.random()*9000)}while(s===seed);seed=s;run()};
       sc.querySelector('#mds-redo').onclick=run;
       sc.querySelector('#mds-home').onclick=home;

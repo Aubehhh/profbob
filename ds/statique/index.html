@@ -129,8 +129,10 @@ td.mono{font-family:var(--mono);font-size:.88rem;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 html{scroll-behavior:smooth;scroll-padding-top:64px}
 </style>
+<link rel="stylesheet" href="/assets/notation.css">
+<script src="/assets/notation.js" defer></script>
 </head>
-<body>
+<body data-nota-all>
 
 <div class="wrap">
 <header class="hero">
@@ -143,6 +145,7 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 <nav class="toc" aria-label="Sommaire"><div class="in" id="toc">
   <div class="ttl"><a href="/matieres/mecanique/">← Mécanique</a></div>
   <a href="#plan">Plan</a>
+  <a href="#notations">Notations</a>
   <div class="grp">Cours</div>
   <a href="#m1" data-m="m1">1 Forces 2D</a>
   <a href="#m2" data-m="m2">2 Vecteurs 3D</a>
@@ -188,6 +191,8 @@ html{scroll-behavior:smooth;scroll-padding-top:64px}
 </section>
 
 <!-- ============ MODULE 1 ============ -->
+<div id="notations" data-nonota><details class="nota" open><summary>Notations utilisées</summary><table><tr><td><span class="vec">F</span></td><td>Force (vecteur : intensité + direction + sens)</td><td>N</td></tr><tr><td>F &nbsp;ou&nbsp; ‖<span class="vec">F</span>‖</td><td>Intensité (norme) de la force, toujours positive</td><td>N</td></tr><tr><td>F<sub>x</sub>, F<sub>y</sub>, F<sub>z</sub></td><td>Composantes de <span class="vec">F</span> sur les axes, avec leur signe</td><td>N</td></tr><tr><td><span class="vec">i</span>, <span class="vec">j</span>, <span class="vec">k</span></td><td>Vecteurs unitaires des axes x, y, z</td><td>—</td></tr><tr><td>θ</td><td>Angle de la force mesuré depuis l'axe +x, sens anti-horaire</td><td>°</td></tr><tr><td>α, β, γ</td><td>Angles directeurs : angles entre le vecteur et les axes x, y, z</td><td>°</td></tr><tr><td><span class="vec">F</span><sub>R</sub></td><td>Résultante : somme de toutes les forces</td><td>N</td></tr><tr><td><span class="vec">r</span><sub>AB</sub></td><td>Vecteur position de A vers B : coordonnées de B − coordonnées de A</td><td>m</td></tr><tr><td><span class="vec">u</span><sub>AB</sub></td><td>Vecteur unitaire de A vers B (norme 1) : <span class="vec">r</span><sub>AB</sub> / ‖<span class="vec">r</span><sub>AB</sub>‖</td><td>—</td></tr><tr><td>T<sub>AB</sub></td><td>Tension dans le câble AB</td><td>N</td></tr><tr><td>W = m·g</td><td>Poids, avec g = 9,81 m/s²</td><td>N</td></tr><tr><td>F<sub>s</sub> = k (l − l₀)</td><td>Force d'un ressort (k raideur, l₀ longueur à vide)</td><td>N</td></tr><tr><td><span class="vec">a</span> · <span class="vec">b</span></td><td>Produit scalaire : donne un nombre</td><td>—</td></tr><tr><td><span class="vec">A</span> × <span class="vec">B</span></td><td>Produit vectoriel : donne un vecteur</td><td>—</td></tr><tr><td><span class="vec">M</span><sub>O</sub> = <span class="vec">r</span> × <span class="vec">F</span></td><td>Moment de <span class="vec">F</span> par rapport au point O (<span class="vec">r</span> va de O au point d'application)</td><td>N·m</td></tr><tr><td>M<sub>a</sub> = <span class="vec">u</span><sub>a</sub> · <span class="vec">M</span><sub>O</sub></td><td>Moment par rapport à l'axe a : un nombre, signe donné par la main droite</td><td>N·m</td></tr></table></details></div>
+
 <section id="m1">
   <div class="mhead"><span class="num">01</span><h2>Forces et vecteurs en 2D</h2><span class="meta">chapitre 1 · 30 min</span></div>
 

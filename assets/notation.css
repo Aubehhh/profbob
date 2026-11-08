@@ -1,0 +1,17 @@
+/* Notations : flèche au-dessus des vecteurs (.vec, et .v déjà utilisé dans les pages), tableau de légende */
+.vec,.v{position:relative;display:inline-block;padding-top:.28em;line-height:1;font-style:normal}
+.vec::after,.v::after{content:"";position:absolute;left:-.04em;right:-.12em;top:0;height:.36em;min-width:.6em;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4h21' stroke='black' stroke-width='1.8'/%3E%3Cpath d='M17 .6 23.4 4 17 7.4z'/%3E%3C/svg%3E") center/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4h21' stroke='black' stroke-width='1.8'/%3E%3Cpath d='M17 .6 23.4 4 17 7.4z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.formula sub,.m sub,[data-nota] sub,.mds-field label sub{font-size:.72em;vertical-align:-.3em;line-height:0}
+.nota{border:1px solid var(--line);border-radius:12px;background:var(--paper);margin:16px 0;overflow:hidden}
+.nota>summary{cursor:pointer;list-style:none;padding:12px 16px;font-family:var(--display);font-weight:700;color:var(--ink)}
+.nota>summary::-webkit-details-marker{display:none}
+.nota>summary::before{content:"▸ ";color:var(--vec)}
+.nota[open]>summary::before{content:"▾ "}
+.nota table{width:100%;border-collapse:collapse;font-size:.92rem}
+.nota td{padding:7px 16px;border-top:1px solid var(--line);vertical-align:top}
+.nota td:first-child{font-family:var(--mono);white-space:nowrap;width:1%;color:var(--vec);font-weight:600}
+.nota td:last-child{font-family:var(--mono);color:var(--muted);white-space:nowrap;width:1%;text-align:right}
+.nota .howto{padding:10px 16px 14px;border-top:1px solid var(--line);font-family:var(--display);font-size:.88rem;color:var(--muted)}
+.nota .howto b{color:var(--ink)}

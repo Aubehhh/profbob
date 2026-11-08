@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/minids.css">
+<link rel="stylesheet" href="/assets/notation.css">
 <style>
 /* Page de réglages du mini-DS : 3 étapes (matière, quoi réviser, réglages) puis un récap avec le bouton.
    Au lancement, les réglages disparaissent et l'épreuve s'affiche à la place. */
@@ -130,6 +131,8 @@
   <footer class="site">Une erreur dans une question ? <a href="/contact/?type=erreur&amp;page=Mini-DS">Signale-la ici</a> avec le numéro du sujet.</footer>
 </div>
 
+<script src="/assets/notation.js"></script>
+<script src="/assets/notations.js"></script>
 <script src="/assets/minids.js"></script>
 <script src="/ds/statique/mini-ds/banque.js"></script>
 <script src="matieres.js"></script>
@@ -239,6 +242,7 @@
     MiniDS.start({
       id:S.m+':'+chs.join('+')+':'+S.n, histKey:'minids-'+S.m,
       mount:runEl, bank:P, report:'/contact/', startNow:true,
+      notations:window.Notations?Notations.html(S.m,{howto:true,title:'Notations et comment répondre'}):'',
       formats:[{id:'c',label,min:S.t,n:S.n}],
       onHome(){runEl.hidden=true;runEl.innerHTML='';cfgEl.hidden=false;S.seed=null;
         const v=new URL(location.href);v.searchParams.delete('sujet');history.replaceState(null,'',v);hist();window.scrollTo({top:0})}
