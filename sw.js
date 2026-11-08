@@ -1,9 +1,10 @@
 /* Service worker de profbob.fr : le site marche hors connexion.
    - pages : réseau d'abord (toujours la dernière version), copie gardée pour le hors-ligne ;
-   - fichiers du site (css, js, images) et polices : copie en cache, mise à jour en arrière-plan.
+   - fichiers du site (css, js, images) : réseau d'abord aussi, copie en cache pour le hors-ligne ;
+   - polices Google : cache d'abord (elles ne changent pas).
    Les compteurs de visites et le formulaire de contact ne passent jamais par le cache.
    Changer VERSION force le renouvellement du cache. */
-const VERSION='pb-v3';
+const VERSION='pb-v4';
 const CORE=['/','/matieres/','/mini-ds/','/notes/','/ds/statique/','/contact/','/404.html',
   '/assets/site.css','/assets/matieres.css','/assets/minids.css','/assets/notation.css',
   '/assets/minids.js','/assets/notation.js','/assets/notations.js','/assets/stats.js','/assets/pwa.js',
@@ -16,12 +17,11 @@ self.addEventListener('fetch',e=>{
   const font=/fonts\.(googleapis|gstatic)\.com$/.test(u.hostname);
   if(u.origin!==location.origin&&!font)return; // compteurs, formulaires… : réseau direct
   if(r.mode==='navigate'){
-    e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp));return res})
+    e.respondWith(fetch(r,{cache:'no-cache'}).then(res=>{const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp));return res})
       .catch(()=>caches.match(r,{ignoreSearch:true}).then(m=>m||caches.match('/'))));
     return;
   }
-  e.respondWith(caches.match(r).then(m=>{
-    const net=fetch(r).then(res=>{if(res.ok||res.type==='opaque'){const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp))}return res}).catch(()=>m);
-    return m||net;
-  }));
+  // fichiers du site : réseau d'abord (pour avoir tout de suite les mises à jour), cache si hors connexion ; polices : cache d'abord
+  if(font){e.respondWith(caches.match(r).then(m=>m||fetch(r).then(res=>{const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp));return res})));return}
+  e.respondWith(fetch(r,{cache:'no-cache'}).then(res=>{if(res.ok){const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp))}return res}).catch(()=>caches.match(r,{ignoreSearch:true})));
 });
