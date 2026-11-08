@@ -4,7 +4,7 @@
    - polices Google : cache d'abord (elles ne changent pas).
    Les compteurs de visites et le formulaire de contact ne passent jamais par le cache.
    Changer VERSION force le renouvellement du cache. */
-const VERSION='pb-v4';
+const VERSION='pb-v5';
 const CORE=['/','/matieres/','/mini-ds/','/notes/','/ds/statique/','/contact/','/404.html',
   '/assets/site.css','/assets/matieres.css','/assets/minids.css','/assets/notation.css',
   '/assets/minids.js','/assets/notation.js','/assets/notations.js','/assets/stats.js','/assets/pwa.js',
@@ -17,7 +17,7 @@ self.addEventListener('fetch',e=>{
   const font=/fonts\.(googleapis|gstatic)\.com$/.test(u.hostname);
   if(u.origin!==location.origin&&!font)return; // compteurs, formulaires… : réseau direct
   if(r.mode==='navigate'){
-    e.respondWith(fetch(r,{cache:'no-cache'}).then(res=>{const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp));return res})
+    e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(VERSION).then(c=>c.put(r,cp));return res})
       .catch(()=>caches.match(r,{ignoreSearch:true}).then(m=>m||caches.match('/'))));
     return;
   }
