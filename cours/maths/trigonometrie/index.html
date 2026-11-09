@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 4 · Trigonométrie et fonctions usuelles · Outils mathématiques · profbob.fr</title>
+<meta name="description" content="Outils mathématiques, chapitre 4 : cercle trigonométrique et fonctions circulaires, identités et formules de trigonométrie, fonctions trigonométriques réciproques, équations trigonométr. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="maths-trigonometrie" data-matiere="outils" data-ch="trigonometrie" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mathematiques/">← Outils mathématiques</a> · Chapitre 4 sur 4</div>
+  <h1>Trigonométrie et fonctions usuelles</h1>
+  <p class="lead">Cercle trigonométrique et formules, fonctions réciproques, équations trigonométriques, exponentielle, logarithme et fonctions hyperboliques.</p>
+  <div class="chips"><span class="chip"><b>6</b> sections</span><span class="chip">≈ 4 h</span><span class="chip">Chapitre 4, diapos 1 à 50</span><span class="chip">Cours de N. Coupier</span><span class="chip">Prérequis : <a href="/cours/maths/integration/">chapitre 3</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=outils&amp;ch=trigonometrie">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=outils&amp;ch=trigonometrie">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Cercle trigonométrique</a>
+  <a href="#s2"><span class="n">2</span>Formules</a>
+  <a href="#s3"><span class="n">3</span>Fonctions réciproques</a>
+  <a href="#s4"><span class="n">4</span>Équations trigonométriques</a>
+  <a href="#s5"><span class="n">5</span>Exponentielle, logarithme</a>
+  <a href="#s6"><span class="n">6</span>Hyperboliques</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="outils"></div>
+
+<section class="csec" id="s1" data-toc="Cercle trigonométrique">
+  <div class="shead"><span class="num">1</span><h2>Cercle trigonométrique et fonctions circulaires</h2><span class="meta">diapos 5 à 9 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Sur le cercle de centre O et de rayon 1, le point d'angle θ a pour coordonnées (cos θ, sin θ). La tangente est la pente de la droite qui relie O à ce point.</div>
+  <div class="formula key cours">sin θ = opposé/hypoténuse   cos θ = adjacent/hypoténuse   tan θ = opposé/adjacent
+csc θ = 1/sin θ    sec θ = 1/cos θ    cot θ = 1/tan θ
+Cercle trigonométrique : x² + y² = 1
+x ≡ y [2π]  ⇔  ∃k ∈ ℤ, x = y + 2kπ</div>
+  <div class="formula key cours">cos' = −sin ;  sin' = cos ;   |sin x| ≤ |x|
+tan x = sin x / cos x  pour x ≠ π/2 + kπ ;   tan' x = 1 + tan² x = 1/cos² x</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 7</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">sin(π/4) = √2/2
+−19π/6 = −19π/6 + 4π = 5π/6  [2π]  →  sin(−19π/6) = sin(5π/6) = 1/2</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Pour un angle « bizarre », on enlève ou on ajoute des tours complets (2π) jusqu'à tomber dans ]−π, π] ou [0, 2π[, puis on lit la valeur sur le cercle.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Formules">
+  <div class="shead"><span class="num">2</span><h2>Identités et formules de trigonométrie</h2><span class="meta">diapos 10 à 17 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> Quelques formules suffisent pour calculer les valeurs exactes d'angles non remarquables (15°, 22,5°, 75°…) et pour transformer des produits en sommes.</div>
+  <div class="formula key cours">Pythagore :  sin² θ + cos² θ = 1 ;  1 + tan² θ = sec² θ ;  1 + cot² θ = csc² θ
+Sommes et différences :
+   sin(A ± B) = sin A cos B ± cos A sin B
+   cos(A ± B) = cos A cos B ∓ sin A sin B
+   tan(A ± B) = (tan A ± tan B) / (1 ∓ tan A tan B)
+Angles doubles :  sin 2θ = 2 sin θ cos θ ;  cos 2θ = cos² θ − sin² θ ;  tan 2θ = 2 tan θ / (1 − tan² θ)
+Angles moitiés :  sin(θ/2) = ±√((1 − cos θ)/2) ;  cos(θ/2) = ±√((1 + cos θ)/2)
+Produits :  2 cos a cos b = cos(a + b) + cos(a − b)
+            2 sin a cos b = sin(a + b) + sin(a − b)
+            2 sin a sin b = cos(a − b) − cos(a + b)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 10 à 15</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">sin θ / (1 + cos θ) = 2 sin(θ/2) cos(θ/2) / (2 cos²(θ/2)) = tan(θ/2)
+sin 75° = sin(45° + 30°) = (√2/2)(√3/2) + (√2/2)(1/2) = (√6 + √2)/4 ≈ 0,966
+sin 22,5° = √((1 − cos 45°)/2) = √(2 − √2) / 2 ≈ 0,383   (positif : angle du 1er quadrant)
+   (on retrouve cos 2θ = 1 − 2 sin² θ avec θ = 22,5°)
+sin(π/12) = sin(π/3 − π/4) = (√3/2)(√2/2) − (1/2)(√2/2) = (√6 − √2)/4 ≈ 0,259</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 16 et 17</div>
+    <p>Onde y(x, t) = A sin(kx − ωt) ; vaisseau à 10 000 km/h pendant 2 h, à 30° de la verticale.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">∂y/∂x = Ak cos(kx − ωt) ;   ∂y/∂t = −Aω cos(kx − ωt)
+(∂y/∂t) / (∂y/∂x) = −ω/k
+distance parcourue = 10 000 × 2 = 20 000 km
+composante verticale = 20 000 × cos 30° ≈ 17 320 km</div>
+      <p>Le rapport vaut −ω/k ; la vitesse de l'onde, elle, est v = ω/k (positive, l'onde avance vers les x croissants). La diapo écrit « v = −ω/k » : retiens que le rapport des dérivées vaut <b>−v</b>.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Fonctions réciproques">
+  <div class="shead"><span class="num">3</span><h2>Fonctions trigonométriques réciproques</h2><span class="meta">diapos 18 à 27 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> sin, cos et tan ne sont pas bijectives sur ℝ : on les restreint à un intervalle, et leur réciproque (arcsin, arccos, arctan…) donne l'angle dont on connaît le sinus, le cosinus ou la tangente.</div>
+  <div class="tw"><table>
+    <tr><th>Réciproque</th><th>Domaine</th><th>Image</th><th>Dérivée</th></tr>
+    <tr><td>arcsin x</td><td>[−1, 1]</td><td>[−π/2, π/2]</td><td>1/√(1 − x²)</td></tr>
+    <tr><td>arccos x</td><td>[−1, 1]</td><td>[0, π]</td><td>−1/√(1 − x²)</td></tr>
+    <tr><td>arctan x</td><td>ℝ</td><td>]−π/2, π/2[</td><td>1/(1 + x²)</td></tr>
+    <tr><td>arccot x</td><td>ℝ</td><td>]0, π[</td><td>−1/(1 + x²)</td></tr>
+    <tr><td>arcsec x</td><td>]−∞, −1] ∪ [1, ∞[</td><td>[0, π], y ≠ π/2</td><td>1/(|x|√(x² − 1))</td></tr>
+    <tr><td>arccsc x</td><td>]−∞, −1] ∪ [1, ∞[</td><td>[−π/2, 0[ ∪ ]0, π/2]</td><td>−1/(|x|√(x² − 1))</td></tr>
+  </table></div>
+  <p>Les primitives se lisent à l'envers : ∫ dx/√(1 − x²) = arcsin x + C, ∫ dx/(1 + x²) = arctan x + C, ∫ dx/(x√(x² − 1)) = arcsec x + C (x &gt; 1).</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 20 à 22</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">f(x) = arccos(1 − x²) : il faut −1 ≤ 1 − x² ≤ 1 ⇔ x² ≤ 2
+   D_f = [−√2, √2] ;  1 − x² parcourt [−1, 1], donc image [0, π]
+f(x) = arccsc(x) + 2 : D_f = ]−∞, −1] ∪ [1, ∞[ ;  image [2 − π/2, 2[ ∪ ]2, 2 + π/2]
+Projectile : sin θ = 30/50 = 0,6  →  θ = arcsin 0,6 ≈ 36,9°</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 27</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">I = ∫ 3 / (x√(9x² − 1)) dx ;  u = 3x :  I = 3 ∫ du / (u√(u² − 1)) = 3 arcsec(3x) + C   (x &gt; 1/3)
+J = ∫ arccot x dx ;  IPP avec u = arccot x, dv = dx :
+   J = x arccot x + ∫ x/(1 + x²) dx = x arccot x + ½ ln(1 + x²) + C</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Équations trigonométriques">
+  <div class="shead"><span class="num">4</span><h2>Équations trigonométriques</h2><span class="meta">diapos 28 à 33 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une équation trigonométrique a en général une infinité de solutions : on donne la solution générale « + 2kπ » (ou « + kπ »), puis on ne garde que celles de l'intervalle demandé.</div>
+  <div class="formula key">sin x = sin a  ⇔  x = a + 2kπ  ou  x = π − a + 2kπ
+cos x = cos a  ⇔  x = a + 2kπ  ou  x = −a + 2kπ
+tan x = tan a  ⇔  x = a + kπ</div>
+  <div class="trap"><b>Piège.</b> Ne pas confondre [0, 2π] et [−π, π], et ne pas oublier la seconde famille de solutions (π − a pour le sinus, −a pour le cosinus). Sur un intervalle, on écrit S = {…}.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 29 et 30</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">sin x = 1/2  →  x = π/6 + 2kπ  ou  x = 5π/6 + 2kπ
+cos 2x = 1/2  →  2x = ±π/3 + 2kπ  →  x = ±π/6 + kπ
+sin 3x = −√2/2  →  3x = −π/4 + 2kπ ou 5π/4 + 2kπ  →  x = −π/12 + 2kπ/3  ou  x = 5π/12 + 2kπ/3
+sin(2x − π/3) = cos(π/2 + 3x) = −sin 3x = sin(−3x)
+   →  2x − π/3 = −3x + 2kπ  ⇒  x = π/15 + 2kπ/5
+   ou 2x − π/3 = π + 3x + 2kπ  ⇒  x = −4π/3 − 2kπ</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 31 et 32, dans [0, 2π]</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">2 cos 2x + √3 = 0 : cos 2x = −√3/2 → 2x = ±5π/6 + 2kπ
+   S = {5π/12 ; 7π/12 ; 17π/12 ; 19π/12}
+sin 2x = cos x ⇔ cos x (2 sin x − 1) = 0
+   S = {π/6 ; π/2 ; 5π/6 ; 3π/2}
+2 cot² x − 3 cot x − 2 = 0 : cot x = 2 ou cot x = −1/2
+   S ≈ {0,464 ; 2,034 ; 3,605 ; 5,176}   (arctan(1/2), π − arctan 2, puis + π)</div>
+      <p>La diapo 31 affiche « 2 cos 2x + 3 = 0 », qui n'a pas de solution (cos 2x = −1,5) : il s'agit sûrement de <b>2 cos 2x + √3 = 0</b>.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · oscillateur et circuit RLC (diapos 28 et 33)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">x(t) = 5 cos(2πt + π/4) = 2  →  2πt + π/4 = arccos 0,4 = 1,159
+   t = (1,159 − 0,785)/(2π) ≈ 0,0595 s  (premier instant positif)
+RLC : R = 20 Ω, Lω = 0,05 × 50 = 2,5 Ω, 1/(Cω) = 1/(200×10⁻⁶ × 50) = 100 Ω
+   Z = 20 + j(2,5 − 100) = 20 − 97,5j ;  |Z| = 99,5 Ω ;  φ = −78,4° (capacitif)
+   I(t) = (15/99,5) sin(50t + 1,368) = 0,151 sin(50t + 1,368)
+   premier maximum : 50t + 1,368 = π/2  →  t ≈ 4,05 ms</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Exponentielle, logarithme">
+  <div class="shead"><span class="num">5</span><h2>Puissances, exponentielle et logarithmes</h2><span class="meta">diapos 35 à 40 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> L'exponentielle transforme une somme en produit, le logarithme fait l'inverse. Le logarithme de base b est la réciproque de bˣ.</div>
+  <div class="formula key cours">(xy)ⁿ = xⁿyⁿ ;  x^(m+n) = x^m xⁿ ;  (x^m)ⁿ = x^(mn) ;  racine n-ième : x^(1/n)
+eˣ = lim (n→∞) (1 + x/n)ⁿ ;  domaine ℝ, image ]0, +∞[ ;  (eˣ)' = eˣ ;  ∫ eˣ dx = eˣ + C
+   lim (x→−∞) eˣ = 0 ;  lim (x→+∞) eˣ = +∞
+log_b(x) défini pour x &gt; 0 :  log_b(1) = 0 ;  log_b(b) = 1
+   log_b(xy) = log_b x + log_b y ;  log_b(xⁿ) = n log_b x
+   (log_b x)' = 1/(x ln b) ;  ∫ log_b x dx = (x ln x − x)/ln b + C
+ln = log_e :  domaine ]0, +∞[, image ℝ ;  (ln x)' = 1/x ;  ∫ ln x dx = x ln x − x + C ;  lim (x→0⁺) ln x = −∞</div>
+  <div class="coquille"><b>Coquilles du cours (diapos 37 et 39).</b> L'image de l'exponentielle et le domaine de ln sont écrits « [0, ∞[ » : c'est <b>]0, +∞[</b> (0 est exclu : eˣ ne s'annule jamais et ln 0 n'existe pas). « Strictement continue » ne veut rien dire : la fonction est continue et strictement croissante.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 40</div>
+    <p>Dérivée de f(x) = log₂(x³ + x).</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">f(x) = ln(x³ + x) / ln 2  →  f'(x) = (3x² + 1) / ((x³ + x) ln 2)   (x &gt; 0)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Hyperboliques">
+  <div class="shead"><span class="num">6</span><h2>Fonctions hyperboliques</h2><span class="meta">diapos 41 à 49 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Les fonctions hyperboliques s'écrivent avec des exponentielles. Le point (cosh t, sinh t) décrit la moitié droite de l'hyperbole x² − y² = 1, comme (cos t, sin t) décrit le cercle. La chaînette (un câble suspendu) a la forme de cosh.</div>
+  <div class="formula key cours">sinh x = (eˣ − e⁻ˣ)/2        cosh x = (eˣ + e⁻ˣ)/2        tanh x = sinh x / cosh x
+coth x = cosh x / sinh x     sech x = 1/cosh x            csch x = 1/sinh x
+cosh² x − sinh² x = 1
+sinh' = cosh ;  cosh' = sinh ;  tanh' = sech² ;  coth' = −csch² ;  sech' = −sech tanh ;  csch' = −csch coth
+∫ sinh = cosh + C ;  ∫ cosh = sinh + C ;  ∫ tanh = ln(cosh x) + C ;  ∫ sech² = tanh + C
+sinh 2x = 2 sinh x cosh x ;  cosh 2x = cosh² x + sinh² x = 2 cosh² x − 1 = 1 + 2 sinh² x
+tanh 2x = 2 tanh x / (1 + tanh² x)</div>
+  <div class="trap"><b>Piège : les signes changent par rapport au cercle.</b> cosh' = +sinh (et non −), et cosh² − sinh² = 1 (et non +).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 46, 47 et 49</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">cosh(x − n)' = sinh(x − n)
+sinh(x²)' = 2x cosh(x²)
+cosh(3x)' = 3 sinh(3x)
+sech(x²)' = −2x sech(x²) tanh(x²)
+∫ sinh x cosh x dx = sinh² x / 2 + C   (forme u' u)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">applications des diapos</span></div>
+  <div class="ex"><h4>Valeurs exactes <span class="tag">sections 1 et 2</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Décompose l'angle en somme ou différence d'angles remarquables (75° = 45° + 30°, 15° = 45° − 30°), ou en moitié d'un angle remarquable (22,5° = 45°/2), puis applique la formule adaptée.</p></div></details></div>
+  <div class="ex"><h4>Domaines des fonctions réciproques <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Écris la condition sur ce qui est « à l'intérieur » (entre −1 et 1 pour arcsin et arccos, |·| ≥ 1 pour arcsec et arccsc), résous en x, puis cherche les valeurs atteintes par l'intérieur pour obtenir l'image.</p></div></details></div>
+  <div class="ex"><h4>Équations dans [0, 2π] <span class="tag">section 4</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Factorise si possible (sin 2x = 2 sin x cos x), ou pose X = cot x et résous une équation du second degré, puis liste toutes les solutions de l'intervalle, en vérifiant qu'aucune n'en sort.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=outils&amp;ch=trigonometrie"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=outils&amp;ch=trigonometrie"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=outils&amp;ds=outils"><b>DS blanc Outils mathématiques ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/maths/integration/"><small>◂ Chapitre 3</small>Intégration</a></nav>
+</section>
+
+<p class="credit">Cours « Outils mathématiques pour l'ingénieur 1 » de N. Coupier (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Outils mathématiques%20%C2%B7%20chapitre%204">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

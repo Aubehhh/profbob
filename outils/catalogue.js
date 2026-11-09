@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'9 nov.',texte:'Électricité : les 4 chapitres (continu, théorèmes, sinusoïdal), avec mini-DS et flashcards',url:'/matieres/electricite/',nouveau:true},
+    {date:'9 nov.',texte:'Outils mathématiques : complexes, dérivation, intégration et trigonométrie, avec mini-DS et flashcards',url:'/matieres/mathematiques/',nouveau:true},
+    {date:'9 nov.',texte:'Électricité : les 4 chapitres (continu, théorèmes, sinusoïdal), avec mini-DS et flashcards',url:'/matieres/electricite/'},
     {date:'9 nov.',texte:'Chimie : l\'atome, la classification et les molécules, avec mini-DS et flashcards',url:'/matieres/chimie/'},
     {date:'9 nov.',texte:'Thermodynamique : les 5 chapitres, avec mini-DS et flashcards',url:'/matieres/thermodynamique/'},
     {date:'9 nov.',texte:'Statique refaite chapitre par chapitre, d\'après les diapos du prof',url:'/cours/statique/vecteurs/'},
@@ -26,7 +27,14 @@ module.exports={
   dedicace:'big up à squige, polo, pouletpaki, mashmash et tagrandmere, RDV sur <a href="https://richup.io" target="_blank" rel="noopener">monopoly</a>',
   ue:[
     {id:'maths',couleur:'#7c3aed',modules:[
-      {id:'outils',slug:'mathematiques',mono:'OM',chapitres:[],ds:[]},
+      {id:'outils',slug:'mathematiques',mono:'OM',
+       chapitres:[
+         {id:'complexes',titre:'Nombres complexes',url:'/cours/maths/complexes/'},
+         {id:'derivation',titre:'Calcul différentiel',url:'/cours/maths/derivation/'},
+         {id:'integration',titre:'Techniques fondamentales du calcul intégral',url:'/cours/maths/integration/'},
+         {id:'trigonometrie',titre:'Trigonométrie et fonctions usuelles',url:'/cours/maths/trigonometrie/'}],
+       ds:[
+         {titre:'Outils mathématiques : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=outils&ds=outils',desc:'Chapitres 1 à 4 : complexes, dérivation, intégration, trigonométrie et fonctions usuelles.',liens:[['Complexes','/cours/maths/complexes/'],['Dérivation','/cours/maths/derivation/'],['Intégration','/cours/maths/integration/'],['Trigonométrie','/cours/maths/trigonometrie/'],['Flashcards','/flashcards/?m=outils']],minids:'/mini-ds/?m=outils&ds=outils'}]},
       {id:'analyse',slug:'analyse',mono:'An',chapitres:[],ds:[]}]},
     {id:'chelec',couleur:'#0f766e',modules:[
       {id:'chimie',slug:'chimie',mono:'Ch',

@@ -61,6 +61,29 @@
       ['vc','Indice : volume de contrôle (E<sub>vc</sub>, m<sub>vc</sub>, P<sub>th,vc</sub>)','—',[VC]],
       ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
     ]})(),
+    // Outils mathématiques (N. Coupier) : profil « thermo » (indices seulement)
+    outils:(()=>{const C='complexes',D='derivation',I='integration',T='trigonometrie';return [
+      ['i (j en physique)','Unité imaginaire : i² = −1','—',[C]],
+      ['Re z ; Im z','Partie réelle ; partie imaginaire de z = a + ib','—',[C]],
+      ['z* ou z̄','Conjugué : a − ib','—',[C]],
+      ['|z| ; arg z','Module √(a² + b²) ; argument (angle avec l\'axe des réels, en rad)','— ; rad',[C]],
+      ['re<sup>iθ</sup> ; r(cos θ + i sin θ)','Formes exponentielle et trigonométrique','—',[C]],
+      ['Ṽ ; V<sub>m</sub>∠φ','Phaseur d\'une grandeur sinusoïdale (module V<sub>m</sub>, phase φ)','—',[C]],
+      ['Δ ; δ','Discriminant ; une racine carrée de Δ','—',[C]],
+      ['f\' ; f\'\' ; f<sup>(n)</sup>','Dérivées première, seconde, n-ième','—',[D,I]],
+      ['∂f/∂x','Dérivée partielle par rapport à x (les autres variables figées)','—',[D,T]],
+      ['Cⁿ(I)','Fonctions n fois dérivables à dérivées continues sur I','—',[D]],
+      ['C(n, k)','Coefficient binomial n!/(k!(n − k)!)','—',[D]],
+      ['df ; Δf','Différentielle f\'(x) dx ; variation réelle','—',[D]],
+      ['∫ f(x) dx ; F','Intégrale indéfinie ; une primitive (F\' = f)','—',[I]],
+      ['∫ₐᵇ f(x) dx','Intégrale définie = F(b) − F(a) (aire signée)','—',[I]],
+      ['Δx ; S<sub>n</sub>','Largeur d\'une bande ; somme de Riemann à n bandes','—',[I]],
+      ['x ≡ y [2π]','x et y congrus modulo 2π (x = y + 2kπ)','—',[T]],
+      ['sec ; csc ; cot','1/cos ; 1/sin ; 1/tan','—',[D,T]],
+      ['arcsin ; arccos ; arctan','Fonctions réciproques (cyclométriques)','—',[D,I,T]],
+      ['sinh ; cosh ; tanh','Fonctions hyperboliques','—',[D,I,T]],
+      ['log<sub>b</sub> ; ln','Logarithme de base b ; népérien (base e)','—',[T,I]]
+    ]})(),
     // Électricité (Fiolet) : profil « thermo » (indices seulement) ; complexes soulignés, vecteurs de Fresnel fléchés
     elec:(()=>{const B='bases',C='continu',T='theoremes',S='sinusoidal';return [
       ['u, i ; U, I','Minuscule : valeur instantanée (dépend du temps) ; majuscule : valeur constante ou efficace','V ; A',[B,C,T,S]],

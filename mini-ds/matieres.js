@@ -66,5 +66,20 @@ window.MINIDS_MATIERES=[
    ],
    ds:[
      {id:'elec',nom:'DS Électricité',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['bases','continu','theoremes','sinusoidal'],n:8,min:60}
+   ]},
+  {id:'outils',module:'outils',nom:'Outils mathématiques',couleur:'#4338ca',nota:'thermo',
+   banque:()=>window.BANQUE_OUTILS,
+   noms:{produit:'Produit de complexes',quotient:'Quotient de complexes',modarg:'Module et argument',trigalg:'Forme trigonométrique → algébrique',moivre:'Puissance (De Moivre)',racinecarree:'Racine carrée d\'un complexe',racinesn:'Racines n-ièmes',second:'Équation du second degré dans ℂ',horner:'Factorisation (Hörner)',phaseur:'Phaseur et impédance',
+     chaine:'Dérivée d\'une composée',produitexp:'Dérivée d\'un produit',leibniz:'Dérivée n-ième (Leibniz)',lineaire:'Approximation linéaire',extremum:'Extremum local',erreur:'Propagation d\'erreur',cylindre:'Optimisation (boîte cylindrique)',
+     integrale:'Intégrale définie',riemann:'Somme de Riemann',ipp:'Intégration par parties',simples:'Éléments simples',moyenne:'Valeur moyenne',
+     valexacte:'Valeurs exactes (formules)',equation:'Équation trigonométrique',logderivee:'Dérivée d\'un logarithme',hyperbolique:'Fonctions hyperboliques'},
+   chapitres:[
+     {id:'complexes',nom:'Nombres complexes',detail:'Opérations, module et argument, De Moivre, racines, équations, circuits',q:['produit','quotient','modarg','trigalg','moivre','racinecarree','racinesn','second','horner','phaseur']},
+     {id:'derivation',nom:'Calcul différentiel',detail:'Composée, produit, Leibniz, extremum, approximation, erreur, optimisation',q:['chaine','produitexp','leibniz','lineaire','extremum','erreur','cylindre']},
+     {id:'integration',nom:'Calcul intégral',detail:'Intégrale définie, Riemann, IPP, éléments simples, valeur moyenne',q:['integrale','riemann','ipp','simples','moyenne']},
+     {id:'trigonometrie',nom:'Trigonométrie et fonctions usuelles',detail:'Formules, équations, logarithme, hyperboliques',q:['valexacte','equation','logderivee','hyperbolique']}
+   ],
+   ds:[
+     {id:'outils',nom:'DS Outils mathématiques',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['complexes','derivation','integration','trigonometrie'],n:8,min:90}
    ]}
 ];

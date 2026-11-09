@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 1 · Nombres complexes · Outils mathématiques · profbob.fr</title>
+<meta name="description" content="Outils mathématiques, chapitre 1 : définition et opérations, plan complexe, module, argument, forme trigonométrique, forme exponentielle, formule d'euler, de moivre, transformations dan. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="maths-complexes" data-matiere="outils" data-ch="complexes" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mathematiques/">← Outils mathématiques</a> · Chapitre 1 sur 4</div>
+  <h1>Nombres complexes</h1>
+  <p class="lead">Calculer avec i, passer d'une forme à l'autre (algébrique, trigonométrique, exponentielle), trouver des racines et résoudre des équations, jusqu'aux circuits en sinusoïdal.</p>
+  <div class="chips"><span class="chip"><b>7</b> sections</span><span class="chip">≈ 4 h</span><span class="chip">Chapitre 1, diapos 1 à 53</span><span class="chip">Cours de N. Coupier</span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=outils&amp;ch=complexes">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=outils&amp;ch=complexes">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Définition et opérations</a>
+  <a href="#s2"><span class="n">2</span>Module, argument</a>
+  <a href="#s3"><span class="n">3</span>Exponentielle, De Moivre</a>
+  <a href="#s4"><span class="n">4</span>Transformations</a>
+  <a href="#s5"><span class="n">5</span>Racines</a>
+  <a href="#s6"><span class="n">6</span>Équations, polynômes</a>
+  <a href="#s7"><span class="n">7</span>Circuits</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="outils"></div>
+
+<section class="csec" id="s1" data-toc="Définition et opérations">
+  <div class="shead"><span class="num">1</span><h2>Définition et opérations</h2><span class="meta">diapos 4 à 14 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> x² − 2x + 5 = 0 n'a pas de solution réelle (Δ = −16). On ajoute un nombre i tel que i² = −1, et toutes les équations du second degré ont des solutions : ici 1 + 2i et 1 − 2i.</div>
+  <div class="formula key cours">z = a + ib  avec a, b ∈ ℝ  et  i² = −1
+   a = Re(z) : partie réelle ;  b = Im(z) : partie imaginaire
+z = z'  ⇔  Re(z) = Re(z') et Im(z) = Im(z')
+Conjugué :  z* = z̄ = a − ib</div>
+  <div class="coquille"><b>Coquille du cours (diapo 6).</b> La définition précise « b est non nul » : il faut l'enlever. a et b sont deux réels quelconques ; si b = 0, z est un réel (qui est aussi un complexe), et si a = 0, z est un <b>imaginaire pur</b>. Zéro est à la fois réel et imaginaire pur.</div>
+  <div class="formula key cours">Propriétés du conjugué :
+   conj(z̄) = z        Re z = (z + z̄)/2        Im z = (z − z̄)/(2i)
+   z ∈ ℝ ⇔ Im z = 0 ⇔ z = z̄        z ∈ iℝ ⇔ Re z = 0 ⇔ z = −z̄
+   conj(z + z') = z̄ + z̄'    conj(z z') = z̄ z̄'    conj(z'/z) = z̄'/z̄
+   z z̄ = (Re z)² + (Im z)² = a² + b²</div>
+  <div class="formula key cours">Addition :        (a₁ + ib₁) + (a₂ + ib₂) = (a₁ + a₂) + i(b₁ + b₂)
+Multiplication :  (a₁ + ib₁)(a₂ + ib₂) = (a₁a₂ − b₁b₂) + i(a₁b₂ + b₁a₂)
+Division : on multiplie en haut et en bas par le conjugué du dénominateur
+   z₁/z₂ = [(a₁a₂ + b₁b₂) + i(b₁a₂ − a₁b₂)] / (a₂² + b₂²)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · les calculs des diapos 11 à 14</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(3 + 4i) + (1 − 2i) = 4 + 2i
+(5 + 3i) − (2 + 7i) = 3 − 4i
+(2 + 3i)(1 − 4i) = 2 − 8i + 3i − 12i² = 2 + 12 − 5i = 14 − 5i
+(2 + 3i)/(5 − 2i) = (2 + 3i)(5 + 2i) / (25 + 4) = (10 + 4i + 15i − 6)/29 = (4 + 19i)/29</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Dans un produit, i² devient −1 : c'est ce qui change le signe de b₁b₂. Dans une division, on ne divise jamais « partie par partie ».</div>
+  <div class="quiz">
+    <div class="q"><p>(1 + i)² vaut :</p>
+      <div class="opts"><button>2</button><button data-ok="1">2i</button><button>1 + i²</button></div>
+      <div class="fb" hidden>(1 + i)² = 1 + 2i + i² = 1 + 2i − 1 = 2i.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Module, argument">
+  <div class="shead"><span class="num">2</span><h2>Plan complexe, module, argument, forme trigonométrique</h2><span class="meta">diapos 15 à 22 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> z = a + ib est le point A(a, b) du plan (plan d'Argand). Sa distance à O est le module, l'angle avec l'axe des réels est l'argument : on peut décrire z par ces deux nombres au lieu de a et b.</div>
+  <div class="formula key cours">Module :     |z| = √(a² + b²)          (Pythagore)
+Argument :   θ = arg(z), en radians,  tan θ = b/a
+Forme trigonométrique :  z = r(cos θ + i sin θ)  avec r = |z|, θ = arg(z)
+   a = r cos θ ;  b = r sin θ</div>
+  <div class="tw"><table>
+    <tr><th>Point</th><th>Quadrant</th><th>Argument (α = arctan |b/a|)</th></tr>
+    <tr><td>a &gt; 0, b &gt; 0</td><td>I</td><td>θ = α</td></tr>
+    <tr><td>a &lt; 0, b &gt; 0</td><td>II</td><td>θ = π − α</td></tr>
+    <tr><td>a &lt; 0, b &lt; 0</td><td>III</td><td>θ = α − π</td></tr>
+    <tr><td>a &gt; 0, b &lt; 0</td><td>IV</td><td>θ = −α</td></tr>
+  </table></div>
+  <div class="trap"><b>Piège : arctan(b/a) ne suffit pas.</b> arctan donne un angle entre −π/2 et π/2. Pour −3 + 4i, arctan(4/(−3)) = −0,93 rad est faux : le point est dans le quadrant II, θ = π − arctan(4/3).</div>
+  <div class="formula key cours">Produit :  |z₁z₂| = |z₁| |z₂|   et   arg(z₁z₂) = arg z₁ + arg z₂</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 16, 19, 21 et 22</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Point A(3 ; 4) : |z| = √(9 + 16) = 5, arg = arctan(4/3) = 53,13°
+z = 1 + i : r = √2, θ = π/4  →  z = √2 (cos π/4 + i sin π/4)
+z = −1 + √3 i : r = 2, quadrant II, α = arctan √3 = π/3, θ = π − π/3 = 2π/3
+z = −3 + 4i : r = 5, θ = π − arctan(4/3) ≈ 2,214 rad (126,9°)
+z₁ = 6(cos π/3 + i sin π/3), z₂ = 4(cos π/4 + i sin π/4) :
+   z₁z₂ = 24 (cos 7π/12 + i sin 7π/12)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Exponentielle, De Moivre">
+  <div class="shead"><span class="num">3</span><h2>Forme exponentielle, formule d'Euler, De Moivre</h2><span class="meta">diapos 23 à 31 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> e<sup>iθ</sup> est le point du cercle unité d'angle θ. Avec cette écriture, multiplier, diviser et élever à une puissance devient facile : on multiplie les modules et on additionne les arguments.</div>
+  <div class="formula key cours">Formule d'Euler :      e^(iθ) = cos θ + i sin θ
+Forme exponentielle :  z = r e^(iθ)
+|e^(iθ)| = 1      conj(e^(iθ)) = e^(−iθ) = 1/e^(iθ)      e^(i(θ+θ')) = e^(iθ) e^(iθ')
+e^(iθ) = 1  ⇔  θ = 2kπ, k ∈ ℤ          identité d'Euler : e^(iπ) + 1 = 0</div>
+  <div class="formula key cours">r₁e^(iθ) × r₂e^(iθ') = (r₁r₂) e^(i(θ+θ'))
+r₂e^(iθ) / r₁e^(iθ') = (r₂/r₁) e^(i(θ−θ'))
+zⁿ = (re^(iθ))ⁿ = rⁿ e^(inθ)
+De Moivre :  (cos θ + i sin θ)ⁿ = cos(nθ) + i sin(nθ)
+Exponentielle complexe :  e^z = e^(Re z) e^(i Im z)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 28 et 29</div>
+    <p>(cos 30° + i sin 30°)⁴ et (1 + i)⁵.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(cos 30° + i sin 30°)⁴ = cos 120° + i sin 120° = −1/2 + i √3/2
+1 + i = √2 e^(iπ/4)  →  (1 + i)⁵ = (√2)⁵ e^(i5π/4) = 4√2 (−√2/2 − i √2/2) = −4 − 4i</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD, exercices 8, 9 et 13</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">z = 2e^(iπ/6), z' = 3e^(iπ/3) :  zz' = 6e^(iπ/2) = 6i ;  z/z' = (2/3)e^(−iπ/6) = (√3/3) − i/3
+z = 1 − i = √2 e^(−iπ/4)  →  z³ = 2√2 e^(−3iπ/4) = −2 − 2i
+1 + i√3 = 2e^(iπ/3)  →  (1 + i√3)⁶ = 64 e^(2iπ) = 64</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Transformations">
+  <div class="shead"><span class="num">4</span><h2>Transformations dans le plan complexe</h2><span class="meta">diapos 32 à 35 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une opération simple sur z correspond à un déplacement simple du point M(z).</div>
+  <div class="tw"><table>
+    <tr><th>Transformation</th><th>M(z) ↦ M'</th></tr>
+    <tr><td>Symétrie par rapport à O</td><td>−z</td></tr>
+    <tr><td>Symétrie par rapport à l'axe des abscisses</td><td>z*</td></tr>
+    <tr><td>Homothétie de centre O, de rapport k ∈ ℝ*</td><td>kz</td></tr>
+    <tr><td>Translation de vecteur d'affixe a</td><td>z + a</td></tr>
+    <tr><td>Rotation de centre O, d'angle θ</td><td>e<sup>iθ</sup>z</td></tr>
+  </table></div>
+  <div class="quiz">
+    <div class="q"><p>Multiplier z par i revient à :</p>
+      <div class="opts"><button>une symétrie par rapport à O</button><button data-ok="1">une rotation de π/2 autour de O</button><button>une translation de 1 vers le haut</button></div>
+      <div class="fb" hidden>i = e^(iπ/2) : c'est la rotation d'angle π/2.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Racines">
+  <div class="shead"><span class="num">5</span><h2>Racines carrées et racines n-ièmes</h2><span class="meta">diapos 36 à 40 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Tout complexe non nul a exactement n racines n-ièmes, régulièrement réparties sur un cercle (écart 2π/n). Pour une racine carrée en forme algébrique, on identifie parties réelles, imaginaires et modules.</div>
+  <div class="formula key cours">Racine carrée Z = A + iB de z = a + ib  (Z² = z) :
+   A² + B² = √(a² + b²)      (|Z|² = |z|)
+   A² − B² = a               (Re Z² = Re z)
+   AB du signe de b          (Im Z² = 2AB = b)</div>
+  <div class="formula key cours">Racines n-ièmes de l'unité (zⁿ = 1) :   z_k = e^(i2kπ/n),  k = 0, 1, …, n − 1
+Racines n-ièmes de ω = re^(iθ) :          z_k = r^(1/n) e^(i(θ + 2kπ)/n),  k = 0, …, n − 1</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · racines carrées (diapo 36)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">15 − 8i : A² + B² = 17, A² − B² = 15 → A² = 16, B² = 1, AB &lt; 0 → ±(4 − i)
+3 + 4i  : A² + B² = 5,  A² − B² = 3  → A² = 4,  B² = 1, AB &gt; 0 → ±(2 + i)
+−4i     : A² + B² = 4,  A² − B² = 0  → A² = B² = 2,  AB &lt; 0 → ±(√2 − i√2)
+2 − 4i√6 : |z| = √(4 + 96) = 10 → A² = 6, B² = 4, AB &lt; 0 → ±(√6 − 2i)</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · racines cubiques (diapos 38 et 40)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">z³ = 1 : z_k = e^(i2kπ/3) → 1 ;  e^(i2π/3) = −1/2 + i√3/2 ;  e^(i4π/3) = −1/2 − i√3/2
+ω = 8e^(iπ/4) : z_k = 2 e^(i(π/4 + 2kπ)/3) = 2e^(iπ/12), 2e^(i3π/4), 2e^(i17π/12)
+   (trois points sur le cercle de rayon 2, espacés de 120°)</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD, exercices 11 et 12</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">z⁴ = 16 = 16e^(i0) : z_k = 2e^(ikπ/2) → 2, 2i, −2, −2i
+z³ = 27e^(iπ/3) : z_k = 3e^(i(π/9 + 2kπ/3)) → 3e^(iπ/9), 3e^(i7π/9), 3e^(i13π/9)
+   3e^(iπ/9) ≈ 2,819 + 1,026i ;  3e^(i7π/9) ≈ −2,298 + 1,928i ;  3e^(i13π/9) ≈ −0,521 − 2,954i</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Équations, polynômes">
+  <div class="shead"><span class="num">6</span><h2>Équations du second degré et polynômes</h2><span class="meta">diapos 41 à 47 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Dans ℂ, le discriminant a toujours des racines carrées : une équation du second degré a toujours des solutions. Pour un degré plus grand, on factorise grâce à une racine connue (division euclidienne ou tableau de Hörner).</div>
+  <div class="formula key cours">az² + bz + c = 0  (a, b, c ∈ ℂ, a ≠ 0) ;  Δ = b² − 4ac
+   Δ = 0 : racine double z₀ = −b/(2a)
+   Δ ≠ 0 : δ une racine carrée de Δ  →  z₁ = (−b − δ)/(2a) ;  z₂ = (−b + δ)/(2a)</div>
+  <div class="coquille"><b>Coquille du cours (diapo 41).</b> Les deux racines y sont écrites « z₁ = −b−δ / 2a et z₂ = −b−δ / 2a » : la seconde est <b>(−b + δ)/(2a)</b>, et il faut des parenthèses autour du numérateur.</div>
+  <div class="formula key cours">Division euclidienne :  A = BQ + R  avec  deg R &lt; deg B  (Q et R uniques)
+Hörner (racine r connue) : on recopie le 1er coefficient, puis à chaque colonne
+   (nombre du bas à gauche) × r + coefficient du haut ;  la dernière case doit valoir 0
+   la ligne du bas donne les coefficients de P(x)/(x − r)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · division euclidienne (diapo 43)</div>
+    <p>Diviser 2X⁴ − X³ − 2X² + 3X − 1 par X² − X + 1.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Q = 2X² + X − 3 ;   R = −X + 2
+Vérification : (X² − X + 1)(2X² + X − 3) − X + 2 = 2X⁴ − X³ − 2X² + 3X − 1 ✓</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · Hörner (diapos 46 et 47)</div>
+    <p>P(x) = x⁴ − 2x³ − 7x² + 8x + 12, racine évidente r = 3.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">coefficients :   1    −2    −7     8    12
+× 3          :         3     3   −12   −12
+ligne du bas :   1     1    −4    −4     0   ✓ (r = 3 est racine)
+P(x) = (x − 3)(x³ + x² − 4x − 4) = (x − 3)(x + 1)(x² − 4)
+     = (x − 3)(x + 1)(x − 2)(x + 2)      racines : 3, −1, 2, −2</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD, exercice 1</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">x² + 4x + 13 = 0 : Δ = 16 − 52 = −36 = (6i)²  →  x = (−4 ± 6i)/2 = −2 ± 3i
+z² = −25  →  z = 5i ou z = −5i</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s7" data-toc="Circuits">
+  <div class="shead"><span class="num">7</span><h2>Applications aux circuits : phaseurs et impédances</h2><span class="meta">diapos 48 à 52 et fiche « Application 2 » · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une tension sinusoïdale V<sub>m</sub> cos(ωt + φ) est la partie réelle de V<sub>m</sub>e<sup>iφ</sup>e<sup>iωt</sup>. On garde seulement V<sub>m</sub>e<sup>iφ</sup>, le phaseur, et les équations du circuit deviennent algébriques. En physique, l'unité imaginaire se note j.</div>
+  <div class="formula key cours">v(t) = V_m cos(ωt + φ)  →  phaseur  Ṽ = V_m e^(jφ) = V_m ∠φ = V_m cos φ + j V_m sin φ
+Loi d'Ohm :  Ṽ = Z Ĩ  (convention récepteur)
+Z_R = R      Z_L = jLω (tension en avance de π/2)      Z_C = 1/(jCω) = −j/(Cω) (courant en avance de π/2)
+Série :  Z = Σ Z_k        Parallèle :  1/Z = Σ 1/Z_k   (admittance Y = 1/Z)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 52</div>
+    <p>R = 10 Ω et L = 100 mH en série, v(t) = 50 cos(1000t). Impédance et courant i(t) ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Z = R + jLω = 10 + j × 0,1 × 1000 = 10 + 100j
+|Z| = √(100 + 10 000) = 100,5 Ω ;  arg Z = arctan(10) = 1,471 rad (84,3°)
+Ĩ = Ṽ / Z = 50∠0 / 100,5∠1,471 = 0,4975∠(−1,471)
+i(t) = 0,4975 cos(1000t − 1,471)   (A)</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fiche « Application 2 – Application aux circuits »</div>
+    <p>Échelle de R, condensateurs C, bobines 2L et L avec R = ωL et LCω² = 2, e(t) = e<sub>m</sub> cos(ωt).</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Z_C = −j/(Cω) = −jωL/2 ;  chaque étage (C en parallèle avec une branche jωL) vaut −jωL
+Z_total = R + (−jωL) = ωL(1 − j) = √2 ωL ∠(−π/4)
+i(t)  = e_m/(√2 ωL) cos(ωt + π/4)
+u(t)  = e_m/√2 cos(ωt − π/4)
+i₁(t) = e_m/(√2 ωL) cos(ωt − 3π/4) ;  i₂(t) = e_m/(√2 ωL) cos(ωt + π/4) ;  i₃(t) = e_m/(√2 ωL) cos(ωt − 3π/4)</div>
+      <p>Méthode : on part du nœud le plus loin de la source et on remonte, en remplaçant à chaque fois un groupement par son impédance équivalente (par les admittances pour le parallèle).</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s7"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 1 « Nombres complexes » et fiches de démonstrations</span></div>
+  <div class="ex"><h4>Ex. 2 à 4 · conjugués et opérations <span class="tag">section 1</span></h4>
+    <details class="hint"><summary>Résultats</summary><div><p>z = 9 − 3i : <span class="res">z̄ = 9 + 3i, z z̄ = 90</span> ; z + z̄ = 2 Re z est réel. <span class="res">(7 + i) + (1 − 2i) = 8 − i</span> ; <span class="res">(5 − 3i) − (2 + 6i) = 3 − 9i</span> ; <span class="res">(8 + i)(6 − 3i) = 51 − 18i</span>. z = 3 + 4i, z' = −1 + 2i : <span class="res">z + z' = 2 + 6i, z − z' = 4 + 2i</span> ; <span class="res">(2 + 3i)(1 − i) = 5 + i</span> ; <span class="res">(5 + 2i)/(1 + 3i) = (11 − 13i)/10</span>, de module ≈ 1,703 et d'argument ≈ −0,869 rad.</p></div></details></div>
+  <div class="ex"><h4>Ex. 5 à 7, 10 · formes trigonométrique et exponentielle <span class="tag">sections 2 et 3</span></h4>
+    <details class="hint"><summary>Résultats</summary><div><p><span class="res">1 + i = √2 e^(iπ/4)</span> ; <span class="res">−3 + 3i = 3√2 e^(i3π/4)</span> ; 2 + 3i : <span class="res">√13, arg ≈ 0,983 rad</span> ; −1 − 2i : <span class="res">√5, arg ≈ −2,034 rad</span> ; <span class="res">4 − 4i = 4√2 e^(−iπ/4)</span> ; <span class="res">−3 + 3√3 i = 6 e^(i2π/3)</span> ; <span class="res">3e^(iπ/4)</span> et <span class="res">5e^(i2π/3)</span>.</p></div></details></div>
+  <div class="ex"><h4>Ex. 14 à 16 · démonstrations et linéarisation <span class="tag">sections 1 et 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Ex. 14 : a/b = a b̄ / |b|², donc Re(a/b) = (Re a Re b + Im a Im b)/|b|² et Im(a/b) = (Im a Re b − Re a Im b)/|b|² ; pour a = 1, 1/b = b̄/|b|². Ex. 15 : cos 3θ + cos 5θ = 2 cos 4θ cos θ, donc l'expression vaut <span class="res">2 cos 4θ</span>. Ex. 16 : écris cos x = (e^(ix) + e^(−ix))/2 et sin x = (e^(ix) − e^(−ix))/(2i), développe, puis regroupe les exponentielles opposées en cosinus et sinus.</p></div></details></div>
+  <div class="ex"><h4>TD 1 « corps céleste » · parties I et II <span class="tag">sections 3 et 5</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>z(t) = 6e^(−t/12) e^(iπt/6) : <span class="res">module 6e^(−t/12), argument πt/6</span> ; x(t) = 6e^(−t/12) cos(πt/6), y(t) = 6e^(−t/12) sin(πt/6). L'argument revient au même angle tous les <span class="res">12 jours</span>, mais le module diminue : c'est une <b>spirale</b> qui se resserre vers O. z' = λz avec λ = −1/12 + iπ/6, donc z⁽ⁿ⁾ = λⁿz et |z'| = |λ| |z|.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=outils&amp;ch=complexes"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=outils&amp;ch=complexes"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=outils&amp;ds=outils"><b>DS blanc Outils mathématiques ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a class="next" href="/cours/maths/derivation/"><small>Chapitre 2 ▸</small>Dérivation</a></nav>
+</section>
+
+<p class="credit">Cours « Outils mathématiques pour l'ingénieur 1 » de N. Coupier (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Outils mathématiques%20%C2%B7%20chapitre%201">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>
