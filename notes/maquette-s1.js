@@ -10,7 +10,7 @@ window.MAQUETTE_S1={
       {id:'outils',nom:'Outils mathématiques pour l\'ingénieur 1',poids:60,ep:[['DS','DS',25],['Finale','Épreuve finale',35]]},
       {id:'analyse',nom:'Analyse',poids:40,ep:[['DS','DS',15],['Finale','Épreuve finale',25]]}]},
     {id:'chelec',nom:'Chimie et Électricité',ects:6,couleur:'#3f9a3a',modules:[
-      {id:'chimie',nom:'Chimie 1',poids:50,ep:[['DS','DS',20],['Finale','Épreuve finale',30]]},
+      {id:'chimie',nom:'Chimie',poids:50,ep:[['DS','DS',20],['Finale','Épreuve finale',30]]},
       {id:'elec',nom:'Bases de l\'électricité',poids:50,ep:[['DS','DS',20],['Finale','Épreuve finale',25],['TP1','TP 1',2.5],['TP2','TP 2',2.5]]}]},
     {id:'meca',nom:'Mécanique',ects:7,couleur:'#2a8fc8',modules:[
       {id:'statique',nom:'Mécanique 1 (Statique)',poids:50,ep:[['DS','DS',20],['Finale','Épreuve finale',30]]},
