@@ -23,3 +23,11 @@ Les exercices des diapos et des PDF complémentaires vont dans la section `#exos
 - `node outils/verif-minids.js 3000` : pour chaque question, un **solveur indépendant** (méthode différente : système linéaire, règle cyclique pour le produit vectoriel…) recalcule la réponse à partir de `v` ; contrôle aussi qu'aucun NaN/undefined n'apparaît, et qu'une réponse tapée à la française (valeur du corrigé, ou 3 chiffres significatifs) est acceptée → copies parfaites notées 20/20. Ajouter un solveur pour chaque nouvelle question.
 - Test navigateur : sur `/mini-ds/?m=<id>&ch=<chapitre>`, rendre une copie, relire les valeurs attendues, refaire le même sujet avec ces valeurs → 20/20 sans erreur JS.
 - `node outils/build.js`, puis maquette avant mise en ligne.
+
+## 6. Mode « DS spécifique » (demande du type « DS le 20 nov. sur les chapitres 2 et 3 »)
+Entrée : matière, chapitres concernés, date du DS (et durée si connue). Les chapitres doivent déjà avoir leur page et leurs questions (sinon : agent « créateur de cours » d'abord).
+- `outils/catalogue.js` : un DS dans `ds` du module (`titre`, `quand`, `date:'AAAA-MM-JJ'`, `desc`, `liens` vers les chapitres, `minids:'/mini-ds/?m=<id>&ds=<ds id>'`). Le premier DS du catalogue alimente le bandeau « En ce moment » de l'accueil : mettre le DS le plus proche en premier.
+- `mini-ds/matieres.js` : `{id, nom, detail, chapitres:[…], n, min}` dans `ds` (n = nombre de questions, min = durée réelle du DS).
+- Si des types d'exercices des chapitres manquent à la banque, les ajouter (et leurs solveurs) avant.
+- Optionnel, si demandé : une page de révision `/ds/<module>-<ds id>/` (plan de révision jusqu'à la date, sujet blanc, fiche récap des formules des chapitres concernés).
+- Vérifier (`verif-minids.js`, test navigateur sur `?ds=<ds id>`), build, maquette, mise en ligne après validation.
