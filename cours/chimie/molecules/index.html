@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 3 · Structure électronique des molécules · Chimie · profbob.fr</title>
+<meta name="description" content="Chimie, chapitre 3 : modèle de lewis : liaisons et charges formelles, règle de l'octet, valence et méthode de lewis, caractéristiques des liaisons covalentes, mésomérie et. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="chimie-molecules" data-matiere="chimie" data-ch="molecules" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/chimie/">← Chimie</a> · Chapitre 3 sur 3</div>
+  <h1>Structure électronique des molécules</h1>
+  <p class="lead">Écrire la formule de Lewis d'une molécule ou d'un ion, prévoir sa forme avec la VSEPR et dire si elle est polaire.</p>
+  <div class="chips"><span class="chip"><b>5</b> sections</span><span class="chip">≈ 3 h 30</span><span class="chip">Chap. 2</span><span class="chip">Cours de S. Beaumont</span><span class="chip">Prérequis : <a href="/cours/chimie/classification/">chapitre 2</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=chimie&amp;ch=molecules">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=chimie&amp;ch=molecules">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Liaisons de Lewis</a>
+  <a href="#s2"><span class="n">2</span>Octet et méthode</a>
+  <a href="#s3"><span class="n">3</span>Liaisons polarisées</a>
+  <a href="#s4"><span class="n">4</span>Mésomérie</a>
+  <a href="#s5"><span class="n">5</span>VSEPR et polarité</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="chimie"></div>
+
+<section class="csec" id="s1" data-toc="Liaisons de Lewis">
+  <div class="shead"><span class="num">1</span><h2>Modèle de Lewis : liaisons et charges formelles</h2><span class="meta">pages 2 et 3 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une liaison, c'est un doublet d'électrons mis en commun. On ne dessine que la couche de valence : points pour les électrons célibataires, traits pour les doublets.</div>
+  <ul>
+    <li><b>Doublet liant</b> : partagé entre deux atomes. <b>Doublet non liant</b> : appartient en propre à un atome.</li>
+    <li><b>Liaison de covalence</b> : chaque atome apporte un électron. Simple (1 doublet), double (2), triple (3) ; dans une liaison multiple, les doublets n'ont pas la même énergie.</li>
+    <li><b>Liaison de coordination (dative)</b> : un atome apporte les deux électrons dans une case vide de l'autre. Une fois formée, on ne la distingue plus d'une covalence.</li>
+  </ul>
+  <h3>Charge formelle</h3>
+  <p>On donne à chaque atome la moitié des électrons de ses liaisons et tous ses doublets non liants : il « possède » alors N<sub>A</sub> électrons de valence dans l'édifice, à comparer à son nombre normal N<sub>V</sub>.</p>
+  <div class="formula key cours">z_F = N_V − N_A
+Σ z_F = 0 pour une molécule      Σ z_F = z pour un ion de charge z</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · charges formelles dans NO₃⁻</div>
+    <p>Dans l'ion nitrate, N est lié à un O par une double liaison et à deux O par des simples liaisons. Charges formelles ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">N : 4 liaisons, 0 doublet non liant  →  N_A = 4      z_F = 5 − 4 = +1
+O (double liaison) : 2 doublets non liants + 2 liaisons → N_A = 4 + 2 = 6   z_F = 6 − 6 = 0
+O (simple liaison) : 3 doublets non liants + 1 liaison → N_A = 6 + 1 = 7    z_F = 6 − 7 = −1   (×2)
+Σ z_F = +1 + 0 − 1 − 1 = −1 = charge de l'ion ✓</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Octet et méthode">
+  <div class="shead"><span class="num">2</span><h2>Règle de l'octet, valence et méthode de Lewis</h2><span class="meta">pages 3 et 4 · 40 min</span></div>
+  <ul>
+    <li><b>Octet</b> : un atome cherche la configuration du gaz rare voisin, donc 8 électrons autour de lui (2 pour l'hydrogène : règle du <b>duet</b>).</li>
+    <li><b>Octet réduit</b> (lacunaire) : moins de 8 électrons (B dans BH<sub>3</sub>). <b>Hypervalence</b> : plus de 8, possible seulement à partir de la 3ᵉ période (jusqu'à 14 électrons ; 18 en 4ᵉ période, règle de Sidgwick).</li>
+  </ul>
+  <div class="formula key cours">Valence :  x = 8 − N_V        (C : N_V = 4, x = 4 ; N : 3 ; O : 2 ; F : 1)</div>
+  <h3>La méthode en 7 étapes</h3>
+  <ol class="steps">
+    <li>Repère l'atome central et les atomes périphériques.</li>
+    <li>Compte les électrons de valence de l'édifice : <span class="m">N_e = (Σ N_V) − z</span> (un ion négatif apporte des électrons en plus).</li>
+    <li>Déduis le nombre de doublets (N<sub>e</sub>/2) et un éventuel électron célibataire.</li>
+    <li>Relie les atomes périphériques à l'atome central par des liaisons simples.</li>
+    <li>Complète avec les doublets restants en respectant au mieux l'octet (duet pour H).</li>
+    <li>Préfère les liaisons multiples aux doublets non liants (plus stable).</li>
+    <li>Place les charges formelles en les minimisant.</li>
+  </ol>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · ion nitrate NO₃⁻ (page 3)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">N_e = 5 + 3 × 6 + 1 = 24 électrons  →  12 doublets
+3 liaisons N–O (3 doublets) ; 9 doublets restants sur les O (3 chacun)
+N n'a que 6 électrons : un doublet d'un O devient une liaison N=O
+Résultat : une liaison N=O, deux N–O⁻, et N⁺ (charges calculées en section 1)</div>
+    </div></details>
+  </div>
+  <h3>Acides et bases de Lewis</h3>
+  <p>Un <b>acide de Lewis</b> a au moins une case vide : il accepte un doublet (AlCl<sub>3</sub>, BF<sub>3</sub>, H⁺). Une <b>base de Lewis</b> a au moins un doublet non liant à céder (NH<sub>3</sub>, H<sub>2</sub>O).</p>
+  <div class="quiz">
+    <div class="q"><p>Combien d'électrons de valence dans l'ion ammonium NH₄⁺ ?</p>
+      <div class="opts"><button>9</button><button data-ok="1">8</button><button>10</button></div>
+      <div class="fb" hidden>N_e = 5 + 4 × 1 − 1 = 8, soit 4 doublets : les 4 liaisons N–H. Le N porte une charge formelle +1.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Liaisons polarisées">
+  <div class="shead"><span class="num">3</span><h2>Caractéristiques des liaisons covalentes</h2><span class="meta">pages 4 et 5 · 35 min</span></div>
+  <ul>
+    <li><b>Longueur de liaison</b> d<sub>AB</sub> : distance entre les deux noyaux.</li>
+    <li><b>Énergie de liaison</b> D<sub>AB</sub> : énergie pour casser AB(g) → A(g) + B(g). Plus une liaison est courte, plus elle est forte.</li>
+    <li><b>Polarisation</b> : si χ<sub>B</sub> &gt; χ<sub>A</sub>, le doublet est plus près de B, qui porte une charge partielle −δ, A portant +δ.</li>
+  </ul>
+  <h3>Moment dipolaire</h3>
+  <p>Le vecteur moment dipolaire est orienté <b>du pôle négatif vers le pôle positif</b> (de B vers A).</p>
+  <div class="formula key cours">p = q · d_AB        p en C·m, q en C, d_AB en m
+p_D = 48 · (q/e) · d          p_D en Debye
+p_D ≈ χ_B − χ_A
+1 Debye = 3,33×10⁻³⁰ C·m</div>
+  <div class="coquille"><b>Coquille du cours (page 5).</b> Dans p<sub>D</sub> = 48 · (q/e) · d, la distance d doit être en <b>nanomètres</b> (1 e × 1 nm = 1,602×10⁻²⁸ C·m = 48 D), pas en mètres comme indiqué.</div>
+  <h3>Caractère ionique</h3>
+  <div class="formula key cours">I_AB = (p_réel / p_ion) × 100</div>
+  <p>p<sub>ion</sub> est le moment dipolaire si la liaison était totalement ionique (charges +e et −e sur les noyaux).</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · H–Cl (page 5)</div>
+    <p>p<sub>réel</sub> = 1,07 D, d<sub>HCl</sub> = 127,4 pm. Caractère ionique ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">p_ion = 48 × 1 × 0,1274 = 6,12 D
+I_HCl = 1,07 / 6,12 × 100 = 17,5 %</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Une molécule qui a des liaisons polarisées n'est pas forcément polaire : tout dépend de sa forme (section 5).</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Mésomérie">
+  <div class="shead"><span class="num">4</span><h2>Mésomérie et résonance</h2><span class="meta">pages 5 et 6 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Parfois plusieurs formules de Lewis sont possibles, ne différant que par la place des électrons. La vraie structure est un « mélange » des deux : l'<b>hybride de résonance</b>.</div>
+  <ul>
+    <li><b>Formes mésomères</b> (formules limites) : formules de Lewis qui ne diffèrent que par la position des doublets non liants et/ou π. Les atomes, eux, ne bougent pas. On les relie par une flèche ↔, et des flèches courbes montrent les déplacements d'électrons.</li>
+    <li>Ion carbonate CO<sub>3</sub><sup>2−</sup> : trois formes mésomères ; dans l'hybride, la charge négative est sur chaque O « 2/3 du temps ».</li>
+    <li>Benzène : les électrons π sont <b>délocalisés</b> sur tout le cycle.</li>
+  </ul>
+  <h3>Quelle forme compte le plus ?</h3>
+  <ul>
+    <li>Les atomes respectent l'octet (obligatoire en 2ᵉ période) et le duet pour H.</li>
+    <li>Maximum de liaisons, minimum de charges formelles ; s'il y en a plusieurs, le plus éloignées possible.</li>
+    <li>L'hybride ressemble le plus à la forme la plus stable ; plus il y a de formes, plus l'hybride est stable.</li>
+  </ul>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="VSEPR et polarité">
+  <div class="shead"><span class="num">5</span><h2>Géométrie VSEPR et polarité des molécules</h2><span class="meta">pages 6 à 12 · 50 min</span></div>
+  <div class="idee"><b>L'idée.</b> Les doublets autour de l'atome central se repoussent et s'écartent le plus possible. Leur nombre total fixe la figure ; les doublets non liants « prennent une place » mais ne se voient pas dans la forme de la molécule.</div>
+  <div class="formula key cours">A X_n E_m      A : atome central ;  X : atomes liés (n) ;  E : doublets non liants de A (m)</div>
+  <div class="tw"><table>
+    <tr><th>n + m</th><th>Figure des doublets</th><th>AX<sub>n</sub>E<sub>m</sub></th><th>Forme de la molécule</th><th>Exemples</th></tr>
+    <tr><td>2</td><td>segment (180°)</td><td>AX<sub>2</sub></td><td>linéaire</td><td>BeH<sub>2</sub>, CO<sub>2</sub>, HCN</td></tr>
+    <tr><td rowspan="2">3</td><td rowspan="2">triangle (120°)</td><td>AX<sub>3</sub></td><td>triangulaire plane</td><td>BF<sub>3</sub>, NO<sub>3</sub>⁻, SO<sub>3</sub></td></tr>
+    <tr><td>AX<sub>2</sub>E</td><td>coudée</td><td>SO<sub>2</sub>, O<sub>3</sub></td></tr>
+    <tr><td rowspan="3">4</td><td rowspan="3">tétraèdre (109,5°)</td><td>AX<sub>4</sub></td><td>tétraédrique</td><td>CH<sub>4</sub>, NH<sub>4</sub>⁺</td></tr>
+    <tr><td>AX<sub>3</sub>E</td><td>pyramide à base triangulaire</td><td>NH<sub>3</sub>, PCl<sub>3</sub></td></tr>
+    <tr><td>AX<sub>2</sub>E<sub>2</sub></td><td>coudée</td><td>H<sub>2</sub>O</td></tr>
+    <tr><td rowspan="4">5</td><td rowspan="4">bipyramide à base triangulaire</td><td>AX<sub>5</sub></td><td>bipyramide triangulaire</td><td>PCl<sub>5</sub></td></tr>
+    <tr><td>AX<sub>4</sub>E</td><td>tétraèdre irrégulier (papillon)</td><td>SF<sub>4</sub></td></tr>
+    <tr><td>AX<sub>3</sub>E<sub>2</sub></td><td>en T</td><td>ClF<sub>3</sub></td></tr>
+    <tr><td>AX<sub>2</sub>E<sub>3</sub></td><td>linéaire</td><td>I<sub>3</sub>⁻, XeF<sub>2</sub></td></tr>
+    <tr><td rowspan="3">6</td><td rowspan="3">octaèdre (90°)</td><td>AX<sub>6</sub></td><td>octaédrique</td><td>SF<sub>6</sub></td></tr>
+    <tr><td>AX<sub>5</sub>E</td><td>pyramide à base carrée</td><td>BrF<sub>5</sub></td></tr>
+    <tr><td>AX<sub>4</sub>E<sub>2</sub></td><td>plan carré</td><td>XeF<sub>4</sub></td></tr>
+  </table></div>
+  <h3>Effets du second ordre sur les angles</h3>
+  <ul>
+    <li>Un doublet non liant est plus répulsif qu'un doublet liant : il <b>ferme</b> les angles X–A–X. CH<sub>4</sub> 109,5° &gt; NH<sub>3</sub> 106,5° &gt; H<sub>2</sub>O 104,5°.</li>
+    <li>Un atome central plus électronégatif <b>ouvre</b> les angles X–A–X : NH<sub>3</sub> (106,5°) &gt; PH<sub>3</sub> (93°).</li>
+    <li>Un atome périphérique électronégatif ouvre les angles qui lui sont opposés (CH<sub>3</sub>F, CH<sub>2</sub>F<sub>2</sub>).</li>
+    <li>Une liaison multiple, plus encombrante, ferme les angles opposés : dans le méthanal, H–C–H ≈ 115° au lieu de 120°.</li>
+  </ul>
+  <h3>Polarité</h3>
+  <div class="formula key cours">p(AX_n) = Σ p_i      (somme vectorielle des moments des liaisons)</div>
+  <p>Une molécule est <b>polaire</b> si cette somme n'est pas nulle. H<sub>2</sub>O (coudée) est polaire ; BeH<sub>2</sub> (linéaire) et BH<sub>3</sub> (triangulaire) sont apolaires malgré leurs liaisons polarisées. En première approximation, une molécule polaire est soluble dans l'eau.</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · moment d'une liaison O–H (exercice « solvant eau »)</div>
+    <p>p(H<sub>2</sub>O) = 1,85 D, angle H–O–H = 104,5°. Moment de chaque liaison O–H ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Les deux moments O–H s'additionnent :  p = 2 p_1 cos(α/2)
+p_1 = 1,85 / (2 × cos 52,25°) = 1,51 D = 1,51 × 3,33×10⁻³⁰ = 5,03×10⁻³⁰ C·m</div>
+    </div></details>
+  </div>
+  <div class="coquille"><b>Attention au corrigé de l'exercice sur le soufre.</b> SO<sub>2</sub> (AX<sub>2</sub>E) et SO<sub>3</sub> (AX<sub>3</sub>) ont bien des doublets en triangle, mais SO<sub>2</sub> est <b>coudée</b>, seule SO<sub>3</sub> est triangulaire plane.</div>
+  <div class="quiz">
+    <div class="q"><p>NH₃ est de type…</p>
+      <div class="opts"><button>AX₃ (plane)</button><button data-ok="1">AX₃E (pyramidale)</button><button>AX₄ (tétraédrique)</button></div>
+      <div class="fb" hidden>N a 3 liaisons et 1 doublet non liant : 4 doublets en tétraèdre, la molécule est une pyramide à base triangulaire. Elle est polaire.</div></div>
+    <div class="q"><p>CO₂ est-elle polaire ?</p>
+      <div class="opts"><button>Oui, les liaisons C=O sont polarisées</button><button data-ok="1">Non</button></div>
+      <div class="fb" hidden>AX₂ linéaire : les deux moments C=O sont opposés et s'annulent. Liaisons polarisées, molécule apolaire.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">feuille d'exercices 2</span></div>
+  <div class="ex"><h4>Ions polyatomiques (PH₄⁺, BrO⁻, BH₄⁻, IF₄⁺, O₂²⁻, N₂H₅⁺) <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>N<sub>e</sub> = Σ N<sub>V</sub> − z, puis la méthode en 7 étapes. Exemple : BH<sub>4</sub>⁻ : 3 + 4 + 1 = 8 électrons, 4 liaisons B–H, charge formelle −1 sur B. IF<sub>4</sub>⁺ : 7 + 28 − 1 = 34 électrons, I hypervalent (AX<sub>4</sub>E).</p></div></details></div>
+  <div class="ex"><h4>Hydrogène et oxygène (CCP 2011) <span class="tag">chapitre 1 et sections 2, 5</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>M(H) = 0,99985 × 1,007825 + 0,00015 × 2,014102 = 1,00798 g·mol⁻¹, donc M(H<sub>2</sub>) = 2,01595 g·mol⁻¹. Fraction massique en deutérium : 0,00015 × 2,014102 / 1,00798 = <span class="res">0,030 %</span> (le corrigé écrit « 3 % » : c'est 0,03 %). Ozone : AX<sub>2</sub>E, coudée, angle 117°.</p></div></details></div>
+  <div class="ex"><h4>Dérivés du phosphore, du soufre, de l'arsenic <span class="tag">sections 2 et 5</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>À partir de la 3ᵉ période, l'hypervalence est possible (PBr<sub>5</sub> AX<sub>5</sub>, SO<sub>4</sub><sup>2−</sup>…) ; pas en 2ᵉ période (NBr<sub>5</sub> n'existe pas). Cherche toujours la forme qui minimise les charges formelles.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=chimie&amp;ch=molecules"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=chimie&amp;ch=molecules"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=chimie&amp;ds=chimie"><b>DS blanc Chimie ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/chimie/classification/"><small>◂ Chapitre 2</small>Classification</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Chimie%20%C2%B7%20chapitre%203">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

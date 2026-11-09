@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 2 · La classification périodique · Chimie · profbob.fr</title>
+<meta name="description" content="Chimie, chapitre 2 : une classification construite peu à peu, la classification actuelle, énergie d'ionisation, attachement et affinité électronique, l'électronégativité. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="chimie-classification" data-matiere="chimie" data-ch="classification" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/chimie/">← Chimie</a> · Chapitre 2 sur 3</div>
+  <h1>La classification périodique</h1>
+  <p class="lead">Pourquoi le tableau a cette forme, et comment l'énergie d'ionisation et l'électronégativité y évoluent.</p>
+  <div class="chips"><span class="chip"><b>4</b> sections</span><span class="chip">≈ 2 h</span><span class="chip">Chap. 1, partie 2</span><span class="chip">Cours de S. Beaumont</span><span class="chip">Prérequis : <a href="/cours/chimie/atome/">chapitre 1</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=chimie&amp;ch=classification">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=chimie&amp;ch=classification">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Histoire</a>
+  <a href="#s2"><span class="n">2</span>Tableau actuel</a>
+  <a href="#s3"><span class="n">3</span>Ionisation, affinité</a>
+  <a href="#s4"><span class="n">4</span>Électronégativité</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="chimie"></div>
+
+<section class="csec" id="s1" data-toc="Histoire">
+  <div class="shead"><span class="num">1</span><h2>Une classification construite peu à peu</h2><span class="meta">pages 2 et 3 · 10 min</span></div>
+  <p>On attribue la classification à Mendeleïev, mais elle est le fruit d'une longue évolution depuis Lavoisier :</p>
+  <ul>
+    <li>1700 : 12 corps simples connus ; 1808 et 1818 : Davy remarque des familles (Ca, Sr, Ba ; Li, Na, K) ; 1850 : 60 corps simples.</li>
+    <li>1860 : premier classement par masse atomique croissante ; 1862 : De Chancourtois et sa « vis tellurique » ; 1864 : Newlands et la loi des octaves.</li>
+    <li><b>1869 : Mendeleïev</b> regroupe en colonnes les éléments aux propriétés communes, quitte à laisser des cases vides (qu'il prédit) et à inverser l'ordre des masses (tellure/iode). Il lui manquait la colonne des gaz rares.</li>
+    <li>1895 : Ramsay découvre l'hélium et l'argon, ajoute une colonne, puis trouve le krypton et le xénon.</li>
+  </ul>
+  <div class="retiens"><b>Aujourd'hui</b>, les éléments sont classés par <b>numéro atomique Z croissant</b>, et non plus par masse. Tous les éléments naturels (jusqu'à l'uranium, Z = 92) sont connus ; au-delà, ce sont les transuraniens, artificiels.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Tableau actuel">
+  <div class="shead"><span class="num">2</span><h2>La classification actuelle</h2><span class="meta">pages 5 à 7 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le tableau est une carte des configurations électroniques : la <b>ligne</b> donne le n de la couche externe, la <b>colonne</b> donne la configuration externe, donc les propriétés chimiques.</div>
+  <ul>
+    <li><b>7 périodes</b> (lignes) et <b>18 familles</b> (colonnes).</li>
+    <li>Quatre blocs : <b>s</b> (colonnes 1–2), <b>d</b> (3–12, métaux de transition), <b>p</b> (13–18), <b>f</b> (lanthanides 4f et actinides 5f, mis à part).</li>
+    <li>Colonne 1 : <b>alcalins</b> ; colonne 2 : <b>alcalino-terreux</b> ; colonne 17 : <b>halogènes</b> ; colonne 18 : <b>gaz rares</b> (gaz nobles), couche externe saturée, quasiment aucune réactivité.</li>
+    <li>Une même famille : même structure de couche externe, et tendance à donner les mêmes types d'ions.</li>
+  </ul>
+  <div class="formula key">Trouver la place d'un élément à partir de Z :
+   période = plus grand n de la configuration
+   bloc s : colonne = nombre d'électrons ns (1 ou 2)
+   bloc d : colonne = 2 + nombre d'électrons (n−1)d
+   bloc p : colonne = 12 + nombre d'électrons np</div>
+  <div class="retiens"><b>Les moyens mnémotechniques du cours.</b> Période 2 : Li Be B C N O F Ne. Période 3 : Na Mg Al Si P S Cl Ar (« Napoléon Mangea Allègrement Six Poulets Sans Claquer d'Argent »).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · place du sélénium</div>
+    <p>Le sélénium est dans la famille de l'oxygène (Z = 8) et dans la même période que le krypton (Z = 36). Numéro atomique ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Oxygène : 2s² 2p⁴ → famille en ns² np⁴ (colonne 16)
+Krypton : couche externe n = 4 → période 4
+Sélénium : [Ar] 3d¹⁰ 4s² 4p⁴   →   Z = 18 + 10 + 2 + 4 = 34</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Configuration externe 4s² : quelle place ?</p>
+      <div class="opts"><button>période 2, colonne 4</button><button data-ok="1">période 4, colonne 2</button><button>période 4, colonne 18</button></div>
+      <div class="fb" hidden>n = 4 donne la période, 2 électrons s donnent la colonne 2 : c'est le calcium (Z = 20), un alcalino-terreux.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Ionisation, affinité">
+  <div class="shead"><span class="num">3</span><h2>Énergie d'ionisation, attachement et affinité électronique</h2><span class="meta">pages 8 et 9 · 25 min</span></div>
+  <div class="formula key cours">Énergie de 1ʳᵉ ionisation E_1 :     X(g) → X⁺(g) + e⁻
+Attachement électronique :         X(g) + e⁻ → X⁻(g)
+Affinité électronique A_E :        X⁻(g) → X(g) + e⁻      (l'inverse de l'attachement)</div>
+  <ul>
+    <li>L'énergie de 2ᵉ ionisation arrache le 2ᵉ électron, etc. On a toujours E<sub>2</sub> &gt; E<sub>1</sub> : il est plus dur d'arracher un électron à un ion déjà positif.</li>
+    <li>Le long d'une <b>période</b> (de gauche à droite), E<sub>1</sub> augmente globalement ; elle est maximale pour les gaz rares.</li>
+    <li>Le long d'une <b>colonne</b> (de haut en bas), E<sub>1</sub> diminue : l'électron externe est plus loin du noyau et les couches internes font écran.</li>
+  </ul>
+  <div class="trap"><b>Piège.</b> Toutes ces énergies concernent des atomes et ions <b>à l'état gazeux</b>. Et l'affinité électronique est l'énergie pour arracher l'électron à l'anion, pas pour l'ajouter.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Électronégativité">
+  <div class="shead"><span class="num">4</span><h2>L'électronégativité</h2><span class="meta">pages 9 et 10 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> L'électronégativité χ mesure combien un atome attire vers lui les électrons d'une liaison. Elle traduit sa tendance à former un anion, son caractère oxydant.</div>
+  <h3>Échelle de Mulliken</h3>
+  <div class="formula key cours">χ_M = k_M × (E_1 + A_E) / 2       E_1 et A_E en eV ;  k_M facteur d'échelle (Mulliken : 1 eV⁻¹)</div>
+  <h3>Échelle de Pauling</h3>
+  <div class="formula key cours">Δ = (χ_A − χ_B)
+|Δ| = k_p × √( D_AB − √(D_AA × D_BB) )      D : énergies de dissociation (kJ·mol⁻¹)</div>
+  <p>C'est une échelle relative : on fixe l'électronégativité de l'hydrogène à 2,2. Le fluor est l'élément le plus électronégatif (4,0) ; les gaz rares n'en ont pas.</p>
+  <div class="coquille"><b>Coquille du cours (page 9).</b> Le facteur est écrit k<sub>p</sub> = 1,04×10⁻². Avec D en kJ·mol⁻¹, la valeur qui marche est <b>k<sub>p</sub> ≈ 0,102</b> : pour HCl (D<sub>HCl</sub> = 431, D<sub>HH</sub> = 436, D<sub>ClCl</sub> = 242 kJ·mol⁻¹), on trouve |Δ| ≈ 1,05 (attendu ≈ 1,0), alors que 1,04×10⁻² donnerait 0,11.</div>
+  <div class="retiens"><b>Évolution.</b> χ augmente de gauche à droite dans une période et diminue de haut en bas dans une colonne : les éléments les plus électronégatifs sont en haut à droite (F, O, N, Cl).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · Mulliken (exercices de la partie 2)</div>
+    <p>(a) Phosphore : E<sub>1</sub> = 10,9 eV, A<sub>E</sub> = 0,74 eV. (b) Halogènes et H : E<sub>1</sub> (eV) H 13,6 ; F 17,4 ; Cl 13,0 ; Br 11,8 ; I 10,5 et A<sub>E</sub> (eV) 0,8 ; 3,5 ; 3,5 ; 3,4 ; 3,0.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(a) χ_M(P) = (10,9 + 0,74)/2 = 5,82
+(b) H : 7,2     F : 10,45     Cl : 8,25     Br : 7,6     I : 6,75
+    Mulliken : F &gt; Cl &gt; Br &gt; H &gt; I      Pauling : F &gt; Cl &gt; Br &gt; I &gt; H</div>
+      <p>Les deux échelles ne classent pas H et I pareil : ce sont des modèles, chacun avec ses limites.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Quel est l'élément le plus électronégatif ?</p>
+      <div class="opts"><button>Le césium</button><button>L'hélium</button><button data-ok="1">Le fluor</button></div>
+      <div class="fb" hidden>En haut à droite du tableau (hors gaz rares, qui n'ont pas d'électronégativité) : le fluor.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">feuille d'exercices 1, partie 2</span></div>
+  <div class="ex"><h4>L'aluminium, les halogènes, les alcalino-terreux <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Configuration avec Klechkowski → couche externe → famille et ion le plus probable : Al → Al³⁺, halogènes → X⁻ (np⁶), Ca → Ca²⁺. Le strontium (Z = 38) finit en 5s² : c'est un alcalino-terreux.</p></div></details></div>
+  <div class="ex"><h4>Ions isoélectroniques X⁺ et Y²⁺ <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Même nombre d'électrons : Z<sub>Y</sub> = Z<sub>X</sub> + 1, donc colonnes 1 et 2 voisines. Y²⁺ a un proton de plus pour le même nuage : il est plus petit que X⁺.</p></div></details></div>
+  <div class="ex"><h4>Propriétés du magnésium et de sa famille <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Rayon qui augmente de Be à Ba → électron externe moins retenu → E<sub>1</sub> qui diminue. Le baryum (plus grand rayon, plus faibles E<sub>1</sub> et E<sub>2</sub>) est le moins électronégatif.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=chimie&amp;ch=classification"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=chimie&amp;ch=classification"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=chimie&amp;ds=chimie"><b>DS blanc Chimie ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/chimie/atome/"><small>◂ Chapitre 1</small>L'atome</a><a class="next" href="/cours/chimie/molecules/"><small>Chapitre 3 ▸</small>Molécules</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Chimie%20%C2%B7%20chapitre%202">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

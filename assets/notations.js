@@ -60,6 +60,28 @@
       ['q<sub>m</sub> ; q<sub>m,e</sub> ; q<sub>m,s</sub>','Débit massique ; à l\'entrée e ; à la sortie s','kg/s',[VC]],
       ['vc','Indice : volume de contrôle (E<sub>vc</sub>, m<sub>vc</sub>, P<sub>th,vc</sub>)','—',[VC]],
       ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
+    ]})(),
+    // Chimie (S. Beaumont) : profil « thermo » (indices seulement)
+    chimie:(()=>{const A='atome',C='classification',M='molecules';return [
+      ['<sup>A</sup><sub>Z</sub>X','A : nombre de masse (nucléons) ; Z : numéro atomique (protons)','—',[A,C]],
+      ['N = A − Z','Nombre de neutrons','—',[A]],
+      ['u.m.a.','Unité de masse atomique : 1/12 de la masse d\'un atome de ¹²C = 1,66×10⁻²⁷ kg','kg',[A]],
+      ['N<sub>A</sub>','Nombre d\'Avogadro : 6,022×10²³','mol⁻¹',[A]],
+      ['M','Masse molaire','g·mol⁻¹',[A]],
+      ['F','Faraday : charge d\'une mole d\'électrons ≈ 96 500 C','C',[A]],
+      ['h ; ν ; λ ; C','Constante de Planck (6,626×10⁻³⁴ J·s) ; fréquence ; longueur d\'onde ; célérité de la lumière','J·s ; Hz ; m ; m·s⁻¹',[A]],
+      ['E<sub>n</sub> = −13,6/n²','Énergie du niveau n de l\'atome d\'hydrogène (1 eV = 1,6×10⁻¹⁹ J)','eV',[A]],
+      ['n ; l ; m<sub>l</sub> ; m<sub>s</sub>','Nombres quantiques : principal, secondaire, magnétique, de spin','—',[A,C]],
+      ['OA','Orbitale atomique (case quantique)','—',[A,M]],
+      ['E<sub>1</sub> ; A<sub>E</sub>','Énergie de 1ʳᵉ ionisation ; affinité électronique','eV',[C]],
+      ['χ ; χ<sub>M</sub>','Électronégativité (Pauling) ; de Mulliken','—',[C,M]],
+      ['D<sub>AB</sub> ; d<sub>AB</sub>','Énergie de liaison ; longueur de liaison','kJ·mol⁻¹ ; m (pm)',[C,M]],
+      ['N<sub>V</sub> ; N<sub>A</sub> ; N<sub>e</sub>','Électrons de valence de l\'atome ; qu\'il possède dans l\'édifice ; de tout l\'édifice','—',[M]],
+      ['z<sub>F</sub> ; z','Charge formelle d\'un atome ; charge de l\'édifice','—',[M]],
+      ['x','Valence : nombre de liaisons covalentes (x = 8 − N<sub>V</sub>)','—',[M]],
+      ['δ ; p ; p<sub>D</sub>','Charge partielle ; moment dipolaire en C·m ; en debye (1 D = 3,33×10⁻³⁰ C·m)','C ; C·m ; D',[M]],
+      ['I<sub>AB</sub>','Caractère ionique de la liaison AB','%',[M]],
+      ['AX<sub>n</sub>E<sub>m</sub>','VSEPR : atome central A, n atomes liés X, m doublets non liants E','—',[M]]
     ]})()
   };
   const HOWTO='<b>Comment répondre au mini-DS :</b> un nombre par case, virgule ou point acceptés, arrondi à 3 chiffres significatifs, sans unité (elle est écrite à côté). Garde le signe − des grandeurs négatives (composantes, travail reçu, chaleur cédée). Les angles sont en degrés.';

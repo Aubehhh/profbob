@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'9 nov.',texte:'Thermodynamique : les 5 chapitres, avec mini-DS et flashcards',url:'/matieres/thermodynamique/',nouveau:true},
+    {date:'9 nov.',texte:'Chimie : l\'atome, la classification et les molécules, avec mini-DS et flashcards',url:'/matieres/chimie/',nouveau:true},
+    {date:'9 nov.',texte:'Thermodynamique : les 5 chapitres, avec mini-DS et flashcards',url:'/matieres/thermodynamique/'},
     {date:'9 nov.',texte:'Statique refaite chapitre par chapitre, d\'après les diapos du prof',url:'/cours/statique/vecteurs/'},
     {date:'8 nov.',texte:'Flashcards des formules, recherche dans les cours et progression par chapitre',url:'/flashcards/?m=meca'},
     {date:'8 nov.',texte:'Mode « Mes erreurs » dans le mini-DS',url:'/mini-ds/'},
@@ -27,7 +28,15 @@ module.exports={
       {id:'outils',slug:'mathematiques',mono:'OM',chapitres:[],ds:[]},
       {id:'analyse',slug:'analyse',mono:'An',chapitres:[],ds:[]}]},
     {id:'chelec',couleur:'#0f766e',modules:[
-      {id:'chimie',slug:'chimie',mono:'Ch',chapitres:[],ds:[]},
+      {id:'chimie',slug:'chimie',mono:'Ch',
+       chapitres:[
+         {id:'atome',titre:'L\'atome',url:'/cours/chimie/atome/'},
+         {id:'classification',titre:'La classification périodique',url:'/cours/chimie/classification/'},
+         {id:'molecules',titre:'Structure électronique des molécules',url:'/cours/chimie/molecules/'}],
+       ds:[{titre:'Chimie : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=chimie&ds=chimie',
+            desc:'Chapitres 1 et 2 : atome, configuration électronique, classification et électronégativité, Lewis, VSEPR, polarité.',
+            liens:[['L\'atome','/cours/chimie/atome/'],['Classification','/cours/chimie/classification/'],['Molécules','/cours/chimie/molecules/'],['Flashcards','/flashcards/?m=chimie']],
+            minids:'/mini-ds/?m=chimie&ds=chimie'}]},
       {id:'elec',slug:'electricite',mono:'Él',chapitres:[],ds:[]}]},
     {id:'meca',couleur:'#2453b8',modules:[
       {id:'statique',slug:'mecanique',mono:'Mé',

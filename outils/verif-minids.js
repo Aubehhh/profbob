@@ -6,16 +6,16 @@
    3. « copie parfaite » : la valeur affichée par le corrigé, et la même arrondie à 3 chiffres significatifs,
       tapées à la française (virgule), sont acceptées par le moteur de correction (assets/minids.js) → 20/20 ;
    4. chaque question est déclarée une fois dans mini-ds/matieres.js (nom lisible + chapitre).
-   Usage : node outils/verif-minids.js [N=2000] [matière]   (matières : meca, thermo ; par défaut toutes) */
+   Usage : node outils/verif-minids.js [N=2000] [matière]   (matières : meca, thermo, chimie ; par défaut toutes) */
 'use strict';
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'..');
 const ctx={window:{},Math,console};ctx.window.window=ctx.window;vm.createContext(ctx);
-for(const f of ['assets/minids.js','ds/statique/mini-ds/banque.js','mini-ds/banques/thermo.js','mini-ds/matieres.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
+for(const f of ['assets/minids.js','ds/statique/mini-ds/banque.js','mini-ds/banques/thermo.js','mini-ds/banques/chimie.js','mini-ds/matieres.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
 const W=ctx.window,{F,makeR,_test:{parse,correct}}=W.MiniDS;
 const N=+process.argv[2]||2000,ONLY=process.argv[3];
 // une banque par matière : global de la banque + solveurs indépendants (outils/solveurs/<id>.js)
-const MATS=[{id:'meca',bank:W.BANQUE_STATIQUE},{id:'thermo',bank:W.BANQUE_THERMO}].filter(m=>!ONLY||m.id===ONLY);
+const MATS=[{id:'meca',bank:W.BANQUE_STATIQUE},{id:'thermo',bank:W.BANQUE_THERMO},{id:'chimie',bank:W.BANQUE_CHIMIE}].filter(m=>!ONLY||m.id===ONLY);
 const sig3=x=>{if(x===0)return 0;const e=Math.floor(Math.log10(Math.abs(x)))-2;return Math.round(x/10**e)*10**e};
 const frStr=x=>String(x).replace('.',',').replace('-','−');
 let err=0,total=0;const fail=(m)=>{if(err<40)console.log('  ✗ '+m);err++};

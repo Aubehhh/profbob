@@ -39,5 +39,18 @@ window.MINIDS_MATIERES=[
   {id:'elec',nom:'Bases de l\'électricité',couleur:'#b45309'},
   {id:'web',nom:'Pages Web',couleur:'#be185d'},
   {id:'embarque',nom:'Informatique embarquée',couleur:'#15803d'},
-  {id:'chimie',nom:'Chimie',couleur:'#0f766e'}
+  {id:'chimie',module:'chimie',nom:'Chimie',couleur:'#0f766e',nota:'thermo',
+   banque:()=>window.BANQUE_CHIMIE,
+   noms:{composition:'Protons, neutrons, électrons',massemoy:'Masse atomique moyenne',abondance:'Abondance de deux isotopes',photon:'Énergie d\'un photon',raie:'Raie de l\'atome d\'hydrogène',
+     quantique:'Cases quantiques et électrons max',quadruplet:'Quadruplet possible ?',config:'Électrons de valence et célibataires',
+     position:'Place dans le tableau',ion:'Ion le plus probable',mulliken:'Électronégativité de Mulliken',pauling:'Électronégativité de Pauling',
+     electrons:'Électrons de valence d\'un édifice',chargef:'Charge formelle',dipole:'Moment dipolaire',ionique:'Caractère ionique',vsepr:'Type VSEPR et angle',polarite:'Moment d\'une liaison (molécule coudée)'},
+   chapitres:[
+     {id:'atome',nom:'L\'atome',detail:'Composition, isotopes, spectre de H, nombres quantiques, configuration',q:['composition','massemoy','abondance','photon','raie','quantique','quadruplet','config']},
+     {id:'classification',nom:'Classification périodique',detail:'Place dans le tableau, ions, électronégativité',q:['position','ion','mulliken','pauling']},
+     {id:'molecules',nom:'Structure des molécules',detail:'Lewis, charges formelles, moment dipolaire, VSEPR, polarité',q:['electrons','chargef','dipole','ionique','vsepr','polarite']}
+   ],
+   ds:[
+     {id:'chimie',nom:'DS Chimie',detail:'Chapitres 1 et 2 · semaine du 14 au 18 déc.',chapitres:['atome','classification','molecules'],n:8,min:60}
+   ]}
 ];

@@ -4,8 +4,8 @@
    - polices Google : cache d'abord (elles ne changent pas).
    Les compteurs de visites et le formulaire de contact ne passent jamais par le cache.
    Changer VERSION force le renouvellement du cache. */
-const VERSION='pb-v11';
-const CORE=['/','/matieres/','/mini-ds/','/flashcards/','/recherche/','/flashcards/cartes.js','/assets/recherche-index.js','/assets/progression.js','/notes/','/cours/statique/vecteurs/','/cours/statique/equilibre/','/cours/statique/moments/','/cours/thermo/concepts/','/cours/thermo/premier-principe/','/cours/thermo/proprietes/','/cours/thermo/volume-controle/','/cours/thermo/second-principe/','/mini-ds/banques/thermo.js','/contact/','/404.html',
+const VERSION='pb-v12';
+const CORE=['/','/matieres/','/mini-ds/','/flashcards/','/recherche/','/flashcards/cartes.js','/assets/recherche-index.js','/assets/progression.js','/notes/','/cours/statique/vecteurs/','/cours/statique/equilibre/','/cours/statique/moments/','/cours/thermo/concepts/','/cours/thermo/premier-principe/','/cours/thermo/proprietes/','/cours/thermo/volume-controle/','/cours/thermo/second-principe/','/mini-ds/banques/thermo.js','/cours/chimie/atome/','/cours/chimie/classification/','/cours/chimie/molecules/','/mini-ds/banques/chimie.js','/contact/','/404.html',
   '/assets/site.css','/assets/matieres.css','/assets/accueil.css','/assets/accueil.js','/assets/minids.css','/assets/notation.css','/assets/cours.css','/assets/cours.js',
   '/assets/minids.js','/assets/notation.js','/assets/notations.js','/assets/stats.js','/assets/pwa.js',
   '/mini-ds/matieres.js','/assets/ue-s1.js','/ds/statique/mini-ds/banque.js','/notes/maquette-s1.js','/assets/favicon.svg','/assets/icon-192.png'];
