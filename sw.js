@@ -4,7 +4,7 @@
    - polices Google : cache d'abord (elles ne changent pas).
    Les compteurs de visites et le formulaire de contact ne passent jamais par le cache.
    Changer VERSION force le renouvellement du cache. */
-const VERSION='pb-v7';
+const VERSION='pb-v8';
 const CORE=['/','/matieres/','/mini-ds/','/flashcards/','/recherche/','/flashcards/cartes.js','/assets/recherche-index.js','/assets/progression.js','/notes/','/ds/statique/','/contact/','/404.html',
   '/assets/site.css','/assets/matieres.css','/assets/accueil.css','/assets/accueil.js','/assets/minids.css','/assets/notation.css',
   '/assets/minids.js','/assets/notation.js','/assets/notations.js','/assets/stats.js','/assets/pwa.js',

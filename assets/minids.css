@@ -8,7 +8,7 @@
 .mds-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
 .mds-bar{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);
   margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-left,0px))}
-.mds-bar .in{max-width:780px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.mds-bar .in{max-width:var(--page-w,1000px);margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .mds-time{font-family:var(--mono);font-size:1.5rem;font-weight:600;font-variant-numeric:tabular-nums}
 .mds-time.low{color:var(--force)}
 .mds-bar .grow{flex:1}

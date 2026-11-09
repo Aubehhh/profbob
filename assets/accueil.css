@@ -1,12 +1,11 @@
 /* Accueil : titre, bandeau du DS en cours, tableau de bord perso, matières par UE (une ligne chacune), nouveautés */
-.wrap.home{max-width:960px}
 .home .hero{padding-top:34px;padding-bottom:6px}
 .home .hero h1{font-size:clamp(2.2rem,6vw,3.2rem)}
 .dedi{font-family:var(--display);font-size:.92rem;color:var(--muted);margin:8px 0 0}
 .dedi a{font-weight:600}
 .sec{font-size:1.05rem;margin:30px 0 12px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .sec small{font-family:var(--display);font-weight:400;font-size:.82rem;color:var(--muted)}
-.banner{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:var(--vec);color:#fff;border-radius:16px;padding:18px 22px;margin-top:18px}
+.banner{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:#2453b8;color:#fff;border-radius:16px;padding:18px 22px;margin-top:18px}
 .banner .t{flex:1;min-width:240px}
 .banner .eyebrow{color:rgba(255,255,255,.75)}
 .banner h3{font-size:1.3rem;margin:4px 0 2px;color:#fff}

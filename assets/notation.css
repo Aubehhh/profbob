@@ -15,3 +15,11 @@
 .nota td:last-child{font-family:var(--mono);color:var(--muted);white-space:nowrap;width:1%;text-align:right}
 .nota .howto{padding:10px 16px 14px;border-top:1px solid var(--line);font-family:var(--display);font-size:.88rem;color:var(--muted)}
 .nota .howto b{color:var(--ink)}
+@media (max-width:560px){
+  .nota table,.nota tbody,.nota tr,.nota td{display:block;width:auto}
+  .nota tr{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 16px;border-top:1px solid var(--line)}
+  .nota td{padding:0;border:0}
+  .nota td:first-child{grid-column:1;width:auto}
+  .nota td:last-child{grid-column:2;grid-row:1;width:auto}
+  .nota td:nth-child(2){grid-column:1/-1;font-size:.88rem;color:var(--muted)}
+}

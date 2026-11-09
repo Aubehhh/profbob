@@ -42,7 +42,6 @@
 .empty-state b{font-family:var(--display);font-size:1.1rem}
 .empty-state p{color:var(--muted);margin:6px 0 16px}
 .soon{color:var(--muted);font-size:.95rem}
-.wrap.wide{max-width:1000px}
 .sems{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .pill.off{border-style:dashed}
 .uegrid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:8px}

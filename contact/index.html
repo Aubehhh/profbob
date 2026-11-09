@@ -16,7 +16,7 @@
 /* Layout : barre du haut, puis deux colonnes sur grand écran (explications à gauche, formulaire à droite),
    une seule colonne sur téléphone. Après l'envoi, le formulaire laisse place à un écran de confirmation. */
 
-.page{max-width:980px;margin:0 auto}
+.page{max-width:var(--page-w);margin:0 auto}
 .hero2{padding-block:36px 8px}
 .grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:18px;align-items:start}
 @media (min-width:860px){.grid{grid-template-columns:280px 1fr;gap:36px}.side{position:sticky;top:20px}}
@@ -47,7 +47,7 @@
 .row2{display:grid;grid-template-columns:1fr;gap:0 16px}
 @media (min-width:640px){.row2{grid-template-columns:1fr 1fr}}
 .f label{display:block;font-family:var(--display);font-weight:700;font-size:.95rem;margin-bottom:6px}
-.f label small{font-family:var(--body);font-weight:400;color:var(--muted)}
+.f label small{font-family:var(--display);font-weight:400;font-size:.82rem;color:var(--muted)}
 .f input,.f textarea{width:100%;font:inherit;font-size:1rem;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
 .f textarea{min-height:160px;resize:vertical;line-height:1.5}
 .f input:focus,.f textarea:focus{outline:2px solid var(--vec);outline-offset:1px;border-color:var(--vec);background:var(--paper)}
