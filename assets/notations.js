@@ -34,9 +34,35 @@
       [v('M','O')+' = '+v('r')+' × '+v('F'),'Moment vectoriel ('+v('r')+' va de O vers un point de la ligne d\'action)','N·m',[M]],
       [v('M','R')+' = Σ('+v('r','i')+' × '+v('F','i')+')','Moment résultant de plusieurs forces, toutes par rapport au même point O','N·m',[M]],
       [s('M','a')+' = '+v('u','a')+' · ('+v('r')+' × '+v('F')+')','Moment par rapport à un axe a (exercices complémentaires) : un nombre','N·m',[M]]
-    ]
+    ],
+    // Thermodynamique 1 (K. Figoureux) : indices écrits avec <sub>, sans vecteurs (profil « thermo » de notation.js)
+    thermo:(()=>{const C='concepts',P='premier-principe',Pr='proprietes',VC='volume-controle',S2='second-principe';return [
+      ['m ; V','Masse ; volume (en ch. 2 et 4, V désigne aussi une vitesse)','kg ; m³'],
+      ['ρ ; v = 1/ρ','Masse volumique ; volume spécifique (massique)','kg/m³ ; m³/kg'],
+      ['p','Pression (absolue dans les relations thermo). 1 bar = 10⁵ Pa = 100 kPa','Pa, bar'],
+      ['p(relative) ; p(vide)','p(abs) − p<sub>atm</sub> ; p<sub>atm</sub> − p(abs)','Pa',[C]],
+      ['T','Température, en kelvins dans les formules : T(°C) = T(K) − 273,15','K'],
+      ['E = U + E<sub>c</sub> + E<sub>p</sub>','Énergie d\'un système : interne + cinétique + potentielle','J',[P,Pr]],
+      ['U ; u','Énergie interne ; énergie interne massique','J ; kJ/kg',[P,Pr,VC]],
+      ['W','Travail : W &gt; 0 fourni <b>par</b> le système, W &lt; 0 fourni <b>sur</b> le système','J',[P,Pr,S2]],
+      ['Q','Chaleur : Q &gt; 0 reçue <b>par</b> le système, Q &lt; 0 cédée','J',[P,Pr,S2]],
+      ['P<sub>th</sub> ; P<sub>méca</sub>','Puissance thermique reçue ; puissance mécanique fournie','W',[P,VC]],
+      ['n','Exposant polytropique : p V<sup>n</sup> = constante','—',[P,Pr]],
+      ['κ (k) ; h ; ε ; σ','Conductivité thermique ; coefficient de convection ; émissivité ; σ = 5,67×10⁻⁸ W/(m²·K⁴)','W/(m·K) ; W/(m²·K) ; — ; —',[P]],
+      ['Φ<sub>conv</sub> ; Q̇<sub>x</sub>','Flux thermique (puissance) par convection ; par conduction selon x','W',[P]],
+      ['Q<sub>in</sub> ; Q<sub>out</sub> ; W<sub>cycle</sub>','Chaleur entrante ; sortante ; travail net, par cycle (positifs dans le sens des flèches)','J',[P]],
+      ['η ; β ; γ','Rendement thermique ; coefficient de performance froid ; de pompe à chaleur','—',[P,S2]],
+      ['x','Titre en vapeur : masse de vapeur / masse totale (0 à 1)','—',[Pr,VC]],
+      ['f ; g ; fg','Indices : liquide saturé ; vapeur saturée ; g − f (vaporisation)','—',[Pr,VC]],
+      ['h = u + p v','Enthalpie massique','kJ/kg',[Pr,VC]],
+      ['c<sub>v</sub> ; c<sub>p</sub> ; k','Chaleurs massiques à volume / pression constants ; k = c<sub>p</sub>/c<sub>v</sub>','kJ/(kg·K)',[Pr]],
+      ['R ; r = R/M','Constante universelle (8,314 J/(mol·K)) ; constante du gaz','J/(kg·K)',[Pr,VC]],
+      ['q<sub>m</sub> ; q<sub>m,e</sub> ; q<sub>m,s</sub>','Débit massique ; à l\'entrée e ; à la sortie s','kg/s',[VC]],
+      ['vc','Indice : volume de contrôle (E<sub>vc</sub>, m<sub>vc</sub>, P<sub>th,vc</sub>)','—',[VC]],
+      ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
+    ]})()
   };
-  const HOWTO='<b>Comment répondre au mini-DS :</b> un nombre par case, virgule ou point acceptés, arrondi à 3 chiffres significatifs, sans unité (elle est écrite à côté). Garde le signe − des composantes négatives. Les angles sont en degrés.';
+  const HOWTO='<b>Comment répondre au mini-DS :</b> un nombre par case, virgule ou point acceptés, arrondi à 3 chiffres significatifs, sans unité (elle est écrite à côté). Garde le signe − des grandeurs négatives (composantes, travail reçu, chaleur cédée). Les angles sont en degrés.';
   window.Notations={
     has:id=>!!N[id],
     rows(id,ch){return (N[id]||[]).filter(r=>!ch||!r[3]||r[3].includes(ch))},

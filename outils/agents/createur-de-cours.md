@@ -13,6 +13,8 @@ Modèle de référence : `cours/statique/vecteurs/index.html` (et `equilibre/`, 
 - `assets/notations.js` : une clé par matière (même id que `mini-ds/matieres.js`). Chaque ligne : `[symbole HTML, sens, unité, [ids des chapitres]]`. Écrire les symboles **comme dans le cours** (ex. `F = k s ; s = l − l0`, `(F_R)x`, `M_O = F d`).
 - `assets/notation.js` met en forme le texte : `X_AB` → indice, `r_AB`/`u_a` → vecteur fléché, `Fx`/`rx` → composante. Une composante scalaire s'écrit **sans** `_` (`rx`, pas `r_x`, qui donnerait une flèche). Si le cours utilise une écriture que la règle ne connaît pas, compléter `convert()` (et vérifier les autres pages).
 - Une formule à mettre en forme à la main : `<span class="vec">r</span>` + `data-nonota` sur le bloc.
+- **Matière sans vecteurs** (thermo, électricité, chimie…) : `data-nota-profil="thermo"` sur le `<body>` et `nota:'thermo'` dans `mini-ds/matieres.js`. Ce profil ne fait que les indices écrits avec `_` (accents et virgule permis : `P_méca`, `q_m,e`, `dm_vc/dt`, `(∂u/∂T)_v`), sans transformer `u_f` ou `r_x` en vecteurs.
+- Exemple de matière complète : Thermodynamique (`cours/thermo/…`, 5 chapitres).
 
 ## 3. Écrire la page `/cours/<module>/<chapitre>/index.html`
 En-tête obligatoire : viewport, favicon, manifest, theme-color `#2453b8`, apple-touch-icon, polices, `site.css` + `notation.css` + `cours.css`, `notation.js` (defer).

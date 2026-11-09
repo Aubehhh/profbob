@@ -84,6 +84,7 @@
   const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   document.getElementById('eb').textContent='Flashcards · '+M.nom;
   document.title='Flashcards '+M.nom+' · profbob.fr';
+  if(M.nota)document.body.dataset.notaProfil=M.nota;
 
   const want=(q.get('ch')||'').split(',').filter(Boolean);
   const chSel=new Set(want.length?want:(M.chapitres||[]).map(c=>c.id));

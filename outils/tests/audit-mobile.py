@@ -1,8 +1,8 @@
-# Audit mobile : 15 pages × 1280 clair / 390 clair / 390 sombre, détection des débordements et erreurs JS. Serveur local sur 8765 requis.
+# Audit mobile : pages × 1280 clair / 390 clair / 390 sombre, débordements et erreurs JS. Serveur local sur 8765 requis.
 import asyncio
 from playwright.async_api import async_playwright
 BASE='http://127.0.0.1:8765'
-PAGES=['/','/matieres/','/matieres/mecanique/','/cours/statique/vecteurs/','/cours/statique/equilibre/','/cours/statique/moments/','/ds/statique/','/mini-ds/?m=meca&ch=vecteurs','/flashcards/?m=meca&ch=moments','/recherche/?q=ressort','/notes/','/contact/','/admin/','/404.html','/mini-ds/']
+PAGES=['/','/matieres/','/matieres/mecanique/','/cours/statique/vecteurs/','/cours/statique/equilibre/','/cours/statique/moments/','/ds/statique/','/mini-ds/?m=meca&ch=vecteurs','/flashcards/?m=meca&ch=moments','/recherche/?q=ressort','/notes/','/contact/','/admin/','/404.html','/mini-ds/','/cours/thermo/concepts/','/cours/thermo/premier-principe/','/cours/thermo/proprietes/','/cours/thermo/volume-controle/','/cours/thermo/second-principe/','/matieres/thermodynamique/','/mini-ds/?m=thermo&ds=thermo','/flashcards/?m=thermo&ch=volume-controle']
 VIEWS=[('1280 clair',1280,800,'light'),('390 clair',390,844,'light'),('390 sombre',390,844,'dark')]
 JS='''()=>{const W=innerWidth,out=[];
  if(document.documentElement.scrollWidth>W+1)out.push('page '+document.documentElement.scrollWidth+'px');

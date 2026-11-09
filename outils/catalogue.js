@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'9 nov.',texte:'Statique refaite chapitre par chapitre, d\'après les diapos du prof',url:'/cours/statique/vecteurs/',nouveau:true},
+    {date:'9 nov.',texte:'Thermodynamique : les 5 chapitres, avec mini-DS et flashcards',url:'/matieres/thermodynamique/',nouveau:true},
+    {date:'9 nov.',texte:'Statique refaite chapitre par chapitre, d\'après les diapos du prof',url:'/cours/statique/vecteurs/'},
     {date:'8 nov.',texte:'Flashcards des formules, recherche dans les cours et progression par chapitre',url:'/flashcards/?m=meca'},
     {date:'8 nov.',texte:'Mode « Mes erreurs » dans le mini-DS',url:'/mini-ds/'},
     {date:'8 nov.',texte:'Toutes les matières du S1 rangées par UE',url:'/matieres/'},
@@ -38,7 +39,17 @@ module.exports={
             desc:'Chapitres 1 à 3 : vecteurs et forces, vecteur position, produit scalaire, équilibre d\'une particule, produit vectoriel, moments.',
             liens:[['Chapitre 1','/cours/statique/vecteurs/'],['Chapitre 2','/cours/statique/equilibre/'],['Chapitre 3','/cours/statique/moments/'],['Flashcards','/flashcards/?m=meca']],
             minids:'/mini-ds/?m=meca&ds=statique'}]},
-      {id:'thermo',slug:'thermodynamique',mono:'Th',chapitres:[],ds:[]}]},
+      {id:'thermo',slug:'thermodynamique',mono:'Th',
+       chapitres:[
+         {id:'concepts',titre:'Concepts et définitions d\'introduction',url:'/cours/thermo/concepts/'},
+         {id:'premier-principe',titre:'L\'énergie et le premier principe',url:'/cours/thermo/premier-principe/'},
+         {id:'proprietes',titre:'Évaluation des propriétés thermodynamiques',url:'/cours/thermo/proprietes/'},
+         {id:'volume-controle',titre:'Analyse par volume de contrôle',url:'/cours/thermo/volume-controle/'},
+         {id:'second-principe',titre:'Le second principe (partie 1)',url:'/cours/thermo/second-principe/'}],
+       ds:[{titre:'Thermodynamique : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=thermo&ds=thermo',
+            desc:'Chapitres 1 à 5 : pression et température, premier principe, transferts de chaleur, cycles, tables et gaz parfait, volume de contrôle, second principe.',
+            liens:[['Ch. 1','/cours/thermo/concepts/'],['Ch. 2','/cours/thermo/premier-principe/'],['Ch. 3','/cours/thermo/proprietes/'],['Ch. 4','/cours/thermo/volume-controle/'],['Ch. 5','/cours/thermo/second-principe/'],['Flashcards','/flashcards/?m=thermo']],
+            minids:'/mini-ds/?m=thermo&ds=thermo'}]}]},
     {id:'info',couleur:'#be185d',modules:[
       {id:'embarque',slug:'informatique-embarquee',mono:'IE',chapitres:[],ds:[]},
       {id:'web',slug:'pages-web',mono:'We',chapitres:[],ds:[]}]},

@@ -2,7 +2,9 @@
 
 Lancé par l'agent « créateur de cours » une fois le chapitre écrit. Il part de la page chapitre (mêmes chapitres, mêmes notations, mêmes formules) et produit :
 
-## 1. Banque du mini-DS (`<chemin>/mini-ds/banque.js`)
+## 1. Banque du mini-DS (`mini-ds/banques/<id matière>.js`)
+Nouvelle matière : ajouter `<script src="/mini-ds/banques/<id>.js">` dans `mini-ds/index.html` et le fichier dans le `CORE` de `sw.js`. Exemples : `ds/statique/mini-ds/banque.js` (méca), `mini-ds/banques/thermo.js`.
+Quand le cours utilise des tables (thermo), **écrire les valeurs nécessaires dans l'énoncé** : aucune question ne doit obliger à ouvrir les tables.
 Un générateur par **type d'exercice** du chapitre (au moins un par section importante). Format : voir l'en-tête de `ds/statique/mini-ds/banque.js`.
 - Valeurs tirées avec `R` (reproductible : même sujet = mêmes valeurs pour toute la classe), choisies pour que le calcul soit propre (racines entières, angles usuels).
 - `fields` : `label` en notation du cours, `unit`, `ans`, `d` (décimales affichées), `tol`/`rel` si besoin, `type:'angle'`, et **`hint` = « quoi taper »** (signe, intervalle, unité).
@@ -20,7 +22,8 @@ Pour chaque chapitre : toutes les formules encadrées de la page, recto = la que
 Les exercices des diapos et des PDF complémentaires vont dans la section `#exos` de la page chapitre (méthode, et correction complète quand les données de la figure sont lisibles et le résultat vérifié).
 
 ## 5. Vérifier (obligatoire)
-- `node outils/verif-minids.js 3000` : pour chaque question, un **solveur indépendant** (méthode différente : système linéaire, règle cyclique pour le produit vectoriel…) recalcule la réponse à partir de `v` ; contrôle aussi qu'aucun NaN/undefined n'apparaît, et qu'une réponse tapée à la française (valeur du corrigé, ou 3 chiffres significatifs) est acceptée → copies parfaites notées 20/20. Ajouter un solveur pour chaque nouvelle question.
+- Solveurs dans `outils/solveurs/<id matière>.js`, matière déclarée dans `MATS` en haut de `outils/verif-minids.js`.
+- `node outils/verif-minids.js 3000 [id]` : pour chaque question, un **solveur indépendant** (méthode différente : système linéaire, règle cyclique pour le produit vectoriel…) recalcule la réponse à partir de `v` ; contrôle aussi qu'aucun NaN/undefined n'apparaît, et qu'une réponse tapée à la française (valeur du corrigé, ou 3 chiffres significatifs) est acceptée → copies parfaites notées 20/20. Ajouter un solveur pour chaque nouvelle question.
 - Test navigateur : sur `/mini-ds/?m=<id>&ch=<chapitre>`, rendre une copie, relire les valeurs attendues, refaire le même sujet avec ces valeurs → 20/20 sans erreur JS.
 - `node outils/build.js`, puis maquette avant mise en ligne.
 

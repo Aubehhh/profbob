@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 3 · Évaluation des propriétés thermodynamiques · Thermodynamique · profbob.fr</title>
+<meta name="description" content="Thermodynamique 1, chapitre 3 : phase, substance pure et principe d'état, surface p-v-t, saturation et diagrammes, le changement de phase et le titre en vapeur, lire les tables et in. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="thermo-proprietes" data-matiere="thermo" data-ch="proprietes" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/thermodynamique/">← Thermodynamique</a> · Chapitre 3 sur 5</div>
+  <h1>Évaluation des propriétés thermodynamiques</h1>
+  <p class="lead">Trouver l'état d'une substance (liquide, mélange, vapeur), lire les tables, utiliser le titre en vapeur et le modèle du gaz parfait.</p>
+  <div class="chips"><span class="chip"><b>8</b> sections</span><span class="chip">≈ 3 h 30</span><span class="chip">Diapos 73 à 132</span><span class="chip">Cours de K. Figoureux</span><span class="chip">Prérequis : <a href="/cours/thermo/premier-principe/">chapitre 2</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=thermo&amp;ch=proprietes">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=thermo&amp;ch=proprietes">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Phase et état</a>
+  <a href="#s2"><span class="n">2</span>Surface p-v-T</a>
+  <a href="#s3"><span class="n">3</span>Changement de phase</a>
+  <a href="#s4"><span class="n">4</span>Tables</a>
+  <a href="#s5"><span class="n">5</span>Mélange diphasique</a>
+  <a href="#s6"><span class="n">6</span>Trouver l'état</a>
+  <a href="#s7"><span class="n">7</span>Chaleurs massiques</a>
+  <a href="#s8"><span class="n">8</span>Gaz parfait</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="thermo"></div>
+
+<section class="csec" id="s1" data-toc="Phase et état">
+  <div class="shead"><span class="num">1</span><h2>Phase, substance pure et principe d'état</h2><span class="meta">diapos 76 à 80 · 15 min</span></div>
+  <ul>
+    <li><b>Phase</b> : matière homogène dans toute sa masse, par sa composition chimique et sa structure physique (tout solide, tout liquide ou tout vapeur). L'eau avec des glaçons : deux phases.</li>
+    <li><b>Substance pure</b> : composition chimique uniforme et invariable. Elle peut exister sous plusieurs phases si chacune a la même composition (eau + glaçons, oui ; mélange air-carburant, seulement avant l'allumage).</li>
+    <li><b>Système compressible simple</b> : système constitué d'une substance pure courante (celles des tables A-2 à A-18, A-22, A-23).</li>
+  </ul>
+  <div class="retiens"><b>Principe d'état.</b> Pour un système compressible simple, <b>deux propriétés intensives indépendantes</b> suffisent à fixer toutes les autres. Les couples (T, v) et (p, v) sont souvent pratiques. Attention : dans un mélange liquide-vapeur, p et T ne sont <b>pas</b> indépendantes.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Surface p-v-T">
+  <div class="shead"><span class="num">2</span><h2>Surface p-v-T, saturation et diagrammes</h2><span class="meta">diapos 81 à 84 · 20 min</span></div>
+  <p>Pour une substance pure, p = p(T, v). Cette relation forme une surface avec des régions monophasées (solide, liquide, vapeur) et, entre elles, des régions diphasées où deux phases coexistent à l'équilibre.</p>
+  <ul>
+    <li><b>Dôme de vapeur</b> : la région en cloche des mélanges liquide-vapeur. Ses bords sont les courbes de <b>liquide saturé</b> (à gauche) et de <b>vapeur saturée</b> (à droite).</li>
+    <li><b>État de saturation</b> : un état où un changement de phase commence ou se termine.</li>
+    <li><b>Point critique</b> : le sommet de la cloche. T<sub>c</sub> est la température maximale où liquide et vapeur peuvent coexister ; p<sub>c</sub> la pression à ce point.</li>
+    <li><b>T<sub>sat</sub></b> : température du changement de phase à une pression donnée. <b>p<sub>sat</sub></b> : pression du changement de phase à une température donnée.</li>
+    <li>Projections : sur le plan p–T, le <b>diagramme de phase</b> ; sur p–v, le <b>diagramme p-v</b> ; sur T–v, le <b>diagramme T-v</b>.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 420 230" width="420" role="img" aria-label="Diagramme T-v avec le dôme de vapeur et une isobare">
+      <g font-family="var(--mono)" font-size="12">
+        <line x1="40" y1="200" x2="400" y2="200" stroke="var(--muted)"/><line x1="40" y1="200" x2="40" y2="15" stroke="var(--muted)"/>
+        <text x="392" y="218" fill="var(--muted)">v</text><text x="26" y="22" fill="var(--muted)">T</text>
+        <path d="M 70 200 C 80 90, 140 40, 170 38 C 200 40, 300 120, 390 195" fill="var(--tint)" stroke="var(--ink)" stroke-width="1.5"/>
+        <circle cx="170" cy="38" r="4" fill="var(--force)"/><text x="178" y="32" fill="var(--force)">point critique</text>
+        <path d="M 50 185 L 104 120 L 290 120 L 340 60" fill="none" stroke="var(--vec)" stroke-width="3"/>
+        <circle cx="70" cy="161" r="4" fill="var(--vec)"/><text x="54" y="152" fill="var(--vec)">l</text>
+        <circle cx="104" cy="120" r="4" fill="var(--vec)"/><text x="94" y="112" fill="var(--vec)">f</text>
+        <circle cx="200" cy="120" r="4" fill="var(--vec)"/><text x="186" y="112" fill="var(--vec)">mélange</text>
+        <circle cx="290" cy="120" r="4" fill="var(--vec)"/><text x="296" y="114" fill="var(--vec)">g</text>
+        <circle cx="330" cy="72" r="4" fill="var(--vec)"/><text x="338" y="72" fill="var(--vec)">s</text>
+        <text x="58" y="215" fill="var(--muted)">liquide comprimé</text><text x="290" y="215" fill="var(--muted)">vapeur surchauffée</text>
+      </g>
+    </svg>
+    <figcaption>Chauffage à pression constante : l → f (liquide saturé) → mélange → g (vapeur saturée) → s (surchauffée). Le palier horizontal est à T<sub>sat</sub>.</figcaption>
+  </figure>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Changement de phase">
+  <div class="shead"><span class="num">3</span><h2>Le changement de phase et le titre en vapeur</h2><span class="meta">diapos 85 à 90 · 20 min</span></div>
+  <p>On chauffe 1 kg d'eau liquide à 20 °C dans un piston-cylindre, à pression constante :</p>
+  <ol class="steps">
+    <li><b>l, liquide comprimé</b> : T &lt; T<sub>sat</sub>(p). T monte vite, v très peu.</li>
+    <li><b>f, liquide saturé</b> : le liquide est sur le point de bouillir.</li>
+    <li><b>Mélange diphasique liquide-vapeur</b> : de la vapeur se forme, <b>sans changement de température</b>, et v augmente beaucoup. La phase liquide est du liquide saturé, la phase vapeur de la vapeur saturée.</li>
+    <li><b>g, vapeur saturée</b> : la dernière goutte vient de s'évaporer.</li>
+    <li><b>s, vapeur surchauffée</b> : T &gt; T<sub>sat</sub>(p), T et v augmentent.</li>
+  </ol>
+  <div class="formula key cours">x = m_vapeur / m_totale       0 ≤ x ≤ 1
+liquide saturé : x = 0          vapeur saturée : x = 1</div>
+  <div class="trap"><b>Piège.</b> Le titre x n'existe que dans le mélange diphasique. Pour un liquide comprimé ou une vapeur surchauffée, il n'a pas de sens.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Tables">
+  <div class="shead"><span class="num">4</span><h2>Lire les tables et interpoler</h2><span class="meta">diapos 91 à 95 · 25 min</span></div>
+  <div class="tw"><table>
+    <tr><th>Table</th><th>Contenu</th><th>Entrée</th></tr>
+    <tr><td>A-2</td><td>Eau saturée (liquide-vapeur)</td><td>par température</td></tr>
+    <tr><td>A-3</td><td>Eau saturée (liquide-vapeur)</td><td>par pression</td></tr>
+    <tr><td>A-4</td><td>Vapeur d'eau surchauffée</td><td>p et T</td></tr>
+    <tr><td>A-5</td><td>Eau liquide comprimée</td><td>p et T</td></tr>
+    <tr><td>A-22</td><td>Air, gaz parfait</td><td>T</td></tr>
+  </table></div>
+  <p>On y lit T, p, v, u, l'<b>enthalpie massique</b> h et l'entropie s (chapitre 6). L'enthalpie revient sans cesse dans les bilans (son sens physique arrive au chapitre 4) :</p>
+  <div class="formula key cours">h = u + p v        (Eq. 3.4)</div>
+  <h3>Interpolation linéaire</h3>
+  <p>Quand l'état tombe entre deux lignes de la table, on suppose une variation linéaire : la pente entre les deux lignes est la même que entre la première ligne et le point cherché.</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 95</div>
+    <p>Volume spécifique de la vapeur d'eau à 10 bar et 215 °C. Table A-4 à 10 bar : v = 0,2060 m³/kg à 200 °C et 0,2275 m³/kg à 240 °C.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(0,2275 − 0,2060) / (240 − 200) = (v − 0,2060) / (215 − 200)
+v = 0,2060 + 0,0215 × 15/40 = 0,2141 m³/kg</div>
+    </div></details>
+  </div>
+  <div class="coquille"><b>Note sur les tables.</b> La colonne v<sub>f</sub> des tables A-2 et A-3 est donnée « × 10³ » : à 8 °C, v<sub>f</sub> × 10³ = 1,002, donc v<sub>f</sub> = 1,002 × 10⁻³ m³/kg.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Mélange diphasique">
+  <div class="shead"><span class="num">5</span><h2>Propriétés d'un mélange liquide-vapeur</h2><span class="meta">diapos 96 à 99 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un mélange au titre x, c'est une fraction (1 − x) de liquide saturé et x de vapeur saturée : chaque propriété massique est la moyenne pondérée des deux.</div>
+  <div class="formula key cours">V = V_liq + V_vap     →     v = V/m = (1 − x) v_f + x v_g
+
+v = (1 − x) v_f + x v_g = v_f + x (v_g − v_f)      (Eq. 3.2)
+u = (1 − x) u_f + x u_g = u_f + x (u_g − u_f)      (Eq. 3.6)
+h = (1 − x) h_f + x h_g = h_f + x (h_g − h_f)      (Eq. 3.7)</div>
+  <p>Dans l'autre sens, si l'on connaît v (ou u, ou h) d'un mélange, on trouve le titre : <span class="m">x = (v − v_f) / (v_g − v_f)</span>.</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 99</div>
+    <p>Mélange d'eau à 6 °C, titre 0,4. Volume spécifique ? (Table A-2 à 6 °C : v<sub>f</sub> × 10³ = 1,0001 ; v<sub>g</sub> = 137,734 m³/kg.)</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">v = v_f + x (v_g − v_f) = 1,0001×10⁻³ + 0,4 × (137,734 − 1,0001×10⁻³) = 55,094 m³/kg</div>
+      <p>v<sub>f</sub> est négligeable devant v<sub>g</sub> : v ≈ x v<sub>g</sub>.</p>
+    </div></details>
+  </div>
+  <div class="coquille"><b>Coquille du diapo 99.</b> Le diapo écrit v<sub>f</sub> = 1,001×10⁻³ ; la table A-2 donne v<sub>f</sub> × 10³ = 1,0001 à 6 °C, soit 1,0001×10⁻³. Sans conséquence sur le résultat.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Trouver l'état">
+  <div class="shead"><span class="num">6</span><h2>Trouver l'état, puis faire le bilan avec les tables</h2><span class="meta">diapos 100 à 120 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> Avant de lire une table, il faut savoir <b>dans quelle région</b> on est. On compare la donnée à la valeur de saturation, avec la table A-2 (si on connaît T) ou A-3 (si on connaît p).</div>
+  <div class="tw"><table>
+    <tr><th>Données</th><th>Comparaison</th><th>État</th><th>Table</th></tr>
+    <tr><td>p et T</td><td>T &lt; T<sub>sat</sub>(p) (ou p &gt; p<sub>sat</sub>(T))</td><td>liquide comprimé</td><td>A-5, ou A-2 (approx. liquide saturé)</td></tr>
+    <tr><td>p et T</td><td>T = T<sub>sat</sub>(p)</td><td>mélange : il manque une donnée</td><td>—</td></tr>
+    <tr><td>p et T</td><td>T &gt; T<sub>sat</sub>(p) (ou p &lt; p<sub>sat</sub>(T))</td><td>vapeur surchauffée</td><td>A-4</td></tr>
+    <tr><td>T (ou p) et v</td><td>v &lt; v<sub>f</sub> ; v<sub>f</sub> &lt; v &lt; v<sub>g</sub> ; v &gt; v<sub>g</sub></td><td>liquide comprimé ; mélange ; surchauffée</td><td>A-5 ; titre x ; A-4</td></tr>
+    <tr><td>T (ou p) et u</td><td>même comparaison avec u<sub>f</sub> et u<sub>g</sub></td><td>idem</td><td>idem</td></tr>
+    <tr><td>T (ou p) et x</td><td>—</td><td>mélange</td><td>A-2 (ou A-3) + Eq. 3.2, 3.6, 3.7</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemples corrigés · diapos 105 à 118</div>
+    <p>Quelques états de l'eau (exemples 1, 2, 6, 11 et 12 du cours).</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Ex. 1 : 30 bar, 320 °C. A-3 : T_sat = 233,9 °C &lt; 320 °C   →  vapeur surchauffée (A-4)
+Ex. 2 : 25 bar, 100 °C. A-3 : T_sat = 224,0 °C &gt; 100 °C   →  liquide comprimé
+Ex. 6 : 80 °C, v = 1,2 m³/kg. A-2 : v_f = 0,0010291 &lt; 1,2 &lt; v_g = 3,407  →  mélange
+Ex. 11 : 80 °C, x = 0,6 : v = 0,0010291 + 0,6 × (3,407 − 0,0010291) = 2,045 m³/kg
+Ex. 12 : 80 bar, x = 0,6 (A-3 : u_f = 1305,6 ; u_g = 2569,8) :
+         u = 1305,6 + 0,6 × (2569,8 − 1305,6) = 2064,1 kJ/kg</div>
+    </div></details>
+  </div>
+  <div class="coquille"><b>Coquille du diapo 118.</b> L'exemple 12 utilise u<sub>f</sub> = 1308,6 kJ/kg (d'où 2065,3 kJ/kg) ; la table A-3 et les exemples 9 et 10 donnent u<sub>f</sub> = 1305,6 kJ/kg à 80 bar, soit u = 2064,1 kJ/kg.</div>
+  <h3>Bilan d'énergie avec les tables</h3>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 100 et 101</div>
+    <p>2 kg d'eau à 100 °C et 1 bar sont comprimés jusqu'à la vapeur saturée à 2,5 bar, en cédant 250 kJ de chaleur. Travail ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Bilan (ΔE_c = ΔE_p = 0) :  ΔU = Q − W   →   W = Q − m (u_2 − u_1)
+État 1 : 1 bar, 100 °C &gt; T_sat = 99,63 °C : surchauffée, A-4 : u_1 = 2506,7 kJ/kg
+État 2 : vapeur saturée à 2,5 bar, A-3 : u_2 = u_g = 2537,2 kJ/kg
+W = −250 − 2 × (2537,2 − 2506,7) = −311 kJ</div>
+      <p>Le signe − : du travail est fourni <b>sur</b> l'eau, normal pour une compression.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 13 (diapo 119)</div>
+    <p>Récipient rigide de 0,5 m³, mélange d'eau à p<sub>1</sub> = 1 bar et x<sub>1</sub> = 0,5, chauffé jusqu'à p<sub>2</sub> = 1,5 bar. (a) T<sub>1</sub>, T<sub>2</sub> ; (b) masse de vapeur aux états 1 et 2 ; (c) pression quand il ne reste que de la vapeur saturée.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Récipient rigide et fermé : v constant pendant tout le chauffage
+(a) A-3 : T_1 = T_sat(1 bar) = 99,63 °C ; à l'état 2, on vérifie que c'est encore un mélange :
+    T_2 = T_sat(1,5 bar) = 111,4 °C
+(b) v_1 = 1,0432×10⁻³ + 0,5 × (1,694 − 1,0432×10⁻³) = 0,8475 m³/kg   →   m = 0,5/0,8475 = 0,590 kg
+    m_vap,1 = x_1 m = 0,295 kg
+    À 1,5 bar : x_2 = (0,8475 − 1,0528×10⁻³)/(1,159 − 1,0528×10⁻³) = 0,731   →   m_vap,2 = 0,431 kg
+(c) Il ne reste que de la vapeur saturée quand v_g = 0,8475 m³/kg :
+    A-3 entre 2 bar (v_g = 0,8857) et 2,5 bar (v_g = 0,7187) : p ≈ 2,11 bar</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 14 (diapo 120)</div>
+    <p>Eau à 10 bar et 400 °C, refroidie à p constante jusqu'à la vapeur saturée (1→2), puis à volume constant jusqu'à 150 °C (2→3). Travail et chaleur de l'ensemble, en kJ/kg ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">État 1 (A-4, 10 bar, 400 °C) : v_1 = 0,3066 m³/kg ; u_1 = 2957,3 kJ/kg
+État 2 (A-3, vapeur saturée à 10 bar) : v_2 = 0,1944 m³/kg
+État 3 (A-2 à 150 °C, v_3 = v_2 = 0,1944 entre v_f = 1,0905×10⁻³ et v_g = 0,3928 : mélange)
+  x_3 = (0,1944 − 0,0010905)/(0,3928 − 0,0010905) = 0,4935
+  u_3 = 631,68 + 0,4935 × (2559,5 − 631,68) = 1583,1 kJ/kg
+W/m = p (v_2 − v_1) + 0 = 1000 kPa × (0,1944 − 0,3066) = −112,2 kJ/kg
+Q/m = (u_3 − u_1) + W/m = (1583,1 − 2957,3) − 112,2 = −1486,4 kJ/kg</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s7" data-toc="Chaleurs massiques">
+  <div class="shead"><span class="num">7</span><h2>Chaleurs massiques, liquides et incompressibles</h2><span class="meta">diapos 102 à 104 · 20 min</span></div>
+  <div class="formula key cours">c_v = (∂u/∂T)_v      c_p = (∂h/∂T)_p      k = c_p / c_v      (Eq. 3.8, 3.9, 3.10)</div>
+  <p>Malgré leur nom, c<sub>v</sub> et c<sub>p</sub> n'ont aucun lien général avec le terme Q du bilan d'énergie.</p>
+  <h3>Liquides : approximation par le liquide saturé</h3>
+  <div class="formula key cours">v(T, p) ≈ v_f(T)        u(T, p) ≈ u_f(T)        (Eq. 3.11, 3.12)
+h(T, p) ≈ h_f(T) + v_f(T) [p − p_sat(T)]     (Eq. 3.13)
+h(T, p) ≈ h_f(T)   si le terme entre crochets est petit   (Eq. 3.14)</div>
+  <h3>Substance incompressible (v constant, c_p = c_v = c)</h3>
+  <div class="formula key cours">u_2 − u_1 = c (T_2 − T_1)                     (Eq. 3.20a)
+h_2 − h_1 = c (T_2 − T_1) + v (p_2 − p_1)      (Eq. 3.20b)</div>
+  <label class="checkrow"><input type="checkbox" data-s="s7"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s8" data-toc="Gaz parfait">
+  <div class="shead"><span class="num">8</span><h2>Le modèle du gaz parfait</h2><span class="meta">diapos 121 à 132 · 45 min</span></div>
+  <div class="formula key cours">p V = n R T       (Eq. 3.35)    R = 8,314 J/(mol·K)
+p V = m r T       (Eq. 3.33)    n = m/M,  r = R/M
+p v = r T         (Eq. 3.32)    v = V/m</div>
+  <div class="formula key cours">u = u(T)                        (Eq. 3.36)
+h = u + p v = u(T) + r T        (Eq. 3.37)
+c_v(T) = du/dT    c_p(T) = dh/dT          (Eq. 3.38, 3.41)
+Chaleurs massiques constantes :
+u(T_2) − u(T_1) = c_v [T_2 − T_1]         (Eq. 3.50)
+h(T_2) − h(T_1) = c_p [T_2 − T_1]         (Eq. 3.51)</div>
+  <p>Sur un grand intervalle de température, c<sub>v</sub> et c<sub>p</sub> ne sont plus constantes : on lit u et h dans la table A-22 (air).</p>
+  <h3>Transformation polytropique d'un gaz</h3>
+  <div class="formula key cours">p Vⁿ = constante   (Eq. 3.52)
+n = 0 : isobare      n = ±∞ : isochore      n = 1 (gaz parfait) : isotherme</div>
+  <div class="trap"><b>Piège.</b> Dans p v = r T, T en kelvins, p en Pa (ou kPa avec r en kJ/(kg·K)), et r est propre au gaz : r = 8,314/M. Pour l'air, M = 28,97 g/mol, r = 0,287 kJ/(kg·K).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 128 et 129</div>
+    <p>1 kg d'air dans un réservoir rigide est chauffé de 300 K à 1500 K. Chaleur reçue ? (A-22 : u = 214,07 kJ/kg à 300 K ; 1205,41 kJ/kg à 1500 K.)</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Réservoir rigide : W = 0 ; ΔE_c = ΔE_p = 0   →   Q = m (u_2 − u_1)
+Q = 1 × (1205,41 − 214,07) = 991,3 kJ</div>
+      <p>Avec c<sub>v</sub> constant on se tromperait nettement sur un tel écart de température : c'est pour ça qu'on utilise la table.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 15 (diapo 123)</div>
+    <p>1 lb d'air : 1→2 isochore, 2→3 détente isotherme, 3→1 compression isobare. T<sub>1</sub> = 540 °R, p<sub>1</sub> = 1 atm, p<sub>2</sub> = 2 atm. T<sub>2</sub> et v<sub>3</sub> ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">1→2 isochore : p/T constant   →   T_2 = T_1 × p_2/p_1 = 540 × 2 = 1080 °R
+2→3 isotherme : T_3 = T_2 ;  3→1 isobare : p_3 = p_1 = 1 atm
+v_3 = r T_3 / p_3 = 53,34 × 1080 / (14,696 × 144) = 27,2 ft³/lb</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 16 (diapo 131)</div>
+    <p>0,907 kg d'air comprimé de 300 K à 466,67 K, en cédant 21,10 kJ de chaleur. Travail ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">A-22 : u_1 = 214,07 kJ/kg ; à 466,67 K, entre 460 K (329,97) et 470 K (337,32) :
+u_2 = 329,97 + (6,67/10) × 7,35 = 334,87 kJ/kg
+W = Q − m (u_2 − u_1) = −21,10 − 0,907 × (334,87 − 214,07) = −130,7 kJ</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 17 (diapo 132)</div>
+    <p>CO (M = 28,01 g/mol) : 2 kg à 77 °C et 0,7 bar dans un réservoir, 8 kg à 27 °C et 1,2 bar dans l'autre. On mélange, T finale = 42 °C. Pression finale et chaleur ? (c<sub>v</sub> = 0,745 kJ/(kg·K))</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r = 8,314/28,01 = 0,2968 kJ/(kg·K)
+V_A = m r T / p = 2 × 0,2968 × 350,15 / 70 = 2,969 m³      V_B = 8 × 0,2968 × 300,15 / 120 = 5,939 m³
+p_f = m_tot r T_f / V_tot = 10 × 0,2968 × 315,15 / 8,908 = 105 kPa = 1,05 bar
+Q = ΔU (réservoirs rigides, W = 0) = c_v [2 × (42 − 77) + 8 × (42 − 27)] = 0,745 × 50 = 37,3 kJ</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Gaz parfait : à quoi l'énergie interne massique u est-elle liée ?</p>
+      <div class="opts"><button>à p et T</button><button data-ok="1">à T seulement</button><button>à v seulement</button></div>
+      <div class="fb" hidden>Eq. 3.36 : u = u(T). Même chose pour h = u(T) + r T.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s8"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Pour aller plus loin</h2></div>
+  <p>Les exercices 13 à 17 du chapitre sont corrigés plus haut. Pour t'entraîner à repérer les états, refais les exemples 3, 4, 5, 7, 8, 9 et 10 (diapos 109 à 116) en cachant la conclusion : la méthode est dans le tableau de la section 6.</p>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=thermo&amp;ch=proprietes"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=thermo&amp;ch=proprietes"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=thermo&amp;ds=thermo"><b>DS blanc Thermodynamique ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/thermo/premier-principe/"><small>◂ Chapitre 2</small>Premier principe</a><a class="next" href="/cours/thermo/volume-controle/"><small>Chapitre 4 ▸</small>Volume de contrôle</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Thermodynamique%20%C2%B7%20chapitre%203">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

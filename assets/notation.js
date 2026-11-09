@@ -2,7 +2,9 @@
    - vecteurs : r_AB, u_a, i j k (dans {… i … j … k}), r × F, a · b, |A|  →  flèche au-dessus (classe .vec)
    - indices  : X_AB → X avec AB en indice (aussi A_⊥, A_∥) ; Fx, F1x, FRx, FR → F avec x, 1x, Rx, R en indice ; (F_R)x → (F_R) avec x en indice
    Appliqué aux éléments .formula, .m et [data-nota] (texte seulement, le HTML existant est respecté).
-   Une seule règle pour tout le site : la page de cours et le mini-DS écrivent pareil. */
+   Une seule règle pour tout le site : la page de cours et le mini-DS écrivent pareil.
+   Profils : par défaut « meca » (vecteurs + indices). Un élément sous [data-nota-profil="thermo"] (ou le body) n'a que
+   les indices X_ab (lettres accentuées et virgule permises : P_méca, q_m,e, W_cycle, h_fg), sans flèches de vecteur. */
 (function(){
   'use strict';
   const V=(s,sub)=>'<span class="vec">'+s+'</span>'+(sub?'<sub>'+sub+'</sub>':'');
@@ -40,18 +42,28 @@
     return s;
   }
 
+  // profil thermo : seulement les indices, écrits avec _ comme dans le cours (h_e, v_f, Q_in, P_th, Φ_conv, E_c2)
+  function convertThermo(t){
+    let s=esc(t);
+    const SB='([A-Za-zÀ-ÿ0-9,₀-₉]*[A-Za-zÀ-ÿ0-9₀-₉])';
+    s=s.replace(new RegExp('(^|[^A-Za-zÀ-ÿ>])d([A-Za-z])_'+SB,'g'),(m,p,a,b)=>p+'d'+a+'<sub>'+b+'</sub>');        // dm_vc/dt, dE_vc/dt
+    s=s.replace(new RegExp('(^|[^A-Za-zÀ-ÿ>])([A-Za-zα-ωΑ-Ω]\u0307?)_'+SB,'g'),(m,p,a,b)=>p+a+'<sub>'+b+'</sub>');   // h_e, Q̇_x, Σ_e
+    s=s.replace(/\)_([a-z]+)/g,(m,b)=>')<sub>'+b+'</sub>');                                                         // (∂u/∂T)_v
+    return s;
+  }
   function applyText(node){
     const w=document.createTreeWalker(node,NodeFilter.SHOW_TEXT,{acceptNode:n=>{
       const p=n.parentElement;if(!p)return NodeFilter.FILTER_REJECT;
       if(p.closest('.vec,sub,sup,svg,script,style,input,textarea,[data-nonota]'))return NodeFilter.FILTER_REJECT;
       return /[_|×·ijkxyzR0-9]/.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
     const list=[];let n;while((n=w.nextNode()))list.push(n);
-    list.forEach(t=>{const h=convert(t.nodeValue);if(h===esc(t.nodeValue))return;
+    list.forEach(t=>{const pr=t.parentElement.closest('[data-nota-profil]');const th=pr&&pr.dataset.notaProfil==='thermo';
+      const h=(th?convertThermo:convert)(t.nodeValue);if(h===esc(t.nodeValue))return;
       const span=document.createElement('span');span.innerHTML=h;t.replaceWith(...span.childNodes)});
   }
   function apply(root){
     (root||document).querySelectorAll('.formula,.m,[data-nota],[data-nota-all] p,[data-nota-all] li,[data-nota-all] td,[data-nota-all] button,[data-nota-all] summary,[data-nota-all] .q').forEach(el=>{if(!el.dataset.notaDone){applyText(el);el.dataset.notaDone='1'}});
   }
-  window.Nota={apply,convert,V};
+  window.Nota={apply,convert,convertThermo,V};
   if(document.readyState!=='loading')apply();else document.addEventListener('DOMContentLoaded',()=>apply());
 })();

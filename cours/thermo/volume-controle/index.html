@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 4 · Analyse par volume de contrôle fondée sur l'énergie · Thermodynamique · profbob.fr</title>
+<meta name="description" content="Thermodynamique 1, chapitre 4 : bilan des débits massiques, bilan de puissance pour un volume de contrôle, tuyères, diffuseurs, turbines, compresseurs et pompes, échangeurs de chaleu. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="thermo-volume-controle" data-matiere="thermo" data-ch="volume-controle" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/thermodynamique/">← Thermodynamique</a> · Chapitre 4 sur 5</div>
+  <h1>Analyse par volume de contrôle fondée sur l'énergie</h1>
+  <p class="lead">Quand la matière traverse le système : bilans de débit et de puissance, appliqués aux tuyères, turbines, compresseurs, échangeurs et détendeurs.</p>
+  <div class="chips"><span class="chip"><b>4</b> sections</span><span class="chip">≈ 3 h</span><span class="chip">Diapos 133 à 163</span><span class="chip">Cours de K. Figoureux</span><span class="chip">Prérequis : <a href="/cours/thermo/proprietes/">chapitre 3</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=thermo&amp;ch=volume-controle">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=thermo&amp;ch=volume-controle">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Bilan de masse</a>
+  <a href="#s2"><span class="n">2</span>Bilan de puissance</a>
+  <a href="#s3"><span class="n">3</span>Tuyères, turbines…</a>
+  <a href="#s4"><span class="n">4</span>Échangeurs, laminage</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="thermo"></div>
+
+<section class="csec" id="s1" data-toc="Bilan de masse">
+  <div class="shead"><span class="num">1</span><h2>Bilan des débits massiques</h2><span class="meta">diapos 136 à 140 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Ce qui s'accumule dans le volume de contrôle = ce qui entre − ce qui sort. En régime permanent, rien ne s'accumule : ce qui entre ressort.</div>
+  <div class="formula key cours">dm_vc/dt = q_m,e − q_m,s                    (Eq. 4.1)
+dm_vc/dt = Σ_e q_m,e − Σ_s q_m,s            (Eq. 4.2)   plusieurs entrées / sorties
+
+Débit massique (écoulement 1D) :   q_m = A V / v      (Eq. 4.4b)
+   A : section, V : vitesse moyenne, v : volume massique
+
+Régime permanent :   Σ_e q_m,e = Σ_s q_m,s            (Eq. 4.6)</div>
+  <ul>
+    <li><b>Écoulement unidimensionnel</b> : l'écoulement est perpendiculaire à la frontière aux entrées et sorties, et les propriétés y sont uniformes sur la section.</li>
+    <li><b>Régime permanent (stationnaire)</b> : toutes les propriétés restent constantes dans le temps.</li>
+    <li>Le <b>débit volumique</b> est A V (en m³/s) ; le débit massique est A V / v = ρ A V (en kg/s).</li>
+  </ul>
+  <div class="trap"><b>Piège.</b> Dans ce chapitre, V est une <b>vitesse</b> et v un volume massique. Sections en m² : 25 cm² = 25×10⁻⁴ m².</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 1 (diapo 140)</div>
+    <p>Réchauffeur d'eau en régime permanent : vapeur en 1 (7 bar, 200 °C, 40 kg/s) ; eau liquide en 2 (7 bar, 40 °C, A<sub>2</sub> = 25 cm²) ; liquide saturé à 7 bar en 3, débit volumique 0,06 m³/s. Débits en 2 et 3, vitesse en 2 ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Sortie 3 : liquide saturé à 7 bar, A-3 : v_3 = v_f = 1,1080×10⁻³ m³/kg
+q_m,3 = (A V)_3 / v_3 = 0,06 / 1,1080×10⁻³ = 54,15 kg/s
+Régime permanent : q_m,1 + q_m,2 = q_m,3   →   q_m,2 = 54,15 − 40 = 14,15 kg/s
+Entrée 2 : liquide à 40 °C, v_2 ≈ v_f(40 °C) = 1,0078×10⁻³ m³/kg
+V_2 = q_m,2 v_2 / A_2 = 14,15 × 1,0078×10⁻³ / 25×10⁻⁴ = 5,70 m/s</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Bilan de puissance">
+  <div class="shead"><span class="num">2</span><h2>Bilan de puissance pour un volume de contrôle</h2><span class="meta">diapos 141 à 146 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> En plus de la chaleur et du travail, la matière qui entre apporte son énergie (interne, cinétique, potentielle) et il faut un travail pour la pousser dedans : le <b>travail d'écoulement</b> p v. Les deux se regroupent dans l'enthalpie h = u + p v.</div>
+  <div class="formula key cours">dE_vc/dt = P_th − P_méca + q_m,e (u_e + V_e²/2 + g z_e) − q_m,s (u_s + V_s²/2 + g z_s)   (Eq. 4.9)
+
+Puissance mécanique :  P_méca = P_méca,vc + q_m,s (p_s v_s) − q_m,e (p_e v_e)       (Eq. 4.12)
+   P_méca,vc : arbres tournants, déplacement de frontière, effets électriques
+   q_m (p v) : travail d'écoulement en sortie et en entrée
+
+Avec h = u + p v :
+dE_vc/dt = P_th,vc − P_méca,vc + Σ_e q_m,e (h_e + V_e²/2 + g z_e) − Σ_s q_m,s (h_s + V_s²/2 + g z_s)   (Eq. 4.15)</div>
+  <h3>Régime permanent, une entrée et une sortie</h3>
+  <div class="formula key cours">0 = P_th,vc − P_méca,vc + q_m [ (h_e − h_s) + (V_e² − V_s²)/2 + g (z_e − z_s) ]   (Eq. 4.20a)
+
+En divisant par le débit :
+0 = Q_vc − W_vc + (h_e − h_s) + (V_e² − V_s²)/2 + g (z_e − z_s)                (Eq. 4.20b)</div>
+  <div class="trap"><b>Piège des unités.</b> h est en kJ/kg mais V²/2 sort en J/kg (m²/s²) : divise V²/2 et g z par 1000 avant de les ajouter à h. Avec 665 m/s, V²/2 = 221 kJ/kg : pas négligeable ; avec 10 m/s, 0,05 kJ/kg : négligeable.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Tuyères, turbines…">
+  <div class="shead"><span class="num">3</span><h2>Tuyères, diffuseurs, turbines, compresseurs et pompes</h2><span class="meta">diapos 147 à 155 · 45 min</span></div>
+  <p>Pour chaque appareil, on part de l'Eq. 4.20a et on barre ce qui est nul ou négligeable :</p>
+  <div class="tw"><table>
+    <tr><th>Appareil</th><th>Rôle</th><th>Ce qu'on néglige</th><th>Bilan réduit</th></tr>
+    <tr><td>Tuyère / diffuseur</td><td>la vitesse augmente / diminue le long de la section variable</td><td>P<sub>méca,vc</sub> = 0, Q souvent négligeable, Δz</td><td>0 = h<sub>e</sub> − h<sub>s</sub> + (V<sub>e</sub>² − V<sub>s</sub>²)/2 (Eq. 4.21)</td></tr>
+    <tr><td>Turbine</td><td>le fluide fait tourner un arbre : produit de la puissance</td><td>ΔV²/2, Δz, Q (si négligeables)</td><td>P<sub>méca</sub> = q<sub>m</sub> (h<sub>e</sub> − h<sub>s</sub>)</td></tr>
+    <tr><td>Compresseur (gaz) / pompe (liquide)</td><td>on fournit du travail pour augmenter la pression ou l'altitude</td><td>ΔV²/2, Δz, Q (si négligeables)</td><td>P<sub>méca</sub> = q<sub>m</sub> (h<sub>e</sub> − h<sub>s</sub>) &lt; 0</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 2 (diapo 149)</div>
+    <p>Tuyère, régime permanent : entrée 40 bar, 400 °C, 10 m/s ; sortie 15 bar, 665 m/s ; débit 2 kg/s ; Q et Δz négligeables. Section de sortie ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">A-4 (40 bar, 400 °C) : h_e = 3213,6 kJ/kg
+Eq. 4.21 :  h_s = h_e + (V_e² − V_s²)/2 = 3213,6 + (10² − 665²)/2 /1000 = 3213,6 − 221,1 = 2992,5 kJ/kg
+A-4 à 15 bar : h = 2992,7 kJ/kg à 280 °C  →  T_s ≈ 280 °C, v_s = 0,1627 m³/kg
+A_s = q_m v_s / V_s = 2 × 0,1627 / 665 = 4,89×10⁻⁴ m²</div>
+      <p>Réponse : <span class="res">A<sub>s</sub> ≈ 4,89 cm²</span>.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 3 (diapo 152)</div>
+    <p>Turbine : 4600 kg/h, puissance 1000 kW. Entrée 60 bar, 400 °C, 10 m/s ; sortie 0,1 bar, x = 0,9, 30 m/s. Puissance thermique échangée ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">q_m = 4600/3600 = 1,278 kg/s
+A-4 (60 bar, 400 °C) : h_e = 3177,2 kJ/kg
+A-3 (0,1 bar) : h_s = h_f + x h_fg = 191,83 + 0,9 × 2392,8 = 2345,4 kJ/kg
+(V_s² − V_e²)/2 = (900 − 100)/2 = 400 J/kg = 0,4 kJ/kg
+P_th = P_méca + q_m [(h_s − h_e) + (V_s² − V_e²)/2] = 1000 + 1,278 × (−831,8 + 0,4) = −62,4 kW</div>
+      <p>Réponse : <span class="res">P<sub>th</sub> = −62,4 kW</span> : la turbine perd de la chaleur vers l'extérieur.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 4 (diapo 155)</div>
+    <p>Compresseur d'air (gaz parfait) : entrée 1 bar, 290 K, 6 m/s, section 0,1 m² ; sortie 7 bar, 450 K, 2 m/s ; pertes de chaleur 180 kJ/min. Puissance ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">v_e = r T_e / p_e = 0,287 × 290 / 100 = 0,8323 m³/kg      q_m = A V / v = 0,1 × 6 / 0,8323 = 0,721 kg/s
+A-22 : h_e = 290,16 kJ/kg ; h_s = 451,80 kJ/kg      P_th = −180/60 = −3 kW
+P_méca = P_th + q_m [(h_e − h_s) + (V_e² − V_s²)/2] = −3 + 0,721 × (−161,64 + 0,016) = −119,5 kW</div>
+      <p>Réponse : <span class="res">P<sub>méca</sub> = −119,5 kW</span> : le signe − dit que la puissance est fournie au compresseur.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Échangeurs, laminage">
+  <div class="shead"><span class="num">4</span><h2>Échangeurs de chaleur, détendeurs et intégration</h2><span class="meta">diapos 156 à 163 · 40 min</span></div>
+  <h3>Échangeurs de chaleur</h3>
+  <p>Deux types : <b>contact direct</b> (chambre de mélange) ou <b>tube dans un tube à contre-courant</b>, où une paroi sépare les deux fluides. Sans puissance mécanique, avec ΔE<sub>c</sub>, ΔE<sub>p</sub> et pertes négligeables :</p>
+  <div class="formula key cours">0 = Σ_e q_m,e h_e − Σ_s q_m,s h_s</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 5 (diapo 158)</div>
+    <p>Condenseur : vapeur à 0,1 bar, x = 0,95, ressort liquide à 0,1 bar et 45 °C ; eau de refroidissement de 20 °C à 35 °C. (a) rapport des débits eau/vapeur ; (b) chaleur cédée par kg de vapeur.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Vapeur : h_1 = 191,83 + 0,95 × 2392,8 = 2465,0 kJ/kg ;  h_2 ≈ h_f(45 °C) = 188,45 kJ/kg
+Eau : h_3 ≈ h_f(20 °C) = 83,96 ;  h_4 ≈ h_f(35 °C) = 146,68 kJ/kg
+(a) q_m,eau / q_m,vap = (h_1 − h_2) / (h_4 − h_3) = 2276,6 / 62,72 = 36,3
+(b) chaleur cédée par la vapeur = h_1 − h_2 = 2276,6 kJ par kg de vapeur</div>
+    </div></details>
+  </div>
+  <h3>Organes de détente (laminage)</h3>
+  <p>Une restriction (vanne partiellement ouverte, bouchon poreux) fait chuter fortement la pression. Pas de travail, pas de chaleur, ΔE<sub>c</sub> et ΔE<sub>p</sub> négligeables :</p>
+  <div class="formula key cours">h_e = h_s        (Eq. 4.22)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 6 (diapo 161)</div>
+    <p>Ammoniac : entre dans le détendeur à 10 bar et 24 °C, ressort à 1 bar. Titre en sortie ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">10 bar : T_sat = 24,89 °C &gt; 24 °C  →  liquide (légèrement comprimé) : h_e ≈ h_f(24 °C) = 293,45 kJ/kg (A-13)
+Laminage : h_s = h_e = 293,45 kJ/kg
+A-14 à 1 bar : h_f = 28,18 ; h_fg = 1370,23 kJ/kg
+x_s = (h_s − h_f) / h_fg = (293,45 − 28,18) / 1370,23 = 0,194</div>
+    </div></details>
+  </div>
+  <h3>Intégration de systèmes</h3>
+  <p>On combine des composants (chaudière, turbine, condenseur, pompe) pour un objectif global, sous des contraintes comme un coût minimal : c'est l'<b>intégration de systèmes</b>. La centrale à vapeur en est l'exemple type. Pour l'exercice 7 (diapo 163), fais un bilan par composant, puis η = (P<sub>turbine</sub> + P<sub>pompe</sub>) / P<sub>th,chaudière</sub> (la puissance de la pompe est négative).</p>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Méthode générale pour un exercice de volume de contrôle</h2></div>
+  <ol class="steps">
+    <li>Dessine le volume de contrôle, numérote entrées et sorties, écris les données à chaque point.</li>
+    <li>Bilan de masse (régime permanent : entrées = sorties).</li>
+    <li>Bilan de puissance (Eq. 4.18 ou 4.20a), puis barre les termes négligeables d'après l'énoncé.</li>
+    <li>Pour chaque point, trouve l'état (chapitre 3) et lis h dans la bonne table ; gaz parfait : table A-22.</li>
+    <li>Calcule, avec V²/2 en kJ/kg, et commente le signe du résultat.</li>
+  </ol>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=thermo&amp;ch=volume-controle"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=thermo&amp;ch=volume-controle"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=thermo&amp;ds=thermo"><b>DS blanc Thermodynamique ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/thermo/proprietes/"><small>◂ Chapitre 3</small>Propriétés</a><a class="next" href="/cours/thermo/second-principe/"><small>Chapitre 5 ▸</small>Second principe</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Thermodynamique%20%C2%B7%20chapitre%204">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

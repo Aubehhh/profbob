@@ -2,8 +2,8 @@
 import asyncio,re,sys
 from playwright.async_api import async_playwright
 BASE='http://127.0.0.1:8765'
-async def run_one(page,ch):
-    await page.goto(f'{BASE}/mini-ds/?m=meca&ch={ch}')
+async def run_one(page,m,ch):
+    await page.goto(f'{BASE}/mini-ds/?m={m}&ch={ch}')
     await page.wait_for_selector('#start')
     await page.click('#start')
     await page.wait_for_selector('.mds-q')
@@ -30,9 +30,9 @@ async def main():
         b=await p.chromium.launch()
         page=await b.new_page()
         errs=[];page.on('pageerror',lambda e: errs.append(str(e)))
-        for ch in ['vecteurs','equilibre','moments','vecteurs,equilibre,moments']:
-            for k in range(3):
-                note,n,qs=await run_one(page,ch)
+        for m,ch in [('thermo','concepts'),('thermo','premier-principe'),('thermo','proprietes'),('thermo','volume-controle'),('thermo','second-principe'),('meca','vecteurs')]:
+            for k in range(2):
+                note,n,qs=await run_one(page,m,ch)
                 print(ch,'essai',k+1,':',note,'·',n,'cases ·',', '.join(qs))
         print('erreurs JS :',errs or 'aucune')
         await b.close()

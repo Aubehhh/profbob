@@ -162,6 +162,7 @@
 <script src="/assets/notations.js"></script>
 <script src="/assets/minids.js"></script>
 <script src="/ds/statique/mini-ds/banque.js"></script>
+<script src="/mini-ds/banques/thermo.js"></script>
 <script src="/assets/ue-s1.js"></script>
 <script src="matieres.js"></script>
 <script>
@@ -286,6 +287,7 @@
     history.replaceState(null,'',u);
     const label=(S.mode==='err'?'Mes erreurs':S.mode==='ds'?(m.ds.find(d=>d.id===S.ds)||{}).nom:(chs.length===1?(m.chapitres.find(c=>c.id===chs[0])||{}).nom:chs.length+' chapitres'))+' · '+S.n+' q · '+(S.t?S.t+' min':'sans chrono');
     cfgEl.hidden=true;runEl.hidden=false;document.getElementById('shared').hidden=true;
+    if(m.nota)runEl.dataset.notaProfil=m.nota;else delete runEl.dataset.notaProfil;
     MiniDS.start({
       id:S.m+':'+(S.mode==='err'?'err-'+base.map(b=>b.id).join('+'):chs.join('+'))+':'+S.n, histKey:'minids-'+S.m, errKey:'minids-err-'+S.m,
       mount:runEl, bank:P, report:'/contact/', startNow:true,

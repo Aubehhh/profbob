@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 5 · Le second principe de la thermodynamique · Thermodynamique · profbob.fr</title>
+<meta name="description" content="Thermodynamique 1, chapitre 5 : les énoncés du second principe, irréversibilités, processus réversibles et irréversibles, kelvin-planck en équation et rendement entre deux réservoirs. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="thermo-second-principe" data-matiere="thermo" data-ch="second-principe" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/thermodynamique/">← Thermodynamique</a> · Chapitre 5 sur 5</div>
+  <h1>Le second principe de la thermodynamique</h1>
+  <p class="lead">Pourquoi aucun moteur n'atteint 100 % : les énoncés du second principe, les irréversibilités et le rendement entre deux réservoirs.</p>
+  <div class="chips"><span class="chip"><b>3</b> sections</span><span class="chip">≈ 1 h</span><span class="chip">Diapos 164 à 179 (partie 1)</span><span class="chip">Cours de K. Figoureux</span><span class="chip">Prérequis : <a href="/cours/thermo/volume-controle/">chapitre 4</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=thermo&amp;ch=second-principe">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=thermo&amp;ch=second-principe">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Énoncés</a>
+  <a href="#s2"><span class="n">2</span>Irréversibilités</a>
+  <a href="#s3"><span class="n">3</span>Cycles et rendement</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="thermo"></div>
+
+<section class="csec" id="s1" data-toc="Énoncés">
+  <div class="shead"><span class="num">1</span><h2>Les énoncés du second principe</h2><span class="meta">diapos 166 à 170 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le premier principe dit que l'énergie se conserve. Le second dit dans quel <b>sens</b> les choses se passent : la chaleur ne remonte pas seule du froid vers le chaud, et on ne transforme jamais toute la chaleur en travail.</div>
+  <p>Il n'existe pas d'énoncé unique ; le cours en donne trois.</p>
+  <ul>
+    <li><b>Clausius</b> : il est impossible pour un système de fonctionner de sorte que le <i>seul</i> résultat soit un transfert de chaleur d'un corps froid vers un corps chaud. (Un frigo y arrive, mais en consommant du travail.)</li>
+    <li><b>Kelvin-Planck</b> : il est impossible pour un système, en cycle, de fournir un travail net à son environnement en recevant de la chaleur d'un <i>seul</i> réservoir thermique.</li>
+    <li><b>Entropie</b> : il est impossible pour un système de fonctionner de manière à <i>détruire</i> l'entropie. L'entropie est une propriété extensive (chapitre 6) qui, contrairement à la masse et à l'énergie, ne se conserve pas : elle est produite dès qu'il y a frottement ou autre non-idéalité.</li>
+  </ul>
+  <div class="retiens"><b>Réservoir thermique.</b> Un système qui garde une température constante malgré les échanges de chaleur : l'atmosphère, un lac, l'océan, un gros bloc de cuivre.</div>
+  <div class="quiz">
+    <div class="q"><p>Un bateau qui avancerait en prenant de la chaleur à l'océan seul et en la changeant entièrement en travail viole…</p>
+      <div class="opts"><button>le premier principe</button><button data-ok="1">l'énoncé de Kelvin-Planck</button><button>rien du tout</button></div>
+      <div class="fb" hidden>L'énergie serait conservée (premier principe respecté), mais un seul réservoir et du travail net en cycle : c'est interdit par Kelvin-Planck.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Irréversibilités">
+  <div class="shead"><span class="num">2</span><h2>Irréversibilités, processus réversibles et irréversibles</h2><span class="meta">diapos 171 à 177 · 25 min</span></div>
+  <p>Le second principe sert à trouver les <b>performances théoriques optimales</b> d'un système, calculées sur des processus idéalisés. Les processus réels s'en écartent à cause des <b>irréversibilités</b> :</p>
+  <ul>
+    <li>transfert de chaleur à travers une différence de température finie ;</li>
+    <li>détente libre d'un gaz ou d'un liquide vers une pression plus basse ;</li>
+    <li>réaction chimique spontanée ; mélange spontané de matières différentes ;</li>
+    <li>frottement (glissement, écoulement des fluides) ;</li>
+    <li>courant électrique dans une résistance ; déformation inélastique.</li>
+  </ul>
+  <div class="tw"><table>
+    <tr><th>Processus</th><th>Irréversibilités</th></tr>
+    <tr><td>Irréversible</td><td>présentes dans le système et/ou son environnement. <b>Tous les processus réels.</b></td></tr>
+    <tr><td>Réversible</td><td>aucune, ni dans le système ni dans l'environnement. Parfaitement idéal.</td></tr>
+    <tr><td>Réversible en interne</td><td>aucune dans le système (il peut y en avoir dehors). C'est un processus de quasi-équilibre.</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple du cours · diapo 177</div>
+    <p>De l'eau s'évapore à 100 °C dans un piston-cylindre, chauffée par des gaz à 500 °C. L'eau passe par une suite d'états d'équilibre : <b>pas d'irréversibilité interne</b>. Mais le transfert de chaleur spontané entre 500 °C et 100 °C est une <b>irréversibilité externe</b>.</p>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Cycles et rendement">
+  <div class="shead"><span class="num">3</span><h2>Kelvin-Planck en équation et rendement entre deux réservoirs</h2><span class="meta">diapos 178 et 179 · 20 min</span></div>
+  <div class="formula key cours">Un seul réservoir :   W_cycle ≤ 0                     (Eq. 5.3)
+   &lt; 0 : des irréversibilités internes sont présentes
+   = 0 : aucune irréversibilité interne</div>
+  <p>Pour un cycle moteur qui échange avec deux réservoirs, un chaud (Q<sub>C</sub> reçue) et un froid (Q<sub>F</sub> cédée) :</p>
+  <div class="formula key cours">W_cycle = Q_C − Q_F
+
+η = W_cycle / Q_C = 1 − Q_F / Q_C           (Eq. 5.4)</div>
+  <div class="retiens"><b>Pourquoi η &lt; 1.</b> Si Q<sub>F</sub> valait 0, le moteur fonctionnerait avec un seul réservoir et fournirait du travail : Kelvin-Planck l'interdit. Il faut donc toujours rejeter une partie de la chaleur, et η &lt; 100 %.</div>
+  <div class="coquille"><b>Notations.</b> Au chapitre 2, les mêmes chaleurs s'appellent Q<sub>in</sub> et Q<sub>out</sub> ; au chapitre 5, Q<sub>C</sub> (chaud) et Q<sub>F</sub> (froid). Ce sont les mêmes formules.</div>
+  <div class="quiz">
+    <div class="q"><p>Un moteur reçoit Q<sub>C</sub> = 500 kJ et rejette Q<sub>F</sub> = 300 kJ. η ?</p>
+      <div class="opts"><button>60 %</button><button data-ok="1">40 %</button><button>166 %</button></div>
+      <div class="fb" hidden>η = 1 − 300/500 = 0,40. Et W<sub>cycle</sub> = 200 kJ.</div></div>
+  </div>
+  <div class="idee"><b>À venir.</b> La suite du chapitre 5 (corollaires de Carnot, échelle Kelvin, cycle de Carnot, inégalité de Clausius) sera ajoutée quand le prof aura donné la partie 2.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Pour s'entraîner</h2></div>
+  <p>Ce début de chapitre est surtout du cours : entraîne-toi à reconnaître l'énoncé violé dans les questions rapides et le mini-DS, et à calculer η avec Q<sub>C</sub> et Q<sub>F</sub>.</p>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=thermo&amp;ch=second-principe"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=thermo&amp;ch=second-principe"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=thermo&amp;ds=thermo"><b>DS blanc Thermodynamique ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/thermo/volume-controle/"><small>◂ Chapitre 4</small>Volume de contrôle</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Thermodynamique%20%C2%B7%20chapitre%205">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>
