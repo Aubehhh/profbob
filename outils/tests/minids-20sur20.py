@@ -1,4 +1,3 @@
-# Test navigateur (agent tests) : lancer d'abord « python3 -m http.server 8765 --bind 127.0.0.1 » à la racine du site.
 import asyncio,re,sys
 from playwright.async_api import async_playwright
 BASE='http://127.0.0.1:8765'
@@ -27,10 +26,10 @@ async def run_one(page,m,ch):
     return note.replace('\n',' '),n,qs
 async def main():
     async with async_playwright() as p:
-        b=await p.chromium.launch()
+        b=await p.chromium.launch(executable_path='/usr/bin/google-chrome')
         page=await b.new_page()
         errs=[];page.on('pageerror',lambda e: errs.append(str(e)))
-        for m,ch in [('thermo','concepts'),('thermo','premier-principe'),('thermo','proprietes'),('thermo','volume-controle'),('thermo','second-principe'),('meca','vecteurs')]:
+        for m,ch in [('chimie','atome'),('chimie','classification'),('chimie','molecules'),('thermo','proprietes'),('meca','moments')]:
             for k in range(2):
                 note,n,qs=await run_one(page,m,ch)
                 print(ch,'essai',k+1,':',note,'·',n,'cases ·',', '.join(qs))

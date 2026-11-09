@@ -52,6 +52,7 @@ ol.steps li{margin:6px 0}
 .tw{overflow-x:auto;margin:12px 0}
 .tw table{border-collapse:collapse;width:100%;font-size:.95rem}
 .tw th,.tw td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+@media(max-width:600px){.tw table{font-size:.84rem}.tw th,.tw td{padding:6px 5px}}
 .tw th{font-family:var(--display);font-weight:700}
 figure{margin:16px 0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
 figure svg{display:block;margin:0 auto;max-width:100%;height:auto}
@@ -94,3 +95,4 @@ details .formula{margin-top:4px}
 .chnav a:hover{border-color:var(--vec)}
 .chnav .next{text-align:right;grid-column:2}
 @media (max-width:520px){.chnav{grid-template-columns:1fr}.chnav .next{grid-column:1}}
+.credit{max-width:var(--page-w);margin:28px auto 0;padding:14px 0 0;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
