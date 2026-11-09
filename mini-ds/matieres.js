@@ -36,7 +36,6 @@ window.MINIDS_MATIERES=[
    ds:[
      {id:'thermo',nom:'DS Thermodynamique',detail:'Chapitres 1 à 5 · semaine du 14 au 18 déc.',chapitres:['concepts','premier-principe','proprietes','volume-controle','second-principe'],n:8,min:60}
    ]},
-  {id:'elec',nom:'Bases de l\'électricité',couleur:'#b45309'},
   {id:'web',nom:'Pages Web',couleur:'#be185d'},
   {id:'embarque',nom:'Informatique embarquée',couleur:'#15803d'},
   {id:'chimie',module:'chimie',nom:'Chimie',couleur:'#0f766e',nota:'thermo',
@@ -52,5 +51,20 @@ window.MINIDS_MATIERES=[
    ],
    ds:[
      {id:'chimie',nom:'DS Chimie',detail:'Chapitres 1 et 2 · semaine du 14 au 18 déc.',chapitres:['atome','classification','molecules'],n:8,min:60}
+   ]},
+  {id:'elec',module:'elec',nom:'Bases de l\'électricité',couleur:'#b45309',nota:'thermo',
+   banque:()=>window.BANQUE_ELEC,
+   noms:{charge:'Courant et charge',energie:'Énergie consommée',pmoy:'Puissance moyenne',
+     resfil:'Résistance d\'un fil',temperature:'Résistance et température',tempfinale:'Température d\'un enroulement',association:'Série et parallèle',divtension:'Diviseur de tension',divcourant:'Diviseur de courant',maille:'Loi des mailles',
+     theveninessai:'Modèle de Thévenin par essais',theveninch:'Thévenin sur une charge',norton:'Modèle de Norton',deuxgen:'Deux générateurs en parallèle',superposition:'Superposition',
+     efficace:'Valeur efficace, pulsation, période',complexe:'Calcul en complexes',bobine:'Inductance en sinusoïdal',condensateur:'Condensateur en sinusoïdal',rlserie:'Circuit R, L série',rlc:'Circuit RLC série',puissances:'Puissances P, Q, S',boucherot:'Méthode de Boucherot',releve:'Relèvement du facteur de puissance',stockage:'Énergie stockée (L ou C)'},
+   chapitres:[
+     {id:'bases',nom:'Notions de base',detail:'Courant, énergie, puissance moyenne',q:['charge','energie','pmoy']},
+     {id:'continu',nom:'Tension continue',detail:'Résistance d\'un fil, température, associations, Kirchhoff, diviseurs',q:['resfil','temperature','tempfinale','association','divtension','divcourant','maille']},
+     {id:'theoremes',nom:'Modèles équivalents',detail:'Thévenin, Norton, superposition',q:['theveninessai','theveninch','norton','deuxgen','superposition']},
+     {id:'sinusoidal',nom:'Sinusoïdal monophasé',detail:'Valeur efficace, complexes, R L C, impédances, puissances, Boucherot',q:['efficace','complexe','bobine','condensateur','stockage','rlserie','rlc','puissances','boucherot','releve']}
+   ],
+   ds:[
+     {id:'elec',nom:'DS Électricité',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['bases','continu','theoremes','sinusoidal'],n:8,min:60}
    ]}
 ];

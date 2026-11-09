@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'9 nov.',texte:'Chimie : l\'atome, la classification et les molécules, avec mini-DS et flashcards',url:'/matieres/chimie/',nouveau:true},
+    {date:'9 nov.',texte:'Électricité : les 4 chapitres (continu, théorèmes, sinusoïdal), avec mini-DS et flashcards',url:'/matieres/electricite/',nouveau:true},
+    {date:'9 nov.',texte:'Chimie : l\'atome, la classification et les molécules, avec mini-DS et flashcards',url:'/matieres/chimie/'},
     {date:'9 nov.',texte:'Thermodynamique : les 5 chapitres, avec mini-DS et flashcards',url:'/matieres/thermodynamique/'},
     {date:'9 nov.',texte:'Statique refaite chapitre par chapitre, d\'après les diapos du prof',url:'/cours/statique/vecteurs/'},
     {date:'8 nov.',texte:'Flashcards des formules, recherche dans les cours et progression par chapitre',url:'/flashcards/?m=meca'},
@@ -37,7 +38,14 @@ module.exports={
             desc:'Chapitres 1 et 2 : atome, configuration électronique, classification et électronégativité, Lewis, VSEPR, polarité.',
             liens:[['L\'atome','/cours/chimie/atome/'],['Classification','/cours/chimie/classification/'],['Molécules','/cours/chimie/molecules/'],['Flashcards','/flashcards/?m=chimie']],
             minids:'/mini-ds/?m=chimie&ds=chimie'}]},
-      {id:'elec',slug:'electricite',mono:'Él',chapitres:[],ds:[]}]},
+      {id:'elec',slug:'electricite',mono:'Él',
+       chapitres:[
+         {id:'bases',titre:'Notions de base en électricité',url:'/cours/elec/bases/'},
+         {id:'continu',titre:'Circuits alimentés en continu',url:'/cours/elec/continu/'},
+         {id:'theoremes',titre:'Modèles électriques équivalents',url:'/cours/elec/theoremes/'},
+         {id:'sinusoidal',titre:'Circuits alimentés en sinusoïdal monophasé',url:'/cours/elec/sinusoidal/'}],
+       ds:[
+         {titre:'Électricité : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=elec&ds=elec',desc:'Chapitres 1 à 4 : puissance et énergie, résistance, Kirchhoff, Thévenin et Norton, sinusoïdal, puissances et Boucherot.',liens:[['Bases','/cours/elec/bases/'],['Continu','/cours/elec/continu/'],['Théorèmes','/cours/elec/theoremes/'],['Sinusoïdal','/cours/elec/sinusoidal/'],['Flashcards','/flashcards/?m=elec']],minids:'/mini-ds/?m=elec&ds=elec'}]}]},
     {id:'meca',couleur:'#2453b8',modules:[
       {id:'statique',slug:'mecanique',mono:'Mé',
        chapitres:[

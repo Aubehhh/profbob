@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 4 · Circuits alimentés en sinusoïdal monophasé · Électricité · profbob.fr</title>
+<meta name="description" content="Électricité, chapitre 4 : le signal sinusoïdal et sa représentation de fresnel, l'outil mathématique : les nombres complexes, le résistor et la valeur efficace, l'inductance d'. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="elec-sinusoidal" data-matiere="elec" data-ch="sinusoidal" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/electricite/">← Électricité</a> · Chapitre 4 sur 4</div>
+  <h1>Circuits alimentés en sinusoïdal monophasé</h1>
+  <p class="lead">Valeur efficace, Fresnel et complexes, R, L et C en alternatif, impédances, puissances P, Q, S, Boucherot et facteur de puissance.</p>
+  <div class="chips"><span class="chip"><b>9</b> sections</span><span class="chip">≈ 5 h</span><span class="chip">Chapitre 4</span><span class="chip">Cours de Fiolet</span><span class="chip">Prérequis : <a href="/cours/elec/theoremes/">chapitre 3</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=elec&amp;ch=sinusoidal">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=elec&amp;ch=sinusoidal">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Signal sinusoïdal</a>
+  <a href="#s2"><span class="n">2</span>Nombres complexes</a>
+  <a href="#s3"><span class="n">3</span>Résistor, valeur efficace</a>
+  <a href="#s4"><span class="n">4</span>Bobine</a>
+  <a href="#s5"><span class="n">5</span>Condensateur</a>
+  <a href="#s6"><span class="n">6</span>Impédances, RLC</a>
+  <a href="#s7"><span class="n">7</span>Source réelle</a>
+  <a href="#s8"><span class="n">8</span>Puissances, Boucherot</a>
+  <a href="#s9"><span class="n">9</span>Facteur de puissance</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="elec"></div>
+
+<section class="csec" id="s1" data-toc="Signal sinusoïdal">
+  <div class="shead"><span class="num">1</span><h2>Le signal sinusoïdal et sa représentation de Fresnel</h2><span class="meta">diapos 3 à 7 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un signal sinusoïdal est entièrement décrit par trois nombres : son amplitude (ou sa valeur efficace), sa fréquence et sa phase à l'origine. À fréquence commune, on le dessine comme un vecteur tournant : le vecteur de Fresnel.</div>
+  <div class="formula key cours">v(t) = V̂ sin(ωt + φ) = V √2 sin(ωt + φ)
+   V̂ (= V_max) : amplitude ; V : valeur efficace
+   ω = 2πf = 2π/T : pulsation (rad·s⁻¹) ; f = 1/T (Hz) ; T : période (s)
+   φ : phase à l'origine (rad)
+   réseau : f = 50 Hz, T = 20 ms, V = 230 V, V̂ = 325 V</div>
+  <div class="tw"><table>
+    <tr><th>θ (°)</th><td>0</td><td>30</td><td>60</td><td>90</td><td>120</td><td>150</td><td>180</td></tr>
+    <tr><th>θ (rad)</th><td>0</td><td>π/6</td><td>π/3</td><td>π/2</td><td>2π/3</td><td>5π/6</td><td>π</td></tr>
+    <tr><th>sin θ</th><td>0</td><td>0,5</td><td>√3/2 ≈ 0,866</td><td>1</td><td>0,866</td><td>0,5</td><td>0</td></tr>
+  </table></div>
+  <p><b>Déphasage.</b> v₂(t) = V̂₂ sin(ωt − π/6) a une phase à l'origine de −π/6 = −30° : v₂ est en <b>retard</b> de 30° sur v₁(t) = V̂₁ sin ωt. Une phase positive correspond à une <b>avance</b>.</p>
+  <div class="retiens"><b>Fresnel.</b> On dessine un vecteur de longueur proportionnelle à la <b>valeur efficace</b>, faisant avec l'axe un angle égal à la <b>phase à l'origine</b>. On note la grandeur avec une flèche : V⃗₁. C'est pratique pour ajouter ou soustraire des tensions, mais cela ne marche qu'à fréquence commune et pour des sinus parfaits, et on ne peut pas dessiner un produit de deux vecteurs.</div>
+  <div class="quiz">
+    <div class="q"><p>Une tension v(t) = 325 sin(100πt) a pour fréquence :</p>
+      <div class="opts"><button>100 Hz</button><button data-ok="1">50 Hz</button><button>314 Hz</button></div>
+      <div class="fb" hidden>ω = 100π = 2πf, donc f = 50 Hz.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Nombres complexes">
+  <div class="shead"><span class="num">2</span><h2>L'outil mathématique : les nombres complexes</h2><span class="meta">diapos 8 à 10 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le vecteur de Fresnel devient un nombre complexe : on peut alors calculer au lieu de dessiner. On note un complexe souligné : <u>V</u>.</div>
+  <div class="formula key cours">Forme algébrique :      V = a + j b
+Forme polaire :         V = [ρ ; θ] = ρ (cos θ + j sin θ) = ρ e^(jθ)
+   ρ = √(a² + b²)  (module = longueur du vecteur)
+   a = ρ cos θ ;  b = ρ sin θ ;  θ = arctan(b/a)  (argument)
+   j = [1 ; π/2] : imaginaire pur de module 1, j² = −1</div>
+  <div class="formula key cours">Addition, soustraction : sur la forme algébrique  V₁ ± V₂ = (a₁ ± a₂) + j(b₁ ± b₂)
+Multiplication :         V₁ × V₂ = [ρ₁ρ₂ ; θ₁ + θ₂]
+Division :               V₁ / V₂ = [ρ₁/ρ₂ ; θ₁ − θ₂]</div>
+  <div class="trap"><b>Piège : arctan ne suffit pas toujours.</b> arctan(b/a) donne un angle entre −90° et +90°. Si la partie réelle a est négative, il faut ajouter 180° (le point est à gauche de l'axe imaginaire).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice de la diapo 10 (et diapo 7)</div>
+    <p>v₁(t) = V₁√2 sin ωt et v₂(t) = V₂√2 sin(ωt + 2π/3), avec V₁ = V₂ = 230 V. Calcule <u>U</u>₁₂ = <u>V</u>₁ − <u>V</u>₂ : valeur efficace et phase à l'origine.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">V₁ = [230 ; 0] = 230 + j 0
+V₂ = [230 ; 120°] = 230 cos 120° + j 230 sin 120° = −115 + j 199,2
+U₁₂ = V₁ − V₂ = 345 − j 199,2
+|U₁₂| = √(345² + 199,2²) = 398,4 V   (= 230 √3)
+arg U₁₂ = arctan(−199,2 / 345) = −30°</div>
+      <p>On retrouve un résultat du triphasé : la différence de deux tensions de 230 V décalées de 120° vaut 230√3 ≈ 400 V.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Résistor, valeur efficace">
+  <div class="shead"><span class="num">3</span><h2>Le résistor et la valeur efficace</h2><span class="meta">diapos 11 à 21 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Dans une résistance, courant et tension sont en phase et la puissance est toujours consommée. La valeur efficace est la valeur continue qui chaufferait autant la même résistance.</div>
+  <div class="formula key cours">u_R(t) = R i_R(t)       (continu : U_R = R I_R)
+En complexes : U_R = Z_R I_R  avec  Z_R = R = [R ; 0]
+φ_R = arg U_R − arg I_R = 0 : tension et courant en phase
+p_R(t) = u_R(t) × i_R(t) = R i_R²(t) = u_R²(t)/R ≥ 0</div>
+  <p>La puissance instantanée a une fréquence <b>double</b> de celle de la tension et ne prend que des valeurs positives : la résistance consomme toujours, et transforme la puissance en chaleur (effet Joule).</p>
+  <div class="formula key cours">Puissance active : P = &lt;p(t)&gt; = (1/T) ∫₀ᵀ p(t) dt     (à mi-hauteur entre p_max et p_min)
+Pour une résistance :  P_R = Û_R² / (2R) = U_R² / R = R I_R² = U_R × I_R
+Valeur efficace (RMS) : U = √( (1/T) ∫₀ᵀ u²(t) dt ) = √&lt;u²(t)&gt;
+En sinusoïdal :        U = Û / √2</div>
+  <div class="trap"><b>Piège.</b> U = Û/√2 n'est vrai qu'en sinusoïdal. Pour un carré symétrique d'amplitude E, u² vaut toujours E² : la valeur efficace vaut <b>E</b>, pas E/√2.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices N°1 et N°2 (diapo 18)</div>
+    <p>Valeur efficace d'un carré symétrique d'amplitude E ? Un radiateur porte 230 V, 1000 W : courant efficace et résistance ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Carré : u²(t) = E² à tout instant  →  U = √E² = E
+Radiateur : I = P / U = 1000 / 230 = 4,35 A
+            R = U² / P = 230² / 1000 = 52,9 Ω</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · source continue et source sinusoïdale (diapos 19 et 20)</div>
+    <p>Une tension sinusoïdale d'amplitude V̂ = 325 V, puis une source V₁ = 24 V efficace, 50 Hz, qui alimente R = 47 Ω. Valeur efficace, pulsation, puissance, et tension continue qui chaufferait autant ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">V = 325 / √2 = 229,8 V
+24 V efficace : V̂ = 24 √2 = 33,9 V ;  T = 20 ms ;  ω = 2π × 50 = 314 rad·s⁻¹
+P = V² / R = 24² / 47 = 12,3 W
+Même puissance en continu : il faut 24 V continus (c'est la définition de la valeur efficace).</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Bobine">
+  <div class="shead"><span class="num">4</span><h2>L'inductance d'une bobine</h2><span class="meta">diapos 22 à 35 · 50 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une bobine s'oppose aux variations du courant. En continu établi, c'est un simple fil ; en sinusoïdal, le courant est en retard d'un quart de période sur la tension, et la bobine ne consomme aucune puissance active.</div>
+  <p>Une bobine réelle est modélisée par une inductance L (en henry, H) en série avec la résistance R de son fil. Elle crée un champ magnétique, génère une tension quand le champ varie, stocke et restitue de l'énergie, et filtre les variations de courant.</p>
+  <div class="formula key cours">u_L(t) = L × di_L(t)/dt
+Continu établi : u_L = 0 → la bobine se comporte comme un fil
+Sinusoïdal :     U_L = Lω × I_L ;   Z_L = jLω = [Lω ; π/2]
+                 le courant est en retard de π/2 (quadrature retard) sur la tension
+Énergie stockée : w_L(t) = ½ L i_L²(t)</div>
+  <div class="formula key cours">Puissances d'une inductance :
+   P_L = U_L I_L cos(π/2) = 0
+   Q_L = U_L I_L = Lω I_L² = U_L² / (Lω)  > 0 (consommée)   [VAR]
+   S_L = Q_L = U_L I_L ;  facteur de puissance = 0
+Associations :  série  L_éq = L₁ + L₂ + L₃ ;   parallèle  1/L_éq = 1/L₁ + 1/L₂ + 1/L₃</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°2 (diapo 33)</div>
+    <p>L = 0,9 H alimentée par u<sub>L</sub>(t) = 325 sin ωt, f = 50 Hz. Valeur efficace, impédance, courant, puissances ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">U_L = 325 / √2 = 229,8 V        ω = 2π × 50 = 314,2 rad·s⁻¹
+Z_L = jLω = [0,9 × 314,2 ; 90°] = [282,7 Ω ; 90°]
+I_L = U_L / Z_L = [229,8 / 282,7 ; 0 − 90°] = [0,813 A ; −90°]
+P_L = 0 (inductance pure)
+Q_L = U_L I_L = 229,8 × 0,813 = 187 VAR ;  S_L = 187 VA</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°1 (diapo 32) : courant triangulaire</div>
+    <p>L = 0,7 H, courant triangulaire de −5 A à +5 A, f = 1 kHz. Période, tension sur chaque demi-période, énergie maximale stockée ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">T = 1 / f = 1 ms
+0 &lt; t &lt; T/2 : i monte de −5 à +5 A en 0,5 ms → di/dt = 10 / 0,5×10⁻³ = 2×10⁴ A·s⁻¹
+   u_L = 0,7 × 2×10⁴ = 14 000 V
+T/2 &lt; t &lt; T : i redescend → u_L = −14 000 V (créneau)
+W_max = ½ × 0,7 × 5² = 8,75 J</div>
+      <p>Les valeurs sont énormes car le courant varie très vite : c'est pour cela qu'on ne coupe jamais brutalement le courant dans une bobine (étincelles).</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°3 (diapo 35) : circuit R, L série</div>
+    <p>R = 165 Ω et L = 0,7 H en série sous V = 230 V, 50 Hz. Impédance, courant, tensions U<sub>R</sub> et U<sub>L</sub> ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Lω = 0,7 × 314,2 = 219,9 Ω
+Z_éq = R + jLω = 165 + j 219,9 = [274,9 Ω ; 53,1°]
+I = V / Z_éq = [230 / 274,9 ; −53,1°] = [0,837 A ; −53,1°]
+U_R = R I = 138,0 V ;   U_L = Lω I = 184,0 V
+(138,0² + 184,0² = 230² : U_R + U_L = V en vecteurs, pas en valeurs efficaces)</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> 138 + 184 ≠ 230 : les valeurs efficaces ne s'ajoutent pas en sinusoïdal, ce sont les vecteurs (ou les complexes) qui s'ajoutent.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Condensateur">
+  <div class="shead"><span class="num">5</span><h2>Le condensateur</h2><span class="meta">diapos 36 à 44 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> C'est l'inverse de la bobine : un condensateur s'oppose aux variations de la tension. En continu, il bloque le courant ; en sinusoïdal, le courant est en avance d'un quart de période et le condensateur fournit de la puissance réactive.</div>
+  <p>Deux surfaces conductrices séparées par un isolant (air, céramique, papier, électrolyte…). Il stocke de l'énergie, lisse les variations de tension et crée un champ électrique.</p>
+  <div class="formula key cours">i_C(t) = C × du_C(t)/dt
+Continu : i_C = 0 → circuit ouvert
+Sinusoïdal :   I_C = Cω × U_C ;   Z_C = 1/(jCω) = −j/(Cω) = [1/(Cω) ; −π/2]
+               le courant est en avance de π/2 (quadrature avance) sur la tension
+Énergie stockée : w_C(t) = ½ C u_C²(t)</div>
+  <div class="formula key cours">Puissances d'un condensateur :
+   P_C = 0
+   Q_C = −U_C I_C = −I_C² / (Cω) = −U_C² Cω  &lt; 0 (fournie)   [VAR]
+   S_C = U_C I_C = |Q_C| ;  facteur de puissance = 0
+Associations :  série  1/C_éq = 1/C₁ + 1/C₂ + 1/C₃ ;   parallèle  C_éq = C₁ + C₂ + C₃</div>
+  <div class="trap"><b>Piège : les associations de condensateurs sont « à l'envers ».</b> Les capacités s'ajoutent en <b>parallèle</b> et se combinent comme des inverses en <b>série</b> : c'est le contraire des résistances et des inductances.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°2 (diapo 43)</div>
+    <p>C = 12 µF sous V = 230 V, 50 Hz, phase à l'origine nulle. Impédance, courant, puissances ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">1/(Cω) = 1 / (12×10⁻⁶ × 314,2) = 265,3 Ω
+Z_C = [265,3 Ω ; −90°] ;   U_C = [230 V ; 0]
+I_C = U_C / Z_C = [230 / 265,3 ; 0 + 90°] = [0,867 A ; +90°]
+Q_C = −U_C I_C = −199 VAR ;   S_C = 199 VA</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°1 (diapo 42) : charge à courant constant</div>
+    <p>C = 1000 µF, initialement déchargé, chargé par I<sub>CC</sub> = 200 mA pendant 100 s. Tension atteinte et énergie stockée ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">i_C constant : du_C/dt = I/C  →  u_C(t) = (I / C) × t  (droite)
+u_C(100 s) = 0,2 × 100 / 1000×10⁻⁶ = 20 000 V
+W = ½ C u² = ½ × 10⁻³ × (2×10⁴)² = 2×10⁵ J</div>
+      <p>Les valeurs de l'énoncé donnent une tension irréaliste (aucun condensateur de 1000 µF ne tient 20 kV) : garde la méthode, la droite u<sub>C</sub> = I t / C.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>En sinusoïdal, dans un condensateur, le courant est :</p>
+      <div class="opts"><button>en phase avec la tension</button><button data-ok="1">en avance de 90° sur la tension</button><button>en retard de 90° sur la tension</button></div>
+      <div class="fb" hidden>Z_C = [1/(Cω) ; −90°], donc arg I = arg U + 90°.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Impédances, RLC">
+  <div class="shead"><span class="num">6</span><h2>Associations d'impédances et circuit RLC série</h2><span class="meta">diapos 45 et 46 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> En complexes, les impédances s'associent exactement comme des résistances. Tout le reste (loi d'Ohm, diviseurs, Kirchhoff) marche pareil.</div>
+  <div class="formula key cours">Loi d'Ohm complexe :  U = Z I
+Série :      Z_éq = Z₁ + Z₂ + Z₃
+Parallèle :  1/Z_éq = 1/Z₁ + 1/Z₂ + 1/Z₃
+RLC série :  Z_s = R + j(Lω − 1/(Cω))
+   |Z_s| = √(R² + (Lω − 1/(Cω))²) ;   φ = arg Z_s = arctan((Lω − 1/(Cω)) / R)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°3 (diapo 46) : récepteur RLC série</div>
+    <p>R = 200 Ω, L = 2 H, C = 10 µF en série sous E = 230 V, 50 Hz (E origine des phases). Z<sub>s</sub>, courant, tensions U<sub>R</sub>, U<sub>L</sub>, U<sub>C</sub> ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Lω = 2 × 314,2 = 628,3 Ω ;   1/(Cω) = 1/(10⁻⁵ × 314,2) = 318,3 Ω
+Z_s = 200 + j(628,3 − 318,3) = 200 + j 310,0
+|Z_s| = √(200² + 310,0²) = 368,9 Ω ;   arg Z_s = arctan(310,0/200) = 57,2°
+I = E / Z_s = [230 / 368,9 ; −57,2°] = [0,623 A ; −57,2°]
+U_R = [124,7 V ; −57,2°] ;  U_L = [391,7 V ; 32,8°] ;  U_C = [198,4 V ; −147,2°]</div>
+      <p>U<sub>L</sub> = 391,7 V dépasse E = 230 V : c'est possible, car U<sub>L</sub> et U<sub>C</sub> sont en opposition et se compensent en partie.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Dans un RLC série, si Lω &gt; 1/(Cω), le circuit est :</p>
+      <div class="opts"><button data-ok="1">inductif : le courant est en retard sur la tension</button><button>capacitif : le courant est en avance</button><button>purement résistif</button></div>
+      <div class="fb" hidden>La partie imaginaire de Z_s est positive, donc φ &gt; 0 : le courant est en retard.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s7" data-toc="Source réelle">
+  <div class="shead"><span class="num">7</span><h2>Modèle de Thévenin d'une source sinusoïdale</h2><span class="meta">diapos 47 et 48 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Comme en continu : une source réelle est une source parfaite <u>E</u><sub>T</sub> en série avec une impédance interne <u>Z</u><sub>T</sub>, et la tension de sortie baisse quand le courant augmente.</div>
+  <div class="formula key cours">Source parfaite : U reste constante quel que soit I
+Source réelle :   U = E_T − Z_T × I
+Avec une charge Z_C :  I = E_T / (Z_T + Z_C) ;   U = E_T × Z_C / (Z_T + Z_C)  (diviseur de tension)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice de la diapo 48</div>
+    <p>E<sub>T</sub> = 237 V (phase nulle), <u>Z</u><sub>T</sub> = [1,87 Ω ; 42°], charge <u>Z</u><sub>C</sub> = [44 Ω ; 42°]. Courant et tension ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Les deux impédances ont le même argument : leurs modules s'ajoutent directement
+Z_T + Z_C = [1,87 + 44 ; 42°] = [45,87 Ω ; 42°]
+I = 237 / [45,87 ; 42°] = [5,17 A ; −42°]
+U = Z_C I = [44 × 5,17 ; 42° − 42°] = [227,3 V ; 0°]
+Diviseur de tension : U = 237 × 44 / 45,87 = 227,3 V ✓</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> On n'ajoute les modules d'impédances que si elles ont le même argument. Sinon, il faut passer par la forme algébrique.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s7"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s8" data-toc="Puissances, Boucherot">
+  <div class="shead"><span class="num">8</span><h2>Triangle des puissances et méthode de Boucherot</h2><span class="meta">diapos 27, 28 et 49 à 51 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> P (active, en W) et Q (réactive, en VAR) forment les côtés d'un triangle rectangle dont l'hypoténuse est S (apparente, en VA). Pour plusieurs récepteurs, on additionne les P entre eux et les Q entre eux, jamais les S.</div>
+  <div class="formula key cours">S = U × I = √(P² + Q²)     [VA]   (sert à dimensionner les fils)
+P = U I cos φ = S cos φ     [W]
+Q = U I sin φ = S sin φ     [VAR]
+tan φ = Q / P ;  facteur de puissance PF = P / S = cos φ</div>
+  <div class="formula key cours">Méthode de Boucherot (n récepteurs alimentés sous la même tension U) :
+   P_T = P₁ + P₂ + … + P_N
+   Q_T = Q₁ + Q₂ + … + Q_N      (Q &gt; 0 bobine, Q &lt; 0 condensateur)
+   S_T = √(P_T² + Q_T²) = U × I_T      cos φ_T = P_T / S_T</div>
+  <div class="trap"><b>Piège : S<sub>T</sub> ≠ S₁ + S₂ + …</b> Les puissances apparentes ne s'ajoutent pas (sauf si tous les récepteurs ont le même φ). C'est pour cela qu'on passe par P<sub>T</sub> et Q<sub>T</sub>.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice de la diapo 51</div>
+    <p>Le RLC série précédent (R = 200 Ω, L = 2 H, C = 10 µF) est branché en parallèle avec C₂ = 4 µF sous E = 230 V, 50 Hz. Puissances de chaque dipôle, puis bilan.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">|Z_RLC| = 368,9 Ω ;  I_RLC = 230 / 368,9 = 0,623 A
+P_R  = R I² = 200 × 0,623² = 77,7 W            Q_R = 0
+Q_L  = Lω I² = 628,3 × 0,623² = 244,2 VAR
+Q_C  = −I² / (Cω) = −318,3 × 0,623² = −123,7 VAR
+Q_C2 = −E² C₂ω = −230² × 4×10⁻⁶ × 314,2 = −66,5 VAR
+RLC seul :  S_RLC = 230 × 0,623 = 143,4 VA ;  cos φ_RLC = 77,7/143,4 = 0,542 ;  φ_RLC = 57,2°
+Total :     P_T = 77,7 W ;  Q_T = 244,2 − 123,7 − 66,5 = 54,0 VAR
+            S_T = √(77,7² + 54,0²) = 94,7 VA ;  I_T = 94,7 / 230 = 0,412 A
+            cos φ_T = 77,7 / 94,7 = 0,821 ;  φ_T = 34,8°</div>
+      <p>I<sub>T</sub> (0,412 A) est plus petit que I<sub>RLC</sub> (0,623 A) : C₂ fournit une partie de la puissance réactive consommée par la bobine, le réseau en fournit donc moins.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s8"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s9" data-toc="Facteur de puissance">
+  <div class="shead"><span class="num">9</span><h2>Relever le facteur de puissance, appareils de mesure</h2><span class="meta">diapos 52 et 53 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un moteur consomme du réactif, donc il demande plus de courant que nécessaire. Un condensateur en parallèle fournit ce réactif sur place : la puissance active ne change pas, mais le courant de ligne baisse.</div>
+  <div class="formula key">Rendement : η = P_U / P_A  →  P_A = P_U / η
+Condensateur pour passer de φ à φ' (P inchangée) :
+   Q_C = −P (tan φ − tan φ')     C = P (tan φ − tan φ') / (U² ω)
+Courant après relèvement :  I' = P / (U cos φ')</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · moteur asynchrone (diapo 52)</div>
+    <p>U = [230 V ; 0°], 50 Hz, I<sub>m</sub> = 52 A, P<sub>U</sub> = 8 kW, η = 85 %. On veut cos φ<sub>mC</sub> = 0,8.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">P_Am = 8000 / 0,85 = 9412 W
+cos φ_m = P_Am / (U I_m) = 9412 / (230 × 52) = 0,787 ;  φ_m = 38,1°
+Q_m = P_Am tan φ_m = 9412 × 0,784 = 7380 VAR
+tan φ_mC = tan(arccos 0,8) = 0,75
+C = 9412 × (0,784 − 0,75) / (230² × 314,2) = 19,3 µF
+I_C = U C ω = 230 × 19,3×10⁻⁶ × 314,2 = 1,40 A
+I_mC = P_Am / (U cos φ_mC) = 9412 / (230 × 0,8) = 51,2 A</div>
+      <p>Le gain est faible ici (52 A → 51,2 A), car le facteur de puissance de départ (0,787) est déjà proche de 0,8.</p>
+    </div></details>
+  </div>
+  <div class="tw"><table>
+    <tr><th>Grandeur</th><th>Appareil</th></tr>
+    <tr><td>Valeur efficace d'une tension</td><td>voltmètre en position AC, en parallèle</td></tr>
+    <tr><td>Valeur efficace d'un courant</td><td>ampèremètre en position AC, en série (ou pince ampèremétrique)</td></tr>
+    <tr><td>Forme d'onde, déphasage</td><td>oscilloscope, ou carte d'acquisition et ordinateur</td></tr>
+    <tr><td>P, Q, S, facteur de puissance</td><td>« énergie-mètre » (wattmètre), souvent sous forme de pince</td></tr>
+  </table></div>
+  <label class="checkrow"><input type="checkbox" data-s="s9"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">diapos 7 à 52</span></div>
+  <div class="ex"><h4>Fresnel et complexes : <u>U</u>₁₂ = <u>V</u>₁ − <u>V</u>₂ <span class="tag">sections 1 et 2</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Passe chaque tension en forme algébrique, soustrais, puis repasse en polaire : <span class="res">U₁₂ = [398,4 V ; −30°]</span>. Le tracé à l'échelle (1 cm pour 50 V) doit donner un vecteur d'environ 8 cm.</p></div></details></div>
+  <div class="ex"><h4>Radiateur, carré symétrique, source 24 V <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p><span class="res">I = 4,35 A, R = 52,9 Ω</span> ; carré : <span class="res">U = E</span> ; 24 V sur 47 Ω : <span class="res">P = 12,3 W</span>. Voir les exemples de la section 3.</p></div></details></div>
+  <div class="ex"><h4>Bobine : N°1, N°2, N°3 <span class="tag">section 4</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>N°1 : <span class="res">u<sub>L</sub> = ±14 000 V, W<sub>max</sub> = 8,75 J</span>. N°2 : <span class="res">I = [0,813 A ; −90°], Q = 187 VAR</span>. N°3 : <span class="res">Z = [274,9 Ω ; 53,1°], I = 0,837 A, U<sub>R</sub> = 138 V, U<sub>L</sub> = 184 V</span>.</p></div></details></div>
+  <div class="ex"><h4>Condensateur : N°1, N°2 <span class="tag">section 5</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>N°1 : <span class="res">u<sub>C</sub> = I t / C = 20 000 V, W = 2×10⁵ J</span>. N°2 : <span class="res">Z<sub>C</sub> = [265,3 Ω ; −90°], I = [0,867 A ; 90°], Q = −199 VAR</span>.</p></div></details></div>
+  <div class="ex"><h4>Récepteur RLC série <span class="tag">section 6</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p><span class="res">Z<sub>s</sub> = [368,9 Ω ; 57,2°], I = [0,623 A ; −57,2°]</span>. Pour le Fresnel (50 V/cm) : U<sub>R</sub> ≈ 2,5 cm, U<sub>L</sub> ≈ 7,8 cm, U<sub>C</sub> ≈ 4 cm, leur somme est le vecteur E.</p></div></details></div>
+  <div class="ex"><h4>Boucherot et relèvement du facteur de puissance <span class="tag">sections 8 et 9</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Fais un tableau P / Q par dipôle, additionne par colonne, puis S<sub>T</sub> = √(P<sub>T</sub>² + Q<sub>T</sub>²). <span class="res">I<sub>T</sub> = 0,412 A, cos φ<sub>T</sub> = 0,821</span> ; moteur : <span class="res">C = 19,3 µF, I<sub>mC</sub> = 51,2 A</span>.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=elec&amp;ch=sinusoidal"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=elec&amp;ch=sinusoidal"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=elec&amp;ds=elec"><b>DS blanc Électricité ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/elec/theoremes/"><small>◂ Chapitre 3</small>Théorèmes</a></nav>
+</section>
+
+<p class="credit">Cours « Les bases de l'électricité » de Fiolet (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Électricité%20%C2%B7%20chapitre%204">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

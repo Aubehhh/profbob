@@ -61,6 +61,32 @@
       ['vc','Indice : volume de contrôle (E<sub>vc</sub>, m<sub>vc</sub>, P<sub>th,vc</sub>)','—',[VC]],
       ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
     ]})(),
+    // Électricité (Fiolet) : profil « thermo » (indices seulement) ; complexes soulignés, vecteurs de Fresnel fléchés
+    elec:(()=>{const B='bases',C='continu',T='theoremes',S='sinusoidal';return [
+      ['u, i ; U, I','Minuscule : valeur instantanée (dépend du temps) ; majuscule : valeur constante ou efficace','V ; A',[B,C,T,S]],
+      ['Q','Charge électrique (i = dQ/dt)','C',[B]],
+      ['p(t) ; &lt;p(t)&gt; ; P','Puissance instantanée ; puissance moyenne = puissance active','W',[B,S]],
+      ['w','Énergie','J (ou kWh)',[B,S]],
+      ['ρ ; ρ<sub>0</sub> ; ρ<sub>θ</sub>','Résistivité ; à 0 °C ; à θ °C','Ω·m',[C]],
+      ['a<sub>0</sub>','Coefficient de température défini à 0 °C','°C⁻¹',[C]],
+      ['R<sub>0</sub> ; R<sub>θ</sub> ; R<sub>éq</sub>','Résistance à 0 °C ; à θ °C ; équivalente','Ω',[C,T]],
+      ['l ; S','Longueur ; section du conducteur','m ; m²',[C]],
+      ['V<sub>e</sub> ; V<sub>s</sub>','Tension d\'entrée ; de sortie (potentiomètre, diviseur)','V',[C]],
+      ['E','Source de tension (force électromotrice)','V',[C,T,S]],
+      ['E<sub>T</sub> ; R<sub>T</sub>','Modèle de Thévenin : tension à vide ; résistance interne','V ; Ω',[T,S]],
+      ['I<sub>CC</sub> ; R<sub>N</sub>','Modèle de Norton : courant de court-circuit ; résistance','A ; Ω',[T]],
+      ['i<sub>1E2</sub>','Superposition : part de i₁ due à la source E₂ seule','A',[T]],
+      ['V̂ (V<sub>max</sub>) ; V','Amplitude ; valeur efficace (V = V̂/√2 en sinusoïdal)','V',[S]],
+      ['ω ; f ; T','Pulsation (ω = 2πf) ; fréquence ; période','rad·s⁻¹ ; Hz ; s',[S]],
+      ['φ','Déphasage de la tension par rapport au courant (φ = arg U − arg I)','rad ou °',[S]],
+      ['V⃗','Vecteur de Fresnel (longueur = valeur efficace, angle = phase à l\'origine)','—',[S]],
+      ['<u>V</u> ; [ρ ; θ]','Nombre complexe (souligné) ; forme polaire : module ρ, argument θ','—',[S]],
+      ['<u>Z</u> ; Z','Impédance complexe ; son module','Ω',[S]],
+      ['L ; C','Inductance ; capacité','H ; F',[S]],
+      ['Q ; S','Puissance réactive ; apparente','VAR ; VA',[S]],
+      ['PF = cos φ','Facteur de puissance (power factor) = P/S','—',[S]],
+      ['η ; P<sub>U</sub> ; P<sub>A</sub>','Rendement ; puissance utile ; puissance absorbée','— ; W',[S]]
+    ]})(),
     // Chimie (S. Beaumont) : profil « thermo » (indices seulement)
     chimie:(()=>{const A='atome',C='classification',M='molecules';return [
       ['<sup>A</sup><sub>Z</sub>X','A : nombre de masse (nucléons) ; Z : numéro atomique (protons)','—',[A,C]],
