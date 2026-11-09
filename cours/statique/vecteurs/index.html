@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 1 · Principes généraux et outils mathématiques · Statique · profbob.fr</title>
+<meta name="description" content="Statique, chapitre 1 : principes généraux, vecteurs, loi du parallélogramme, composantes 2D et 3D, vecteur position, produit scalaire. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="statique-vecteurs" data-matiere="meca" data-ch="vecteurs" data-nota-all>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mecanique/">← Mécanique 1 (Statique)</a> · Chapitre 1 sur 3</div>
+  <h1>Principes généraux et outils mathématiques</h1>
+  <p class="lead">Tout le reste de la statique repose sur ce chapitre : écrire une force en vecteur, l'additionner aux autres, la porter le long d'un câble et la projeter sur un axe.</p>
+  <div class="chips"><span class="chip"><b>8</b> sections</span><span class="chip">≈ 2 h 30</span><span class="chip">Diapos 1 à 63</span><span class="chip">Cours d'E. Fernandez</span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=meca&amp;ch=vecteurs">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=meca&amp;ch=vecteurs">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Principes</a>
+  <a href="#s2"><span class="n">2</span>Vecteurs</a>
+  <a href="#s3"><span class="n">3</span>Parallélogramme</a>
+  <a href="#s4"><span class="n">4</span>Composantes 2D</a>
+  <a href="#s5"><span class="n">5</span>Résultante 2D</a>
+  <a href="#s6"><span class="n">6</span>Vecteurs 3D</a>
+  <a href="#s7"><span class="n">7</span>Vecteur position</a>
+  <a href="#s8"><span class="n">8</span>Produit scalaire</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="meca"></div>
+
+<!-- ============ 1 ============ -->
+<section class="csec" id="s1">
+  <div class="shead"><span class="num">1</span><h2>Principes généraux</h2><span class="meta">diapos 5 à 11 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> La mécanique étudie les corps au repos ou en mouvement sous l'action de forces. Ce cours traite de la <b>statique</b> : l'équilibre des corps rigides, au repos ou à vitesse constante.</div>
+
+  <h3>Les branches de la mécanique</h3>
+  <p>Trois branches : corps rigides, corps déformables, fluides. Les corps rigides se divisent en <b>statique</b> (équilibre) et <b>dynamique</b> (mouvement accéléré). La statique remonte à Archimède et au principe du levier ; la dynamique à Galilée (pendules, chute des corps) puis à Newton (trois lois du mouvement et gravitation universelle).</p>
+
+  <h3>Les quantités de base</h3>
+  <div class="tw"><table>
+    <tr><th>Quantité</th><th>Ce qu'elle décrit</th></tr>
+    <tr><td>Longueur</td><td>Position d'un point, taille d'un système, géométrie.</td></tr>
+    <tr><td>Temps</td><td>Succession d'événements. Ne sert pas en statique, important en dynamique.</td></tr>
+    <tr><td>Masse</td><td>Quantité de matière : attraction gravitationnelle et résistance à un changement de vitesse.</td></tr>
+    <tr><td>Force</td><td>« Poussée » ou « traction » d'un corps sur un autre. Définie par son <b>intensité</b>, sa <b>direction</b> et son <b>point d'application</b>.</td></tr>
+  </table></div>
+
+  <h3>Les idéalisations</h3>
+  <ul>
+    <li><b>Particule</b> : a une masse, mais sa taille est négligée. La géométrie n'intervient pas (chapitres 1 et 2).</li>
+    <li><b>Corps rigide</b> : ses particules restent à distance fixe, il ne se déforme pas sous la charge. Le matériau n'importe pas.</li>
+    <li><b>Force concentrée</b> : charge supposée agir en un seul point, valable si la surface d'application est très petite devant le corps.</li>
+  </ul>
+
+  <h3>Les trois lois de Newton</h3>
+  <ol class="steps">
+    <li><b>Équilibre</b> : une particule au repos ou en mouvement rectiligne à vitesse constante y reste si elle n'est soumise à aucune force déséquilibrée. C'est la base de tout le chapitre 2.</li>
+    <li><b>Mouvement accéléré</b> : une force déséquilibrée <span class="v">F</span> donne une accélération <span class="v">a</span> de même direction, proportionnelle à la force (F = m a).</li>
+    <li><b>Action-réaction</b> : les forces entre deux particules sont égales, opposées et colinéaires.</li>
+  </ol>
+
+  <h3>Système international et méthode</h3>
+  <p>Longueur en m, masse en kg, temps en s, force en newtons (1 N = 1 kg·m/s²). Les préfixes vont de 1000 en 1000 : G (10⁹), M (10⁶), k (10³), m (10⁻³), µ (10⁻⁶), n (10⁻⁹). On évite « déca » et « centi », sauf pour certaines surfaces et volumes.</p>
+  <div class="retiens"><b>La démarche du cours en 5 étapes.</b> 1. Lire et relier la situation à la théorie. 2. Tabuler les données, faire un grand schéma. 3. Appliquer les principes en vérifiant l'homogénéité des unités. 4. Résoudre et donner la réponse avec <b>3 chiffres significatifs au maximum</b>. 5. Vérifier que le résultat est raisonnable.</div>
+  <div class="trap"><b>Piège n°1 du DS.</b> Une masse n'est pas un poids. Une lampe de 8 kg pèse <span class="m">W = m g = 8 × 9,81 = 78,5 N</span>, pas 8 N.</div>
+
+  <div class="quiz">
+    <div class="q"><p>La statique étudie…</p>
+      <div class="opts"><button>les corps en accélération</button><button data-ok="1">les corps au repos ou à vitesse constante</button><button>les fluides</button></div>
+      <div class="fb" hidden>Statique = équilibre : repos ou vitesse constante. Le mouvement accéléré, c'est la dynamique.</div></div>
+    <div class="q"><p>Une réponse finale du DS doit avoir au plus…</p>
+      <div class="opts"><button>2 chiffres significatifs</button><button data-ok="1">3 chiffres significatifs</button><button>5 décimales</button></div>
+      <div class="fb" hidden>Consigne du cours : 3 chiffres significatifs au maximum (212,6 N → 213 N).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="csec" id="s2">
+  <div class="shead"><span class="num">2</span><h2>Scalaires, vecteurs et opérations</h2><span class="meta">diapos 13 à 16 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un nombre seul ne suffit pas pour décrire une force : il faut aussi savoir vers où elle tire. D'où le vecteur, une flèche qui porte une intensité <i>et</i> une direction.</div>
+  <ul>
+    <li><b>Scalaire</b> : défini par sa seule intensité, positive ou négative (masse, longueur, temps).</li>
+    <li><b>Vecteur</b> : intensité + direction. Sur la flèche, la <b>longueur</b> donne l'intensité, l'<b>angle</b> donne la ligne d'action par rapport à un axe fixe, la <b>pointe</b> donne le sens.</li>
+  </ul>
+
+  <h3>Les opérations</h3>
+  <ul>
+    <li><b>Multiplier par un scalaire</b> : l'intensité est multipliée ; un scalaire négatif inverse aussi le sens.</li>
+    <li><b>Addition (loi du parallélogramme)</b> : on met les deux vecteurs origine contre origine, on trace les parallèles, la diagonale est la résultante <span class="m">R = A + B</span>.</li>
+    <li><b>Règle du triangle</b> : on met B au bout de A (« tête-à-queue ») ; R va de l'origine de A à la pointe de B. L'addition est commutative : <span class="m">R = A + B = B + A</span>.</li>
+    <li><b>Vecteurs colinéaires</b> : même ligne d'action, l'addition devient une simple addition algébrique.</li>
+    <li><b>Soustraction</b> : on ajoute l'opposé, <span class="m">R' = A − B = A + (−B)</span>.</li>
+  </ul>
+  <figure>
+    <svg viewBox="0 0 520 190" width="520" role="img" aria-label="Loi du parallélogramme et règle du triangle">
+      <g font-family="var(--mono)" font-size="14">
+        <line x1="40" y1="160" x2="190" y2="160" stroke="var(--vec)" stroke-width="3"/><polygon points="190,154 202,160 190,166" fill="var(--vec)"/>
+        <line x1="40" y1="160" x2="95" y2="70" stroke="var(--vec)" stroke-width="3"/><polygon points="89,67 101,61 99,74" fill="var(--vec)"/>
+        <line x1="200" y1="160" x2="255" y2="70" stroke="var(--muted)" stroke-dasharray="5 4"/><line x1="98" y1="64" x2="252" y2="64" stroke="var(--muted)" stroke-dasharray="5 4"/>
+        <line x1="40" y1="160" x2="244" y2="72" stroke="var(--force)" stroke-width="3.5"/><polygon points="238,66 254,66 244,79" fill="var(--force)"/>
+        <text x="110" y="180" fill="var(--vec)">A</text><text x="48" y="110" fill="var(--vec)">B</text><text x="150" y="102" fill="var(--force)" font-weight="600">R</text>
+        <text x="40" y="24" fill="var(--muted)" font-size="12">parallélogramme</text>
+        <line x1="300" y1="160" x2="450" y2="160" stroke="var(--vec)" stroke-width="3"/><polygon points="450,154 462,160 450,166" fill="var(--vec)"/>
+        <line x1="462" y1="160" x2="505" y2="72" stroke="var(--vec)" stroke-width="3"/><polygon points="498,72 510,62 510,77" fill="var(--vec)"/>
+        <line x1="300" y1="160" x2="496" y2="70" stroke="var(--force)" stroke-width="3.5"/><polygon points="490,64 506,66 495,78" fill="var(--force)"/>
+        <text x="370" y="180" fill="var(--vec)">A</text><text x="490" y="128" fill="var(--vec)">B</text><text x="380" y="106" fill="var(--force)" font-weight="600">R</text>
+        <text x="300" y="24" fill="var(--muted)" font-size="12">triangle (tête-à-queue)</text>
+      </g>
+    </svg>
+    <figcaption>Les deux constructions donnent la même résultante R = A + B.</figcaption>
+  </figure>
+  <div class="coquille"><b>Coquille du diapo 14.</b> Multiplier par un scalaire <i>multiplie</i> l'intensité (×2 la double) ; elle n'est pas « augmentée de cette quantité ».</div>
+  <div class="quiz">
+    <div class="q"><p>On multiplie <span class="v">F</span> (50 N vers la droite) par −2. On obtient…</p>
+      <div class="opts"><button>48 N vers la droite</button><button data-ok="1">100 N vers la gauche</button><button>−100 N vers la droite</button></div>
+      <div class="fb" hidden>L'intensité est multipliée par 2 (100 N) et le signe − inverse le sens. Une intensité reste toujours positive.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="csec" id="s3">
+  <div class="shead"><span class="num">3</span><h2>Additionner deux forces : parallélogramme et trigonométrie</h2><span class="meta">diapos 17 à 20 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Avec deux forces, on ne dessine qu'une <b>moitié du parallélogramme</b> : un triangle. Les lois des cosinus et des sinus donnent alors l'intensité et la direction de la résultante.</div>
+  <div class="formula key cours">C = √(A² + B² − 2AB cos(c))                (loi des cosinus)
+
+A / sin(a) = B / sin(b) = C / sin(c)         (loi des sinus)</div>
+  <p>Dans le triangle, chaque angle <b>a, b, c</b> est en face du côté A, B, C du même nom. Pour décomposer une force F sur deux axes u et v, on trace depuis la pointe de F les parallèles aux axes, et on résout le triangle de la même façon.</p>
+  <div class="trap"><b>Piège.</b> L'angle c est l'angle <i>intérieur</i> du triangle, en face de la résultante. Si les deux forces partent du même point en faisant un angle φ entre elles, alors <span class="m">c = 180° − φ</span>.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 18</div>
+    <p>Une tête de vis subit F<sub>1</sub> = 100 N à 15° au-dessus de l'axe x et F<sub>2</sub> = 150 N à 10° de l'axe y (soit 80° depuis x). Intensité et direction de la résultante ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Angle entre les forces : 80° − 15° = 65°, donc dans le triangle c = 180° − 65° = 115°
+FR = √(100² + 150² − 2·100·150·cos 115°) = 212,6 N
+sin φ / 150 = sin 115° / 212,6   →   φ = 39,8°   (angle entre F1 et FR)
+θ = 15° + 39,8° = 54,8° au-dessus de l'axe x</div>
+      <p>Réponse : <span class="res">F<sub>R</sub> = 213 N, θ = 54,8°</span>.</p>
+    </div></details>
+  </div>
+
+  <h3>Limite de la méthode</h3>
+  <p>Avec trois forces ou plus, il faut appliquer le parallélogramme plusieurs fois : <span class="m">F_R = (F1 + F2) + F3</span>. Les calculs deviennent lourds. La solution pratique, c'est la méthode des <b>composantes rectangulaires</b> (sections 4 et 5).</p>
+  <div class="quiz">
+    <div class="q"><p>Deux forces partent du même point avec 40° entre elles. Quel angle mettre dans la loi des cosinus ?</p>
+      <div class="opts"><button>40°</button><button data-ok="1">140°</button><button>50°</button></div>
+      <div class="fb" hidden>Dans le triangle tête-à-queue, l'angle en face de la résultante vaut 180° − 40° = 140°.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="csec" id="s4">
+  <div class="shead"><span class="num">4</span><h2>Système coplanaire : composantes et notation cartésienne</h2><span class="meta">diapos 21 à 23 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> On remplace la flèche oblique par deux flèches le long des axes x et y. Ensuite, additionner des forces revient à additionner des nombres.</div>
+
+  <h3>Avec un angle θ</h3>
+  <p>La force et ses composantes forment un triangle rectangle. Si θ est mesuré depuis l'axe x :</p>
+  <div class="formula key cours">Fx = F cos(θ)        Fy = F sin(θ)</div>
+  <div class="coquille"><b>Coquille du diapo 21.</b> Le diapo écrit F<sub>y</sub> = F cos(θ). C'est bien <b>F<sub>y</sub> = F sin(θ)</b> : le cosinus va avec le côté adjacent à l'angle, le sinus avec le côté opposé.</div>
+  <figure>
+    <svg viewBox="0 0 320 200" width="320" role="img" aria-label="Force F décomposée en Fx et Fy">
+      <line x1="40" y1="170" x2="300" y2="170" stroke="var(--muted)" stroke-width="1.5"/>
+      <line x1="40" y1="170" x2="40" y2="15" stroke="var(--muted)" stroke-width="1.5"/>
+      <text x="292" y="188" fill="var(--muted)" font-family="var(--mono)" font-size="13">x</text>
+      <text x="26" y="22" fill="var(--muted)" font-family="var(--mono)" font-size="13">y</text>
+      <line x1="40" y1="170" x2="220" y2="170" stroke="var(--vec)" stroke-width="3"/><polygon points="220,164 232,170 220,176" fill="var(--vec)"/>
+      <line x1="232" y1="170" x2="232" y2="62" stroke="var(--vec)" stroke-width="3" stroke-dasharray="6 4"/><polygon points="226,62 232,50 238,62" fill="var(--vec)"/>
+      <line x1="40" y1="170" x2="224" y2="56" stroke="var(--force)" stroke-width="3.5"/><polygon points="220,48 234,50 226,61" fill="var(--force)"/>
+      <path d="M 95 170 A 55 55 0 0 0 87 141" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="100" y="158" fill="var(--ink)" font-family="var(--mono)" font-size="14">θ</text>
+      <text x="120" y="100" fill="var(--force)" font-family="var(--mono)" font-size="15" font-weight="600">F</text>
+      <text x="110" y="190" fill="var(--vec)" font-family="var(--mono)" font-size="13">Fx = F cos θ</text>
+      <text x="240" y="115" fill="var(--vec)" font-family="var(--mono)" font-size="13">Fy = F sin θ</text>
+    </svg>
+    <figcaption>Si l'angle est donné par rapport à l'axe y, les rôles s'inversent.</figcaption>
+  </figure>
+
+  <h3>Avec un triangle de « pente » (a, b, c)</h3>
+  <p>La direction est donnée par un petit triangle (souvent 3-4-5), proportionnel au grand triangle formé par la force. Avec a le côté horizontal, b le côté vertical et c l'hypoténuse :</p>
+  <div class="formula key cours">Fx = F (a / c)        Fy = −F (b / c)</div>
+  <p>Le signe − du diapo vient de la figure (la force y descend). En pratique, on met le signe d'après le sens de la flèche sur le dessin.</p>
+
+  <h3>Notation vectorielle cartésienne</h3>
+  <p>Les vecteurs unitaires <span class="v">i</span> et <span class="v">j</span> ont une intensité 1, sans unité, et donnent les directions des axes x et y. À la main, on les écrit avec un accent circonflexe (î, ĵ).</p>
+  <div class="formula key cours">F = Fx i + Fy j</div>
+  <div class="retiens"><b>Signes.</b> Le signe + ou − ne sert qu'au calcul. Sur un schéma, c'est la pointe de la flèche qui indique le sens, et l'intensité écrite à côté est toujours positive.</div>
+  <div class="quiz">
+    <div class="q"><p>Une force de 50 N fait 30° avec l'axe <b>y</b>. Que vaut |F<sub>x</sub>| ?</p>
+      <div class="opts"><button data-ok="1">25 N</button><button>43,3 N</button><button>50 N</button></div>
+      <div class="fb" hidden>L'angle est mesuré depuis y : F<sub>x</sub> = F sin 30° = 25 N et F<sub>y</sub> = F cos 30° = 43,3 N.</div></div>
+    <div class="q"><p>F = 100 N, pente 3-4-5 avec 4 à l'horizontale, la force monte vers la gauche. F<sub>x</sub> = ?</p>
+      <div class="opts"><button>60 N</button><button>80 N</button><button data-ok="1">−80 N</button></div>
+      <div class="fb" hidden>F<sub>x</sub> = −100 × 4/5 = −80 N (vers la gauche) et F<sub>y</sub> = +100 × 3/5 = 60 N.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="csec" id="s5">
+  <div class="shead"><span class="num">5</span><h2>Résultante de forces coplanaires : méthode analytique</h2><span class="meta">diapos 23 à 28 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Les composantes en x sont toutes sur la même droite : on les additionne comme des nombres. Pareil en y. On recolle ensuite les deux sommes avec Pythagore.</div>
+  <div class="formula key cours">(F_R)x = ΣFx        (F_R)y = ΣFy
+
+F_R = √((F_R)x² + (F_R)y²)
+
+θ = tan⁻¹ |(F_R)y / (F_R)x|</div>
+  <ol class="steps">
+    <li>Décompose chaque force en x et y, avec leurs signes.</li>
+    <li>Additionne : (F<sub>R</sub>)<sub>x</sub> = ΣF<sub>x</sub> et (F<sub>R</sub>)<sub>y</sub> = ΣF<sub>y</sub>.</li>
+    <li>Intensité par Pythagore.</li>
+    <li>Angle avec la valeur absolue (un angle aigu), puis place-le dans le bon quadrant d'après les signes, et dis depuis quel axe il est mesuré.</li>
+  </ol>
+  <div class="trap"><b>Piège.</b> θ = tan⁻¹|…| donne toujours un angle entre 0° et 90°. Si (F<sub>R</sub>)<sub>x</sub> &lt; 0 et (F<sub>R</sub>)<sub>y</sub> &gt; 0, la résultante est en haut à gauche : il faut le dire, ou donner 180° − θ depuis +x. Et mets la calculatrice en degrés.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 25</div>
+    <p>Un piton subit F<sub>1</sub> = 600 N à 30° au-dessus de l'axe +x et F<sub>2</sub> = 400 N à 45° de l'axe y, vers la gauche. Intensité et direction de la résultante ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">F1x = 600 cos 30° = 519,6 N        F1y = 600 sin 30° = 300 N
+F2x = −400 sin 45° = −282,8 N      F2y = 400 cos 45° = 282,8 N
+(F_R)x = 519,6 − 282,8 = 236,8 N
+(F_R)y = 300 + 282,8 = 582,8 N
+F_R = √(236,8² + 582,8²) = 629 N
+θ = tan⁻¹(582,8 / 236,8) = 67,9°   (les deux composantes sont positives : au-dessus de +x)</div>
+      <p>Réponse : <span class="res">F<sub>R</sub> = 629 N, θ = 67,9° depuis +x</span>.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>(F<sub>R</sub>)<sub>x</sub> = −30 N et (F<sub>R</sub>)<sub>y</sub> = 40 N. Où pointe la résultante ?</p>
+      <div class="opts"><button>En haut à droite</button><button data-ok="1">En haut à gauche</button><button>En bas à gauche</button></div>
+      <div class="fb" hidden>x négatif, y positif : en haut à gauche. F<sub>R</sub> = 50 N, θ = tan⁻¹(40/30) = 53,1° au-dessus de l'axe −x (126,9° depuis +x).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="csec" id="s6">
+  <div class="shead"><span class="num">6</span><h2>Vecteurs cartésiens en 3D</h2><span class="meta">diapos 29 à 39 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Même chose qu'en 2D avec un troisième axe z. Un vecteur, c'est trois nombres : ce qu'il avance selon x, selon y et selon z.</div>
+  <p><b>Repère direct</b> (orienté à droite) : le pouce de la main droite pointe vers +z, les doigts s'enroulent de +x vers +y. Les vecteurs unitaires <span class="v">i</span>, <span class="v">j</span>, <span class="v">k</span> donnent les directions de x, y, z.</p>
+  <div class="formula key cours">A = Ax i + Ay j + Az k
+
+A = √(Ax² + Ay² + Az²)</div>
+
+  <h3>Angles directeurs α, β, γ</h3>
+  <p>Ce sont les angles entre le vecteur et les axes <b>positifs</b> x, y, z, chacun entre 0° et 180°.</p>
+  <div class="formula key cours">cos α = Ax / A        cos β = Ay / A        cos γ = Az / A</div>
+  <p>Le <b>vecteur unitaire</b> <span class="m">u_A</span> a la même direction que <span class="v">A</span> et une norme égale à 1. Ses composantes sont exactement les cosinus directeurs :</p>
+  <div class="formula key cours">u_A = A / A = (Ax / A) i + (Ay / A) j + (Az / A) k = cos α i + cos β j + cos γ k
+
+cos² α + cos² β + cos² γ = 1
+
+A = A u_A = A cos α i + A cos β j + A cos γ k</div>
+  <div class="coquille"><b>Coquilles des diapos 32.</b> Le diapo écrit « cos γ <b>i</b> » à la fin de u<sub>A</sub> et de <span class="v">A</span> : c'est <b>cos γ <span class="v">k</span></b>. Et dans cos² α + cos² β + cos² γ = 1, il n'y a pas de vecteurs i, j, k : c'est une égalité entre nombres.</div>
+  <div class="trap"><b>Piège.</b> Avec seulement α et β, la relation donne cos γ = ±√(1 − cos² α − cos² β) : deux solutions (γ et 180° − γ). Le dessin tranche : si la force descend, cos γ &lt; 0.</div>
+
+  <h3>Direction donnée par deux angles θ et φ</h3>
+  <p>φ est l'angle avec l'axe z, θ l'angle de la projection horizontale dans le plan xy. On décompose en deux étapes :</p>
+  <div class="formula key cours">Az = A cos φ          A' = A sin φ   (projection dans le plan xy)
+Ax = A' cos θ = A sin φ cos θ
+Ay = A' sin θ = A sin φ sin θ
+
+A = A sin φ cos θ i + A sin φ sin θ j + A cos φ k</div>
+
+  <h3>Addition en 3D</h3>
+  <div class="formula key cours">R = A + B = (Ax + Bx) i + (Ay + By) j + (Az + Bz) k
+
+F_R = ΣF = ΣFx i + ΣFy j + ΣFz k</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 35</div>
+    <p>Un anneau subit <span class="m">F1 = {50 i − 100 j + 100 k} lb</span> et <span class="m">F2 = {60 j + 80 k} lb</span>. Intensité et angles directeurs de la résultante ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">F_R = {50 i + (−100 + 60) j + (100 + 80) k} = {50 i − 40 j + 180 k} lb
+F_R = √(50² + 40² + 180²) = 191,0 lb
+α = cos⁻¹(50 / 191,0) = 74,8°
+β = cos⁻¹(−40 / 191,0) = 102°
+γ = cos⁻¹(180 / 191,0) = 19,6°
+Vérif : 0,262² + 0,209² + 0,942² = 1  ✓</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · deux angles</div>
+    <p>F = 200 N avec α = 60°, β = 45°, et F pointe vers le bas. Écris F en vecteur cartésien.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">cos² γ = 1 − cos² 60° − cos² 45° = 1 − 0,25 − 0,5 = 0,25   →   cos γ = ±0,5
+F descend  →  cos γ = −0,5  →  γ = 120°
+F = 200 (0,5 i + 0,707 j − 0,5 k) = {100 i + 141 j − 100 k} N</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Norme de <span class="m">A = {2 i − 3 j + 6 k}</span> ?</p>
+      <div class="opts"><button>5</button><button data-ok="1">7</button><button>11</button></div>
+      <div class="fb" hidden>√(4 + 9 + 36) = √49 = 7.</div></div>
+    <div class="q"><p>Un vecteur a α = 90°. Donc…</p>
+      <div class="opts"><button data-ok="1">Ax = 0</button><button>il est parallèle à x</button><button>A = 0</button></div>
+      <div class="fb" hidden>cos 90° = 0 donc A<sub>x</sub> = 0 : le vecteur est dans le plan yz, perpendiculaire à x.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="csec" id="s7">
+  <div class="shead"><span class="num">7</span><h2>Vecteur position et force dirigée le long d'une droite</h2><span class="meta">diapos 40 à 52 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Dans les exercices, on donne rarement les angles : on donne des <b>points</b> (où le câble est accroché, où il arrive). Le vecteur position transforme deux points en une direction, et la force du câble suit cette direction.</div>
+  <p>Axe z vers le haut, x et y dans le plan horizontal. Depuis l'origine O jusqu'au point P(x, y, z) :</p>
+  <div class="formula key cours">r = x i + y j + z k</div>
+  <p>Entre deux points quelconques, de A vers B : par la règle du triangle, <span class="m">r_A + r = r_B</span>, donc <span class="m">r = r_B − r_A</span>.</p>
+  <div class="formula key cours">r = (xB − xA) i + (yB − yA) j + (zB − zA) k</div>
+  <div class="retiens"><b>Règle pratique.</b> Coordonnées de la <b>tête</b> (B) moins coordonnées de la <b>queue</b> (A). La norme de <span class="v">r</span> donne la longueur du câble, et <span class="m">u = r / r</span> sa direction.</div>
+
+  <h3>Force le long d'un câble</h3>
+  <p>La force <span class="v">F</span> a la même direction et le même sens que le vecteur position de A vers B :</p>
+  <div class="formula key cours">F = F u = F (r / r)
+
+F = F [ (xB − xA) i + (yB − yA) j + (zB − zA) k ] / √((xB − xA)² + (yB − yA)² + (zB − zA)²)</div>
+  <div class="trap"><b>Piège.</b> Un câble <i>tire</i> le point où il est accroché vers l'autre bout. La force sur A dirigée vers B se calcule avec <span class="m">r_AB</span>, pas <span class="m">r_BA</span> : inverser change le signe de toutes les composantes.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 42</div>
+    <p>Un élastique relie A(1 ; 0 ; −3) m à B(−2 ; 2 ; 3) m. Sa longueur et sa direction de A vers B ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r = (−2 − 1) i + (2 − 0) j + (3 − (−3)) k = {−3 i + 2 j + 6 k} m
+r = √(9 + 4 + 36) = 7 m
+u = (−3/7) i + (2/7) j + (6/7) k
+α = cos⁻¹(−3/7) = 115°     β = cos⁻¹(2/7) = 73,4°     γ = cos⁻¹(6/7) = 31,0°</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 44</div>
+    <p>Un homme tire sur une corde avec 70 lb. La corde va du support A(0 ; 0 ; 30) ft à B(12 ; −8 ; 6) ft. Écris la force sur A en vecteur cartésien et donne sa direction.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r = (12 − 0) i + (−8 − 0) j + (6 − 30) k = {12 i − 8 j − 24 k} ft
+r = √(144 + 64 + 576) = 28 ft
+F = 70 (12/28 i − 8/28 j − 24/28 k) = {30 i − 20 j − 60 k} lb
+α = cos⁻¹(30/70) = 64,6°     β = cos⁻¹(−20/70) = 107°     γ = cos⁻¹(−60/70) = 149°</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>A(1 ; 2 ; 0) et B(4 ; 6 ; 0). Longueur AB ?</p>
+      <div class="opts"><button data-ok="1">5</button><button>7</button><button>√52</button></div>
+      <div class="fb" hidden><span class="m">r = {3 i + 4 j}</span>, donc √(9 + 16) = 5.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s7"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="csec" id="s8">
+  <div class="shead"><span class="num">8</span><h2>Produit scalaire</h2><span class="meta">diapos 53 à 63 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le produit scalaire répond à « combien de A va dans la direction de B ? ». Le résultat est un <b>nombre</b>. Il sert à deux choses : trouver l'angle entre deux droites et projeter une force sur un axe.</div>
+  <div class="formula key cours">A · B = A B cos θ        avec 0° ≤ θ ≤ 180°</div>
+  <p>Lois : commutatif (<span class="m">A · B = B · A</span>), multiplication par un scalaire (<span class="m">a(A · B) = (aA) · B = A · (aB)</span>), distributif (<span class="m">A · (B + D) = A · B + A · D</span>). Pour les vecteurs unitaires : <span class="m">i · i = 1</span> (θ = 0°) et <span class="m">i · j = 0</span> (θ = 90°).</p>
+  <div class="formula key cours">A · B = Ax Bx + Ay By + Az Bz</div>
+  <p>On multiplie les composantes x entre elles, y entre elles, z entre elles, puis on fait la somme algébrique.</p>
+
+  <h3>Application 1 : angle entre deux vecteurs (ou deux droites)</h3>
+  <div class="formula key cours">θ = cos⁻¹( A · B / (A B) )        0° ≤ θ ≤ 180°</div>
+  <p>Si <span class="m">A · B = 0</span>, alors θ = 90° : les vecteurs sont perpendiculaires.</p>
+
+  <h3>Application 2 : composantes d'un vecteur par rapport à un axe</h3>
+  <div class="formula key cours">A_a = A cos θ = A · u_a           (composante parallèle, projection)
+A_a (vecteur) = A_a u_a
+A_⊥ = A sin θ = √(A² − A_a²)       (composante perpendiculaire)</div>
+  <div class="trap"><b>Piège.</b> On projette sur un vecteur <b>unitaire</b> u<sub>a</sub>. Faire A · r au lieu de A · u multiplie le résultat par la longueur r. Et A<sub>a</sub> peut être négatif : la composante est alors dans le sens −u<sub>a</sub>.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 56</div>
+    <p>F = 100 N fait 45° avec l'axe u et 15° avec l'axe v. Grandeurs de ses projections sur u et v ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(F_u)proj = F cos 45° = 70,7 N
+(F_v)proj = F cos 15° = 96,6 N</div>
+      <p>Attention : les axes u et v ne sont pas perpendiculaires, donc ces projections ne s'additionnent pas pour redonner F.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 57</div>
+    <p>Une structure subit <span class="m">F = {300 j} N</span> en B. Le membre AB va de A (origine) à B(2 ; 6 ; 3) m. Composantes de F parallèle et perpendiculaire à AB ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r_AB = {2 i + 6 j + 3 k} m,   r = √(4 + 36 + 9) = 7 m
+u_AB = (2/7) i + (6/7) j + (3/7) k
+F_AB = F · u_AB = 0·(2/7) + 300·(6/7) + 0·(3/7) = 257 N
+F_⊥ = √(300² − 257,1²) = 155 N</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 58</div>
+    <p><span class="m">F = {−6 i + 9 j + 3 k} kN</span> agit en A(1 ; −2 ; 2) m. Angle θ entre la force et la ligne AO (O origine) ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r_AO = O − A = {−1 i + 2 j − 2 k} m,   r = 3 m
+F · r_AO = (−6)(−1) + 9·2 + 3·(−2) = 18
+F = √(36 + 81 + 9) = 11,22 kN
+θ = cos⁻¹( 18 / (11,22 × 3) ) = 57,7°</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>(1, 2, 3) · (4, −1, 2) = ?</p>
+      <div class="opts"><button>(4, −2, 6)</button><button data-ok="1">8</button><button>12</button></div>
+      <div class="fb" hidden>4 − 2 + 6 = 8. Un produit scalaire donne un nombre, jamais un vecteur.</div></div>
+    <div class="q"><p>A<sub>a</sub> est négatif. Ça veut dire…</p>
+      <div class="opts"><button>erreur de calcul</button><button data-ok="1">A pointe dans le sens opposé à u<sub>a</sub></button><button>A est perpendiculaire à l'axe</button></div>
+      <div class="fb" hidden>θ &gt; 90° : la composante le long de l'axe va dans le sens −u<sub>a</sub>. C'est un résultat valable.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s8"> J'ai compris cette section</label>
+</section>
+
+<!-- ============ Exercices ============ -->
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices des PDF complémentaires</h2><span class="meta">cherche 10 min avant d'ouvrir la méthode</span></div>
+  <p>Les énoncés et les figures sont dans tes PDF « exercices complémentaires » du prof. Ici : la méthode pour démarrer, sans recopier les figures.</p>
+
+  <div class="ex"><h4>Vecteur position · ex. 1 <span class="tag">section 7</span></h4>
+    <p>Longueur de l'élément AB du treillis, en passant par le vecteur position de A vers B.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Lis les coordonnées de A et B sur la figure (attention aux cotes sur les axes négatifs), calcule <span class="m">r_AB = B − A</span>, puis sa norme. C'est tout : la longueur, c'est |<span class="m">r_AB</span>|.</p></div></details></div>
+  <div class="ex"><h4>Vecteur position · ex. 2 <span class="tag">sections 6 et 7</span></h4>
+    <p>Mât de drapeau : F<sub>B</sub> = 700 N et F<sub>C</sub> = 560 N. Norme et angles directeurs de la résultante.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Écris chaque force comme <span class="m">F = F · r / r</span> avec le vecteur position du point d'attache vers B (puis vers C). Additionne composante par composante, puis norme et α, β, γ avec cos α = (F<sub>R</sub>)<sub>x</sub> / F<sub>R</sub>.</p></div></details></div>
+  <div class="ex"><h4>Vecteur position · ex. 3 <span class="tag">sections 6 et 7</span></h4>
+    <p>L'homme tire en C avec 70 N, ce qui donne F<sub>A</sub> = F<sub>C</sub> en B. Angles de la résultante en B.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Même intensité (70 N) pour les deux forces, directions différentes : <span class="m">r_BA</span> et <span class="m">r_BC</span> partent tous les deux de B. Additionne, puis angles directeurs.</p></div></details></div>
+  <div class="ex"><h4>Vecteur position · ex. 4 <span class="tag">sections 6 et 7</span></h4>
+    <p>Deux câbles d'amarrage sur la poupe d'un navire : chaque force en vecteur cartésien, puis angles de la résultante.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Un câble = un vecteur position + une intensité. Le point de départ est la poupe (là où la force s'applique), l'arrivée est le point d'amarrage.</p></div></details></div>
+  <div class="ex"><h4>Produit scalaire · ex. 1 <span class="tag">section 8</span></h4>
+    <p>Angle θ entre l'axe y de la tige et le câble AB.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Deux vecteurs qui partent du même point A : <span class="m">r_AB</span> et un vecteur le long de la tige (par exemple <span class="m">j</span> si la tige suit y). Puis θ = cos⁻¹(r_AB · u / r).</p></div></details></div>
+  <div class="ex"><h4>Produit scalaire · ex. 2 et 3 <span class="tag">section 8</span></h4>
+    <p>Composantes de F = 600 N parallèle et perpendiculaire au segment DE ; de F = 90 lb le long de la diagonale AB d'une caisse.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>1. Écris F en vecteur cartésien (avec son vecteur position). 2. Écris le vecteur unitaire de l'axe (DE ou AB). 3. <span class="m">F_∥ = F · u</span>. 4. <span class="m">F_⊥ = √(F² − F_∥²)</span>.</p></div></details></div>
+  <div class="ex"><h4>Produit scalaire · ex. 4 <span class="tag">section 8</span></h4>
+    <p><span class="m">F = {25 i − 50 j + 10 k} lb</span> en A : composantes F<sub>1</sub> le long de AB et F<sub>2</sub> perpendiculaire.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>F est déjà cartésienne : il ne reste que u<sub>AB</sub> à construire avec les coordonnées de la figure. F = √(25² + 50² + 10²) = 56,8 lb, puis F<sub>1</sub> = F · u<sub>AB</sub> et F<sub>2</sub> = √(F² − F<sub>1</sub>²).</p></div></details></div>
+</section>
+
+<!-- ============ S'entraîner ============ -->
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=meca&amp;ch=vecteurs"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=meca&amp;ch=vecteurs"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/ds/statique/"><b>Révision DS Statique ▸</b><span>Les 3 chapitres d'un coup, fiche et calculatrice</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a class="next" href="/cours/statique/equilibre/"><small>Chapitre 2 ▸</small>Équilibre statique</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Statique%20%C2%B7%20chapitre%201">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

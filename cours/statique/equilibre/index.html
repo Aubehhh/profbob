@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 2 · Équilibre statique · Statique · profbob.fr</title>
+<meta name="description" content="Statique, chapitre 2 : condition d'équilibre d'une particule, diagramme du corps libre, ressorts, câbles et poulies, équilibre en 2D et en 3D. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="statique-equilibre" data-matiere="meca" data-ch="equilibre" data-nota-all>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mecanique/">← Mécanique 1 (Statique)</a> · Chapitre 2 sur 3</div>
+  <h1>Équilibre statique</h1>
+  <p class="lead">Une particule immobile : toutes les forces qui agissent sur elle s'annulent. On isole le point, on dessine ses forces, et chaque axe donne une équation.</p>
+  <div class="chips"><span class="chip"><b>4</b> sections</span><span class="chip">≈ 1 h 30</span><span class="chip">Diapos 1 à 15</span><span class="chip">Prérequis : <a href="/cours/statique/vecteurs/">chapitre 1</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=meca&amp;ch=equilibre">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=meca&amp;ch=equilibre">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Condition d'équilibre</a>
+  <a href="#s2"><span class="n">2</span>Corps libre (DCL)</a>
+  <a href="#s3"><span class="n">3</span>Équilibre 2D</a>
+  <a href="#s4"><span class="n">4</span>Équilibre 3D</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="meca"></div>
+
+<section class="csec" id="s1">
+  <div class="shead"><span class="num">1</span><h2>Condition d'équilibre</h2><span class="meta">diapo 2 · 10 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une particule est en équilibre si elle reste au repos ou garde une vitesse constante. D'après la 1ʳᵉ loi de Newton, la force résultante doit être nulle.</div>
+  <div class="formula key cours">ΣF = 0</div>
+  <p><b>Vérification par la 2ᵉ loi de Newton</b> : <span class="m">ΣF = m a</span>. Si ΣF = 0, alors m a = 0, donc l'accélération a = 0.</p>
+  <div class="quiz">
+    <div class="q"><p>Un ascenseur monte à vitesse constante. Le point d'accroche du câble est-il en équilibre ?</p>
+      <div class="opts"><button data-ok="1">Oui</button><button>Non, il bouge</button></div>
+      <div class="fb" hidden>Vitesse constante = accélération nulle = ΣF = 0. Équilibre ne veut pas dire immobile.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2">
+  <div class="shead"><span class="num">2</span><h2>Le diagramme du corps libre (DCL)</h2><span class="meta">diapos 3 et 4 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pour écrire ΣF = 0, il faut connaître <b>toutes</b> les forces qui agissent sur la particule. On la « découpe » de son environnement et on remplace chaque chose coupée par la force qu'elle exerçait. C'est l'étape la plus importante, et elle est notée.</div>
+
+  <h3>Ressorts (élastiques linéaires)</h3>
+  <div class="formula key cours">F = k s          s = l − l0</div>
+  <p>k est la raideur (N/m), s la déflexion mesurée depuis la longueur à vide l<sub>0</sub>. Si <b>s &gt; 0</b> (allongement), le ressort « tire » ; si <b>s &lt; 0</b> (compression), il « pousse ».</p>
+
+  <h3>Câbles et poulies</h3>
+  <ul>
+    <li>Hypothèses : câbles de poids négligeable et inextensibles.</li>
+    <li>Un câble ne supporte qu'une <b>tension</b> (traction), orientée selon l'axe du câble.</li>
+    <li>La tension T est la <b>même</b> sur toute la longueur d'un câble continu passant par une poulie sans frottement.</li>
+  </ul>
+
+  <h3>Les 3 étapes du DCL</h3>
+  <ol class="steps">
+    <li><b>Dessiner le contour isolé</b> : imaginer la particule « coupée » de son environnement.</li>
+    <li><b>Représenter toutes les forces</b> : les forces <i>actives</i> (poids, charges) et les forces <i>réactives</i> (celles des supports et câbles coupés, qui empêchent le mouvement). Astuce : suivre le contour et repérer chaque point de contact.</li>
+    <li><b>Identifier chaque force</b> : les connues avec leur intensité et leur direction, les inconnues avec une lettre.</li>
+  </ol>
+  <figure>
+    <svg viewBox="0 0 460 200" width="460" role="img" aria-label="Nœud suspendu et son diagramme du corps libre">
+      <g font-family="var(--mono)" font-size="13">
+        <line x1="20" y1="20" x2="200" y2="20" stroke="var(--muted)" stroke-width="3"/>
+        <line x1="40" y1="20" x2="110" y2="90" stroke="var(--ink)" stroke-width="2"/><line x1="190" y1="20" x2="110" y2="90" stroke="var(--ink)" stroke-width="2"/>
+        <line x1="110" y1="90" x2="110" y2="140" stroke="var(--ink)" stroke-width="2"/>
+        <rect x="85" y="140" width="50" height="40" rx="3" fill="var(--tint)" stroke="var(--ink)"/>
+        <circle cx="110" cy="90" r="4" fill="var(--ink)"/><text x="118" y="96" fill="var(--ink)">A</text>
+        <text x="96" y="166" fill="var(--ink)" font-size="11">m</text>
+        <text x="230" y="105" fill="var(--muted)" font-size="22">→</text>
+        <circle cx="360" cy="110" r="5" fill="var(--ink)"/>
+        <line x1="360" y1="110" x2="300" y2="50" stroke="var(--force)" stroke-width="3"/><polygon points="296,46 300,60 310,52" fill="var(--force)"/>
+        <line x1="360" y1="110" x2="430" y2="50" stroke="var(--force)" stroke-width="3"/><polygon points="436,45 422,50 430,60" fill="var(--force)"/>
+        <line x1="360" y1="110" x2="360" y2="180" stroke="var(--vec)" stroke-width="3"/><polygon points="354,178 360,190 366,178" fill="var(--vec)"/>
+        <text x="282" y="80" fill="var(--force)">T_G</text><text x="408" y="88" fill="var(--force)">T_D</text><text x="368" y="176" fill="var(--vec)">W = m g</text>
+        <text x="300" y="24" fill="var(--muted)" font-size="12">DCL du nœud A</text>
+      </g>
+    </svg>
+    <figcaption>Chaque câble coupé devient une tension qui tire vers l'extérieur ; la charge devient son poids.</figcaption>
+  </figure>
+  <div class="trap"><b>Pièges du DCL.</b> Oublier une force (le poids, une réaction) ; mettre une force qui n'agit pas sur le point isolé ; dessiner un câble qui « pousse ». Et pour un ressort : <span class="m">s = l − l0</span>, longueur finale moins longueur à vide, pas l'inverse.</div>
+  <div class="quiz">
+    <div class="q"><p>Un ressort de longueur à vide 2 m mesure 2,5 m, k = 300 N/m. Force ?</p>
+      <div class="opts"><button>750 N</button><button data-ok="1">150 N</button><button>600 N</button></div>
+      <div class="fb" hidden>s = 2,5 − 2 = 0,5 m, F = k s = 300 × 0,5 = 150 N. On utilise la déflexion s, pas la longueur l.</div></div>
+    <div class="q"><p>Un câble passe sur une poulie sans frottement, 200 N d'un côté. De l'autre côté ?</p>
+      <div class="opts"><button>100 N</button><button data-ok="1">200 N</button><button>ça dépend de l'angle</button></div>
+      <div class="fb" hidden>Câble continu + poulie sans frottement : la tension est la même partout.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3">
+  <div class="shead"><span class="num">3</span><h2>Systèmes de forces coplanaires (2D)</h2><span class="meta">diapos 5 à 7 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> En 2D, l'équation vectorielle ΣF = 0 donne deux équations, une par axe. Deux équations, donc au plus deux inconnues.</div>
+  <div class="formula key cours">ΣFx i + ΣFy j = 0
+
+ΣFx = 0
+ΣFy = 0</div>
+  <p>Ces deux équations permettent de trouver au maximum <b>deux inconnues</b> (intensités ou angles).</p>
+  <div class="retiens"><b>Sens inconnu.</b> Sur le DCL, on peut <i>supposer</i> le sens d'une force inconnue. Si le calcul donne un scalaire négatif, le sens réel est simplement opposé à celui supposé.</div>
+  <ol class="steps">
+    <li>DCL du nœud.</li>
+    <li>Axes x horizontal, y vertical (en général).</li>
+    <li>Décompose chaque force (chapitre 1, section 4).</li>
+    <li>ΣF<sub>x</sub> = 0 donne une tension en fonction de l'autre ; on remplace dans ΣF<sub>y</sub> = 0.</li>
+  </ol>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 6</div>
+    <p>Une caisse de 550 kg pend au nœud A. Le câble AB part vers la gauche à 30° au-dessus de l'horizontale ; le câble AC part vers la droite avec une pente 3-4-5 (4 à l'horizontale, 3 à la verticale). Force dans chaque câble ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Câble AD : il porte la caisse, T_AD = W = 550 × 9,81 = 5395,5 N
+DCL du nœud A :
+ΣFx = 0 :  T_AC (4/5) − T_AB cos 30° = 0
+ΣFy = 0 :  T_AC (3/5) + T_AB sin 30° − 5395,5 = 0
+De la 1ʳᵉ : T_AB = 0,8 T_AC / 0,866 = 0,9238 T_AC
+Dans la 2ᵉ : 0,6 T_AC + 0,4619 T_AC = 5395,5   →   T_AC = 5081 N
+T_AB = 4694 N</div>
+      <p>Réponse : <span class="res">T<sub>AC</sub> = 5,08 kN, T<sub>AB</sub> = 4,69 kN, T<sub>AD</sub> = 5,40 kN</span>.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 7</div>
+    <p>Une lampe de 8 kg pend au nœud A. Un ressort AB horizontal (k = 300 N/m, l<sub>0</sub> = 0,4 m) relie A au mur de droite ; le cordon AC monte vers la gauche à 30° de l'horizontale. Les deux points d'attache sont à 2 m l'un de l'autre horizontalement. Longueur du cordon AC ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">W = 8 × 9,81 = 78,48 N
+ΣFy = 0 :  T_AC sin 30° − 78,48 = 0     →  T_AC = 157,0 N
+ΣFx = 0 :  T_AB − T_AC cos 30° = 0      →  T_AB = 135,9 N
+Ressort :  s = T_AB / k = 135,9 / 300 = 0,453 m   →   l_AB = 0,4 + 0,453 = 0,853 m
+Horizontale restante pour AC : 2 − 0,853 = 1,147 m
+l_AC = 1,147 / cos 30° = 1,32 m</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>En 2D, combien d'inconnues peut-on trouver avec l'équilibre d'un seul point ?</p>
+      <div class="opts"><button>1</button><button data-ok="1">2</button><button>3</button></div>
+      <div class="fb" hidden>Deux équations (ΣF<sub>x</sub> = 0 et ΣF<sub>y</sub> = 0), donc deux inconnues au plus.</div></div>
+    <div class="q"><p>Tu trouves T<sub>AB</sub> = −120 N. Que faire ?</p>
+      <div class="opts"><button>Garder −120 N</button><button data-ok="1">Revoir le DCL : un câble ne pousse pas</button><button>Prendre la valeur absolue</button></div>
+      <div class="fb" hidden>Pour une force de sens inconnu, un signe − veut dire « sens inverse ». Mais un câble ne peut que tirer : une tension négative signale une erreur de DCL ou de signe.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4">
+  <div class="shead"><span class="num">4</span><h2>Systèmes de forces en 3 dimensions</h2><span class="meta">diapos 8 à 15 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Même principe avec un troisième axe : trois équations, donc trois inconnues au plus. La difficulté est d'écrire chaque force en vecteur cartésien, d'où le vecteur position du chapitre 1.</div>
+  <div class="formula key cours">ΣFx = 0
+ΣFy = 0
+ΣFz = 0</div>
+  <h3>Procédure d'analyse (stratégie 3D)</h3>
+  <ol class="steps">
+    <li>Tracer le DCL en établissant les axes x, y, z.</li>
+    <li>Si la géométrie est complexe : écrire d'abord chaque force en vecteur cartésien, <span class="m">F = F · r_AB / r_AB</span> (A = le nœud, B = le point d'ancrage).</li>
+    <li>Substituer dans ΣF = 0, regrouper les termes en <span class="v">i</span>, <span class="v">j</span>, <span class="v">k</span> et annuler chaque somme.</li>
+    <li>Comme en 2D, un résultat négatif indique que le sens réel est opposé à celui supposé.</li>
+  </ol>
+  <div class="trap"><b>Piège.</b> Avec z vers le haut, un poids s'écrit <span class="m">W = −W k</span>. Et un câble tire le nœud vers son point d'ancrage : la direction va du nœud vers l'ancrage.</div>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 10</div>
+    <p>Une caisse de 40 lb pend en A, pris comme origine. Trois câbles la retiennent : AB vers B(−3 ; −4 ; 8) ft, AC vers C(−3 ; 4 ; 8) ft, et AD horizontal selon +x. Force dans chaque câble ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r_AB = {−3 i − 4 j + 8 k},  r_AC = {−3 i + 4 j + 8 k},  longueurs √89 = 9,434 ft
+F_B = F_B (−0,318 i − 0,424 j + 0,848 k)
+F_C = F_C (−0,318 i + 0,424 j + 0,848 k)
+F_D = F_D i          W = −40 k
+ΣFy = 0 :  −0,424 F_B + 0,424 F_C = 0           →  F_B = F_C
+ΣFz = 0 :  0,848 F_B + 0,848 F_C − 40 = 0       →  F_B = F_C = 23,6 lb
+ΣFx = 0 :  −0,318 (2 × 23,6) + F_D = 0           →  F_D = 15,0 lb</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 9</div>
+    <p>Une charge de 90 lb pend en A. Elle est tenue par le câble AC (dans le plan x–z, pente 3-4-5 : 3 à la verticale, 4 selon −x), le câble AD (dans le plan x–y, à 30° de l'axe −y, côté +x) et un ressort AB selon +y (k = 500 lb/ft). Forces dans les câbles et étirement du ressort ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">F_C = F_C (−4/5 i + 3/5 k)       F_D = F_D (sin 30° i − cos 30° j)
+F_B = F_B j                      W = −90 k
+ΣFz = 0 :  (3/5) F_C − 90 = 0              →  F_C = 150 lb
+ΣFx = 0 :  −(4/5)(150) + F_D sin 30° = 0   →  F_D = 240 lb
+ΣFy = 0 :  F_B − 240 cos 30° = 0           →  F_B = 208 lb
+Ressort :  s = F_B / k = 207,8 / 500 = 0,416 ft</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Équilibre 3D d'un nœud avec 4 câbles de tensions inconnues. Peut-on tout trouver ?</p>
+      <div class="opts"><button>Oui</button><button data-ok="1">Non, 3 équations pour 4 inconnues</button></div>
+      <div class="fb" hidden>En 3D, ΣF = 0 donne 3 équations : 3 inconnues au plus. Il faut une donnée de plus (une tension connue, une relation…).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du cours et des PDF complémentaires</h2><span class="meta">cherche 10 min avant d'ouvrir la méthode</span></div>
+  <p>Les figures sont dans tes PDF. Ici : la méthode pour démarrer.</p>
+  <div class="ex"><h4>Diapo 11 · F<sub>1</sub>, F<sub>2</sub>, F<sub>3</sub> <span class="tag">3D</span></h4>
+    <p>Intensités de F<sub>1</sub>, F<sub>2</sub>, F<sub>3</sub> pour que la particule (600 N et 900 N connues) soit en équilibre.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Chaque direction est donnée par des triangles 3-4-5 : décompose d'abord dans le plan du triangle, puis sur les axes. Trois inconnues, trois équations ΣF<sub>x</sub> = ΣF<sub>y</sub> = ΣF<sub>z</sub> = 0.</p></div></details></div>
+  <div class="ex"><h4>Diapo 12 · câble AB à 700 N <span class="tag">3D</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Inconnues : T<sub>AC</sub>, T<sub>AD</sub> et F. Écris les trois tensions avec leurs vecteurs position depuis A, F = F <span class="v">k</span>, puis les trois équations.</p></div></details></div>
+  <div class="ex"><h4>Diapo 15 · Roméo et Juliette <span class="tag">2D</span></h4>
+    <p>Chaque brin supporte 2 kN au plus. Roméo (65 kg) peut-il grimper ? Puis redescendre avec Juliette (60 kg) ?</p>
+    <details class="hint"><summary>Méthode</summary><div><p>À vitesse constante, c'est un équilibre : DCL du nœud A avec le poids en bas, et les deux brins vers B et C. Calcule les tensions pour W = 65 × 9,81 N, puis pour W = 125 × 9,81 N, et compare chacune à 2 kN.</p></div></details></div>
+  <div class="ex"><h4>Statique complémentaire · ex. 1 à 3 <span class="tag">2D</span></h4>
+    <p>Joint O (F<sub>2</sub> = 6 kN) ; tambour de 900 lb tenu par deux cordes à 800 lb max ; cylindre de 10 kg avec T<sub>CB</sub> = 2 T<sub>CA</sub>.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Deux équations, deux inconnues à chaque fois : (F<sub>1</sub>, θ), puis (T, θ) avec T = 800 lb imposé, puis (T<sub>CA</sub>, θ) en remplaçant T<sub>CB</sub> par 2 T<sub>CA</sub>. Pour un angle inconnu, isole cos θ ou tan θ.</p></div></details></div>
+  <div class="ex"><h4>Statique complémentaire · charge maximale <span class="tag">2D / 3D</span></h4>
+    <p>Poids maximal du seau (aucun fil au-dessus de 100 lb) ; caisse maximale (aucun câble au-dessus de 250 lb).</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Résous avec W comme lettre : chaque tension vaut (un nombre) × W. Le câble le plus chargé atteint la limite en premier : W<sub>max</sub> = limite / plus grand coefficient.</p></div></details></div>
+  <div class="ex"><h4>Statique complémentaire · ressorts et caisse de 20 kg <span class="tag">2D</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Équilibre du nœud → force de chaque ressort, puis s = F / k (k = 300 N/m) et l = l<sub>0</sub> + s avec l<sub>0</sub> = 2 m.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=meca&amp;ch=equilibre"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=meca&amp;ch=equilibre"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/ds/statique/"><b>Révision DS Statique ▸</b><span>Les 3 chapitres d'un coup, fiche et calculatrice</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/statique/vecteurs/"><small>◂ Chapitre 1</small>Principes et outils mathématiques</a><a class="next" href="/cours/statique/moments/"><small>Chapitre 3 ▸</small>Moment d'une force</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Statique%20%C2%B7%20chapitre%202">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

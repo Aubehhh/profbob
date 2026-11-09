@@ -1,0 +1,96 @@
+/* Pages chapitre (/cours/<module>/<chapitre>/) : format standard de tous les cours du site.
+   Chargé après site.css et notation.css. Largeur commune : .wrap (= --page-w), ne pas la surcharger. */
+
+/* En-tête du chapitre */
+.chero{padding-block:26px 6px}
+.chero h1{font-size:clamp(1.9rem,6vw,2.8rem);margin-top:8px}
+.chero .lead{margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+.chip{font-family:var(--display);font-size:.8rem;padding:4px 10px;border-radius:999px;background:var(--paper);border:1px solid var(--line);color:var(--muted)}
+.chip b{color:var(--ink);font-weight:600}
+.ctools{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 6px}
+.cprog{display:flex;align-items:center;gap:12px;margin:18px 0 6px;font-family:var(--display);font-size:.88rem;color:var(--muted)}
+.cprog .bar{flex:1;max-width:280px;height:8px;border-radius:4px;background:var(--tint);overflow:hidden}
+.cprog .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+
+/* Sommaire collant, horizontal, dans la largeur commune */
+nav.ctoc{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);
+  margin:14px calc(-1 * max(16px,env(safe-area-inset-left,0px))) 0;padding:8px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
+nav.ctoc .in{max-width:var(--page-w);margin:0 auto;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;white-space:nowrap}
+nav.ctoc .in::-webkit-scrollbar{display:none}
+nav.ctoc a{font-family:var(--display);font-size:.84rem;font-weight:500;text-decoration:none;color:var(--ink);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--paper);flex:none}
+nav.ctoc a .n{font-family:var(--mono);font-size:.74rem;color:var(--muted);margin-right:4px}
+nav.ctoc a.done{border-color:var(--ok);color:var(--ok)}
+nav.ctoc a.done .n{color:var(--ok)}
+nav.ctoc a.cur{background:var(--tint);border-color:var(--vec);color:var(--vec)}
+@media (min-width:900px){nav.ctoc .in{flex-wrap:wrap;overflow:visible}}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+@media (min-width:900px){html{scroll-padding-top:110px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Sections du cours */
+.csec{padding-block:34px 10px;border-bottom:1px solid var(--line)}
+.csec>p,.csec>ul,.csec>ol{max-width:75ch}
+.shead{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.shead .num{font-family:var(--mono);font-weight:600;color:var(--vec)}
+.shead h2{font-size:1.45rem}
+.shead .meta{margin-left:auto}
+.csec h3{margin-top:26px}
+.idee{background:var(--tint);border-radius:10px;padding:13px 17px;margin:16px 0;max-width:75ch}
+.idee b:first-child{font-family:var(--display)}
+.formula.key{border-left:3px solid var(--vec)}
+.cours{position:relative}
+.cours::before{content:"Comme dans le cours";display:block;font-family:var(--display);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;white-space:normal}
+.trap{background:var(--warnbg);border-radius:10px;padding:12px 16px;margin:14px 0;max-width:75ch}
+.trap b:first-child{color:var(--warn)}
+.coquille{border:1px dashed var(--warn);border-radius:10px;padding:10px 14px;margin:12px 0;font-size:.93rem;max-width:75ch}
+.coquille b:first-child{color:var(--warn);font-family:var(--display)}
+.retiens{border:1px solid var(--line);border-left:3px solid var(--ok);background:var(--paper);border-radius:10px;padding:12px 16px;margin:14px 0;max-width:75ch}
+.retiens b:first-child{color:var(--ok);font-family:var(--display)}
+ol.steps{padding-left:22px}
+ol.steps li{margin:6px 0}
+.tw{overflow-x:auto;margin:12px 0}
+.tw table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tw th,.tw td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.tw th{font-family:var(--display);font-weight:700}
+figure{margin:16px 0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto}
+figure svg{display:block;margin:0 auto;max-width:100%;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center;margin-top:4px}
+
+/* Exemples corrigés et exercices */
+.example,.ex{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:14px 18px;margin:16px 0}
+.example .eyebrow{color:var(--force)}
+.example p,.ex p{max-width:none}
+.ex h4{margin:0 0 4px;display:flex;gap:10px;flex-wrap:wrap;align-items:baseline;font-size:1rem}
+.tag{font-family:var(--mono);font-size:.72rem;padding:2px 8px;border-radius:999px;background:var(--tint);color:var(--vec);font-weight:600}
+.tag.lvl{background:var(--warnbg);color:var(--warn)}
+details.sol>summary{color:var(--ok)}
+details.hint>summary{color:var(--warn)}
+details .formula{margin-top:4px}
+@media (max-width:600px){.csec .formula{white-space:pre-wrap;font-size:.84rem;overflow-wrap:anywhere}}
+.res{font-family:var(--mono);font-weight:600;color:var(--ok)}
+
+/* Questions rapides */
+.quiz{margin:16px 0}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:10px 0}
+.q p{margin:0 0 8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-family:var(--mono);font-size:.88rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button.right{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.opts button.wrong{text-decoration:line-through;opacity:.6}
+.fb{font-size:.92rem;margin-top:8px;color:var(--muted)}
+.checkrow{display:flex;align-items:center;gap:10px;margin:22px 0 6px;font-family:var(--display);font-weight:500;cursor:pointer}
+.checkrow input{width:20px;height:20px;accent-color:var(--ok)}
+
+/* S'entraîner + navigation entre chapitres */
+.train{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}
+.train a{display:block;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink)}
+.train a:hover{border-color:var(--vec)}
+.train b{font-family:var(--display);display:block;color:var(--vec)}
+.train span{font-family:var(--display);font-size:.85rem;color:var(--muted)}
+.chnav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:28px 0 0}
+.chnav a{display:block;border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:12px 16px;text-decoration:none;color:var(--ink);font-family:var(--display)}
+.chnav a small{display:block;color:var(--muted);font-size:.78rem}
+.chnav a:hover{border-color:var(--vec)}
+.chnav .next{text-align:right;grid-column:2}
+@media (max-width:520px){.chnav{grid-template-columns:1fr}.chnav .next{grid-column:1}}

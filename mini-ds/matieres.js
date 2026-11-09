@@ -4,12 +4,14 @@
 window.MINIDS_MATIERES=[
   {id:'meca',module:'statique',nom:'Mécanique 1 (Statique)',couleur:'#2453b8',
    banque:()=>window.BANQUE_STATIQUE,
-   noms:{resultante:'Résultante de deux forces',cable:'Force portée par un câble',angles:'Norme et angles directeurs',angle2:'Angle entre deux vecteurs',projection:'Projection sur un axe',
-     equilibre:'Équilibre : deux câbles',ressort:'Équilibre : câble et ressort',vectoriel:'Produit vectoriel',varignon:'Moment 2D (Varignon)',moment3d:'Moment 3D',momentaxe:'Moment par rapport à un axe'},
+   noms:{cosinus:'Loi des cosinus et des sinus',pente:'Composantes avec un triangle de pente',resultante:'Résultante de deux forces',angles:'Intensité et angles directeurs',gamma:'Trouver γ avec α et β',thetaphi:'Direction par θ et φ',
+     cable:'Force portée par un câble',longueur:'Longueur et direction entre deux points',angle2:'Angle entre deux vecteurs',projection:'Projection sur un axe',
+     equilibre:'Équilibre : deux câbles',ressort:'Équilibre : câble et ressort',chargemax:'Charge maximale',equi3d:'Équilibre 3D : trois câbles',
+     momentfd:'Moment F d et bras de levier',vectoriel:'Produit vectoriel',varignon:'Moment 2D (Varignon)',moment3d:'Moment r × F',momentres:'Moment résultant',momentaxe:'Moment par rapport à un axe'},
    chapitres:[
-     {id:'vecteurs',nom:'Vecteurs force',detail:'Résultante, vecteur position, angles directeurs, produit scalaire, projection',q:['resultante','cable','angles','angle2','projection']},
-     {id:'equilibre',nom:'Équilibre d\'une particule',detail:'DCL, câbles, ressorts',q:['equilibre','ressort']},
-     {id:'moments',nom:'Moments',detail:'Produit vectoriel, Varignon, moment 3D, moment par rapport à un axe',q:['vectoriel','varignon','moment3d','momentaxe']}
+     {id:'vecteurs',nom:'Principes généraux et outils mathématiques',detail:'Parallélogramme, composantes, vecteurs 3D, vecteur position, produit scalaire',q:['cosinus','pente','resultante','angles','gamma','thetaphi','cable','longueur','angle2','projection']},
+     {id:'equilibre',nom:'Équilibre statique',detail:'DCL, câbles, ressort F = k s, charge maximale, équilibre 3D',q:['equilibre','ressort','chargemax','equi3d']},
+     {id:'moments',nom:'Moment d\'une force',detail:'M_O = F d, produit vectoriel, r × F, Varignon, moment par rapport à un axe',q:['momentfd','vectoriel','varignon','moment3d','momentres','momentaxe']}
    ],
    ds:[
      {id:'statique',nom:'DS Statique',detail:'Chapitres 1 à 3 · novembre 2026',chapitres:['vecteurs','equilibre','moments'],n:8,min:60}

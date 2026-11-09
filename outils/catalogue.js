@@ -5,12 +5,14 @@
 
    Ajouter du contenu :
    - un chapitre : { id:'vecteurs', titre:'Vecteurs force', url:'/cours/statique/vecteurs/' } dans chapitres
+     (page faite au format standard : voir outils/agents/createur-de-cours.md ; les pages /cours/… sont indexées par la recherche)
      (sans url, il apparaît « bientôt »)
    - un DS : { titre, quand:'novembre 2026', url, desc, liens:[[texte,url], …], minids:'/mini-ds/?…' } dans ds */
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'8 nov.',texte:'Flashcards des formules, recherche dans les cours et progression par chapitre',url:'/flashcards/?m=meca',nouveau:true},
+    {date:'9 nov.',texte:'Statique refaite chapitre par chapitre, d\'après les diapos du prof',url:'/cours/statique/vecteurs/',nouveau:true},
+    {date:'8 nov.',texte:'Flashcards des formules, recherche dans les cours et progression par chapitre',url:'/flashcards/?m=meca'},
     {date:'8 nov.',texte:'Mode « Mes erreurs » dans le mini-DS',url:'/mini-ds/'},
     {date:'8 nov.',texte:'Toutes les matières du S1 rangées par UE',url:'/matieres/'},
     {date:'8 nov.',texte:'Le site s\'installe comme une appli sur ton téléphone',url:'/'},
@@ -28,12 +30,12 @@ module.exports={
     {id:'meca',couleur:'#2453b8',modules:[
       {id:'statique',slug:'mecanique',mono:'Mé',
        chapitres:[
-         {id:'vecteurs',titre:'Vecteurs force',url:'/ds/statique/#m1'},
-         {id:'equilibre',titre:'Équilibre d\'une particule',url:'/ds/statique/#m5'},
-         {id:'moments',titre:'Moments',url:'/ds/statique/#m7'}],
+         {id:'vecteurs',titre:'Principes généraux et outils mathématiques',url:'/cours/statique/vecteurs/'},
+         {id:'equilibre',titre:'Équilibre statique',url:'/cours/statique/equilibre/'},
+         {id:'moments',titre:'Moment d\'une force',url:'/cours/statique/moments/'}],
        ds:[{titre:'Statique : chapitres 1 à 3',quand:'novembre 2026',url:'/ds/statique/',
             desc:'Vecteurs et forces, vecteur position, produit scalaire, équilibre d\'une particule, produit vectoriel, moments.',
-            liens:[['Cours · 8 modules','/ds/statique/'],['12 exercices','/ds/statique/#exos'],['Fiche récap','/ds/statique/#fiche']],
+            liens:[['Chapitre 1','/cours/statique/vecteurs/'],['Chapitre 2','/cours/statique/equilibre/'],['Chapitre 3','/cours/statique/moments/'],['Révision · 8 modules','/ds/statique/'],['12 exercices','/ds/statique/#exos'],['Fiche récap','/ds/statique/#fiche']],
             minids:'/mini-ds/?m=meca&ds=statique'}]},
       {id:'thermo',slug:'thermodynamique',mono:'Th',chapitres:[],ds:[]}]},
     {id:'info',couleur:'#be185d',modules:[

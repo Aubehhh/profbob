@@ -188,15 +188,19 @@ fs.writeFileSync(path.join(ROOT,'assets','ue-s1.js'),'/* Généré par outils/bu
     m.chapitres.forEach(c=>add(c.titre,'Chapitre · '+m.nom,c.url||'/matieres/'+m.slug+'/','','chapitre'));
     m.ds.forEach(d=>add(d.titre,'DS · '+m.nom,d.url,d.desc||'','ds'));
   }
-  // page de cours Statique : une entrée par section et par sous-titre
-  const st=fs.readFileSync(path.join(ROOT,'ds/statique/index.html'),'utf8');
-  const re=/<section id="([a-z0-9]+)"[^>]*>([\s\S]*?)<\/section>/g;let mm;
-  while((mm=re.exec(st))){const id=mm[1],body=mm[2];if(id==='calc')continue;
-    const h2=strip((/<h2[^>]*>([\s\S]*?)<\/h2>/.exec(body)||[,''])[1])||id;
-    const parts=body.split(/<h3[^>]*>/);
-    add(h2,'Cours · Statique','/ds/statique/#'+id,strip(parts[0]),'cours');
-    parts.slice(1).forEach(p=>{const i=p.indexOf('</h3>');const t=strip(p.slice(0,i));if(t)add(t,'Statique · '+h2,'/ds/statique/#'+id,strip(p.slice(i+5)),'cours')});
-  }
+  // pages de cours : une entrée par section et par sous-titre (page de révision DS Statique + pages chapitre /cours/…)
+  const indexPage=(file,url,label,skip)=>{
+    const st=fs.readFileSync(path.join(ROOT,file),'utf8');
+    const re=/<section [^>]*id="([a-z0-9]+)"[^>]*>([\s\S]*?)<\/section>/g;let mm;
+    while((mm=re.exec(st))){const id=mm[1],body=mm[2];if(skip.includes(id))continue;
+      const h2=strip((/<h2[^>]*>([\s\S]*?)<\/h2>/.exec(body)||[,''])[1])||id;
+      const parts=body.split(/<h3[^>]*>/);
+      add(h2,'Cours · '+label,url+'#'+id,strip(parts[0]),'cours');
+      parts.slice(1).forEach(p=>{const i=p.indexOf('</h3>');const t=strip(p.slice(0,i));if(t)add(t,label+' · '+h2,url+'#'+id,strip(p.slice(i+5)),'cours')});
+    }};
+  indexPage('ds/statique/index.html','/ds/statique/','Révision Statique',['calc']);
+  for(const m of ALL)m.chapitres.forEach((c,i)=>{if(c.url&&c.url.startsWith('/cours/')){
+    const f=c.url.replace(/^\//,'')+'index.html';if(fs.existsSync(path.join(ROOT,f)))indexPage(f,c.url,m.nom.replace(/^.*\((.*)\)$/,'$1')+' ch. '+(i+1),['train'])}});
   // flashcards
   Object.entries(FC).forEach(([mid,cards])=>{const M=MD.find(x=>x.id===mid)||{nom:mid,chapitres:[]};
     cards.forEach(c=>{const ch=(M.chapitres.find(x=>x.id===c.ch)||{}).nom||'';add(c.q,'Formule · '+ch,'/flashcards/?m='+mid+'&ch='+c.ch,c.r,'formule')})});
@@ -206,7 +210,8 @@ fs.writeFileSync(path.join(ROOT,'assets','ue-s1.js'),'/* Généré par outils/bu
 // --- admin : pages suivies ---
 const ap=path.join(ROOT,'admin/index.html');let ad=fs.readFileSync(ap,'utf8');
 const base=[['p-accueil','Accueil'],['p-matieres','Matières (liste)'],['p-flashcards','Flashcards'],['p-recherche','Recherche'],['p-mini_ds','Mini-DS'],['p-notes','Simulateur de notes'],['p-ds_statique','DS Statique (cours)'],['p-contact','Contact'],['p-404','Page introuvable (404)']];
-const pages=base.concat(ALL.map(m=>['p-matieres_'+m.slug.replace(/[^a-z0-9]+/g,'_'),m.nom]));
+const pages=base.concat(ALL.map(m=>['p-matieres_'+m.slug.replace(/[^a-z0-9]+/g,'_'),m.nom]),
+  ALL.flatMap(m=>m.chapitres.filter(c=>c.url&&c.url.startsWith('/cours/')).map((c,i)=>['p-'+c.url.replace(/^\/|\/$/g,'').replace(/[^a-z0-9]+/gi,'_').toLowerCase(),'Cours · '+c.titre])));
 const pa=ad.indexOf('/*PAGES:debut*/'),pb=ad.indexOf('/*PAGES:fin*/');
 if(pa>=0&&pb>=0){ad=ad.slice(0,pa)+'/*PAGES:debut*/'+JSON.stringify(pages)+ad.slice(pb);fs.writeFileSync(ap,ad)}
 console.log('ok :',ALL.length,'modules,',UES.length,'UE');

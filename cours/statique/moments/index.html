@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 3 · Moment d'une force · Statique · profbob.fr</title>
+<meta name="description" content="Statique, chapitre 3 : moment d'une force, bras de levier, produit vectoriel, moment vectoriel r × F, théorème de Varignon, moment par rapport à un axe. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="statique-moments" data-matiere="meca" data-ch="moments" data-nota-all>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mecanique/">← Mécanique 1 (Statique)</a> · Chapitre 3 sur 3</div>
+  <h1>Moment d'une force</h1>
+  <p class="lead">« Donnez-moi un appui et un levier, et je soulèverai le monde. » Une force ne fait pas que pousser : elle peut faire tourner. Ce chapitre mesure cette tendance à tourner, en 2D avec F d, en 3D avec r × F.</p>
+  <div class="chips"><span class="chip"><b>5</b> sections</span><span class="chip">≈ 2 h 30</span><span class="chip">Diapos 1 à 17</span><span class="chip">Prérequis : <a href="/cours/statique/vecteurs/">chapitre 1</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=meca&amp;ch=moments">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=meca&amp;ch=moments">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Moment scalaire</a>
+  <a href="#s2"><span class="n">2</span>Produit vectoriel</a>
+  <a href="#s3"><span class="n">3</span>Moment r × F</a>
+  <a href="#s4"><span class="n">4</span>Varignon</a>
+  <a href="#s5"><span class="n">5</span>Moment / axe</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="meca"></div>
+
+<section class="csec" id="s1">
+  <div class="shead"><span class="num">1</span><h2>Définition : moment et bras de levier</h2><span class="meta">diapos 2 à 5 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une force appliquée à un corps tend à le faire tourner autour de tout point qui n'est pas sur sa ligne d'action. Cette tendance s'appelle le <b>moment</b>. Pense à une clé sur un écrou : plus tu pousses fort, et plus tu tiens la clé loin, plus ça tourne.</div>
+  <p>L'intensité est proportionnelle à l'intensité F de la force et à la <b>distance perpendiculaire d</b>, le bras de levier. Si la force n'est pas perpendiculaire au levier, le bras de levier réel diminue (<span class="m">d' = d sin θ</span>) et le moment aussi.</p>
+  <div class="formula key cours">M_O = F d          (en N·m ou lb·ft)</div>
+  <p>d est la distance <b>perpendiculaire</b> entre l'axe passant par O et la ligne d'action de la force.</p>
+  <h3>Direction : règle de la main droite</h3>
+  <p>Le moment est un vecteur. Son axe est perpendiculaire au plan qui contient F et d. Les doigts de la main droite s'enroulent dans le sens de rotation ; le pouce donne la direction de <span class="m">M_O</span>. En 2D, on le dessine par une flèche courbe : une rotation <b>anti-horaire</b> correspond à un vecteur qui sort de la page.</p>
+  <figure>
+    <svg viewBox="0 0 360 170" width="360" role="img" aria-label="Bras de levier d entre O et la ligne d'action de F">
+      <g font-family="var(--mono)" font-size="13">
+        <line x1="40" y1="130" x2="300" y2="130" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="40" cy="130" r="6" fill="var(--ink)"/><text x="30" y="155" fill="var(--ink)">O</text>
+        <line x1="270" y1="20" x2="270" y2="122" stroke="var(--force)" stroke-width="3.5"/><polygon points="264,118 270,130 276,118" fill="var(--force)"/>
+        <text x="280" y="60" fill="var(--force)" font-weight="600">F</text>
+        <line x1="40" y1="146" x2="270" y2="146" stroke="var(--vec)" stroke-width="1.5"/><polygon points="44,142 36,146 44,150" fill="var(--vec)"/><polygon points="266,142 274,146 266,150" fill="var(--vec)"/>
+        <text x="150" y="164" fill="var(--vec)">d</text>
+        <path d="M 75 105 A 40 40 0 0 1 75 155" fill="none" stroke="var(--ink)" stroke-width="1.5"/><polygon points="70,152 78,160 82,150" fill="var(--ink)"/>
+        <text x="90" y="100" fill="var(--ink)">M_O = F d (horaire)</text>
+      </g>
+    </svg>
+    <figcaption>Le bras de levier est perpendiculaire à la ligne d'action de la force.</figcaption>
+  </figure>
+
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 4</div>
+    <p>Moment de chaque force autour de O, pour les cinq cas de la figure.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">a) 100 N à 2 m :                M_O = 100 × 2 = 200 N·m           (horaire)
+b) 50 N, bras 0,75 m :           M_O = 50 × 0,75 = 37,5 N·m        (horaire)
+c) 40 lb, bras 4 + 2 cos 30° :   M_O = 40 × 5,732 = 229 lb·ft      (anti-horaire)
+d) 60 lb, bras 1 sin 45° :       M_O = 60 × 0,7071 = 42,4 lb·ft    (anti-horaire)
+e) 7 kN, bras 4 − 1 = 3 m :      M_O = 7 × 3 = 21,0 kN·m           (anti-horaire)</div>
+      <p>À chaque fois, le travail est de trouver la <b>distance perpendiculaire</b> entre O et la ligne d'action prolongée.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 5</div>
+    <p>Moment résultant des quatre forces sur la tige autour de O : 50 N vers le bas à 2 m ; 60 N horizontale au coude (x = 4 m, y = 0) ; au bout du segment de 3 m incliné à 30° sous l'horizontale, 20 N horizontale vers la droite et 40 N vers le bas.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Bout de la tige : x = 4 + 3 cos 30° = 6,598 m     y = −3 sin 30° = −1,5 m
+Anti-horaire positif :
+50 N  :  −50 × 2        = −100 N·m
+60 N  :  passe par O    =    0
+20 N  :  +20 × 1,5      =  +30 N·m      (bras = |y| = 1,5 m)
+40 N  :  −40 × 6,598    = −263,9 N·m
+M_R = −334 N·m,  soit 334 N·m dans le sens horaire</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Une force de 50 N passe par le point O. Son moment par rapport à O ?</p>
+      <div class="opts"><button>50 N·m</button><button data-ok="1">0</button><button>impossible à dire</button></div>
+      <div class="fb" hidden>Bras de levier nul, donc moment nul. C'est pour ça qu'on choisit souvent O sur une force inconnue.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2">
+  <div class="shead"><span class="num">2</span><h2>Le produit vectoriel</h2><span class="meta">diapos 6 et 7 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le produit vectoriel de deux vecteurs donne un <b>troisième vecteur</b>, perpendiculaire aux deux premiers. En statique, il sert à une chose : calculer les moments en 3D.</div>
+  <h3>Lois d'opération</h3>
+  <ul>
+    <li><b>Pas commutatif</b> : <span class="m">A × B ≠ B × A</span>. La vraie relation est <span class="m">A × B = −B × A</span> : même intensité, sens opposé.</li>
+    <li><b>Multiplication par un scalaire</b> : <span class="m">a(A × B) = (aA) × B = A × (aB) = (A × B)a</span>.</li>
+    <li><b>Distributivité</b> : <span class="m">A × (B + D) = A × B + A × D</span>, en gardant strictement l'ordre des vecteurs.</li>
+  </ul>
+  <p>Vecteurs unitaires (règle cyclique) : <span class="m">i × j = k</span>, <span class="m">j × k = i</span>, <span class="m">k × i = j</span> ; dans l'autre sens, signe − ; et <span class="m">i × i = 0</span>.</p>
+  <h3>Calcul par déterminant</h3>
+  <div class="formula key cours">        | i    j    k  |
+A × B = | Ax   Ay   Az |
+        | Bx   By   Bz |
+
+Composante i :    i (Ay Bz − Az By)
+Composante j :   −j (Ax Bz − Az Bx)      ← attention au signe négatif !
+Composante k :    k (Ax By − Ay Bx)
+
+A × B = (Ay Bz − Az By) i − (Ax Bz − Az Bx) j + (Ax By − Ay Bx) k</div>
+  <div class="retiens"><b>Vérification gratuite.</b> Le résultat est perpendiculaire à A et à B : <span class="m">(A × B) · A = 0</span> et <span class="m">(A × B) · B = 0</span>. Si ce n'est pas le cas, il y a une erreur de signe.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé</div>
+    <p><span class="m">A = {2 i − 1 j + 3 k}</span> et <span class="m">B = {1 i + 4 j − 2 k}</span>. Calcule A × B.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">i :    (−1)(−2) − (3)(4)  = 2 − 12 = −10
+j :  −[(2)(−2) − (3)(1)]  = −(−4 − 3) = 7
+k :    (2)(4) − (−1)(1)  = 8 + 1 = 9
+A × B = {−10 i + 7 j + 9 k}
+Vérif : (A × B) · A = −20 − 7 + 27 = 0  ✓</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p><span class="m">k × j</span> = ?</p>
+      <div class="opts"><button>i</button><button data-ok="1">−i</button><button>0</button></div>
+      <div class="fb" hidden>j × k = i dans le sens cyclique ; k × j est dans l'autre sens, donc −i.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3">
+  <div class="shead"><span class="num">3</span><h2>Moment par le produit vectoriel</h2><span class="meta">diapos 8 à 12 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> En 3D, trouver le bras de levier à la main est pénible. Le produit vectoriel le fait pour nous : il suffit d'un vecteur position et de la force.</div>
+  <div class="formula key cours">M_O = r × F
+
+M_O = r F sin θ        (θ = angle entre r et F)
+d = r sin θ   →   M_O = F d</div>
+  <p>Le vecteur position <span class="v">r</span> va <b>de O vers un point quelconque de la ligne d'action</b> de F.</p>
+  <h3>Principe de transmissibilité</h3>
+  <p>Le moment ne change pas si on fait glisser la force le long de sa ligne d'action : <span class="m">M_O = r_1 × F = r_2 × F = r_3 × F</span>. On choisit donc le vecteur position le plus simple à écrire.</p>
+  <h3>Formulation cartésienne</h3>
+  <div class="formula key cours">M_x = ry F_z − rz F_y
+M_y = rz F_x − rx F_z
+M_z = rx F_y − ry F_x</div>
+  <p>Chaque composante mesure la tendance de la force à faire tourner autour de l'axe correspondant ; son signe suit la règle de la main droite.</p>
+  <h3>Moment résultant</h3>
+  <div class="formula key cours">M_R = Σ (r_i × F_i)
+
+M_Rx = Σ M_xi      M_Ry = Σ M_yi      M_Rz = Σ M_zi</div>
+  <div class="trap"><b>Piège.</b> Tous les moments doivent être calculés <b>par rapport au même point O</b> avant d'être additionnés. Et l'ordre compte : c'est <span class="m">r × F</span>, pas F × r (sinon tout change de signe).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 12</div>
+    <p>Un arbre est tiré par une corde de A(0 ; 0 ; 12) m vers B(4 ; 12 ; 0) m avec F = 2 kN. Moment de cette force par rapport à la base O ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">r_AB = {4 i + 12 j − 12 k} m,   r_AB = √(16 + 144 + 144) = 17,44 m
+F = 2 · r_AB / 17,44 = {0,4588 i + 1,376 j − 1,376 k} kN
+r = r_OA = {12 k} m
+M_O = r × F :
+  M_x = 0·(−1,376) − 12·1,376 = −16,5
+  M_y = 12·0,4588 − 0·(−1,376) = 5,51
+  M_z = 0·1,376 − 0·0,4588 = 0
+M_O = {−16,5 i + 5,51 j} kN·m,   M_O = 17,4 kN·m</div>
+      <p>Avec <span class="m">r_OB = {4 i + 12 j}</span> (B est aussi sur la ligne d'action), on trouve exactement le même résultat : c'est la transmissibilité.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4">
+  <div class="shead"><span class="num">4</span><h2>Théorème de Varignon</h2><span class="meta">diapos 13 et 14 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Plutôt que de chercher le bras de levier d'une force oblique, on la coupe en F<sub>x</sub> et F<sub>y</sub> : leurs bras de levier se lisent directement sur la figure.</div>
+  <p>Le moment d'une force par rapport à O est égal à la somme des moments de ses composantes par rapport au même point. C'est la distributivité du produit vectoriel :</p>
+  <div class="formula key cours" data-nonota><span class="vec">M</span><sub>O</sub> = <span class="vec">r</span> × (<span class="vec">F</span><sub>1</sub> + <span class="vec">F</span><sub>2</sub>) = <span class="vec">r</span> × <span class="vec">F</span><sub>1</sub> + <span class="vec">r</span> × <span class="vec">F</span><sub>2</sub></div>
+  <p>En 2D, avec (x ; y) un point de la ligne d'action :</p>
+  <div class="formula key cours">M_O = F_x y − F_y x</div>
+  <div class="trap"><b>Convention de signe.</b> Dans cette écriture du cours, un résultat <b>positif = sens horaire</b>. Si tu comptes l'anti-horaire positif (comme la règle de la main droite et l'axe z), c'est l'opposé : <span class="m">M_O = x F_y − y F_x</span>. Choisis une convention, écris-la sur ta copie et vérifie le sens sur le dessin.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 14</div>
+    <p>Une équerre est encastrée en O. En haut de sa partie verticale, au point (5 ; 2) m, agit F = 100 N vers le bas et la droite, pente 3-4-5 (4 à l'horizontale, 3 à la verticale). Moment par rapport à O ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">F_x = 100 × 4/5 = 80 N  (vers la droite)        F_y = −100 × 3/5 = −60 N  (vers le bas)
+Formule du cours : M_O = F_x y − F_y x = 80 × 2 − (−60) × 5 = 160 + 300 = 460 N·m
+Positif dans cette écriture  →  460 N·m dans le sens horaire
+Vérif en anti-horaire + : x F_y − y F_x = 5(−60) − 2(80) = −460 N·m  ✓</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5">
+  <div class="shead"><span class="num">5</span><h2>Moment par rapport à un axe</h2><span class="meta">exercices complémentaires · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une porte ne peut tourner qu'autour de ses gonds, un écrou qu'autour de son axe. Seule compte alors la partie du moment <b>le long de cet axe</b> : on la récupère avec un produit scalaire (chapitre 1).</div>
+  <p>Cette notion n'est pas sur les diapos du chapitre 3, mais les exercices complémentaires « moment » l'utilisent (axe AC, axe x, axe CD, axe OA).</p>
+  <div class="formula key">M_a = u_a · (r × F)         (un nombre, en N·m)</div>
+  <ol class="steps">
+    <li>Choisis un point O <b>sur l'axe</b> et écris <span class="v">r</span> de ce point vers un point de la ligne d'action de F.</li>
+    <li>Écris le vecteur unitaire de l'axe : <span class="m">u_a</span> = (vecteur de l'axe) / (sa norme).</li>
+    <li>Calcule <span class="m">r × F</span>, puis le produit scalaire avec <span class="m">u_a</span>.</li>
+    <li>Le signe donne le sens par rapport à <span class="m">u_a</span> (main droite). Pour les axes x, y, z, c'est simplement M<sub>x</sub>, M<sub>y</sub>, M<sub>z</sub>.</li>
+  </ol>
+  <div class="quiz">
+    <div class="q"><p>M<sub>O</sub> = {10 i − 20 j + 5 k} N·m. Moment par rapport à l'axe y passant par O ?</p>
+      <div class="opts"><button>20 N·m</button><button data-ok="1">−20 N·m</button><button>√525 N·m</button></div>
+      <div class="fb" hidden>u<sub>a</sub> = <span class="m">j</span>, donc M<sub>y</sub> = −20 N·m : le moment tourne dans le sens opposé à +y.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du cours et des PDF complémentaires</h2><span class="meta">cherche 10 min avant d'ouvrir la méthode</span></div>
+  <div class="ex"><h4>Diapo 15 · F<sub>1</sub> = 500 N et F<sub>2</sub> = 600 N en A <span class="tag">Varignon</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Coordonnées de A depuis O : x = 0,125 + 0,3 = 0,425 m, y = 0,25 m. Décompose F<sub>1</sub> (pente 3-4-5) et F<sub>2</sub> (angle de 60°), puis additionne les moments avec Varignon, en gardant la même convention de signe pour les deux.</p></div></details></div>
+  <div class="ex"><h4>Diapo 16 · F<sub>1</sub> et F<sub>2</sub> au point A <span class="tag">r × F</span></h4>
+    <p><span class="m">F1 = {100 i − 120 j + 75 k} lb</span> et <span class="m">F2 = {−200 i + 250 j + 100 k} lb</span>.</p>
+    <details class="hint"><summary>Méthode</summary><div><p>Les deux forces s'appliquent au même point A : additionne-les d'abord (<span class="m">F = {−100 i + 130 j + 175 k} lb</span>), puis un seul produit <span class="m">r_OA × F</span> avec les coordonnées de A lues sur la figure.</p></div></details></div>
+  <div class="ex"><h4>Diapo 17 · tuyau et force de 80 N <span class="tag">r × F</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Écris F avec ses deux angles (30° et 40°) comme en section 6 du chapitre 1, puis <span class="m">r_BC × F</span> avec r de B vers le point d'application C (attention, les cotes sont en mm : passe en m).</p></div></details></div>
+  <div class="ex"><h4>Moment complémentaire · poutre, porte, tendon d'Achille <span class="tag">2D</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Moments de chaque force autour de B, puis équilibre de rotation : la porte ne tourne pas si les moments de F<sub>A</sub> et F<sub>B</sub> autour des gonds s'annulent ; même idée pour le pied (M<sub>A</sub> de F<sub>t</sub> + M<sub>A</sub> de N<sub>t</sub> = 0).</p></div></details></div>
+  <div class="ex"><h4>Moment complémentaire · F<sub>B</sub> et F<sub>C</sub>, tige courbe, trappe <span class="tag">3D</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Pour chaque force : vecteur position du point d'application, vecteur cartésien de la force (le long d'un câble : F · r / r), produit vectoriel, puis somme.</p></div></details></div>
+  <div class="ex"><h4>Moment complémentaire · axe AC, clé à roues, panneau CD, pot de fleurs <span class="tag">moment / axe</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Section 5 : M<sub>a</sub> = <span class="m">u_a · (r × F)</span>. Pour les questions « quelle force pour un moment donné », garde F (ou W) comme lettre : M<sub>a</sub> = (un nombre) × F, puis F = moment imposé / ce nombre.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=meca&amp;ch=moments"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=meca&amp;ch=moments"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/ds/statique/"><b>Révision DS Statique ▸</b><span>Les 3 chapitres d'un coup, fiche et calculatrice</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/statique/equilibre/"><small>◂ Chapitre 2</small>Équilibre statique</a></nav>
+</section>
+
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Statique%20%C2%B7%20chapitre%203">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

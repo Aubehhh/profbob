@@ -4,9 +4,9 @@
    - polices Google : cache d'abord (elles ne changent pas).
    Les compteurs de visites et le formulaire de contact ne passent jamais par le cache.
    Changer VERSION force le renouvellement du cache. */
-const VERSION='pb-v8';
-const CORE=['/','/matieres/','/mini-ds/','/flashcards/','/recherche/','/flashcards/cartes.js','/assets/recherche-index.js','/assets/progression.js','/notes/','/ds/statique/','/contact/','/404.html',
-  '/assets/site.css','/assets/matieres.css','/assets/accueil.css','/assets/accueil.js','/assets/minids.css','/assets/notation.css',
+const VERSION='pb-v9';
+const CORE=['/','/matieres/','/mini-ds/','/flashcards/','/recherche/','/flashcards/cartes.js','/assets/recherche-index.js','/assets/progression.js','/notes/','/ds/statique/','/cours/statique/vecteurs/','/cours/statique/equilibre/','/cours/statique/moments/','/contact/','/404.html',
+  '/assets/site.css','/assets/matieres.css','/assets/accueil.css','/assets/accueil.js','/assets/minids.css','/assets/notation.css','/assets/cours.css','/assets/cours.js',
   '/assets/minids.js','/assets/notation.js','/assets/notations.js','/assets/stats.js','/assets/pwa.js',
   '/mini-ds/matieres.js','/assets/ue-s1.js','/ds/statique/mini-ds/banque.js','/notes/maquette-s1.js','/assets/favicon.svg','/assets/icon-192.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VERSION).then(c=>Promise.all(CORE.map(u=>c.add(u).catch(()=>{})))).then(()=>self.skipWaiting()))});

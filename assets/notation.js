@@ -1,6 +1,6 @@
 /* Notations du site : transforme l'écriture « texte » des formules en notation propre.
    - vecteurs : r_AB, u_a, i j k (dans {… i … j … k}), r × F, a · b, |A|  →  flèche au-dessus (classe .vec)
-   - indices  : X_AB → X avec AB en indice ; Fx, F1x, FRx, FR → F avec x, 1x, Rx, R en indice
+   - indices  : X_AB → X avec AB en indice (aussi A_⊥, A_∥) ; Fx, F1x, FRx, FR → F avec x, 1x, Rx, R en indice ; (F_R)x → (F_R) avec x en indice
    Appliqué aux éléments .formula, .m et [data-nota] (texte seulement, le HTML existant est respecté).
    Une seule règle pour tout le site : la page de cours et le mini-DS écrivent pareil. */
 (function(){
@@ -22,7 +22,9 @@
     // vecteurs de base dans une écriture en composantes : {12 i − 8 j}, + k, (2/3) i
     s=s.replace(/(\{|[0-9)] |[+−-] )([ijk])(?=[\s}),.;]|$)/g,(m,p,u)=>p+V(u));
     // indices génériques X_YZ (scalaires : T_AB, M_O, F_s…)
-    s=s.replace(/(^|[^A-Za-z>])([A-Za-zα-ωΑ-Ω])_([A-Za-z0-9₀-₉]+)/g,(m,p,a,b)=>p+a+'<sub>'+b+'</sub>');
+    s=s.replace(/(^|[^A-Za-z>])([A-Za-zα-ωΑ-Ω])_([A-Za-z0-9₀-₉⊥∥]+)/g,(m,p,a,b)=>p+a+'<sub>'+b+'</sub>');
+    // composante d'une grandeur indicée, écrite comme dans le cours : (F_R)x, (F_R)y
+    s=s.replace(/(<\/sub>\))([xyz])(?![A-Za-z])/g,(m,p,c)=>p+'<sub>'+c+'</sub>');
     // composantes : Fx, F1x, FRx, Mz, Tx … et résultante FR
     s=s.replace(/(^|[^A-Za-z>])([FTMRWN])([0-9]{0,2}|R)([xyz])(?![A-Za-z])/g,(m,p,a,n,c)=>p+a+'<sub>'+n+c+'</sub>');
     s=s.replace(/(^|[^A-Za-z>])FR(?![A-Za-z])/g,(m,p)=>p+'F<sub>R</sub>');
