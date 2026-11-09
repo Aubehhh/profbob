@@ -14,7 +14,7 @@ window.MINIDS_MATIERES=[
      {id:'moments',nom:'Moment d\'une force',detail:'M_O = F d, produit vectoriel, r × F, Varignon, moment par rapport à un axe',q:['momentfd','vectoriel','varignon','moment3d','momentres','momentaxe']}
    ],
    ds:[
-     {id:'statique',nom:'DS Statique',detail:'Chapitres 1 à 3 · novembre 2026',chapitres:['vecteurs','equilibre','moments'],n:8,min:60}
+     {id:'statique',nom:'DS Statique',detail:'Chapitres 1 à 3 · semaine du 14 au 18 déc.',chapitres:['vecteurs','equilibre','moments'],n:8,min:60}
    ]},
   {id:'maths',nom:'Mathématiques',couleur:'#7c3aed'},
   {id:'analyse',nom:'Analyse',couleur:'#0e7490'},

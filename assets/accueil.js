@@ -9,6 +9,16 @@
   function card(el,{l,v,small,d,go,href,cls}){el.className='st'+(cls?' '+cls:'');el.href=href;
     el.innerHTML=`<div class="l">${l}</div><div class="v${v==null?' empty':''}">${v==null?'—':v}${small&&v!=null?`<small>${small}</small>`:''}</div><div class="d">${d}</div><span class="go">${go} ▸</span>`}
 
+  // 0. compte à rebours du DS du bandeau (dates du catalogue, heure de Paris)
+  (function(){
+    const el=document.querySelector('.banner .cd');if(!el)return;
+    const day=s=>{const[y,m,d]=s.split('-').map(Number);return Date.UTC(y,m-1,d)};
+    const today=day(new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Paris'}));
+    const n=Math.round((day(el.dataset.debut)-today)/864e5),fin=Math.round((day(el.dataset.fin)-today)/864e5);
+    const t=n>1?'dans '+n+' jours':n===1?'demain':fin>=0?(n===0&&fin===0?'aujourd\'hui':'en ce moment'):'terminé';
+    el.textContent=t;el.className='cd'+(n<=7&&fin>=0?' soon':'')+(fin<0?' past':'');
+  })();
+
   // 1. moyenne simulée
   (function(){
     const M=window.MAQUETTE_S1,notes=get('notes-s1')||{},el=$('st-notes');if(!el||!M)return;

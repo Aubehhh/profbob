@@ -24,7 +24,7 @@ Barre du haut commune (Matières en `aria-current`, avec la loupe), puis dans `.
 3. `<div data-notations="<id matière>"></div>` : la légende du chapitre est insérée par `cours.js`.
 4. Une `section.csec#sN` par partie du cours, dans l'ordre du prof : `.shead` (numéro, titre, « diapos a à b · durée ») ; `.idee` ; formules en `.formula.key.cours` (« Comme dans le cours ») ; `.coquille` ; `.trap` ; `.retiens` ; figures SVG (couleurs via variables CSS) ; exemples `.example` avec correction dans `details.sol` (réponse en `.res`, 3 chiffres significatifs) ; `.quiz` (boutons `data-ok="1"` + `.fb`) ; `label.checkrow` avec `input[data-s="sN"]`.
 5. `section#exos` : exercices des diapos et des PDF complémentaires, méthode en `details.hint`, sans recopier les figures.
-6. `section#train` : cartes Mini-DS / Flashcards / révision DS + `nav.chnav` (chapitres précédent et suivant).
+6. `section#train` : cartes Mini-DS du chapitre / Flashcards / DS blanc du module (`/mini-ds/?m=…&ds=…`) + `nav.chnav` (chapitres précédent et suivant). Toutes les matières ont exactement ce modèle : pas de page de cours à part pour un DS.
 7. Pied de page « Signale une erreur » (`/contact/?type=erreur&matiere=…`), puis `notations.js`, `cours.js`, `stats.js` (defer), `pwa.js` (defer).
 
 **Chaque valeur numérique d'un exemple est recalculée par un script** avant d'être écrite (et confrontée au corrigé du livre ou de la fiche quand il existe).
