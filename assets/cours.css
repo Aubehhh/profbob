@@ -95,3 +95,4 @@ details .formula{margin-top:4px}
 .chnav a:hover{border-color:var(--vec)}
 .chnav .next{text-align:right;grid-column:2}
 @media (max-width:520px){.chnav{grid-template-columns:1fr}.chnav .next{grid-column:1}}
+.credit{max-width:var(--page-w);margin:28px auto 0;padding:14px 0 0;border-top:1px solid var(--line);font-size:.86rem;color:var(--muted)}
