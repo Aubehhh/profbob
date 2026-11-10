@@ -326,7 +326,6 @@ window.FLASHCARDS={
     {ch:'imaginer',q:'Brainwriting',r:'idée au centre d\'une grille de 9 cases qui tourne :\nà quoi ça ressemble, comment ça marche, conséquences'},
     {ch:'imaginer',q:'Trier ses idées',r:'vote, consensus, ou critères\n(impact environnemental, coût, faisabilité, utilité sociale)\ntableau de tri : score = somme des notes'},
     {ch:'imaginer',q:'Fiche concept',r:'nom du produit, cible, recette,\n« c\'est inspiré de… », dessin (packaging + produit)'},
-    {ch:'imaginer',q:'Énigme des mèches (45 s)',r:'mèche 1 par les deux bouts, mèche 2 par un bout\nà 30 s, allumer l\'autre bout de la mèche 2 → +15 s'},
     {ch:'innover',q:'Étapes du processus d\'innovation',r:'1 recherche · 2 recherche appliquée · 3 développement (R&D)\n4 investissement (commercialisation)\n5 adoption, pénétration, amélioration (diffusion)'},
     {ch:'innover',q:'TRL',r:'1-3 recherche (principes, concept, preuve de concept)\n4-6 développement (prototypes)\n7-9 déploiement (réel, qualifié, commercialisé)'},
     {ch:'innover',q:'Modèle de l\'aiguille hypodermique',r:'médias de masse → chaque individu directement\nerroné : ignore les effets de réseau'},

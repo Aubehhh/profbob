@@ -1,6 +1,6 @@
 /* Banque du mini-DS Créativité et Innovation (cours de B. Dufossé et F. Lefebvre), alignée sur /cours/crea/….
    Examen sur table : définitions, modèles (Schumpeter, Rogers, Guilford, TRL), méthodes (SONCASE, brainstorming, pitch, publicité).
-   Surtout des cases « choix » (une situation tirée au hasard, on reconnaît la notion) et quelques calculs (pourcentages, tableau de tri, mèches).
+   Surtout des cases « choix » (une situation tirée au hasard, on reconnaît la notion) et quelques calculs (pourcentages, tableau de tri).
    Les situations sont repérées par leur indice k dans v ; le solveur outils/solveurs/crea.js a sa propre table de réponses.
    Vérification : node outils/verif-minids.js 3000 crea */
 (function(){
@@ -213,14 +213,6 @@ reste : 100 − ${F.n(c,1)} = ${F.n(100-c,1)} %`}}},
     sol:`divergence : analyser, déstructurer, imaginer, associer, combiner
 convergence : évaluer, catégoriser, choisir
 → ${a} : ${pa} ; ${b} : ${pb}`}}},
-
-{id:'meches',chap:'Créativité',pts:2,gen(R,F){
-  const T=R.pick([40,60,80,90,120,180,240]);
-  return{v:{T},text:`<p>Deux mèches de même longueur brûlent chacune entièrement en ${T} s, à vitesse non constante. On allume la mèche 1 par les deux bouts et la mèche 2 par un seul bout ; quand la mèche 1 est consumée, on allume l'autre bout de la mèche 2. Au bout de combien de temps la mèche 1 est-elle consumée, et quelle durée totale mesure-t-on quand la mèche 2 s'éteint ?</p>`,
-    fields:[{label:'mèche 1',unit:'s',ans:T/2,d:1,tol:0.01,hint:'en s'},{label:'durée totale',unit:'s',ans:3*T/4,d:1,tol:0.01,hint:'en s'}],
-    sol:`par les deux bouts, une mèche brûle en moitié moins de temps : ${T} / 2 = ${F.n(T/2,1)} s
-il reste alors ${F.n(T/2,1)} s de combustion à la mèche 2 ; allumée des deux côtés : ${F.n(T/4,1)} s
-total : ${F.n(T/2,1)} + ${F.n(T/4,1)} = ${F.n(3*T/4,1)} s   (avec 60 s : 45 s, l'énigme du cours)`}}},
 
 {id:'regles',chap:'Intelligence collective',pts:2,gen(R,F){
   const k=pickK(R,T_REGLE),[s,a]=T_REGLE[k];

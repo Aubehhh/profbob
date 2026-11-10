@@ -34,7 +34,6 @@ module.exports={
   inventeur:({k})=>[inv[k]],
   lecon:({k})=>[lecon[k]],
   guilford:({i,j})=>[phaseG(verbes[i]),phaseG(verbes[j])],
-  meches:({T})=>{const v1=T/2,reste=T-v1;return [v1,v1+reste/2]},
   regles:({k})=>[regle[k]],
   brainstorming:({k})=>bs[k],
   tri:({P,A,B})=>{let a=0,b=0;for(let i=0;i<3;i++){a+=A[i]*P[i];b+=B[i]*P[i]}return [a,b,a>b?'idée A':'idée B']},
