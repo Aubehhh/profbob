@@ -46,4 +46,17 @@
       {rootMargin:'-30% 0px -65% 0px'});
     secs.forEach(s=>io.observe(s));
   }
+
+  // navigation entre chapitres en haut de page : reprise des liens du bas (nav.chnav), en plus discret
+  const cn=document.querySelector('nav.chnav'),eb=document.querySelector('.chero .eyebrow');
+  if(cn&&eb&&!document.querySelector('.chtop')){
+    const top=document.createElement('nav');top.className='chtop';top.setAttribute('aria-label','Chapitre précédent ou suivant');
+    cn.querySelectorAll('a').forEach(a=>{
+      const nx=a.classList.contains('next'),sm=a.querySelector('small'),num=sm?(sm.textContent.match(/\d+/)||[''])[0]:'';
+      const name=[...a.childNodes].filter(n=>n!==sm).map(n=>n.textContent).join('').trim();
+      const l=document.createElement('a');l.href=a.getAttribute('href');l.className=nx?'next':'prev';
+      l.innerHTML=nx?'<span class="t">Ch. '+num+' · '+name+'</span><span class="ar" aria-hidden="true">▸</span>':'<span class="ar" aria-hidden="true">◂</span><span class="t">Ch. '+num+' · '+name+'</span>';
+      l.title=(nx?'Chapitre suivant : ':'Chapitre précédent : ')+name;top.appendChild(l)});
+    eb.insertAdjacentElement('afterend',top);
+  }
 })();

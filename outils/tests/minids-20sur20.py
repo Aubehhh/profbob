@@ -29,7 +29,7 @@ async def main():
         b=await p.chromium.launch(executable_path='/usr/bin/google-chrome')
         page=await b.new_page()
         errs=[];page.on('pageerror',lambda e: errs.append(str(e)))
-        for m,ch in [('chimie','atome'),('chimie','classification'),('chimie','molecules'),('thermo','proprietes'),('meca','moments')]:
+        for m,ch in [('elec','bases'),('elec','continu'),('elec','theoremes'),('elec','sinusoidal'),('chimie','molecules')]:
             for k in range(2):
                 note,n,qs=await run_one(page,m,ch)
                 print(ch,'essai',k+1,':',note,'·',n,'cases ·',', '.join(qs))
