@@ -9,14 +9,24 @@
   function card(el,{l,v,small,d,go,href,cls}){el.className='st'+(cls?' '+cls:'');el.href=href;
     el.innerHTML=`<div class="l">${l}</div><div class="v${v==null?' empty':''}">${v==null?'—':v}${small&&v!=null?`<small>${small}</small>`:''}</div><div class="d">${d}</div><span class="go">${go} ▸</span>`}
 
-  // 0. compte à rebours du DS du bandeau (dates du catalogue, heure de Paris)
+  // 0. semaine des DS : compte à rebours (heure de Paris) + meilleure note de DS blanc par matière (ce navigateur)
   (function(){
-    const el=document.querySelector('.banner .cd');if(!el)return;
+    const W=document.querySelector('.dsweek');if(!W)return;
     const day=s=>{const[y,m,d]=s.split('-').map(Number);return Date.UTC(y,m-1,d)};
     const today=day(new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Paris'}));
-    const n=Math.round((day(el.dataset.debut)-today)/864e5),fin=Math.round((day(el.dataset.fin)-today)/864e5);
-    const t=n>1?'dans '+n+' jours':n===1?'demain':fin>=0?(n===0&&fin===0?'aujourd\'hui':'en ce moment'):'terminé';
-    el.textContent=t;el.className='cd'+(n<=7&&fin>=0?' soon':'')+(fin<0?' past':'');
+    const n=Math.round((day(W.dataset.debut)-today)/864e5),fin=Math.round((day(W.dataset.fin)-today)/864e5);
+    const cd=W.querySelector('.dw-cd'),b=cd.querySelector('b'),sp=cd.querySelector('span');
+    if(n>1){b.textContent=n;sp.textContent='jours'}else if(n===1){b.textContent='1';sp.textContent='jour'}
+    else if(fin>=0){b.textContent='J'+(n===0?'':'+'+(-n));sp.textContent='c\'est parti';cd.classList.add('now')}
+    else{b.textContent='✓';sp.textContent='terminé';cd.classList.add('past')}
+    if(n>1&&n<=7)cd.classList.add('soon');
+    let done=0;const T=W.querySelectorAll('.dw');
+    T.forEach(a=>{const H=get('minids-'+a.dataset.m);if(!Array.isArray(H))return;
+      const ds=H.filter(x=>/^DS /.test(String(x.fmt||''))&&typeof x.note==='number');if(!ds.length)return;
+      const best=Math.max(...ds.map(x=>x.note));done++;
+      a.classList.add(best>=10?'done':'low');a.querySelector('.s').textContent=(best>=10?'✓ ':'à refaire · ')+fr(best,1)+'/20'});
+    W.querySelector('.dw-prog .bar i').style.width=(100*done/T.length)+'%';
+    W.querySelector('.dw-prog .pv').textContent=done+' DS blanc'+(done>1?'s':'')+' fait'+(done>1?'s':'')+' sur '+T.length;
   })();
 
   // 1. moyenne simulée

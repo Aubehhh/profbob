@@ -138,11 +138,20 @@ ${TOPBAR('home')}
     <h1>Révisions de zgeg</h1>
     ${CAT.dedicace?`<p class="dedi">${CAT.dedicace}</p>`:''}
   </header>
-${latest?`
-  <div class="banner">
-    <div class="t"><div class="eyebrow">En ce moment · DS ${esc(latest.quand||'')}${latest.date?`<span class="cd" data-debut="${latest.date}" data-fin="${latest.dateFin||latest.date}"></span>`:''}</div><h3><a href="${latest.url}">${esc(latest.titre)}</a></h3>${latest.desc?`<p>${esc(latest.desc)}</p>`:''}</div>
-    <div class="row">${(latest.liens||[]).map(([t,u])=>`<a class="chip" href="${u}">${esc(t)}</a>`).join('')}${latest.minids?`<a class="chip hot" href="${esc(latest.minids)}">Mini-DS ▸</a>`:''}</div>
-  </div>`:''}
+${latest?(()=>{
+  // semaine des DS : tous les DS qui commencent à la même date que le premier DS du catalogue
+  const L=ALL.flatMap(m=>m.ds.filter(d=>d.date===latest.date).map(d=>({m,d,u:UES.find(u=>u.modules.includes(m))})));
+  const mid=d=>((/[?&]m=([^&]+)/.exec(d.minids||d.url||'')||[])[1]||'');
+  const fmtD=x=>{const[y,mo,da]=x.split('-').map(Number);return da+' '+['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][mo-1]};
+  return `
+  <section class="dsweek" data-debut="${latest.date}" data-fin="${latest.dateFin||latest.date}">
+    <div class="dw-head">
+      <div class="dw-cd"><b>—</b><span>jours</span></div>
+      <div class="dw-t"><div class="eyebrow">En ce moment</div><h3>Semaine des DS</h3><p>Du ${fmtD(latest.date)} au ${fmtD(latest.dateFin||latest.date)} · ${L.length} matières · fais un DS blanc par matière</p></div>
+      <div class="dw-prog"><span class="bar"><i></i></span><span class="pv">0 DS blanc fait sur ${L.length}</span></div>
+    </div>
+    <div class="dw-grid">${L.map(({m,d,u})=>`<a class="dw" style="--c:${u.couleur}" href="${esc(d.minids||d.url)}" data-m="${mid(d)}"><b>${esc(({thermo:'Thermo'})[m.id]||short[m.id]||m.nom)}</b><span class="s">DS blanc ▸</span></a>`).join('')}</div>
+  </section>`})():''}
 
   <div class="install" id="install" hidden><span data-txt><b>Installe profbob sur ton téléphone</b> : il s'ouvre comme une appli et marche même sans réseau.</span><button class="btn" type="button">Installer l'appli</button></div>
 
