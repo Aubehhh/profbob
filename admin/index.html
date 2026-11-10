@@ -93,28 +93,60 @@ td .track i{display:block;height:100%;background:var(--vec)}
     if(await sha($('pw').value)===HASH){try{sessionStorage.setItem('pb-admin','1')}catch(e){}open()}
     else{$('err').textContent='Mot de passe incorrect.';$('pw').select()}});
 
-  async function get(k){try{const r=await fetch(API+k,{cache:'no-store'});if(!r.ok)return 0;const j=await r.json();return j.value||0}catch(e){return null}}
-  async function getAll(keys){const out={};for(let i=0;i<keys.length;i+=6){const part=keys.slice(i,i+6);const v=await Promise.all(part.map(get));part.forEach((k,j)=>out[k]=v[j])}return out}
+  /* Abacus limite à 30 lectures par 10 s et par adresse IP (au-delà : erreur 429). La page lit ~80 compteurs :
+     on les lit donc au rythme permis (20 lectures, puis pause), on réessaie après un 429, et on garde les valeurs
+     en mémoire sur cet appareil : les jours passés ne changent plus et ne sont relus qu'une fois. */
+  const CK='pb-admin-cache';
+  let cache={};try{cache=JSON.parse(localStorage.getItem(CK)||'{}')}catch(e){}
+  const save=()=>{try{localStorage.setItem(CK,JSON.stringify(cache))}catch(e){}};
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  let stamps=[];
+  async function slot(){for(;;){const now=Date.now();stamps=stamps.filter(t=>now-t<10500);if(stamps.length<20){stamps.push(now);return}await wait(10600-(now-stamps[0]))}}
+  async function get(k){
+    for(let essai=0;essai<4;essai++){
+      await slot();
+      try{const r=await fetch(API+k,{cache:'no-store'});
+        if(r.status===404)return 0;
+        if(r.status===429){const ra=+r.headers.get('Retry-After');await wait((ra>0?ra:10)*1000+300);continue}
+        if(!r.ok)return null;const j=await r.json();return typeof j.value==='number'?j.value:0}
+      catch(e){await wait(1500)}}
+    return null}
 
   function days14(){const [y,m,d]=new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Paris'}).split('-').map(Number);const out=[];for(let i=13;i>=0;i--){const t=new Date(Date.UTC(y,m-1,d-i,12));const p=n=>String(n).padStart(2,'0');out.push({key:t.getUTCFullYear()+p(t.getUTCMonth()+1)+p(t.getUTCDate()),lab:p(t.getUTCDate())+'/'+p(t.getUTCMonth()+1)})}return out}
 
-  async function load(){
-    $('state').textContent='Chargement…';
-    const D=days14();
-    const keys=['total','visiteurs',...D.map(d=>'j-'+d.key),...D.map(d=>'u-'+d.key),...PAGES.map(p=>p[0]),...OTHER.map(o=>o[0])];
-    const v=await getAll(keys);
-    if(Object.values(v).every(x=>x===null)){$('state').textContent='Impossible de joindre le service de compteurs. Réessaie plus tard.';return}
-    const today=D[D.length-1].key,week=D.slice(-7).reduce((s,d)=>s+(v['j-'+d.key]||0),0);
-    $('kpis').innerHTML=[['Pages vues (total)',v.total],['Visiteurs (total)',v.visiteurs],['Visiteurs aujourd\'hui',v['u-'+today]],['Pages vues · 7 jours',week]]
+  const val=k=>cache[k]?cache[k].v:0;
+  function render(D){
+    const today=D[D.length-1].key,week=D.slice(-7).reduce((s,d)=>s+val('j-'+d.key),0);
+    $('kpis').innerHTML=[['Pages vues (total)',val('total')],['Visiteurs (total)',val('visiteurs')],['Visiteurs aujourd\'hui',val('u-'+today)],['Pages vues · 7 jours',week]]
       .map(([l,n])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${(n||0).toLocaleString('fr-FR')}</div></div>`).join('');
-    const max=Math.max(1,...D.map(d=>v['j-'+d.key]||0));
-    $('chart').innerHTML=D.map(d=>{const pv=v['j-'+d.key]||0,u=v['u-'+d.key]||0;
+    const max=Math.max(1,...D.map(d=>val('j-'+d.key)));
+    $('chart').innerHTML=D.map(d=>{const pv=val('j-'+d.key),u=val('u-'+d.key);
       return `<div class="bar" title="${d.lab} : ${pv} pages vues, ${u} visiteurs"><div class="n">${pv||''}</div><div class="b" style="height:${pv/max*100}%"><div class="u" style="height:${pv?Math.min(100,u/pv*100):0}%"></div></div></div>`}).join('');
     $('days').innerHTML=D.map(d=>`<span>${d.lab}</span>`).join('');
-    const P=PAGES.map(([k,n])=>[n,v[k]||0]).sort((a,b)=>b[1]-a[1]);const pm=Math.max(1,...P.map(p=>p[1]));
+    const P=PAGES.map(([k,n])=>[n,val(k)]).sort((a,b)=>b[1]-a[1]);const pm=Math.max(1,...P.map(p=>p[1]));
     $('pages').innerHTML=P.map(([n,x])=>`<tr><td>${esc(n)}<div class="track"><i style="width:${x/pm*100}%"></i></div></td><td class="v">${x}</td></tr>`).join('');
-    $('other').innerHTML=OTHER.map(([k,n])=>`<tr><td>${esc(n)}</td><td class="v">${v[k]||0}</td></tr>`).join('');
-    $('state').textContent='Mis à jour à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+'.';
+    $('other').innerHTML=OTHER.map(([k,n])=>`<tr><td>${esc(n)}</td><td class="v">${val(k)}</td></tr>`).join('');
+  }
+
+  let busy=false;
+  async function load(){
+    if(busy)return;busy=true;$('reload').disabled=true;
+    const D=days14(),today=D[D.length-1].key;
+    // les plus utiles d'abord ; les jours passés déjà lus ne sont pas relus (leurs chiffres ne bougent plus)
+    const past=D.slice(0,-1).flatMap(d=>['j-'+d.key,'u-'+d.key]).filter(k=>!(cache[k]&&cache[k].fin));
+    const keys=['total','visiteurs','j-'+today,'u-'+today,...OTHER.map(o=>o[0]),...PAGES.map(p=>p[0]),...past];
+    render(D);
+    let done=0,fail=0,last=0;
+    const st=()=>{$('state').textContent=`Mise à jour… ${done}/${keys.length} compteurs lus (le service de compteurs limite le rythme de lecture : environ 2 lectures par seconde).`};st();
+    for(const k of keys){
+      const v=await get(k);done++;
+      if(v===null)fail++;else cache[k]={v,t:Date.now(),fin:/^[ju]-\d{8}$/.test(k)&&k.slice(2)<today};
+      if(Date.now()-last>700||done===keys.length){render(D);save();st();last=Date.now()}
+    }
+    save();render(D);
+    if(fail===keys.length)$('state').textContent='Impossible de joindre le service de compteurs. Réessaie plus tard.';
+    else $('state').textContent='Mis à jour à '+new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+(fail?` (${fail} compteur${fail>1?'s':''} non lu${fail>1?'s':''} : valeur précédente affichée).`:'.');
+    busy=false;$('reload').disabled=false;
   }
 
   function meLabel(){let off=false;try{off=localStorage.getItem('pb-nostats')==='1'}catch(e){}
