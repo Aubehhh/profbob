@@ -40,7 +40,8 @@
 .chaps .tag{font-family:var(--mono);font-size:.72rem}
 .empty-state{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:22px;text-align:center}
 .empty-state b{font-family:var(--display);font-size:1.1rem}
-.empty-state p{color:var(--muted);margin:6px 0 16px}
+.empty-state p{color:var(--muted);margin:6px auto 16px}
+.empty-state p:last-child{margin-bottom:0}
 .soon{color:var(--muted);font-size:.95rem}
 .sems{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .pill.off{border-style:dashed}
