@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'10 nov.',texte:'Informatique embarquée : binaire, Arduino, boucles, interruptions, PWM et timers, avec mini-DS et flashcards',url:'/matieres/informatique-embarquee/',nouveau:true},
+    {date:'10 nov.',texte:'Créativité et Innovation : innovation et diffusion, créativité en équipe, pitch et publicité, avec mini-DS et flashcards',url:'/matieres/creativite-innovation/',nouveau:true},
+    {date:'10 nov.',texte:'Informatique embarquée : binaire, Arduino, boucles, interruptions, PWM et timers, avec mini-DS et flashcards',url:'/matieres/informatique-embarquee/'},
     {date:'10 nov.',texte:'Création de page Web : HTML, structure, CSS et formulaires, avec mini-DS et flashcards',url:'/matieres/pages-web/'},
     {date:'9 nov.',texte:'Outils mathématiques : complexes, dérivation, intégration et trigonométrie, avec mini-DS et flashcards',url:'/matieres/mathematiques/'},
     {date:'9 nov.',texte:'Électricité : les 4 chapitres (continu, théorèmes, sinusoïdal), avec mini-DS et flashcards',url:'/matieres/electricite/'},
@@ -99,7 +100,12 @@ module.exports={
       {id:'oral',slug:'expression-orale',mono:'EO',chapitres:[],ds:[]},
       {id:'ecrit',slug:'expression-ecrite',mono:'EÉ',chapitres:[],ds:[]}]},
     {id:'ome',couleur:'#b45309',modules:[
-      {id:'crea',slug:'creativite-innovation',mono:'CI',chapitres:[],ds:[]},
+      {id:'crea',slug:'creativite-innovation',mono:'CI',
+       chapitres:[
+         {id:'explorer',titre:'Explorer et s\'inspirer : l\'innovation et sa diffusion',url:'/cours/crea/explorer/'},
+         {id:'imaginer',titre:'Imaginer : créativité et intelligence collective',url:'/cours/crea/imaginer/'},
+         {id:'innover',titre:'Innover : développer, diffuser et promouvoir',url:'/cours/crea/innover/'}],
+       ds:[]},
       {id:'bureau',slug:'outils-bureautiques',mono:'OB',chapitres:[],ds:[]}]}
   ]
 };

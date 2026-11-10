@@ -109,5 +109,18 @@ window.MINIDS_MATIERES=[
    ],
    ds:[
      {id:'embarque',nom:'Entraînement examen final',detail:'Les 4 chapitres · concepts et lecture de code',chapitres:['systemes','arduino','controle','temps'],n:10,min:45}
+   ]},
+  {id:'crea',module:'crea',nom:'Créativité et Innovation',couleur:'#b45309',nota:'aucun',
+   banque:()=>window.BANQUE_CREA,
+   noms:{niveau:'Découverte, invention ou innovation',schumpeter:'Les 5 formes (Schumpeter)',rogers_cat:'Catégories d\'adoptants',rogers_cumul:'Courbe de Rogers : cumul',conditions:'Conditions d\'adoption',soncase:'Levier SONCASE',
+     inventeur:'Qui a inventé ?',lecon:'Leçon d\'une invention',guilford:'Divergence ou convergence',meches:'Énigme des mèches',regles:'Règles d\'une séance créative',brainstorming:'Phases du brainstorming',tri:'Tableau de tri',
+     trl:'Échelle TRL',etapes:'Étapes du processus d\'innovation',modeles:'Modèles de diffusion',strategies:'Accélérer la diffusion',pitch_format:'Format de pitch',pitch_ordre:'Structure du pitch',fonction_avantage:'Fonctionnalité ou avantage',publicite:'Type de publicité'},
+   chapitres:[
+     {id:'explorer',nom:'Explorer et s\'inspirer',detail:'Innovation, Schumpeter, Rogers, SONCASE',q:['niveau','schumpeter','rogers_cat','rogers_cumul','conditions','soncase']},
+     {id:'imaginer',nom:'Imaginer',detail:'Inventions, Guilford, brainstorming, tri des idées',q:['inventeur','lecon','guilford','meches','regles','brainstorming','tri']},
+     {id:'innover',nom:'Innover',detail:'TRL, diffusion, pitch, publicité',q:['trl','etapes','modeles','strategies','pitch_format','pitch_ordre','fonction_avantage','publicite']}
+   ],
+   ds:[
+     {id:'crea',nom:'Entraînement examen sur table',detail:'Les 3 parties · définitions, modèles et méthodes',chapitres:['explorer','imaginer','innover'],n:10,min:30}
    ]}
 ];

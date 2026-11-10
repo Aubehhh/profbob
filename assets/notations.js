@@ -62,6 +62,16 @@
       ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
     ]})(),
     // Informatique embarquée (D. Gheysens) : vocabulaire et fonctions Arduino
+    crea:(()=>{const X='explorer',I='imaginer',N='innover';return [
+      ['TRL','Technology Readiness Level : maturité d\'une technologie, de 1 à 9','—',[N]],
+      ['SONCASE','Motivations d\'achat : Sécurité, Orgueil, Nouveauté, Confort, Argent, Sympathie, Environnement','—',[X]],
+      ['persona','Portrait type d\'un client cible','—',[X]],
+      ['benchmark','Comparaison des concurrents','—',[X]],
+      ['early adopters','Adopteurs précoces (13,5 %) ; innovators 2,5 %, laggards 16 %','%',[X]],
+      ['divergence ; convergence','Produire des idées ; trier et choisir (Guilford)','—',[I]],
+      ['pitch','Présentation courte et persuasive d\'un projet','—',[N]],
+      ['storyboard','Suite de cases dessinées décrivant les scènes d\'une pub','—',[N]]
+    ]})(),
     embarque:(()=>{const Y='systemes',A='arduino',C='controle',T='temps';return [
       ['bit ; octet','Chiffre binaire (0 ou 1) ; groupe de 8 bits','—',[Y,A]],
       ['2ⁿ','Nombre de valeurs codables sur n bits','—',[Y,T]],

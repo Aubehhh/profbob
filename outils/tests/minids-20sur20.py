@@ -36,7 +36,7 @@ async def main():
         b=await p.chromium.launch(executable_path='/usr/bin/google-chrome')
         page=await b.new_page()
         errs=[];page.on('pageerror',lambda e: errs.append(str(e)))
-        for m,ch in [('embarque','systemes'),('embarque','arduino'),('embarque','controle'),('embarque','temps'),('web','bases'),('web','structure'),('web','css'),('web','formulaires'),('outils','complexes'),('elec','sinusoidal')]:
+        for m,ch in [('crea','explorer'),('crea','imaginer'),('crea','innover'),('embarque','systemes'),('embarque','arduino'),('embarque','controle'),('embarque','temps'),('web','bases'),('web','structure'),('web','css'),('web','formulaires'),('outils','complexes'),('elec','sinusoidal')]:
             for k in range(2):
                 note,n,qs=await run_one(page,m,ch)
                 print(ch,'essai',k+1,':',note,'·',n,'cases ·',', '.join(qs))
