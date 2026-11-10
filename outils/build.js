@@ -54,8 +54,8 @@ const FOOT=`<script src="/assets/stats.js" defer></script>
 </html>
 `;
 const mono=(m,size)=>`<span class="mono" style="--c:${m.couleur}${size?`;width:${size}px;height:${size}px`:''}">${esc(m.mono)}</span>`;
-const statut=m=>{const c=m.chapitres.filter(x=>x.url).length,d=m.ds.length;const p=[];if(c)p.push(c+' chapitre'+(c>1?'s':''));if(d)p.push(d+' DS');return p.join(' · ')||'Bientôt'};
-const mcard=m=>`<a class="mcard${statut(m)==='Bientôt'?' empty':''}" href="/matieres/${m.slug}/">${mono(m,40)}<span class="t"><b>${esc(m.nom)}</b><small>${statut(m)}</small></span><span class="go">▸</span></a>`;
+const statut=m=>{const c=m.chapitres.filter(x=>x.url).length,d=m.ds.length;const p=[];if(c)p.push(c+' chapitre'+(c>1?'s':''));if(d)p.push(d+' DS');return p.join(' · ')||(m.rien?'Rien ce semestre':'Bientôt')};
+const mcard=m=>`<a class="mcard${!m.chapitres.length&&!m.ds.length?' empty':''}" href="/matieres/${m.slug}/">${mono(m,40)}<span class="t"><b>${esc(m.nom)}</b><small>${statut(m)}</small></span><span class="go">▸</span></a>`;
 const dscard=d=>`<div class="dscard">
       <div class="eyebrow">DS · ${esc(d.quand||'')}</div>
       <h3><a href="${d.url}">${esc(d.titre)}</a></h3>
@@ -72,8 +72,9 @@ for(const u of UES)for(const m of u.modules){
   const md=MD.find(x=>x.module===m.id);
   const outils=md?`<div class="tools2"><a class="btn" href="/mini-ds/?m=${md.id}">Mini-DS ▸</a>${FC[md.id]?`<a class="btn ghost" href="/flashcards/?m=${md.id}">Flashcards · ${FC[md.id].length} formules</a>`:''}</div>`:'';
   const chap=m.chapitres.length?`<div class="progsum" id="prog-sum" hidden></div><ol class="chaps">${m.chapitres.map((c,i)=>c.url?`<li data-chap="${c.id}"><a href="${c.url}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="go">▸</span></a></li>`:`<li class="soon" data-chap="${c.id}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="tag">bientôt</span></li>`).join('')}</ol>`
+    :m.rien?`<div class="empty-state"><b>Rien ce semestre.</b><p>Pas de cours de ${esc(m.nom)} à réviser au semestre 1.</p></div>`
     :`<div class="empty-state"><b>Les chapitres arrivent bientôt.</b><p>Le cours de ${esc(m.nom)} sera ajouté chapitre par chapitre.</p><a class="btn ghost" href="/contact/?type=chapitre&amp;matiere=${encodeURIComponent(m.nom)}%20%C2%B7%20">Proposer un chapitre ou envoyer un cours</a></div>`;
-  const ds=m.ds.length?`<div class="list">\n    ${m.ds.map(dscard).join('\n    ')}\n  </div>`:`<p class="soon">Pas encore de DS pour ce module.</p>`;
+  const ds=m.ds.length?`<div class="list">\n    ${m.ds.map(dscard).join('\n    ')}\n  </div>`:`<p class="soon">${m.rien?'Rien ce semestre.':'Pas encore de DS pour ce module.'}</p>`;
   const html=`${HEAD(m.nom+' · profbob.fr','Révisions de '+m.nom+' : cours chapitre par chapitre, DS, exercices corrigés et mini-DS.')}
 <body>
 ${TOPBAR('matieres')}
@@ -105,7 +106,7 @@ const SEM=MAQ.semestre||'Semestre 1';
 const ueCard=u=>`<section class="uecard" style="--c:${u.couleur}">
       <div class="ueh"><h2>${esc(u.nom)}</h2><span>${u.ects} ECTS</span></div>
       <ul class="mods">
-        ${u.modules.map(m=>`<li><a href="/matieres/${m.slug}/"${statut(m)==='Bientôt'?' class="empty"':''}>${mono(m,30)}<span class="nm">${esc(m.nom)}</span><span class="st">${statut(m)}</span><span class="go">▸</span></a></li>`).join('\n        ')}
+        ${u.modules.map(m=>`<li><a href="/matieres/${m.slug}/"${!m.chapitres.length&&!m.ds.length?' class="empty"':''}>${mono(m,30)}<span class="nm">${esc(m.nom)}</span><span class="st">${statut(m)}</span><span class="go">▸</span></a></li>`).join('\n        ')}
       </ul>
     </section>`;
 const idx=`${HEAD('Matières · '+SEM+' · profbob.fr','Toutes les matières du '+SEM.toLowerCase()+' de HEI 1, rangées par UE.')}

@@ -101,8 +101,8 @@ module.exports={
        ds:[{titre:'Page Web : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=web&ds=web',desc:'Cours 1 à 4 : balises HTML, structure d\'une page, liens, tableaux, CSS et formulaires.',liens:[['Bases du HTML','/cours/web/bases/'],['Structure','/cours/web/structure/'],['CSS','/cours/web/css/'],['Formulaires','/cours/web/formulaires/'],['Flashcards','/flashcards/?m=web']],minids:'/mini-ds/?m=web&ds=web'}]}]},
     {id:'huma',couleur:'#c2410c',modules:[
       {id:'anglais',slug:'anglais',mono:'En',chapitres:[],ds:[]},
-      {id:'lv2',slug:'lv2',mono:'L2',chapitres:[],ds:[]},
-      {id:'relation',slug:'competences-relationnelles',mono:'CR',chapitres:[],ds:[]},
+      {id:'lv2',slug:'lv2',mono:'L2',chapitres:[],ds:[],rien:true},
+      {id:'relation',slug:'competences-relationnelles',mono:'CR',chapitres:[],ds:[],rien:true},
       {id:'oral',slug:'expression-orale',mono:'EO',chapitres:[],ds:[]},
       {id:'ecrit',slug:'expression-ecrite',mono:'EÉ',chapitres:[],ds:[]}]},
     {id:'ome',couleur:'#b45309',modules:[
