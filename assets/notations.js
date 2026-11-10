@@ -61,6 +61,22 @@
       ['vc','Indice : volume de contrôle (E<sub>vc</sub>, m<sub>vc</sub>, P<sub>th,vc</sub>)','—',[VC]],
       ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
     ]})(),
+    // Création de page Web (R. Gosswiller) : vocabulaire plutôt que notations
+    web:(()=>{const B='bases',S='structure',C='css',F='formulaires';return [
+      ['balise','Élément HTML entre chevrons : simple (&lt;br /&gt;) ou double (&lt;p&gt;…&lt;/p&gt;)','—',[B,S]],
+      ['attribut','Précision écrite dans la balise ouvrante : nom="valeur" (src, href, alt, class…)','—',[B,S,F]],
+      ['client / serveur','Le navigateur demande ; le serveur envoie la page','—',[B]],
+      ['LAMP','Linux, Apache, MySQL, PHP','—',[B]],
+      ['doctype ; head ; body','Version du HTML ; méta-informations ; contenu affiché','—',[S]],
+      ['ancre','Lien vers un endroit de la page : href="#nom" → id="nom"','—',[S]],
+      ['sélecteur','Ce qui désigne les éléments visés par une règle CSS','—',[C]],
+      ['#nom ; .nom','Sélecteur d\'id (unique) ; de classe (partageable)','—',[C]],
+      ['propriété : valeur;','Une déclaration CSS, entre { }','—',[C]],
+      ['#RRGGBB ; rgb(r, g, b)','Couleur en hexadécimal ; en décimal (0 à 255)','—',[C]],
+      ['@media','Media query : règles appliquées selon l\'écran','—',[C]],
+      ['method ; action','GET ou POST ; page qui reçoit les données','—',[F]],
+      ['name ; id','Nom de la donnée envoyée ; identifiant dans la page','—',[F]]
+    ]})(),
     // Outils mathématiques (N. Coupier) : profil « thermo » (indices seulement)
     outils:(()=>{const C='complexes',D='derivation',I='integration',T='trigonometrie';return [
       ['i (j en physique)','Unité imaginaire : i² = −1','—',[C]],

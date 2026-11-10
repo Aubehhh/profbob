@@ -6,6 +6,9 @@
    { id:'resultante', chap:'Forces 2D', pts:3,
      gen(R,F){ return { text:'<p>énoncé html</p>',
                         fields:[{label:'FR', unit:'N', ans:217.4, type:'angle'?, tol:abs?, rel:relatif?}],
+                        (case à choix : {label, type:'choix', options:['…','…'], ans:indice} ;
+                         case texte : {label, type:'texte', ans:'réponse' ou ['réponse','autre forme acceptée']},
+                         comparée sans tenir compte des majuscules, des espaces, des guillemets ni d'un « ; » final)
                         sol:'texte de correction (formules, une ligne par étape)', note:'html facultatif' } } }
 */
 (function(){
@@ -45,6 +48,20 @@
     const tol=Math.max(field.tol??0.05,(field.rel??0.015)*Math.abs(field.ans));
     return Math.abs(val-field.ans)<=tol;
   }
+  // cases à choix et cases texte (code HTML/CSS, mots-clés…)
+  const norm=t=>String(t==null?'':t).toLowerCase().replace(/[“”«»]/g,'"').replace(/[‘’']/g,'"').replace(/\s+/g,'').replace(/;+$/,'');
+  function judge(field,raw){
+    if(field.type==='choix')return raw!==''&&raw!=null&&Number(raw)===field.ans;
+    if(field.type==='texte'){const n=norm(raw);return n!==''&&[].concat(field.ans).some(a=>norm(a)===n)}
+    return correct(field,parse(raw));
+  }
+  const shown=f=>f.type==='choix'?f.options[f.ans]:f.type==='texte'?[].concat(f.ans)[0]:F.n(f.ans,f.d??2)+' '+(f.unit||'');
+  const fieldHTML=(f,id)=>{
+    if(f.type==='choix')return `<select id="${id}"><option value="">— choisir —</option>${f.options.map((o,i)=>`<option value="${i}">${esc(o)}</option>`).join('')}</select>`;
+    if(f.type==='texte')return `<input id="${id}" class="txt" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+    return `<input id="${id}" inputmode="decimal" autocomplete="off" spellcheck="false">`;
+  };
+  const hintOf=f=>f.hint||(f.type==='angle'?'en degrés':f.s?'avec son signe (+ ou −)':'');
 
   const store={
     get(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}},
@@ -118,14 +135,14 @@
         <div id="mds-qs">${cfg.notations||''}${subject.map(q=>`<div class="mds-q" data-q="${q.num}">
           <h3>Question ${q.num} <span class="tag">${esc(q.chap)}</span><span class="mds-pts">${q.pts} pt${q.pts>1?'s':''}</span></h3>
           ${q.text}
-          <div class="mds-fields">${q.fields.map((f,j)=>`<div class="mds-field"><label for="f${q.num}_${j}" data-nota>${f.label}</label><div class="box"><input id="f${q.num}_${j}" inputmode="decimal" autocomplete="off" spellcheck="false"><span class="unit">${f.unit||''}</span></div>${(f.hint||(f.type==='angle'?'en degrés':(f.s?'avec son signe (+ ou −)':'')))?`<div class="fh">${f.hint||(f.type==='angle'?'en degrés':'avec son signe (+ ou −)')}</div>`:''}</div>`).join('')}</div>
+          <div class="mds-fields">${q.fields.map((f,j)=>`<div class="mds-field"><label for="f${q.num}_${j}" data-nota>${f.label}</label><div class="box">${fieldHTML(f,'f'+q.num+'_'+j)}<span class="unit">${f.unit||''}</span></div>${hintOf(f)?`<div class="fh">${hintOf(f)}</div>`:''}</div>`).join('')}</div>
         </div>`).join('')}</div>
         <div class="mds-row"><button class="btn" id="mds-submit2">Rendre ma copie</button></div>
       </div>`);
       root.appendChild(el);
       if(window.Nota)Nota.apply(el);
       el.querySelector('#mds-submit').onclick=el.querySelector('#mds-submit2').onclick=()=>{
-        const empty=[...el.querySelectorAll('.mds-field input')].filter(i=>i.value.trim()==='').length;
+        const empty=[...el.querySelectorAll('.mds-field input,.mds-field select')].filter(i=>i.value.trim()==='').length;
         if(empty&&!confirm(empty+' case'+(empty>1?'s':'')+' vide'+(empty>1?'s':'')+'. Rendre quand même ?'))return;
         grade(false)};
       el.querySelector('#mds-quit').onclick=()=>{if(confirm('Abandonner ce mini-DS ? Ta copie ne sera pas notée.'))home()};
@@ -151,10 +168,10 @@
       const res=subject.map(q=>{
         const box=root.querySelector(`.mds-q[data-q="${q.num}"]`);
         const r=q.fields.map((f,j)=>{
-          const wrap=box.querySelectorAll('.mds-field')[j],inp=wrap.querySelector('input');
-          const raw=inp.value.trim(),v=parse(raw),good=correct(f,v);
-          inp.readOnly=true;wrap.classList.add(good?'ok':'ko');
-          const exp=h(`<div class="exp">${good?'✓ ':'✗ attendu '}${F.n(f.ans,f.d??2)} ${f.unit||''}</div>`);
+          const wrap=box.querySelectorAll('.mds-field')[j],inp=wrap.querySelector('input,select');
+          const raw=inp.value.trim(),good=judge(f,raw);
+          if(inp.tagName==='SELECT')inp.disabled=true;else inp.readOnly=true;wrap.classList.add(good?'ok':'ko');
+          const exp=h(`<div class="exp">${good?'✓ ':'✗ attendu '}${esc(shown(f))}</div>`);
           wrap.appendChild(exp);
           const cell={st:good?'ok':'ko',wrap,exp,f};
           if(!good&&raw!==''){ // réponse écrite mais refusée : on peut la valider soi-même
@@ -169,7 +186,7 @@
       });
       function paint(c){
         c.wrap.classList.toggle('ok',c.st!=='ko');c.wrap.classList.toggle('ko',c.st==='ko');c.wrap.classList.toggle('forced',c.st==='force');
-        c.exp.textContent=(c.st==='force'?'✓ validée par toi · attendu ':'✗ attendu ')+F.n(c.f.ans,c.f.d??2)+' '+(c.f.unit||'');
+        c.exp.textContent=(c.st==='force'?'✓ validée par toi · attendu ':'✗ attendu ')+shown(c.f);
         if(c.btn)c.btn.textContent=c.st==='force'?'Annuler':'Compter comme juste';
       }
       const d=new Date();const date=d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
@@ -227,5 +244,5 @@
     if(cfg.startNow)run();else intro();
   }
 
-  window.MiniDS={start,F,makeR,_test:{parse,correct}};
+  window.MiniDS={start,F,makeR,_test:{parse,correct,judge}};
 })();

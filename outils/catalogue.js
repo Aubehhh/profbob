@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'9 nov.',texte:'Outils mathématiques : complexes, dérivation, intégration et trigonométrie, avec mini-DS et flashcards',url:'/matieres/mathematiques/',nouveau:true},
+    {date:'10 nov.',texte:'Création de page Web : HTML, structure, CSS et formulaires, avec mini-DS et flashcards',url:'/matieres/pages-web/',nouveau:true},
+    {date:'9 nov.',texte:'Outils mathématiques : complexes, dérivation, intégration et trigonométrie, avec mini-DS et flashcards',url:'/matieres/mathematiques/'},
     {date:'9 nov.',texte:'Électricité : les 4 chapitres (continu, théorèmes, sinusoïdal), avec mini-DS et flashcards',url:'/matieres/electricite/'},
     {date:'9 nov.',texte:'Chimie : l\'atome, la classification et les molécules, avec mini-DS et flashcards',url:'/matieres/chimie/'},
     {date:'9 nov.',texte:'Thermodynamique : les 5 chapitres, avec mini-DS et flashcards',url:'/matieres/thermodynamique/'},
@@ -77,7 +78,13 @@ module.exports={
             minids:'/mini-ds/?m=thermo&ds=thermo'}]}]},
     {id:'info',couleur:'#be185d',modules:[
       {id:'embarque',slug:'informatique-embarquee',mono:'IE',chapitres:[],ds:[]},
-      {id:'web',slug:'pages-web',mono:'We',chapitres:[],ds:[]}]},
+      {id:'web',slug:'pages-web',mono:'We',
+       chapitres:[
+         {id:'bases',titre:'Bases du web et du HTML',url:'/cours/web/bases/'},
+         {id:'structure',titre:'Structures en HTML',url:'/cours/web/structure/'},
+         {id:'css',titre:'CSS',url:'/cours/web/css/'},
+         {id:'formulaires',titre:'Formulaires',url:'/cours/web/formulaires/'}],
+       ds:[]}]},
     {id:'huma',couleur:'#c2410c',modules:[
       {id:'anglais',slug:'anglais',mono:'En',chapitres:[],ds:[]},
       {id:'lv2',slug:'lv2',mono:'L2',chapitres:[],ds:[]},

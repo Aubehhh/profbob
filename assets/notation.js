@@ -57,7 +57,7 @@
       if(p.closest('.vec,sub,sup,svg,script,style,input,textarea,[data-nonota]'))return NodeFilter.FILTER_REJECT;
       return /[_|×·ijkxyzR0-9]/.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
     const list=[];let n;while((n=w.nextNode()))list.push(n);
-    list.forEach(t=>{const pr=t.parentElement.closest('[data-nota-profil]');const th=pr&&pr.dataset.notaProfil==='thermo';
+    list.forEach(t=>{const pr=t.parentElement.closest('[data-nota-profil]');if(pr&&pr.dataset.notaProfil==='aucun')return;const th=pr&&pr.dataset.notaProfil==='thermo';
       const h=(th?convertThermo:convert)(t.nodeValue);if(h===esc(t.nodeValue))return;
       const span=document.createElement('span');span.innerHTML=h;t.replaceWith(...span.childNodes)});
   }
