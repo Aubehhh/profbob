@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 2 · Structures en HTML · Création de page Web · profbob.fr</title>
+<meta name="description" content="Création de page Web, chapitre 2 : structure d'une page : doctype, head, body, liens et ancres, mise en page : iframes et tableaux, mise en page par blocs. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="web-structure" data-matiere="web" data-ch="structure" data-nota-all data-nota-profil="aucun">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/pages-web/">← Création de page Web</a> · Chapitre 2 sur 4</div>
+  <h1>Structures en HTML</h1>
+  <p class="lead">Les trois parties d'une page (doctype, head, body), les liens et les ancres, puis la mise en page : iframes, tableaux et blocs.</p>
+  <div class="chips"><span class="chip"><b>4</b> sections</span><span class="chip">≈ 1 h 30</span><span class="chip">Cours 2, 17 diapos</span><span class="chip">Cours de R. Gosswiller</span><span class="chip">Prérequis : <a href="/cours/web/bases/">chapitre 1</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=web&amp;ch=structure">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=web&amp;ch=structure">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Doctype, head, body</a>
+  <a href="#s2"><span class="n">2</span>Liens et ancres</a>
+  <a href="#s3"><span class="n">3</span>Iframes et tableaux</a>
+  <a href="#s4"><span class="n">4</span>Blocs</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="web"></div>
+
+<section class="csec" id="s1" data-toc="Doctype, head, body">
+  <div class="shead"><span class="num">1</span><h2>Structure d'une page : doctype, head, body</h2><span class="meta">diapos 4 à 9 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une page HTML a trois parties : le <b>doctype</b> (quelle version du HTML), le <b>head</b> (les informations sur la page, invisibles) et le <b>body</b> (ce qui s'affiche).</div>
+  <ul>
+    <li><b>Doctype</b> : en-tête du fichier. Il déclare la version HTML (et donc les règles que le validateur W3C applique). En HTML5, il s'écrit simplement <code>&lt;!DOCTYPE html&gt;</code>. Le cours montre aussi l'ancien doctype HTML 4.01, avec sa DTD (Document Type Definition, le « dictionnaire » des balises autorisées).</li>
+    <li><b>Head</b> : méta-informations. Encodage (charset), mots-clés de recherche, titre de l'onglet, feuilles de style CSS, scripts JavaScript, détection du type d'appareil…</li>
+    <li><b>Body</b> : le contenu de la page.</li>
+  </ul>
+  <pre class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8" /&gt;
+  &lt;meta name="keywords" content="test, page, web" /&gt;
+  &lt;link rel="stylesheet" href="style.css" /&gt;
+  &lt;title&gt;PAGE TITLE&lt;/title&gt;
+  &lt;script&gt; /* scripts JS */ &lt;/script&gt;
+  &lt;style&gt; /* styles CSS */ &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello world !&lt;/h1&gt;
+  &lt;p&gt;This is my first page&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+  <div class="coquille"><b>Coquilles du cours (diapos 7 et 8) et des corrections de TD.</b>
+    <ul>
+      <li>La feuille de style est liée par <code>&lt;link rel="stylesheet" href="chemin/style.css" /&gt;</code> : rel indique le <b>type de lien</b>, et le chemin du fichier va dans <b>href</b>, pas dans rel.</li>
+      <li>Le body se ferme avec <code>&lt;/body&gt;</code>, pas <code>&lt;body&gt;</code>.</li>
+      <li>Le doctype commence par <code>&lt;!</code> : les corrections des TD 2 et 3 écrivent <code>&lt;DOCTYPE …&gt;</code>, sans le point d'exclamation.</li>
+      <li>Pas d'espace dans <code>utf-8</code> ni dans les valeurs d'attributs (<code>"utf -8"</code>, <code>"keywords "</code> sont des fautes de recopie).</li>
+    </ul></div>
+  <div class="quiz">
+    <div class="q"><p>Le titre affiché dans l'onglet du navigateur se met :</p>
+      <div class="opts"><button>dans le body, avec &lt;h1&gt;</button><button data-ok="1">dans le head, avec &lt;title&gt;</button><button>dans le doctype</button></div>
+      <div class="fb" hidden>&lt;title&gt; est une méta-information : elle va dans le head. &lt;h1&gt; est un titre visible dans la page.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Liens et ancres">
+  <div class="shead"><span class="num">2</span><h2>Liens et ancres</h2><span class="meta">diapo 10 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un lien envoie vers une autre page ; une ancre envoie vers un endroit précis de la même page, repéré par un <b>id</b>.</div>
+  <pre class="code">&lt;a href="page.html"&gt;Texte&lt;/a&gt;         affiche « Texte », cliquable, et ouvre page.html
+
+&lt;a href="#keyword"&gt;Ancre&lt;/a&gt;          saute à l'élément dont l'id vaut keyword
+&lt;p id="keyword"&gt;Autre ancre&lt;/p&gt;</pre>
+  <div class="trap"><b>Piège.</b> Dans le lien, on met un <b>#</b> devant le nom (<code>href="#keyword"</code>). Dans l'élément visé, on écrit l'id <b>sans #</b> (<code>id="keyword"</code>).</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Iframes et tableaux">
+  <div class="shead"><span class="num">3</span><h2>Mise en page : iframes et tableaux</h2><span class="meta">diapos 12 à 15 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pour découper une page en zones, on a d'abord utilisé des cadres (frames, iframes), puis des tableaux. Ces méthodes marchent mais sont rigides : on les remplace aujourd'hui par des blocs.</div>
+  <pre class="code">&lt;iframe src="maPage.html" width="600" height="400"&gt;&lt;/iframe&gt;</pre>
+  <p>Une <b>iframe</b> affiche une autre page dans une zone de la page. C'est rigide et vieillissant.</p>
+  <div class="tw"><table>
+    <tr><th>Balise</th><th>Rôle</th></tr>
+    <tr><td><code>&lt;table&gt;</code></td><td>le tableau entier</td></tr>
+    <tr><td><code>&lt;tr&gt;</code></td><td>une ligne (table row)</td></tr>
+    <tr><td><code>&lt;td&gt;</code></td><td>une cellule (table data)</td></tr>
+    <tr><td><code>&lt;thead&gt;</code> · <code>&lt;tbody&gt;</code> · <code>&lt;tfoot&gt;</code></td><td>en-tête · corps · pied du tableau</td></tr>
+  </table></div>
+  <p><b>Attributs utiles</b> : <code>colspan</code> / <code>rowspan</code> (une cellule qui s'étend sur plusieurs colonnes / lignes), <code>width</code> / <code>height</code>, et <code>bgcolor</code>, <code>border</code>, <code>cellspacing</code>, que l'on fait plutôt en CSS.</p>
+  <pre class="code">&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;td&gt;Col 1&lt;/td&gt;&lt;td&gt;Col 2&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;
+        &lt;table&gt;
+          &lt;tr&gt;&lt;td&gt;Cont 1&lt;/td&gt;&lt;td&gt;Cont 2&lt;/td&gt;&lt;/tr&gt;
+        &lt;/table&gt;
+      &lt;/td&gt;
+      &lt;td&gt;Cont 3&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;&lt;tr&gt;&lt;td colspan="2"&gt;Footer&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;</pre>
+  <p>Ici, le pied de tableau tient sur les 2 colonnes (<code>colspan="2"</code>), et la première cellule du corps contient elle-même un tableau.</p>
+  <div class="tw"><table>
+    <tr><th>Tableaux : avantages</th><th>Tableaux : inconvénients</th></tr>
+    <tr><td>simple, plus souple que les frames ; la page devient un ensemble de cellules ; idéal pour de grandes quantités de données</td><td>structure globale peu souple, cellules liées entre elles, code lourd et peu réutilisable</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 2 : page « en trois colonnes »</div>
+    <p>Un tableau de trois cellules de 150, 600 et 100 px ; du texte dans les colonnes de côté ; la page du TD 1 dans une iframe au centre.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td width="150"&gt;&lt;p&gt;Lorem ipsum…&lt;/p&gt;&lt;/td&gt;
+    &lt;td width="600"&gt;&lt;iframe src="TD1.html" width="600" height="600"&gt;&lt;/iframe&gt;&lt;/td&gt;
+    &lt;td width="100"&gt;&lt;p&gt;Lorem ipsum…&lt;/p&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+      <p><b>Exercice 3 :</b> les textes des deux colonnes n'ont pas la même hauteur ; par défaut, le contenu d'une cellule est centré verticalement, donc ils ne sont pas alignés en haut. <b>Exercice 4 :</b> un clic sur un lien dans l'iframe ouvre la nouvelle page <b>dans l'iframe</b>, pas dans toute la fenêtre.</p>
+      <p>Une iframe se ferme par <code>&lt;/iframe&gt;</code> : la forme <code>/&gt;&lt;/iframe&gt;</code> du cours et de la correction mélange balise simple et balise double.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Pour une cellule qui occupe la largeur de 3 colonnes, on écrit :</p>
+      <div class="opts"><button>&lt;td rowspan="3"&gt;</button><button data-ok="1">&lt;td colspan="3"&gt;</button><button>&lt;td width="3"&gt;</button></div>
+      <div class="fb" hidden>colspan = nombre de colonnes couvertes ; rowspan = nombre de lignes.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Blocs">
+  <div class="shead"><span class="num">4</span><h2>Mise en page par blocs</h2><span class="meta">diapos 16 et 17 · 10 min</span></div>
+  <div class="idee"><b>L'idée.</b> La méthode moderne : on découpe la page en blocs indépendants avec <code>&lt;div&gt;</code>, puis on les place et on les met en forme en CSS (chapitre suivant).</div>
+  <ul>
+    <li>Chaque <code>&lt;div&gt;</code> est une zone dédiée (un rectangle dans la page).</li>
+    <li>Les blocs se hiérarchisent : un bloc peut en contenir d'autres.</li>
+    <li>Position, taille, couleurs : tout se règle en CSS.</li>
+  </ul>
+  <div class="retiens"><b>Conclusion du cours.</b> Une page = doctype, head, puis body. Le body est découpé en blocs, et la méthode la plus souple (div + CSS) est la meilleure.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 2</span></div>
+  <div class="ex"><h4>TD 2 · format en trois colonnes <span class="tag">sections 1 et 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Commence par le squelette complet (doctype, html, head avec charset et title, body), puis le tableau d'une ligne et trois cellules. La correction est dans l'exemple de la section 3.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=web&amp;ch=structure"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=web&amp;ch=structure"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=web&amp;ds=web"><b>DS blanc Création de page Web ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/web/bases/"><small>◂ Chapitre 1</small>Bases du HTML</a><a class="next" href="/cours/web/css/"><small>Chapitre 3 ▸</small>CSS</a></nav>
+</section>
+
+<p class="credit">Cours « Développement et Architecture Web » de R. Gosswiller (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Création de page Web%20%C2%B7%20chapitre%202">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

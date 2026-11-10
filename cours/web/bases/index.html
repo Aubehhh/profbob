@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 1 · Bases du web et du HTML · Création de page Web · profbob.fr</title>
+<meta name="description" content="Création de page Web, chapitre 1 : le web : client, serveur et lamp, le html en quelques mots, les balises. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="web-bases" data-matiere="web" data-ch="bases" data-nota-all data-nota-profil="aucun">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/pages-web/">← Création de page Web</a> · Chapitre 1 sur 4</div>
+  <h1>Bases du web et du HTML</h1>
+  <p class="lead">Comment le web s'est construit (client-serveur, LAMP), ce qu'est le HTML, et les premières balises : texte, titres, listes, images et liens.</p>
+  <div class="chips"><span class="chip"><b>3</b> sections</span><span class="chip">≈ 1 h 30</span><span class="chip">Cours 1, 22 diapos</span><span class="chip">Cours de R. Gosswiller</span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=web&amp;ch=bases">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=web&amp;ch=bases">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Le web</a>
+  <a href="#s2"><span class="n">2</span>Le HTML</a>
+  <a href="#s3"><span class="n">3</span>Balises</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="web"></div>
+
+<section class="csec" id="s1" data-toc="Le web">
+  <div class="shead"><span class="num">1</span><h2>Le web : client, serveur et LAMP</h2><span class="meta">diapos 3 à 10 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le web repose sur un dialogue : un <b>client</b> (ton navigateur) demande une page, un <b>serveur</b> la lui envoie. Chaque brique de la pile LAMP règle un problème précis.</div>
+  <div class="tw"><table>
+    <tr><th>Problème</th><th>Solution</th><th>Brique</th></tr>
+    <tr><td>Transmettre une information</td><td>le client demande, le possesseur envoie, le client confirme la réception (transmission par paquets)</td><td>ARPAnet, puis <b>Linux</b> comme système</td></tr>
+    <tr><td>Proposer plusieurs pages</td><td>un programme (le <b>serveur</b>) envoie le fichier demandé ; on passe d'un fichier à l'autre par un lien hypertexte</td><td><b>Apache</b></td></tr>
+    <tr><td>Avoir des pages à jour</td><td>générer la page HTML à la volée, au moment de la demande (elle n'est pas enregistrée sur le serveur)</td><td><b>PHP</b></td></tr>
+    <tr><td>Conserver des données</td><td>les ranger dans une base de données</td><td><b>MySQL</b></td></tr>
+  </table></div>
+  <div class="retiens"><b>LAMP</b> = Linux + Apache + MySQL + PHP. <b>Back-end</b> : le serveur envoie les bonnes informations (bases de données, architecture). <b>Front-end</b> : le client affiche correctement (design, interactivité). C'est le front-end qu'on fait dans ce cours.</div>
+  <ul>
+    <li><b>Web 1.0</b> : pages statiques ou dynamiques (sites vitrines, boutiques, pages perso).</li>
+    <li><b>Web 2.0</b> : contenu créé par les utilisateurs (YouTube, réseaux sociaux).</li>
+    <li><b>Web 3.0</b> (au sens du cours) : contenu personnalisé (recherches et recommandations adaptées à chacun).</li>
+    <li><b>W3C</b> (World Wide Web Consortium, fondé en 1994) : publie les recommandations du web. Son validateur, validator.w3.org, vérifie un fichier HTML.</li>
+  </ul>
+  <div class="coquille"><b>Remarque sur l'historique (diapo 4).</b> ARPAnet date de 1969 et n'a pas tourné sur Linux, apparu en 1991. Le web lui-même (HTML et liens hypertextes) a été inventé par Tim Berners-Lee au CERN vers 1990. Retiens surtout la logique « un problème → une brique », c'est elle que le cours veut faire passer.</div>
+  <div class="quiz">
+    <div class="q"><p>Un site qui fabrique la page au moment où tu la demandes (avec la date du jour, par exemple) utilise :</p>
+      <div class="opts"><button>MySQL</button><button data-ok="1">PHP</button><button>Apache</button></div>
+      <div class="fb" hidden>PHP génère la page HTML à la volée ; MySQL stocke les données ; Apache envoie les fichiers.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Le HTML">
+  <div class="shead"><span class="num">2</span><h2>Le HTML en quelques mots</h2><span class="meta">diapos 12 à 15 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le HTML (HyperText Markup Language) ne calcule rien : il <b>structure</b> l'information d'une page avec des balises, et c'est le navigateur qui l'interprète pour l'afficher.</div>
+  <ul>
+    <li>Avantage : très rapide à écrire. Inconvénients : un navigateur différent peut donner un résultat différent, et c'est difficile à déboguer.</li>
+    <li>Versions : XHTML (basé sur XML), DHTML (dynamique), <b>HTML5</b> (la version actuelle : portabilité, graphismes, couplage avec JavaScript).</li>
+    <li>Outils : un éditeur de texte (le prof utilise Notepad++) et un navigateur (Firefox).</li>
+  </ul>
+  <ol class="steps">
+    <li>Créer un fichier <code>.html</code>.</li>
+    <li>Y écrire du texte.</li>
+    <li>Ouvrir le fichier dans le navigateur : le texte s'affiche. On l'améliore ensuite avec des balises.</li>
+  </ol>
+  <div class="trap"><b>Piège.</b> Le cours dit que le HTML est un « langage interprété ». Plus précisément, c'est un <b>langage de balisage</b> : il décrit une page, il ne contient pas d'instructions de calcul comme un programme.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Balises">
+  <div class="shead"><span class="num">3</span><h2>Les balises</h2><span class="meta">diapos 17 à 21 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une balise double encadre un contenu (elle s'ouvre et se ferme) ; une balise simple se suffit à elle-même. Les attributs, écrits dans la balise ouvrante, la précisent.</div>
+  <pre class="code">&lt;br /&gt;                     balise simple (se ferme elle-même)
+&lt;b&gt; Texte en gras &lt;/b&gt;     balise double : ouvrante + contenu + fermante</pre>
+  <div class="tw"><table>
+    <tr><th>Balise</th><th>Rôle</th></tr>
+    <tr><td><code>&lt;html&gt;</code></td><td>déclare le HTML dans le fichier</td></tr>
+    <tr><td><code>&lt;b&gt;</code> · <code>&lt;i&gt;</code> · <code>&lt;u&gt;</code></td><td>gras (bold) · italique · souligné (underlined)</td></tr>
+    <tr><td><code>&lt;br /&gt;</code></td><td>retour à la ligne (line break)</td></tr>
+    <tr><td><code>&lt;a&gt;</code></td><td>lien</td></tr>
+    <tr><td><code>&lt;h1&gt;</code> … <code>&lt;h6&gt;</code></td><td>titres et sous-titres, du plus grand au plus petit</td></tr>
+    <tr><td><code>&lt;p&gt;</code></td><td>paragraphe</td></tr>
+    <tr><td><code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code> puis <code>&lt;li&gt;</code></td><td>liste sans numéros (unordered) / avec numéros (ordered), un <code>&lt;li&gt;</code> par élément</td></tr>
+    <tr><td><code>&lt;img /&gt;</code></td><td>image (balise simple)</td></tr>
+    <tr><td><code>&lt;?php ?&gt;</code></td><td>insère du code PHP</td></tr>
+  </table></div>
+  <pre class="code">&lt;img
+  class="fit-picture"
+  src="/images/grapefruit-slice.jpg"
+  alt="Tranche de pamplemousse sur une pile d'autres tranches" /&gt;</pre>
+  <p><b>Attributs.</b> class, src et alt sont des attributs. Pour <code>&lt;img&gt;</code>, <b>src</b> (le chemin de l'image) est nécessaire ; on peut ajouter width, height, border… Pour <code>&lt;a&gt;</code>, le seul attribut nécessaire est <b>href</b> (la destination). Les chemins partent du dossier courant.</p>
+  <pre class="code">&lt;a href="autrePage.html"&gt;Un lien vers une autre page.&lt;/a&gt;
+
+&lt;!-- Ceci est un commentaire : il n'est pas affiché --&gt;</pre>
+  <div class="retiens"><b>Imbrication.</b> On peut ouvrir une balise à l'intérieur de n'importe quelle balise double, à condition de fermer d'abord la plus intérieure : <code>&lt;p&gt;&lt;b&gt;…&lt;/b&gt;&lt;/p&gt;</code>, jamais <code>&lt;p&gt;&lt;b&gt;…&lt;/p&gt;&lt;/b&gt;</code>. On indente le code pour qu'il reste lisible.</div>
+  <div class="trap"><b>Pièges.</b> Pour être valide en HTML5 (validateur W3C), <code>&lt;img&gt;</code> doit aussi avoir un attribut <b>alt</b>, le texte lu si l'image ne s'affiche pas. Et dans l'exemple d'imbrication de la diapo 20, un champ <code>&lt;input&gt;</code> placé dans un lien <code>&lt;a&gt;</code> est refusé par le validateur : un élément cliquable ne doit pas en contenir un autre.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 1, exercices 1 à 4</div>
+    <p>Une page avec « Hello world », un titre « Mon texte », deux paragraphes dont le premier mot est en gras, et une seconde page avec un lien « Mon autre <b>page</b> ».</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">&lt;!-- TD1.html --&gt;
+Hello world
+&lt;h2&gt;Mon texte&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit…&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;Sed&lt;/b&gt; ut perspiciatis unde omnis iste natus error…&lt;/p&gt;
+
+&lt;!-- TD1bis.html --&gt;
+&lt;p&gt;Retour vers &lt;a href="TD1.html"&gt;Mon autre &lt;b&gt;page&lt;/b&gt;&lt;/a&gt;&lt;/p&gt;</pre>
+      <p><b>Exercice 3, br contre p.</b> Avec <code>&lt;br /&gt;</code>, on passe juste à la ligne. Avec <code>&lt;p&gt;</code>, chaque paragraphe est un bloc séparé, avec un espace au-dessus et en dessous. C'est <code>&lt;p&gt;</code> qu'il faut utiliser pour découper un texte.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 1, exercice 5</div>
+    <p>Placer une image à droite d'un paragraphe de plusieurs lignes.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">&lt;p&gt;
+  &lt;img src="sunflower.jpg" alt="Tournesol" style="float:right" width="200" height="200" /&gt;
+  &lt;b&gt;On&lt;/b&gt; sait depuis longtemps que travailler avec du texte lisible…
+&lt;/p&gt;</pre>
+      <p><code>float:right</code> pousse l'image à droite et le texte coule autour. Les valeurs d'attributs s'écrivent entre guillemets (<code>width="200"</code>).</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Quel attribut est indispensable dans une balise <code>&lt;a&gt;</code> ?</p>
+      <div class="opts"><button>src</button><button data-ok="1">href</button><button>alt</button></div>
+      <div class="fb" hidden>href donne la destination du lien. src, c'est pour img.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 1</span></div>
+  <div class="ex"><h4>TD 1 · bases du HTML <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Un fichier par page, ouvert dans le navigateur après chaque modification (F5). Titre avec <code>&lt;h2&gt;</code>, paragraphes avec <code>&lt;p&gt;</code>, gras avec <code>&lt;b&gt;</code>, lien avec <code>&lt;a href="…"&gt;</code>, image flottante avec <code>style="float:right"</code>. Les corrections sont dans les exemples de la section 3.</p></div></details></div>
+  <div class="ex"><h4>Pour aller plus loin <span class="tag">tout le chapitre</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Passe ta page dans le validateur du W3C (validator.w3.org) : il signale les balises mal fermées, les attributs manquants (alt) et les imbrications interdites.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=web&amp;ch=bases"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=web&amp;ch=bases"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=web&amp;ds=web"><b>DS blanc Création de page Web ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a class="next" href="/cours/web/structure/"><small>Chapitre 2 ▸</small>Structure</a></nav>
+</section>
+
+<p class="credit">Cours « Développement et Architecture Web » de R. Gosswiller (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Création de page Web%20%C2%B7%20chapitre%201">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

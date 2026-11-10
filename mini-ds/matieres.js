@@ -36,7 +36,6 @@ window.MINIDS_MATIERES=[
    ds:[
      {id:'thermo',nom:'DS Thermodynamique',detail:'Chapitres 1 à 5 · semaine du 14 au 18 déc.',chapitres:['concepts','premier-principe','proprietes','volume-controle','second-principe'],n:8,min:60}
    ]},
-  {id:'web',nom:'Pages Web',couleur:'#be185d'},
   {id:'embarque',nom:'Informatique embarquée',couleur:'#15803d'},
   {id:'chimie',module:'chimie',nom:'Chimie',couleur:'#0f766e',nota:'thermo',
    banque:()=>window.BANQUE_CHIMIE,
@@ -81,5 +80,20 @@ window.MINIDS_MATIERES=[
    ],
    ds:[
      {id:'outils',nom:'DS Outils mathématiques',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['complexes','derivation','integration','trigonometrie'],n:8,min:90}
+   ]},
+  {id:'web',module:'web',nom:'Création de page Web',couleur:'#be185d',nota:'aucun',
+   banque:()=>window.BANQUE_WEB,
+   noms:{balise:'Quelle balise ?',simpledouble:'Balise simple ou double',attribut:'Attribut indispensable',lamp:'La pile LAMP',
+     partie:'Doctype, head ou body',ancre:'Lien vers une ancre',tableau:'Lire un tableau',tablebalise:'Balises de tableau',
+     selecteur:'Écrire un sélecteur CSS',hexrgb:'Hexadécimal → rgb',rgbhex:'rgb → hexadécimal',propriete:'Quelle propriété CSS ?',media:'Media query',boite:'Largeur d\'un bloc (padding, border, margin)',integration:'Lier une feuille CSS',
+     methode:'GET ou POST',typeinput:'Type de champ',urlget:'URL d\'un envoi GET',radio:'Radio et checkbox',labelfor:'Relier un label'},
+   chapitres:[
+     {id:'bases',nom:'Bases du web et du HTML',detail:'Balises, attributs, LAMP',q:['balise','simpledouble','attribut','lamp']},
+     {id:'structure',nom:'Structures en HTML',detail:'Doctype, head, body, ancres, tableaux',q:['partie','ancre','tableau','tablebalise']},
+     {id:'css',nom:'CSS',detail:'Sélecteurs, couleurs, propriétés, media queries',q:['selecteur','hexrgb','rgbhex','propriete','media','boite','integration']},
+     {id:'formulaires',nom:'Formulaires',detail:'GET et POST, types de champs, labels',q:['methode','typeinput','urlget','radio','labelfor']}
+   ],
+   ds:[
+     {id:'web',nom:'Entraînement Page Web',detail:'Les 4 cours · 10 questions',chapitres:['bases','structure','css','formulaires'],n:10,min:30}
    ]}
 ];
