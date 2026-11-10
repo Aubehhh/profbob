@@ -41,29 +41,35 @@ window.MINIDS_MATIERES=[
    noms:{composition:'Protons, neutrons, électrons',massemoy:'Masse atomique moyenne',abondance:'Abondance de deux isotopes',photon:'Énergie d\'un photon',raie:'Raie de l\'atome d\'hydrogène',
      quantique:'Cases quantiques et électrons max',quadruplet:'Quadruplet possible ?',config:'Électrons de valence et célibataires',
      position:'Place dans le tableau',ion:'Ion le plus probable',mulliken:'Électronégativité de Mulliken',pauling:'Électronégativité de Pauling',
-     electrons:'Électrons de valence d\'un édifice',chargef:'Charge formelle',dipole:'Moment dipolaire',ionique:'Caractère ionique',vsepr:'Type VSEPR et angle',polarite:'Moment d\'une liaison (molécule coudée)'},
+     electrons:'Électrons de valence d\'un édifice',chargef:'Charge formelle',dipole:'Moment dipolaire',ionique:'Caractère ionique',vsepr:'Type VSEPR et angle',polarite:'Moment d\'une liaison (molécule coudée)',
+     famille:'Famille et valence d\'une fonction',rendement:'Rendement d\'une estérification',classe:'Classe de l\'alcool et rendement',mecanisme:'Rôle dans un mécanisme',chargeo:'Charge formelle d\'un oxygène',
+     brute:'Formule brute',cip:'Priorités CIP',rs:'Configuration R ou S',stereo:'Nombre de stéréoisomères',purete:'Pureté optique et excès énantiomérique',ze:'Configuration Z ou E',relation:'Énantiomères ou diastéréoisomères ?',isomerie:'Type d\'isomérie',conformation:'Conformation la plus stable',selectivite:'Réaction sélective ou spécifique'},
    chapitres:[
      {id:'atome',nom:'L\'atome',detail:'Composition, isotopes, spectre de H, nombres quantiques, configuration',q:['composition','massemoy','abondance','photon','raie','quantique','quadruplet','config']},
      {id:'classification',nom:'Classification périodique',detail:'Place dans le tableau, ions, électronégativité',q:['position','ion','mulliken','pauling']},
-     {id:'molecules',nom:'Structure des molécules',detail:'Lewis, charges formelles, moment dipolaire, VSEPR, polarité',q:['electrons','chargef','dipole','ionique','vsepr','polarite']}
+     {id:'molecules',nom:'Structure des molécules',detail:'Lewis, charges formelles, moment dipolaire, VSEPR, polarité',q:['electrons','chargef','dipole','ionique','vsepr','polarite']},
+     {id:'organique',nom:'Chimie organique',detail:'Familles, estérification, mécanisme et flèches courbes',q:['famille','rendement','classe','mecanisme','chargeo']},
+     {id:'description',nom:'Description des molécules',detail:'Formules, conformations, isoméries, R/S, Z/E, pureté optique',q:['brute','conformation','isomerie','cip','rs','stereo','purete','ze','relation','selectivite']}
    ],
    ds:[
-     {id:'chimie',nom:'DS Chimie',detail:'Chapitres 1 et 2 · semaine du 14 au 18 déc.',chapitres:['atome','classification','molecules'],n:8,min:60}
+     {id:'chimie',nom:'DS Chimie',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['atome','classification','molecules','organique','description'],n:8,min:60}
    ]},
   {id:'elec',module:'elec',nom:'Bases de l\'électricité',couleur:'#b45309',nota:'thermo',
    banque:()=>window.BANQUE_ELEC,
    noms:{charge:'Courant et charge',energie:'Énergie consommée',pmoy:'Puissance moyenne',
      resfil:'Résistance d\'un fil',temperature:'Résistance et température',tempfinale:'Température d\'un enroulement',association:'Série et parallèle',divtension:'Diviseur de tension',divcourant:'Diviseur de courant',maille:'Loi des mailles',
      theveninessai:'Modèle de Thévenin par essais',theveninch:'Thévenin sur une charge',norton:'Modèle de Norton',deuxgen:'Deux générateurs en parallèle',superposition:'Superposition',
-     efficace:'Valeur efficace, pulsation, période',complexe:'Calcul en complexes',bobine:'Inductance en sinusoïdal',condensateur:'Condensateur en sinusoïdal',rlserie:'Circuit R, L série',rlc:'Circuit RLC série',puissances:'Puissances P, Q, S',boucherot:'Méthode de Boucherot',releve:'Relèvement du facteur de puissance',stockage:'Énergie stockée (L ou C)'},
+     efficace:'Valeur efficace, pulsation, période',complexe:'Calcul en complexes',bobine:'Inductance en sinusoïdal',condensateur:'Condensateur en sinusoïdal',rlserie:'Circuit R, L série',rlc:'Circuit RLC série',puissances:'Puissances P, Q, S',boucherot:'Méthode de Boucherot',releve:'Relèvement du facteur de puissance',stockage:'Énergie stockée (L ou C)',
+     fils:'Les fils du réseau triphasé',vsimple:'Tensions simples instantanées',vcomplexe:'Tension simple en complexe',ucompose:'Tensions composées instantanées',ueff:'Tension composée efficace',dephasage:'Déphasage entre deux tensions'},
    chapitres:[
      {id:'bases',nom:'Notions de base',detail:'Courant, énergie, puissance moyenne',q:['charge','energie','pmoy']},
      {id:'continu',nom:'Tension continue',detail:'Résistance d\'un fil, température, associations, Kirchhoff, diviseurs',q:['resfil','temperature','tempfinale','association','divtension','divcourant','maille']},
      {id:'theoremes',nom:'Modèles équivalents',detail:'Thévenin, Norton, superposition',q:['theveninessai','theveninch','norton','deuxgen','superposition']},
-     {id:'sinusoidal',nom:'Sinusoïdal monophasé',detail:'Valeur efficace, complexes, R L C, impédances, puissances, Boucherot',q:['efficace','complexe','bobine','condensateur','stockage','rlserie','rlc','puissances','boucherot','releve']}
+     {id:'sinusoidal',nom:'Sinusoïdal monophasé',detail:'Valeur efficace, complexes, R L C, impédances, puissances, Boucherot',q:['efficace','complexe','bobine','condensateur','stockage','rlserie','rlc','puissances','boucherot','releve']},
+     {id:'triphase',nom:'Triphasé',detail:'Fils, tensions simples et composées, Fresnel et complexes',q:['fils','vsimple','vcomplexe','ucompose','ueff','dephasage']}
    ],
    ds:[
-     {id:'elec',nom:'DS Électricité',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['bases','continu','theoremes','sinusoidal'],n:8,min:60}
+     {id:'elec',nom:'DS Électricité',detail:'Chapitres 1 à 5 · semaine du 14 au 18 déc.',chapitres:['bases','continu','theoremes','sinusoidal','triphase'],n:8,min:60}
    ]},
   {id:'outils',module:'outils',nom:'Outils mathématiques',couleur:'#4338ca',nota:'thermo',
    banque:()=>window.BANQUE_OUTILS,
@@ -93,7 +99,7 @@ window.MINIDS_MATIERES=[
      {id:'formulaires',nom:'Formulaires',detail:'GET et POST, types de champs, labels',q:['methode','typeinput','urlget','radio','labelfor']}
    ],
    ds:[
-     {id:'web',nom:'Entraînement Page Web',detail:'Les 4 cours · 10 questions',chapitres:['bases','structure','css','formulaires'],n:10,min:30}
+     {id:'web',nom:'DS Page Web',detail:'Cours 1 à 4 · semaine du 14 au 18 déc.',chapitres:['bases','structure','css','formulaires'],n:8,min:60}
    ]},
   {id:'embarque',module:'embarque',nom:'Informatique embarquée',couleur:'#15803d',nota:'aucun',
    banque:()=>window.BANQUE_EMBARQUE,
@@ -108,7 +114,7 @@ window.MINIDS_MATIERES=[
      {id:'temps',nom:'Temps réel',detail:'millis(), interruptions, analogique, PWM, timers',q:['millis','pwm','pwminverse','analogread','interruption','ports','timer']}
    ],
    ds:[
-     {id:'embarque',nom:'Entraînement examen final',detail:'Les 4 chapitres · concepts et lecture de code',chapitres:['systemes','arduino','controle','temps'],n:10,min:45}
+     {id:'embarque',nom:'DS Informatique embarquée',detail:'Chapitres 1 à 4 · semaine du 14 au 18 déc.',chapitres:['systemes','arduino','controle','temps'],n:8,min:60}
    ]},
   {id:'crea',module:'crea',nom:'Créativité et Innovation',couleur:'#b45309',nota:'aucun',
    banque:()=>window.BANQUE_CREA,
@@ -121,6 +127,6 @@ window.MINIDS_MATIERES=[
      {id:'innover',nom:'Innover',detail:'TRL, diffusion, pitch, publicité',q:['trl','etapes','modeles','strategies','pitch_format','pitch_ordre','fonction_avantage','publicite']}
    ],
    ds:[
-     {id:'crea',nom:'Entraînement examen sur table',detail:'Les 3 parties · définitions, modèles et méthodes',chapitres:['explorer','imaginer','innover'],n:10,min:30}
+     {id:'crea',nom:'DS Créativité et Innovation',detail:'Parties I à III · semaine du 14 au 18 déc.',chapitres:['explorer','imaginer','innover'],n:8,min:60}
    ]}
 ];

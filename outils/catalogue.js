@@ -12,7 +12,10 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'10 nov.',texte:'Créativité et Innovation : innovation et diffusion, créativité en équipe, pitch et publicité, avec mini-DS et flashcards',url:'/matieres/creativite-innovation/',nouveau:true},
+    {date:'10 nov.',texte:'Chimie : chimie organique (fonctions, estérification) et isomérie (conformations, R/S, Z/E), avec mini-DS et flashcards',url:'/cours/chimie/organique/',nouveau:true},
+    {date:'10 nov.',texte:'DS du 14 au 18 déc. aussi pour Page Web, Info embarquée et Créativité et Innovation : compte à rebours et DS blanc',url:'/mini-ds/',nouveau:true},
+    {date:'10 nov.',texte:'Électricité : début du triphasé (tensions simples et composées), avec mini-DS et flashcards',url:'/cours/elec/triphase/',nouveau:true},
+    {date:'10 nov.',texte:'Créativité et Innovation : innovation et diffusion, créativité en équipe, pitch et publicité, avec mini-DS et flashcards',url:'/matieres/creativite-innovation/'},
     {date:'10 nov.',texte:'Informatique embarquée : binaire, Arduino, boucles, interruptions, PWM et timers, avec mini-DS et flashcards',url:'/matieres/informatique-embarquee/'},
     {date:'10 nov.',texte:'Création de page Web : HTML, structure, CSS et formulaires, avec mini-DS et flashcards',url:'/matieres/pages-web/'},
     {date:'9 nov.',texte:'Outils mathématiques : complexes, dérivation, intégration et trigonométrie, avec mini-DS et flashcards',url:'/matieres/mathematiques/'},
@@ -44,19 +47,22 @@ module.exports={
        chapitres:[
          {id:'atome',titre:'L\'atome',url:'/cours/chimie/atome/'},
          {id:'classification',titre:'La classification périodique',url:'/cours/chimie/classification/'},
-         {id:'molecules',titre:'Structure électronique des molécules',url:'/cours/chimie/molecules/'}],
+         {id:'molecules',titre:'Structure électronique des molécules',url:'/cours/chimie/molecules/'},
+         {id:'organique',titre:'Introduction à la chimie organique',url:'/cours/chimie/organique/'},
+         {id:'description',titre:'Description des molécules organiques',url:'/cours/chimie/description/'}],
        ds:[{titre:'Chimie : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=chimie&ds=chimie',
-            desc:'Chapitres 1 et 2 : atome, configuration électronique, classification et électronégativité, Lewis, VSEPR, polarité.',
-            liens:[['L\'atome','/cours/chimie/atome/'],['Classification','/cours/chimie/classification/'],['Molécules','/cours/chimie/molecules/'],['Flashcards','/flashcards/?m=chimie']],
+            desc:'Chapitres 1 à 4 : atome, classification, Lewis, VSEPR, polarité, fonctions organiques, estérification, isomérie.',
+            liens:[['L\'atome','/cours/chimie/atome/'],['Classification','/cours/chimie/classification/'],['Molécules','/cours/chimie/molecules/'],['Chimie organique','/cours/chimie/organique/'],['Isomérie','/cours/chimie/description/'],['Flashcards','/flashcards/?m=chimie']],
             minids:'/mini-ds/?m=chimie&ds=chimie'}]},
       {id:'elec',slug:'electricite',mono:'Él',
        chapitres:[
          {id:'bases',titre:'Notions de base en électricité',url:'/cours/elec/bases/'},
          {id:'continu',titre:'Circuits alimentés en continu',url:'/cours/elec/continu/'},
          {id:'theoremes',titre:'Modèles électriques équivalents',url:'/cours/elec/theoremes/'},
-         {id:'sinusoidal',titre:'Circuits alimentés en sinusoïdal monophasé',url:'/cours/elec/sinusoidal/'}],
+         {id:'sinusoidal',titre:'Circuits alimentés en sinusoïdal monophasé',url:'/cours/elec/sinusoidal/'},
+         {id:'triphase',titre:'Structure et propriétés d\'un réseau triphasé équilibré',url:'/cours/elec/triphase/'}],
        ds:[
-         {titre:'Électricité : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=elec&ds=elec',desc:'Chapitres 1 à 4 : puissance et énergie, résistance, Kirchhoff, Thévenin et Norton, sinusoïdal, puissances et Boucherot.',liens:[['Bases','/cours/elec/bases/'],['Continu','/cours/elec/continu/'],['Théorèmes','/cours/elec/theoremes/'],['Sinusoïdal','/cours/elec/sinusoidal/'],['Flashcards','/flashcards/?m=elec']],minids:'/mini-ds/?m=elec&ds=elec'}]}]},
+         {titre:'Électricité : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=elec&ds=elec',desc:'Chapitres 1 à 5 : puissance et énergie, résistance, Kirchhoff, Thévenin et Norton, sinusoïdal, puissances et Boucherot, début du triphasé.',liens:[['Bases','/cours/elec/bases/'],['Continu','/cours/elec/continu/'],['Théorèmes','/cours/elec/theoremes/'],['Sinusoïdal','/cours/elec/sinusoidal/'],['Triphasé','/cours/elec/triphase/'],['Flashcards','/flashcards/?m=elec']],minids:'/mini-ds/?m=elec&ds=elec'}]}]},
     {id:'meca',couleur:'#2453b8',modules:[
       {id:'statique',slug:'mecanique',mono:'Mé',
        chapitres:[
@@ -85,14 +91,14 @@ module.exports={
          {id:'arduino',titre:'Premiers programmes Arduino',url:'/cours/embarque/arduino/'},
          {id:'controle',titre:'Fonctions et structures de contrôle',url:'/cours/embarque/controle/'},
          {id:'temps',titre:'Temps réel : millis, interruptions, PWM et timers',url:'/cours/embarque/temps/'}],
-       ds:[]},
+       ds:[{titre:'Informatique embarquée : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=embarque&ds=embarque',desc:'Chapitres 1 à 4 : binaire et complément à 2, Arduino, fonctions et boucles, millis, interruptions, PWM et timers.',liens:[['Systèmes et binaire','/cours/embarque/systemes/'],['Arduino','/cours/embarque/arduino/'],['Fonctions et boucles','/cours/embarque/controle/'],['Temps réel','/cours/embarque/temps/'],['Flashcards','/flashcards/?m=embarque']],minids:'/mini-ds/?m=embarque&ds=embarque'}]},
       {id:'web',slug:'pages-web',mono:'We',
        chapitres:[
          {id:'bases',titre:'Bases du web et du HTML',url:'/cours/web/bases/'},
          {id:'structure',titre:'Structures en HTML',url:'/cours/web/structure/'},
          {id:'css',titre:'CSS',url:'/cours/web/css/'},
          {id:'formulaires',titre:'Formulaires',url:'/cours/web/formulaires/'}],
-       ds:[]}]},
+       ds:[{titre:'Page Web : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=web&ds=web',desc:'Cours 1 à 4 : balises HTML, structure d\'une page, liens, tableaux, CSS et formulaires.',liens:[['Bases du HTML','/cours/web/bases/'],['Structure','/cours/web/structure/'],['CSS','/cours/web/css/'],['Formulaires','/cours/web/formulaires/'],['Flashcards','/flashcards/?m=web']],minids:'/mini-ds/?m=web&ds=web'}]}]},
     {id:'huma',couleur:'#c2410c',modules:[
       {id:'anglais',slug:'anglais',mono:'En',chapitres:[],ds:[]},
       {id:'lv2',slug:'lv2',mono:'L2',chapitres:[],ds:[]},
@@ -105,7 +111,7 @@ module.exports={
          {id:'explorer',titre:'Explorer et s\'inspirer : l\'innovation et sa diffusion',url:'/cours/crea/explorer/'},
          {id:'imaginer',titre:'Imaginer : créativité et intelligence collective',url:'/cours/crea/imaginer/'},
          {id:'innover',titre:'Innover : développer, diffuser et promouvoir',url:'/cours/crea/innover/'}],
-       ds:[]},
+       ds:[{titre:'Créativité et Innovation : DS de fin de trimestre',quand:'semaine du 14 au 18 déc.',date:'2026-12-14',dateFin:'2026-12-18',url:'/mini-ds/?m=crea&ds=crea',desc:'Parties I à III : innovation et diffusion (Schumpeter, Rogers), créativité et techniques de groupe, TRL, pitch et publicité.',liens:[['Explorer','/cours/crea/explorer/'],['Imaginer','/cours/crea/imaginer/'],['Innover','/cours/crea/innover/'],['Flashcards','/flashcards/?m=crea']],minids:'/mini-ds/?m=crea&ds=crea'}]},
       {id:'bureau',slug:'outils-bureautiques',mono:'OB',chapitres:[],ds:[]}]}
   ]
 };

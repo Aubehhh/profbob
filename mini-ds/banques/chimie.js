@@ -20,6 +20,80 @@ function analyse(Z){const cf=config(Z);const nmax=Math.max(...cf.map(([s])=>+s[0
 const ZCONF=[5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,25,26,27,28,31,32,33,34,35,37,38,49,50,51,52,53,55,56];
 const H={ent:'un nombre entier',pos:'un nombre positif'};
 
+/* --- tables des chapitres 3 et 4 (chimie organique, isomérie) --- */
+const FAMILLES=['alcool','aldéhyde','cétone','acide carboxylique','ester','amide','amine','halogénoalcane','étheroxyde','nitrile','chlorure d\'acyle','nitroalcane','alcène','alcyne','anhydride'];
+const VALENCES=['monovalente','divalente','trivalente','tétravalente'];
+const VAL_N={monovalente:1,divalente:2,trivalente:3,'tétravalente':4};
+const VAL_FAM={alcool:'monovalente',amine:'monovalente',halogénoalcane:'monovalente',alcène:'monovalente',étheroxyde:'monovalente',nitroalcane:'monovalente',aldéhyde:'divalente',cétone:'divalente',alcyne:'divalente','acide carboxylique':'trivalente',ester:'trivalente',amide:'trivalente',anhydride:'trivalente','chlorure d\'acyle':'trivalente',nitrile:'trivalente'};
+const GROUPE={alcool:'–OH sur un carbone sans C=O',aldéhyde:'–CHO (C=O en bout de chaîne, lié à un H)',cétone:'C=O entre deux carbones',
+  'acide carboxylique':'–COOH (C=O lié à un OH)',ester:'–COO–C (C=O lié à un O lui-même lié à un C)',amide:'–CO–N (C=O lié à un N)',amine:'–NH₂ sur un carbone',
+  halogénoalcane:'C–X (X = Cl, Br, I)',étheroxyde:'C–O–C',nitrile:'–C≡N','chlorure d\'acyle':'–COCl',nitroalcane:'C–NO₂',alcène:'C=C',alcyne:'C≡C',anhydride:'–CO–O–CO–'};
+const T_FAM=[['CH₃–CH₂–CH₂–OH','alcool'],['CH₃–CH(OH)–CH₃','alcool'],['CH₃–CH₂–CHO','aldéhyde'],['CH₃–CH₂–CH₂–CHO','aldéhyde'],['CH₃–CO–CH₂–CH₃','cétone'],['CH₃–CH₂–CH₂–CO–CH₃','cétone'],
+  ['CH₃–CH₂–COOH','acide carboxylique'],['CH₃–COOH','acide carboxylique'],['CH₃–COO–CH₂–CH₃','ester'],['H–COO–CH₃','ester'],['CH₃–CO–NH₂','amide'],['CH₃–CH₂–NH₂','amine'],
+  ['CH₃–CH₂–Br','halogénoalcane'],['CH₃–CHCl–CH₃','halogénoalcane'],['CH₃–O–CH₂–CH₃','étheroxyde'],['CH₃–C≡N','nitrile'],['CH₃–CO–Cl','chlorure d\'acyle'],['CH₃–CH₂–NO₂','nitroalcane'],
+  ['CH₂=CH–CH₃','alcène'],['CH₃–C≡C–CH₃','alcyne'],['CH₃–CO–O–CO–CH₃','anhydride']];
+const T_ALC=[['éthanol','CH₃–CH₂–OH','primaire'],['propan-1-ol','CH₃–CH₂–CH₂–OH','primaire'],['butan-1-ol','CH₃–(CH₂)₂–CH₂–OH','primaire'],['2-méthylpropan-1-ol','(CH₃)₂CH–CH₂–OH','primaire'],
+  ['propan-2-ol','CH₃–CH(OH)–CH₃','secondaire'],['butan-2-ol','CH₃–CH(OH)–CH₂–CH₃','secondaire'],['pentan-3-ol','CH₃–CH₂–CH(OH)–CH₂–CH₃','secondaire'],
+  ['2-méthylpropan-2-ol','(CH₃)₃C–OH','tertiaire'],['2-méthylbutan-2-ol','CH₃–CH₂–C(CH₃)₂–OH','tertiaire']];
+const RDT={primaire:0.67,secondaire:0.60,tertiaire:0.05};
+const ROLES=['nucléophile','électrophile','acide','base','catalyseur','intermédiaire réactionnel'];
+const T_MECA=[['Lors de l\'addition, l\'oxygène de l\'alcool R′–OH donne un doublet non liant au carbone fonctionnel.','nucléophile'],
+  ['Après protonation, le carbone fonctionnel de l\'acide reçoit le doublet de l\'alcool.','électrophile'],
+  ['H⁺ est consommé à la première étape de l\'estérification et régénéré à la dernière.','catalyseur'],
+  ['Pendant la protonation, l\'oxygène du C=O de l\'acide carboxylique capte le proton H⁺.','base'],
+  ['Pendant la protonation, H₃O⁺ cède un proton à l\'acide carboxylique.','acide'],
+  ['L\'espèce R–C(OH)₂–O⁺(H)–R′ est formée à l\'addition puis consommée à l\'étape suivante.','intermédiaire réactionnel'],
+  ['Dans l\'hydratation de l\'éthanal, l\'oxygène de HO⁻ donne un doublet au carbone du C=O.','nucléophile'],
+  ['Dans l\'hydratation de l\'éthanal, le carbone du C=O reçoit le doublet de HO⁻.','électrophile'],
+  ['Dans l\'hydratation de l\'éthanal, l\'eau cède un proton à CH₃–CH(OH)–O⁻.','acide'],
+  ['Dans l\'hydratation de l\'éthanal, CH₃–CH(OH)–O⁻ capte un proton de l\'eau.','base'],
+  ['Dans l\'hydratation de l\'éthanal, HO⁻ est consommé à l\'étape 1 et reformé à l\'étape 2.','catalyseur'],
+  ['Dans l\'hydratation de l\'éthanal, CH₃–CH(OH)–O⁻ est formé à l\'étape 1 puis consommé à l\'étape 2.','intermédiaire réactionnel']];
+const EXPL_ROLE={nucléophile:'Il donne un doublet pour créer une liaison : nucléophile.',électrophile:'Il reçoit un doublet (il est pauvre en électrons) : électrophile.',acide:'Il cède un proton H⁺ : acide (de Brønsted).',base:'Il capte un proton H⁺ : base.',catalyseur:'Il intervient dans le mécanisme et est régénéré : il n\'apparaît pas dans le bilan, c\'est un catalyseur.','intermédiaire réactionnel':'Il est formé puis consommé : intermédiaire réactionnel (absent du bilan).'};
+const T_O=[['Dans l\'acide protoné R–C(=OH⁺)–OH, l\'oxygène qui a capté H⁺ est lié au carbone par une double liaison et à un H.',1,3],
+  ['Dans l\'intermédiaire R–C(OH)₂–O⁺(H)–R′, l\'oxygène venu de l\'alcool est lié au carbone fonctionnel, à un H et à R′.',1,3],
+  ['Dans un ester neutre R–CO–O–R′, l\'oxygène du C=O est lié au carbone par une double liaison.',2,2],
+  ['Dans un alcool R–OH, l\'oxygène est lié à un carbone et à un H.',2,2],
+  ['Dans l\'intermédiaire CH₃–CH(OH)–O⁻, l\'oxygène qui portait le C=O n\'est plus lié qu\'au carbone, par une liaison simple.',3,1],
+  ['Dans l\'ion hydroxyde HO⁻, l\'oxygène est lié seulement à un H.',3,1],
+  ['Dans l\'ion oxonium H₃O⁺, l\'oxygène est lié à trois H.',1,3],
+  ['Le groupe partant –OH₂⁺ : l\'oxygène est lié au carbone et à deux H.',1,3],
+  ['Dans une molécule d\'eau H₂O, l\'oxygène est lié à deux H.',2,2]];
+// groupements classés par priorité CIP croissante (écrit à la main ; le solveur, lui, recalcule par numéros atomiques)
+const GR=['–H','–CH₃','–CH₂–CH₃','–CH(CH₃)₂','–C(CH₃)₃','–CH₂–OH','–CHO','–COOH','–NH₂','–OH','–F','–Cl','–Br','–I'];
+const GR2=['–H','–CH₃','–CH₂–CH₃','–CH₂–OH','–CHO','–OH','–F','–Cl','–Br'];
+const T_STE=[['Le butan-2-ol CH₃–CH(OH)–CH₂–CH₃',1,0],['Le 2-bromobutane CH₃–CHBr–CH₂–CH₃',1,0],['Le pentane-2,3-diol CH₃–CH(OH)–CH(OH)–CH₂–CH₃',2,0],
+  ['Le 2,3-dibromobutane CH₃–CHBr–CHBr–CH₃',2,1],['L\'acide tartrique HOOC–CH(OH)–CH(OH)–COOH',2,1],['Le 2,3,4-trihydroxybutanal HOCH₂–CH(OH)–CH(OH)–CHO',2,0],
+  ['Le 3-bromo-2-chloropentane CH₃–CHCl–CHBr–CH₂–CH₃',2,0],['Le glucose (forme linéaire) HOCH₂–CH(OH)–CH(OH)–CH(OH)–CH(OH)–CHO',4,0],
+  ['Le butane-2,3-diol CH₃–CH(OH)–CH(OH)–CH₃',2,1],['Le propan-2-ol CH₃–CH(OH)–CH₃',0,0],['Le 2,3,4-trihydroxypentanal CH₃–CH(OH)–CH(OH)–CH(OH)–CHO',3,0]];
+const T_DEUX=[['Le pentane-2,3-diol',0],['Le 3-bromo-2-chloropentane',0],['L\'acide tartrique',1],['Le 2,3-dibromobutane',1],['Le butane-2,3-diol',1],['Le 2,3,4-trihydroxybutanal',0]];
+const TYPES_ISO=['isomérie de chaîne','isomérie de position','isomérie de fonction','conformation','énantiomérie','diastéréoisomérie'];
+const T_ISO=[['le butane','le méthylpropane','isomérie de chaîne'],['le pentane','le 2,2-diméthylpropane','isomérie de chaîne'],['le butan-1-ol','le 2-méthylpropan-1-ol','isomérie de chaîne'],
+  ['le propan-1-ol','le propan-2-ol','isomérie de position'],['le but-1-ène','le but-2-ène','isomérie de position'],['la pentan-2-one','la pentan-3-one','isomérie de position'],
+  ['l\'éthanol','le méthoxyméthane','isomérie de fonction'],['le glucose','le fructose','isomérie de fonction'],['le propanal','la propanone','isomérie de fonction'],['l\'acide propanoïque','l\'éthanoate de méthyle','isomérie de fonction'],
+  ['l\'éthane en conformation décalée','l\'éthane en conformation éclipsée','conformation'],['le cyclohexane en chaise','sa chaise inverse','conformation'],['le butane anti','le butane décalé gauche','conformation'],
+  ['le (R)-butan-2-ol','le (S)-butan-2-ol','énantiomérie'],['le (R)-limonène','le (S)-limonène','énantiomérie'],['l\'acide (2R,3R)-tartrique','l\'acide (2S,3S)-tartrique','énantiomérie'],
+  ['le (Z)-but-2-ène','le (E)-but-2-ène','diastéréoisomérie'],['le (2R,3R)-pentane-2,3-diol','le (2R,3S)-pentane-2,3-diol','diastéréoisomérie'],['l\'acide (2R,3R)-tartrique','l\'acide tartrique méso','diastéréoisomérie']];
+const EXPL_ISO={'isomérie de chaîne':'Même formule brute, squelettes carbonés différents.','isomérie de position':'Même formule brute, même fonction, placée sur un autre carbone.','isomérie de fonction':'Même formule brute, fonctions (donc familles) différentes.',
+  conformation:'On passe de l\'une à l\'autre par simple rotation autour de liaisons simples : même molécule, deux conformations.',énantiomérie:'Images l\'une de l\'autre dans un miroir, non superposables : énantiomères.',diastéréoisomérie:'Stéréoisomères de configuration qui ne sont pas images miroir : diastéréoisomères.'};
+const CONFS=['décalée','éclipsée','anti','décalée gauche','chaise','bateau','demi-chaise','substituant en équatorial','substituant en axial'];
+const T_CONF=[['Conformation la plus stable de l\'éthane ?','décalée'],['Conformation la moins stable de l\'éthane ?','éclipsée'],['Conformation la plus stable du butane, celle qui explique le zig-zag des chaînes carbonées ?','anti'],
+  ['Conformation la plus stable du cyclohexane ?','chaise'],['Conformation la moins stable du cyclohexane (sommet de la barrière d\'énergie, ≈ 11 kcal/mol) ?','demi-chaise'],
+  ['Dans la chaise du méthylcyclohexane, où le groupe CH₃ est-il le plus stable ?','substituant en équatorial'],['Le cyclohexanol a son OH en équatorial. En passant à la chaise inverse, le OH devient…','substituant en axial']];
+const EXPL_CONF=['Les H de devant sont entre ceux de derrière : interactions minimales.','Les H de devant cachent ceux de derrière : interactions maximales.','Les deux CH₃ sont opposés (180°), le plus loin possible.','La chaise est la plus stable de toutes les conformations du cycle.','La demi-chaise est au sommet du profil d\'énergie entre chaise et bateau croisé.','En équatorial, le groupe est éloigné du cycle : moins d\'interactions.','Chaise ⇌ chaise inverse : chaque position équatoriale devient axiale.'];
+const SELS=['régiosélective','régiospécifique','stéréosélective','stéréospécifique','énantiosélective','diastéréosélective','énantiospécifique','diastéréospécifique'];
+const SEL3=['stéréosélective','énantiosélective','diastéréosélective'],SPE3=['stéréospécifique','énantiospécifique','diastéréospécifique'];
+const T_SEL=[['À partir d\'un réactif, il se forme plusieurs isomères dont l\'un est majoritaire (addition sur un alcène selon la règle de Markovnikov).','régiosélective',[]],
+  ['La formation d\'un alcène à partir d\'un halogénoalcane donne surtout l\'alcène prévu par la règle de Saïtzev.','régiosélective',[]],
+  ['La réaction se déroule suivant une seule direction de l\'espace (hydrogénation catalytique en syn).','régiospécifique',[]],
+  ['Elle produit majoritairement un stéréoisomère parmi tous les stéréoisomères possibles.','stéréosélective',SEL3],
+  ['Le stéréoisomère majoritaire est un énantiomère parmi tous les énantiomères possibles.','énantiosélective',SEL3],
+  ['Le stéréoisomère majoritaire est un diastéréoisomère parmi tous les diastéréoisomères possibles.','diastéréosélective',SEL3],
+  ['Partant de deux stéréoisomères différents, elle aboutit à deux produits stéréoisomères entre eux.','stéréospécifique',[...SEL3,...SPE3]],
+  ['Partant de deux stéréoisomères différents, elle aboutit à deux produits énantiomères entre eux.','énantiospécifique',[...SEL3,'stéréospécifique']],
+  ['Partant de deux stéréoisomères différents, elle aboutit à deux produits diastéréoisomères entre eux.','diastéréospécifique',[...SEL3,'stéréospécifique']]];
+const DEF_SEL={régiosélective:'plusieurs isomères (de position) se forment, l\'un est majoritaire.',régiospécifique:'la réaction se déroule suivant une seule direction de l\'espace.',stéréosélective:'un stéréoisomère est formé majoritairement parmi tous ceux possibles.',stéréospécifique:'deux réactifs stéréoisomères donnent deux produits stéréoisomères entre eux.',énantiosélective:'stéréosélective, et le produit majoritaire est un énantiomère.',diastéréosélective:'stéréosélective, et le produit majoritaire est un diastéréoisomère.',énantiospécifique:'stéréospécifique, et les deux produits sont énantiomères.',diastéréospécifique:'stéréospécifique, et les deux produits sont diastéréoisomères.'};
+
 window.BANQUE_CHIMIE=[
 
 /* ---------- Chapitre 1, partie 1 : l'atome ---------- */
@@ -173,7 +247,154 @@ ${{2:'segment : 180°',3:'triangle : 120°',4:'tétraèdre : 109,5°',6:'octaèd
   return{v:{p,a},text:`<p>Une molécule coudée AX<sub>2</sub> a un moment dipolaire de ${F.n(p)} D et un angle X–A–X de ${F.n(a)}°. Moment de chaque liaison A–X ?</p>`,
     fields:[{label:'p_1',unit:'D',ans:p1,d:3,hint:'en debye'}],
     sol:`Somme des deux moments :  p = 2 p_1 cos(α/2)
-p_1 = ${F.n(p)} / (2 × cos ${F.n(a/2)}°) = ${F.n(p1,3)} D`}}}
+p_1 = ${F.n(p)} / (2 × cos ${F.n(a/2)}°) = ${F.n(p1,3)} D`}}},
+
+/* ---------- Chapitre 3 : introduction à la chimie organique ---------- */
+
+{id:'famille',chap:'Groupes fonctionnels',pts:2,gen(R,F){
+  const k=R.int(0,T_FAM.length-1),[f,fam]=T_FAM[k];
+  const autres=R.shuffle(FAMILLES.filter(x=>x!==fam)).slice(0,3);
+  const c1=R.shuffle([fam,...autres]),c2=VALENCES.slice();
+  return{v:{k,f},text:`<p>À quelle famille appartient la molécule <b>${f}</b> ? Quelle est la valence de sa fonction ?</p>`,
+    fields:[{label:'famille',type:'choix',options:c1,ans:c1.indexOf(fam)},{label:'valence',type:'choix',options:c2,ans:c2.indexOf(VAL_FAM[fam])}],
+    sol:`Groupe fonctionnel : ${GROUPE[fam]}
+famille : ${fam}
+valence : ${VAL_FAM[fam]} (${VAL_N[VAL_FAM[fam]]} H de l'alcane remplacé${VAL_N[VAL_FAM[fam]]>1?'s':''} sur un même carbone)`,
+    note:`<p class="mds-note">Piège : regarde les voisins du C=O. Avec un H : aldéhyde ; entre deux C : cétone ; avec OH : acide ; avec O–C : ester ; avec N : amide.</p>`}}},
+
+{id:'rendement',chap:'Estérification',pts:3,gen(R,F){
+  const na=R.int(5,40)/100,nb=R.int(5,40)/100,xm=Math.min(na,nb),eta=R.int(30,90)/100,ne=Math.round(eta*xm*1000)/1000;
+  const E=R.pick([['acide éthanoïque','éthanol','éthanoate d\'éthyle'],['acide méthanoïque','éthanol','méthanoate d\'éthyle'],['acide éthanoïque','propan-1-ol','éthanoate de propyle'],['acide propanoïque','méthanol','propanoate de méthyle'],['acide éthanoïque','butan-1-ol','éthanoate de butyle']]);
+  const eff=ne/xm*100;
+  return{v:{na,nb,ne},text:`<p>On mélange ${F.n(na,2)} mol d'${E[0]} et ${F.n(nb,2)} mol d'${E[1]}. À l'équilibre, on obtient ${F.n(ne,3)} mol d'${E[2]}. Avancement maximal, rendement, et quantité d'acide restant à l'équilibre ?</p>`,
+    fields:[{label:'x_max',unit:'mol',ans:xm,d:3,tol:0.0005,hint:'en mol'},{label:'η',unit:'%',ans:eff,d:1,tol:0.2,hint:'en %, sans le signe %'},{label:'n(acide)',unit:'mol',ans:na-ne,d:3,tol:0.0005,hint:'à l\'équilibre, en mol'}],
+    sol:`acide + alcool ⇌ ester + eau  (coefficients 1)
+x_max = min(${F.n(na,2)} ; ${F.n(nb,2)}) = ${F.n(xm,3)} mol
+η = n(ester) / n_max(ester) = ${F.n(ne,3)} / ${F.n(xm,3)} = ${F.n(eff,1)} %
+x_éq = n(ester) = ${F.n(ne,3)} mol  →  n(acide) = ${F.n(na,2)} − ${F.n(ne,3)} = ${F.n(na-ne,3)} mol`,
+    note:`<p class="mds-note">Piège : le rendement se calcule par rapport à la quantité maximale (réactif limitant), pas par rapport à l'autre réactif.</p>`}}},
+
+{id:'classe',chap:'Estérification',pts:2,gen(R,F){
+  const k=R.int(0,T_ALC.length-1),[nom,f,cl]=T_ALC[k],n0=R.int(5,50)/100;
+  const c=['primaire','secondaire','tertiaire'],r=RDT[cl];
+  return{v:{f,n0},text:`<p>On fait réagir ${F.n(n0,2)} mol d'acide éthanoïque avec ${F.n(n0,2)} mol de ${nom} ${f}. Classe de l'alcool, et quantité d'ester attendue d'après le cours ?</p>`,
+    fields:[{label:'classe',type:'choix',options:c,ans:c.indexOf(cl)},{label:'n(ester)',unit:'mol',ans:r*n0,d:4,tol:0.0005,hint:'en mol'}],
+    sol:`Le carbone qui porte OH est lié à ${{primaire:'un seul',secondaire:'deux',tertiaire:'trois'}[cl]} carbone${cl==='primaire'?'':'s'} : alcool ${cl}
+mélange équimolaire : rendement ${F.n(r*100)} % (cours)
+n(ester) = ${F.n(r,2)} × ${F.n(n0,2)} = ${F.n(r*n0,4)} mol`}}},
+
+{id:'mecanisme',chap:'Mécanisme',pts:2,gen(R,F){
+  const k=R.int(0,T_MECA.length-1),[s,role]=T_MECA[k];
+  const o=R.shuffle(ROLES.slice());
+  return{v:{k},text:`<p>${s} Quel rôle joue-t-il ?</p>`,
+    fields:[{label:'rôle',type:'choix',options:o,ans:o.indexOf(role)}],
+    sol:`${EXPL_ROLE[role]}
+réponse : ${role}`}}},
+
+{id:'chargeo',chap:'Mécanisme',pts:2,gen(R,F){
+  const k=R.int(0,T_O.length-1),[s,nl,li]=T_O[k],z=6-(2*nl+li);
+  return{v:{nl,li},text:`<p>${s} Compte ses doublets non liants et ses liaisons, puis donne sa charge formelle.</p>`,
+    fields:[{label:'doublets non liants',unit:'',ans:nl,d:0,tol:0.01,hint:'un entier'},{label:'liaisons',unit:'',ans:li,d:0,tol:0.01,hint:'une double liaison compte pour 2'},{label:'z_F',unit:'',ans:z,d:0,tol:0.01,hint:'un entier avec son signe'}],
+    sol:`z_F = 6 − (électrons des doublets non liants + nombre de liaisons)
+z_F = 6 − (2 × ${nl} + ${li}) = ${F.n(z)}`}}},
+
+/* ---------- Chapitre 4 : description des molécules organiques ---------- */
+
+{id:'brute',chap:'Représentations',pts:2,gen(R,F){
+  const t=R.int(0,5),a=R.int(0,4),b=R.int(0,3);
+  const idx=n=>String(n).split('').map(d=>'₀₁₂₃₄₅₆₇₈₉'[d]).join('');
+  const ch=n=>n===0?'':n===1?'CH₂–':'(CH₂)'+'₀₁₂₃₄₅₆₇₈₉'[n]+'–';
+  const L=[['un alcane',`CH₃–${ch(a+1)}CH₃`],['un alcool',`CH₃–${ch(a)}CH₂–OH`],['un aldéhyde',`CH₃–${ch(a)}CHO`],['une cétone',`CH₃–CO–${ch(a)}CH₃`],['un acide carboxylique',`CH₃–${ch(a)}COOH`],['un ester',`CH₃–${ch(a)}COO–${ch(b)}CH₃`]];
+  const f=L[t][1],nC=[a+3,a+2,a+2,a+3,a+2,a+b+3][t],nH=[2*a+8,2*a+6,2*a+4,2*a+6,2*a+4,2*(a+b)+6][t],nO=[0,1,1,1,2,2][t];
+  return{v:{f},text:`<p>Formule brute d'${L[t][0]} de formule semi-développée <b>${f}</b> ? Donne le nombre d'atomes de chaque élément.</p>`,
+    fields:[{label:'C',unit:'',ans:nC,d:0,tol:0.01,hint:'un entier'},{label:'H',unit:'',ans:nH,d:0,tol:0.01,hint:'un entier'},{label:'O',unit:'',ans:nO,d:0,tol:0.01,hint:'un entier (0 s\'il n\'y en a pas)'}],
+    sol:`On compte chaque groupe : (CH₂)ₙ apporte n carbones et 2n hydrogènes
+C${idx(nC)}H${idx(nH)}${nO?'O'+(nO>1?idx(nO):''):''}  →  C : ${nC}, H : ${nH}, O : ${nO}`}}},
+
+{id:'cip',chap:'Énantiomérie',pts:2,gen(R,F){
+  const idx=R.shuffle(GR.map((_,i)=>i)).slice(0,4),g=idx.map(i=>GR[i]);
+  const tri=idx.slice().sort((x,y)=>y-x).map(i=>GR[i]);
+  const o=R.shuffle(g);
+  return{v:{g},text:`<p>Un carbone asymétrique porte les groupements ${g.join(' ; ')}. Selon les règles CIP, quel est le groupement n° 1 (prioritaire) et le n° 4 (minoritaire) ?</p>`,
+    fields:[{label:'n° 1',type:'choix',options:o,ans:o.indexOf(tri[0])},{label:'n° 4',type:'choix',options:o.slice(),ans:o.indexOf(tri[3])}],
+    sol:`On compare d'abord le numéro atomique de l'atome lié au C* (H 1 < C 6 < N 7 < O 8 < F 9 < Cl 17 < Br 35 < I 53),
+puis, en cas d'égalité, les atomes qui lui sont liés (règle 2 ; une double liaison compte double, règle 3)
+classement : ${tri.join(' > ')}`}}},
+
+{id:'rs',chap:'Énantiomérie',pts:2,gen(R,F){
+  const pos=R.shuffle([12,4,8]),devant=R.int(0,3)===0;
+  const horaire=(pos[1]-pos[0]+12)%12===4;
+  const vu=horaire?'horaire':'anti-horaire',conf=(horaire!==devant)?'R':'S';
+  return{v:{pos,devant},text:`<p>Les groupements d'un C* sont classés 1 > 2 > 3 > 4. Le groupement n° 4 pointe ${devant?'<b>vers toi</b> (triangle plein)':'vers l\'arrière (pointillé)'}. Vus de face, les groupements 1, 2 et 3 sont placés comme les heures d'une horloge : 1 à ${pos[0]} h, 2 à ${pos[1]} h, 3 à ${pos[2]} h. Configuration du C* ?</p>`,
+    fields:[{label:'configuration',type:'choix',options:['R','S'],ans:conf==='R'?0:1}],
+    sol:`1 → 2 → 3 : de ${pos[0]} h à ${pos[1]} h puis ${pos[2]} h, sens ${vu}
+${devant?`le n° 4 est vers l'observateur : on inverse (${vu==='horaire'?'R devient S':'S devient R'})`:'le n° 4 est derrière : on lit directement'}
+configuration ${conf}`,
+    note:`<p class="mds-note">Piège : la règle « sens horaire = R » ne vaut que si le groupement n° 4 est derrière.</p>`}}},
+
+{id:'stereo',chap:'Diastéréoisomérie',pts:2,gen(R,F){
+  const k=R.int(0,T_STE.length-1),[nom,n,meso]=T_STE[k],N=Math.pow(2,n)-(meso?1:0);
+  return{v:{k},text:`<p>${nom} : nombre de carbones asymétriques, puis nombre de stéréoisomères de configuration ?</p>`,
+    fields:[{label:'C*',unit:'',ans:n,d:0,tol:0.01,hint:'un entier'},{label:'stéréoisomères',unit:'',ans:N,d:0,tol:0.01,hint:'un entier'}],
+    sol:`${n} carbone${n>1?'s':''} asymétrique${n>1?'s':''} : au maximum 2^${n} = ${Math.pow(2,n)} stéréoisomères
+${meso?'les deux C* sont identiquement substitués : RS et SR sont la même molécule (méso, achirale)  →  '+N:'aucun composé méso  →  '+N}`}}},
+
+{id:'purete',chap:'Énantiomérie',pts:3,gen(R,F){
+  const a0=R.int(5,60)*R.pick([1,-1]),x=R.int(11,19)*5/100,a=Math.round(a0*(2*x-1)*100)/100;
+  const p=a/a0;
+  return{v:{a,a0},text:`<p>Un mélange de deux énantiomères A<sub>1</sub> et A<sub>2</sub> a un pouvoir rotatoire α = ${F.n(a)}°. L'énantiomère A<sub>1</sub> pur, à la même concentration, a α<sub>0</sub> = ${F.n(a0)}°. Pureté optique, excès énantiomérique, et pourcentage de A<sub>1</sub> dans le mélange ?</p>`,
+    fields:[{label:'p_0',unit:'',ans:p,d:3,tol:0.002,hint:'sans unité, entre 0 et 1'},{label:'ee',unit:'%',ans:100*p,d:1,tol:0.2,hint:'en %, sans le signe %'},{label:'A₁',unit:'%',ans:50*(1+p),d:1,tol:0.2,hint:'en % du mélange'}],
+    sol:`p_0 = α / α_0 = ${F.n(a)} / ${F.n(a0)} = ${F.n(p,3)}
+ee = 100 p = ${F.n(100*p,1)} %
+C_1 − C_2 = p C_0 et C_1 + C_2 = C_0  →  C_1 = (1 + p) C_0 / 2 = ${F.n(50*(1+p),1)} % de C_0`}}},
+
+{id:'ze',chap:'Diastéréoisomérie',pts:2,gen(R,F){
+  const i=R.shuffle(GR2.map((_,j)=>j)),p1=[i[0],i[1]],q=R.shuffle(GR2.map((_,j)=>j)).slice(0,2),p2=[q[0],q[1]];
+  const h1=R.int(0,1),h2=R.int(0,1);
+  const haut1=GR2[p1[h1]],bas1=GR2[p1[1-h1]],haut2=GR2[p2[h2]],bas2=GR2[p2[1-h2]];
+  const prio1=p1[0]>p1[1]?GR2[p1[0]]:GR2[p1[1]],prio2=p2[0]>p2[1]?GR2[p2[0]]:GR2[p2[1]];
+  const Z=(prio1===haut1)===(prio2===haut2);
+  return{v:{haut1,bas1,haut2,bas2},text:`<p>Une double liaison C=C porte, sur le premier carbone, ${haut1} en haut et ${bas1} en bas ; sur le second, ${haut2} en haut et ${bas2} en bas. Configuration ?</p>`,
+    fields:[{label:'configuration',type:'choix',options:['Z','E'],ans:Z?0:1}],
+    sol:`premier carbone : ${prio1} est prioritaire (${prio1===haut1?'en haut':'en bas'})
+second carbone : ${prio2} est prioritaire (${prio2===haut2?'en haut':'en bas'})
+${Z?'du même côté : Z (zusammen)':'de part et d\'autre : E (entgegen)'}`}}},
+
+{id:'relation',chap:'Diastéréoisomérie',pts:2,gen(R,F){
+  const k=R.int(0,T_DEUX.length-1),[mol,ident]=T_DEUX[k];
+  const c=['RR','SS','RS','SR'],a=R.pick(c),b=R.pick(c.filter(x=>x!==a));
+  const flip=s=>s.split('').map(x=>x==='R'?'S':'R').join('');
+  const same=x=>ident&&(x==='RS'||x==='SR')?'méso':x;
+  let rel;if(same(a)===same(b))rel='identiques';else if(flip(a)===b)rel='énantiomères';else rel='diastéréoisomères';
+  const o=['énantiomères','diastéréoisomères','identiques'];
+  return{v:{ident,a,b},text:`<p>${mol} : quelle relation y a-t-il entre le (2${a[0]},3${a[1]}) et le (2${b[0]},3${b[1]}) ?</p>`,
+    fields:[{label:'relation',type:'choix',options:o,ans:o.indexOf(rel)}],
+    sol:`${ident?'Les deux C* sont identiquement substitués : RS et SR sont la même molécule (méso)\n':''}${rel==='identiques'?'même configuration'+(a!==b?' (méso)':'')+' : identiques':rel==='énantiomères'?'tous les C* sont inversés : images dans un miroir, énantiomères':'un seul C* est inversé : diastéréoisomères'}`}}},
+
+{id:'isomerie',chap:'Isoméries',pts:2,gen(R,F){
+  const k=R.int(0,T_ISO.length-1),[a,b,t]=T_ISO[k];
+  const o=R.shuffle(TYPES_ISO.slice());
+  return{v:{k},text:`<p>Quelle relation d'isomérie y a-t-il entre ${a} et ${b} ?</p>`,
+    fields:[{label:'isomérie',type:'choix',options:o,ans:o.indexOf(t)}],
+    sol:`${EXPL_ISO[t]}
+réponse : ${t}`}}},
+
+{id:'conformation',chap:'Conformations',pts:2,gen(R,F){
+  const k=R.int(0,T_CONF.length-1),[q,rep]=T_CONF[k];
+  const o=R.shuffle([rep,...R.shuffle(CONFS.filter(x=>x!==rep)).slice(0,3)]);
+  return{v:{k},text:`<p>${q}</p>`,
+    fields:[{label:'conformation',type:'choix',options:o,ans:o.indexOf(rep)}],
+    sol:`${EXPL_CONF[k]}
+réponse : ${rep}`}}},
+
+{id:'selectivite',chap:'Réactions',pts:2,gen(R,F){
+  const k=R.int(0,T_SEL.length-1),[s,rep,ex]=T_SEL[k];
+  const o=R.shuffle([rep,...R.shuffle(SELS.filter(x=>x!==rep&&!ex.includes(x))).slice(0,3)]);
+  return{v:{k},text:`<p>${s} La réaction est…</p>`,
+    fields:[{label:'réaction',type:'choix',options:o,ans:o.indexOf(rep)}],
+    sol:`Définition du cours : ${DEF_SEL[rep]}
+réponse : ${rep}`}}}
+
 
 ];
 })();

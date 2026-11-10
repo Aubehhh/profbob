@@ -1,0 +1,134 @@
+
+<section class="csec" id="s1" data-toc="Structure">
+  <div class="shead"><span class="num">1</span><h2>Structure d'un réseau triphasé</h2><span class="meta">5.1 · diapo 3 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Au lieu d'une seule tension alternative, on en distribue trois, décalées dans le temps. Il faut donc trois fils de phase, un fil de neutre, et un fil pour la sécurité des personnes.</div>
+  <div class="tw"><table>
+    <tr><th>Fil</th><th>Nom</th><th>Rôle</th></tr>
+    <tr><td>L<sub>1</sub>, L<sub>2</sub>, L<sub>3</sub></td><td>fils de phase</td><td>alimentent les récepteurs</td></tr>
+    <tr><td>N</td><td>fil de neutre</td><td>alimente aussi les récepteurs : c'est la référence des tensions simples</td></tr>
+    <tr><td>PE</td><td>fil de protection</td><td>relié à la terre, il protège les personnes contre les chocs électriques</td></tr>
+  </table></div>
+  <div class="formula key cours">Réseau triphasé : 3 fils de phases (L1, L2, L3) + 1 fil de neutre (N) pour alimenter les récepteurs
++ 1 fil de protection (PE) relié à la terre pour protéger les personnes</div>
+  <p>Le prof dessine le réseau de deux façons : <b>avec les sources</b> (les trois générateurs reliés au neutre) ou en <b>représentation simplifiée sans les sources</b> (cinq traits horizontaux L<sub>1</sub>, L<sub>2</sub>, L<sub>3</sub>, N, PE).</p>
+  <div class="trap"><b>Piège.</b> Le PE n'alimente rien : il ne transporte pas de courant en fonctionnement normal. Le fil qui alimente les récepteurs avec les phases, c'est le neutre N.</div>
+  <div class="quiz">
+    <div class="q"><p>Combien de fils dans un réseau triphasé avec neutre et protection ?</p>
+      <div class="opts"><button>3</button><button>4</button><button data-ok="1">5</button></div>
+      <div class="fb" hidden>3 phases + le neutre (4 fils pour l'alimentation) + le PE relié à la terre.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Tensions simples">
+  <div class="shead"><span class="num">2</span><h2>Les tensions simples</h2><span class="meta">5.2 · diapo 4 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une tension simple se mesure entre une phase et le neutre. Les trois ont la même valeur efficace V et sont décalées d'un tiers de période (2π/3, soit 120°) l'une après l'autre.</div>
+  <h3>Fléchage</h3>
+  <p>v<sub>1N</sub>(t), v<sub>2N</sub>(t), v<sub>3N</sub>(t) sont fléchées du neutre N vers chaque phase (la pointe de la flèche est sur la phase). On les note aussi v<sub>1</sub>, v<sub>2</sub>, v<sub>3</sub>.</p>
+  <h3>Expressions instantanées</h3>
+  <div class="formula key cours">v_1(t) = V √2 sin ωt
+v_2(t) = V √2 sin(ωt − 2π/3)
+v_3(t) = V √2 sin(ωt − 4π/3)</div>
+  <p>V est la valeur <b>efficace</b> d'une tension simple (amplitude V√2). Sur la courbe du prof, l'amplitude vaut environ 325 V : c'est le réseau 230 V (230 × √2 ≈ 325).</p>
+  <h3>Fresnel et complexes</h3>
+  <figure>
+    <svg viewBox="0 0 360 220" width="360" role="img" aria-label="Diagramme de Fresnel des trois tensions simples à 120 degrés et de la tension composée U13">
+      <defs><marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+      <g stroke="currentColor" stroke-width="2" fill="none" marker-end="url(#fl)">
+        <line x1="180" y1="110" x2="260" y2="110"/>
+        <line x1="180" y1="110" x2="140" y2="179"/>
+        <line x1="180" y1="110" x2="140" y2="41"/>
+      </g>
+      <g stroke="#b45309" stroke-width="1.8" stroke-dasharray="5 4" fill="none" marker-end="url(#fl)" color="#b45309">
+        <line x1="180" y1="110" x2="300" y2="179"/>
+      </g>
+      <g fill="currentColor" font-size="13" font-family="inherit">
+        <text x="264" y="106">V₁ (0°)</text>
+        <text x="80" y="196">V₂ (−120°)</text>
+        <text x="80" y="36">V₃ (−240°)</text>
+        <text x="270" y="204" fill="#b45309">U₁₃ (−30°)</text>
+        <text x="210" y="40">ω ↺</text>
+      </g>
+    </svg>
+    <figcaption>Les trois vecteurs ont la même longueur (V) et sont à 120° les uns des autres ; ils tournent à la vitesse ω dans le sens trigonométrique. En pointillé, la tension composée U₁₃ = V₁ − V₃ (section 3).</figcaption>
+  </figure>
+  <div class="formula key cours"><u>V</u>₁ = [V ; 0°]      <u>V</u>₂ = [V ; −120°]      <u>V</u>₃ = [V ; −240°]</div>
+  <p>−240° et +120° désignent le même angle : sur le diagramme, V<sub>3</sub> est « en haut à gauche ». Dans l'ordre 1 → 2 → 3, chaque tension est en <b>retard</b> de 120° sur la précédente.</p>
+  <div class="retiens"><b>À retenir.</b> Les trois vecteurs ont même longueur et sont à 120° : leur somme est nulle. À chaque instant, v<sub>1</sub> + v<sub>2</sub> + v<sub>3</sub> = 0.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · réseau 230 V à ωt = 30°</div>
+    <p>V = 230 V. Valeurs de v<sub>1</sub>, v<sub>2</sub>, v<sub>3</sub> quand ωt = 30° ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">V √2 = 230 × √2 = 325,3 V
+v_1 = 325,3 × sin 30° = 162,6 V
+v_2 = 325,3 × sin(30° − 120°) = 325,3 × sin(−90°) = −325,3 V
+v_3 = 325,3 × sin(30° − 240°) = 325,3 × sin(−210°) = 162,6 V
+Contrôle : 162,6 − 325,3 + 162,6 ≈ 0 ✓</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · forme algébrique de <u>V</u>₂</div>
+    <p><u>V</u><sub>2</sub> = [230 V ; −120°]. Forme algébrique ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula"><u>V</u>₂ = 230 cos(−120°) + j 230 sin(−120°) = −115 − j 199,2 V</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Tensions composées">
+  <div class="shead"><span class="num">3</span><h2>Les tensions composées</h2><span class="meta">5.3 · diapo 5 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une tension composée se mesure entre deux phases, sans passer par le neutre. Elle s'obtient par la loi des mailles à partir de deux tensions simples.</div>
+  <h3>Fléchage</h3>
+  <p>u<sub>21</sub> est fléchée entre L<sub>1</sub> et L<sub>2</sub>, u<sub>32</sub> entre L<sub>2</sub> et L<sub>3</sub>, u<sub>13</sub> entre L<sub>3</sub> et L<sub>1</sub>. La pointe de la flèche est sur la phase du <b>premier</b> indice : u<sub>13</sub> pointe vers L<sub>1</sub>.</p>
+  <h3>En fonction des tensions simples</h3>
+  <p>Sur la diapo, ces trois lignes sont à compléter en séance. Avec le fléchage ci-dessus, la loi des mailles donne :</p>
+  <div class="formula key">u_13(t) = v_1(t) − v_3(t)
+u_21(t) = v_2(t) − v_1(t)
+u_32(t) = v_3(t) − v_2(t)</div>
+  <h3>Expressions instantanées</h3>
+  <div class="formula key cours">u_13(t) = U √2 sin(ωt − π/6)
+u_21(t) = U √2 sin(ωt − 5π/6)
+u_32(t) = U √2 sin(ωt − 3π/2)</div>
+  <p>U est la valeur efficace d'une tension composée. Sur la courbe du prof, l'amplitude vaut environ 563 V, donc U ≈ 400 V : c'est le réseau 230 V / 400 V.</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · retrouver U à partir de V (ajouté par profbob)</div>
+    <p>Montre que u<sub>13</sub> = v<sub>1</sub> − v<sub>3</sub> a bien la forme du cours, et calcule U pour V = 230 V.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">En complexes : <u>U</u>₁₃ = <u>V</u>₁ − <u>V</u>₃ = V [1 − (−1/2 + j √3/2)] = V (3/2 − j √3/2)
+module : V √(9/4 + 3/4) = V √3      argument : arctan(−(√3/2)/(3/2)) = −30° = −π/6
+donc u_13(t) = V√3 · √2 sin(ωt − π/6)  →  U = √3 V
+V = 230 V  →  U = 230 × √3 = 398,4 V ≈ 400 V</div>
+      <p>Ce lien U = √3 V est le sujet de la partie 5.5 du cours (pas encore distribuée) : vérifie-le quand elle arrive.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · tensions composées à ωt = 30°</div>
+    <p>Même réseau (V = 230 V) à ωt = 30°. Valeurs de u<sub>13</sub>, u<sub>21</sub>, u<sub>32</sub> ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Avec les tensions simples de la section 2 :
+u_13 = v_1 − v_3 = 162,6 − 162,6 = 0 V
+u_21 = v_2 − v_1 = −325,3 − 162,6 = −487,9 V
+u_32 = v_3 − v_2 = 162,6 − (−325,3) = 487,9 V
+Contrôle avec le cours : U √2 = 398,4 × √2 = 563,4 V ; u_21 = 563,4 × sin(30° − 150°) = −487,9 V ✓</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> L'ordre des indices compte : u<sub>31</sub> = −u<sub>13</sub>. Regarde toujours où est la pointe de la flèche avant d'écrire la différence.</div>
+  <div class="quiz">
+    <div class="q"><p>De combien u<sub>13</sub> est-elle déphasée par rapport à v<sub>1</sub> ?</p>
+      <div class="opts"><button>+30° (en avance)</button><button data-ok="1">−30° (en retard)</button><button>−120°</button></div>
+      <div class="fb" hidden>u₁₃ = U√2 sin(ωt − π/6) et v₁ = V√2 sin ωt : u₁₃ est en retard de π/6 = 30° sur v₁.</div></div>
+  </div>
+  <div class="coquille"><b>Suite du chapitre.</b> Le fichier reçu s'arrête à la partie 5.3. Les parties 5.4 à 5.7 (représentations vectorielles, système direct et inverse, relations entre valeurs efficaces, couplages étoile et triangle, courants) seront ajoutées quand elles seront distribuées.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">diapos 4 et 5</span></div>
+  <div class="ex"><h4>Tracer les trois tensions simples <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Avec V = 230 V, place les maximums : v<sub>1</sub> à θ = 90°, v<sub>2</sub> à 210°, v<sub>3</sub> à 330°, tous à <span class="res">325 V</span>. Les courbes se croisent tous les 60°.</p></div></details></div>
+  <div class="ex"><h4>Compléter u<sub>13</sub>, u<sub>21</sub>, u<sub>32</sub> en fonction des tensions simples <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Loi des mailles en suivant les flèches de la diapo 5 : <span class="res">u<sub>13</sub> = v<sub>1</sub> − v<sub>3</sub>, u<sub>21</sub> = v<sub>2</sub> − v<sub>1</sub>, u<sub>32</sub> = v<sub>3</sub> − v<sub>2</sub></span>. Vérifie avec les courbes : à θ = 30°, u<sub>13</sub> s'annule.</p></div></details></div>
+  <div class="ex"><h4>Retrouver l'amplitude des tensions composées <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Passe en complexes : <u>U</u><sub>13</sub> = <u>V</u><sub>1</sub> − <u>V</u><sub>3</sub>. Résultat : <span class="res">U = √3 V = 398 V, amplitude 563 V</span>, comme sur la courbe du prof.</p></div></details></div>
+</section>

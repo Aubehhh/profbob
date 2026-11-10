@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 4 · Introduction à la chimie organique · Chimie · profbob.fr</title>
+<meta name="description" content="Chimie, chapitre 4 : groupes fonctionnels et familles chimiques, réactivité organique : l'estérification, mécanisme de l'estérification : flèches courbes. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="chimie-organique" data-matiere="chimie" data-ch="organique" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/chimie/">← Chimie</a> · Chapitre 4 sur 5</div>
+  <h1>Introduction à la chimie organique</h1>
+  <p class="lead">Reconnaître les groupes fonctionnels et leur famille, puis comprendre l'estérification : bilan, rendement et mécanisme avec les flèches courbes.</p>
+  <div class="chips"><span class="chip"><b>3</b> sections</span><span class="chip">≈ 2 h</span><span class="chip">Chap. 3</span><span class="chip">Cours de S. Beaumont</span><span class="chip">Prérequis : <a href="/cours/chimie/molecules/">chapitre 3</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=chimie&amp;ch=organique">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=chimie&amp;ch=organique">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Groupes fonctionnels</a>
+  <a href="#s2"><span class="n">2</span>Estérification</a>
+  <a href="#s3"><span class="n">3</span>Mécanisme</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="chimie"></div>
+
+<section class="csec" id="s1" data-toc="Groupes fonctionnels">
+  <div class="shead"><span class="num">1</span><h2>Groupes fonctionnels et familles chimiques</h2><span class="meta">pages 2 et 3 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> On part d'un alcane (que des C et des H) et on remplace un ou plusieurs H par un groupe qui contient un <b>hétéroatome</b> (un atome autre que C et H : O, N, Cl…). Ce groupe, c'est le <b>groupe fonctionnel</b> : il décide de la famille de la molécule et de sa réactivité.</div>
+  <ul>
+    <li>L'éthanol CH<sub>3</sub>–CH<sub>2</sub>–OH = squelette de l'éthane (2 C) + groupe fonctionnel –OH : c'est comme si on avait remplacé un H de l'éthane par OH.</li>
+    <li>Une molécule peut porter plusieurs groupes fonctionnels. La thréonine (un acide aminé) a une fonction <b>amine</b> (–NH<sub>2</sub>), une fonction <b>acide carboxylique</b> (–COOH) et une fonction <b>alcool</b> (–OH).</li>
+    <li>En écriture topologique, on écrit en entier les atomes des groupes fonctionnels, y compris leurs H.</li>
+  </ul>
+  <h3>Valence d'une fonction</h3>
+  <p>La <b>valence</b> d'une fonction est le nombre d'atomes d'hydrogène qu'elle remplace (formellement) sur un même carbone de l'alcane.</p>
+  <div class="formula key cours">Alcane → alcool : on remplace 1 H par OH  →  fonction monovalente
+Alcane → aldéhyde : on remplace 2 H d'un même carbone par un O (C=O)  →  fonction divalente</div>
+  <div class="tw"><table>
+    <tr><th>Valence</th><th>Fonctions (X = halogène : Cl, Br, I)</th></tr>
+    <tr><td>monovalentes</td><td>alcool C–OH · amine C–NH<sub>2</sub> · halogénoalcane C–X · alcène C=C · étheroxyde C–O–C · organométallique C–MgX · nitroalcane C–NO<sub>2</sub></td></tr>
+    <tr><td>divalentes</td><td>aldéhyde –CH=O (C=O en bout de chaîne, avec un H) · cétone C–CO–C (C=O au milieu de la chaîne) · imine C=N · alcyne C≡C</td></tr>
+    <tr><td>trivalentes</td><td>acide carboxylique –COOH · ester –COO–C · amide –CO–N · anhydride –CO–O–CO– · chlorure d'acyle –COCl · nitrile –C≡N</td></tr>
+    <tr><td>tétravalentes</td><td>carbonate O–CO–O · urée N–CO–N</td></tr>
+  </table></div>
+  <p>Par commodité, le motif alcène est rangé avec les fonctions monovalentes et le motif alcyne avec les divalentes.</p>
+  <div class="trap"><b>Piège.</b> Le C=O ne suffit pas à reconnaître la famille : il faut regarder ses voisins. Avec un H : aldéhyde. Entre deux C : cétone. Avec un OH : acide carboxylique. Avec un O–C : ester. Avec un N : amide. De même, un –OH sur un C=O n'est pas un alcool : il fait partie de la fonction acide.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · formule brute d'une molécule topologique (exercice 1)</div>
+    <p>La molécule A est une chaîne de 7 carbones avec un –OH sur le deuxième carbone (heptan-2-ol). Famille et formule brute ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Famille : alcool (–OH sur un carbone qui ne porte pas de C=O)
+Alcane à 7 C : C₇H₁₆ ; on remplace un H par OH : C₇H₁₅OH
+Formule brute : C₇H₁₆O</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>CH₃–CO–CH₃ appartient à la famille des…</p>
+      <div class="opts"><button>aldéhydes</button><button data-ok="1">cétones</button><button>esters</button></div>
+      <div class="fb" hidden>Le C=O est entre deux carbones : cétone (la propanone, ou acétone). Un aldéhyde a son C=O en bout de chaîne, lié à un H.</div></div>
+    <div class="q"><p>L'acide carboxylique est une fonction…</p>
+      <div class="opts"><button>monovalente</button><button>divalente</button><button data-ok="1">trivalente</button></div>
+      <div class="fb" hidden>Sur le carbone fonctionnel, trois H de l'alcane sont remplacés : deux par =O et un par –OH.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Estérification">
+  <div class="shead"><span class="num">2</span><h2>Réactivité organique : l'estérification</h2><span class="meta">pages 3 et 4 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un acide carboxylique et un alcool se condensent en un ester et de l'eau. Le prof prend cette réaction comme exemple pour introduire les notions de nucléophile, électrophile, acide, base et flèches courbes (section 3).</div>
+  <div class="formula key">R–COOH + R′–OH ⇌ R–COO–R′ + H₂O        (acide + alcool ⇌ ester + eau)</div>
+  <ul>
+    <li>Les esters sont très odorants : arômes et parfums. On les trouve aussi dans les glycérides (esters d'acides gras et du glycérol), qui stockent l'énergie chez l'homme.</li>
+    <li>La réaction est <b>lente</b>, <b>athermique</b> (ni chaleur dégagée ni absorbée), <b>renversable</b> (la réaction inverse, l'hydrolyse de l'ester, existe) et <b>limitée</b> (elle s'arrête à un équilibre).</li>
+  </ul>
+  <h3>Améliorer le rendement</h3>
+  <ul>
+    <li><b>Éliminer l'eau</b> formée, par entraînement à la vapeur avec un solvant qui forme un hétéroazéotrope : on évite l'hydrolyse.</li>
+    <li><b>Éliminer l'ester</b> par distillation, s'il est le composé le plus volatil.</li>
+    <li><b>Choisir la classe de l'alcool</b> (mélange équimolaire acide + alcool) :</li>
+  </ul>
+  <div class="formula key cours">Rendement selon la classe de l'alcool :
+alcool primaire : 67 %      alcool secondaire : 60 %      alcool tertiaire : 5 %</div>
+  <div class="formula key">rendement η = n(ester obtenu) / n_max(ester)        x_max = plus petite quantité de réactif (coefficients 1)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · acide éthanoïque + éthanol (exercice 2)</div>
+    <p>0,100 mol d'acide éthanoïque et 0,100 mol d'éthanol ; à l'équilibre, 0,067 mol d'ester. Rendement et composition à l'équilibre ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">CH₃–COOH + CH₃–CH₂–OH ⇌ CH₃–COO–CH₂–CH₃ + H₂O   (éthanoate d'éthyle)
+x_max = min(0,100 ; 0,100) = 0,100 mol  →  n_max(ester) = 0,100 mol
+η = 0,067 / 0,100 = 0,67 = 67 %   (valeur du cours pour un alcool primaire ✓)
+À l'équilibre : x_éq = 0,067 mol
+acide : 0,100 − 0,067 = 0,033 mol    alcool : 0,033 mol    ester : 0,067 mol    eau : 0,067 mol</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Un catalyseur (H⁺) accélère la réaction dans les deux sens : l'équilibre est atteint plus vite, mais la quantité d'ester finale ne change pas (effet <b>cinétique</b>). Retirer l'eau, au contraire, <b>déplace l'équilibre</b> : on obtient plus d'ester.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Mécanisme">
+  <div class="shead"><span class="num">3</span><h2>Mécanisme de l'estérification : flèches courbes</h2><span class="meta">pages 4 et 5 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une flèche courbe montre où va un <b>doublet d'électrons</b> : elle part toujours d'un doublet (non liant ou de liaison) et pointe vers l'atome qui le reçoit. Un <b>nucléophile</b> donne un doublet ; un <b>électrophile</b> (pauvre en électrons) le reçoit. Un <b>acide</b> cède un proton H⁺ ; une <b>base</b> le capte.</div>
+  <p>Avec un alcool primaire ou secondaire, le mécanisme est une <b>addition nucléophile suivie d'une élimination</b>. Avec un alcool tertiaire, il est différent.</p>
+  <div class="formula key cours">Mécanisme : A_N + E   (addition nucléophile, puis élimination)</div>
+  <h3>Les quatre étapes</h3>
+  <ol class="steps">
+    <li><b>Activation catalytique par H⁺ : protonation de l'acide carboxylique.</b> L'alcool est un nucléophile plutôt faible : on rend le carbone fonctionnel plus électrophile. Un doublet non liant de l'oxygène du C=O capte H⁺ ; on obtient R–C(=OH⁺)–OH, dont la charge + est délocalisée sur le carbone (formes mésomères entre crochets).</li>
+    <li><b>Addition nucléophile de l'alcool.</b> Un doublet non liant de l'oxygène de R<sub>1</sub>–OH attaque le carbone fonctionnel (site électrophile). On obtient R–C(OH)<sub>2</sub>–O⁺(H)–R<sub>1</sub> : l'oxygène de l'alcool porte la charge +.</li>
+    <li><b>Élimination d'eau</b>, après un réarrangement acido-basique interne : un H passe sur un –OH, qui devient –OH<sub>2</sub>⁺ et part sous forme de H<sub>2</sub>O. Le C=O se reforme : ester protoné R–C(=OH⁺)–O–R<sub>1</sub>.</li>
+    <li><b>Déprotonation.</b> L'ester protoné rend son H⁺ : on obtient l'ester R–CO–O–R<sub>1</sub>, et le catalyseur H⁺ est <b>régénéré</b>.</li>
+  </ol>
+  <div class="formula key">Charge formelle d'un O :  z_F = 6 − (électrons des doublets non liants + nombre de liaisons)
+O avec 3 liaisons et 1 doublet non liant (R–OH⁺–, C=OH⁺) : 6 − (2 + 3) = +1
+O avec 2 liaisons et 2 doublets (–OH, C=O) : 6 − (4 + 2) = 0
+O avec 1 liaison et 3 doublets (–O⁻) : 6 − (6 + 1) = −1</div>
+  <div class="retiens"><b>À retenir.</b> Le carbone ne peut pas dépasser l'octet : quand une nouvelle liaison C–O se forme sur le carbone d'un C=O, la liaison π doit s'ouvrir, et son doublet part sur l'oxygène. Et –OH est un mauvais groupe partant (il partirait en HO⁻) : on le protone d'abord pour qu'il parte en H<sub>2</sub>O.</div>
+  <div class="coquille"><b>Notation.</b> Le cours écrit l'alcool R<sub>1</sub>–OH, la feuille d'exercices R′–OH : c'est le même groupe carboné. Petites coquilles du texte : « l'eau formé<b>e</b> » (page 4).</div>
+  <div class="quiz">
+    <div class="q"><p>Dans l'addition, l'oxygène de l'alcool joue le rôle de…</p>
+      <div class="opts"><button data-ok="1">nucléophile</button><button>électrophile</button><button>acide</button></div>
+      <div class="fb" hidden>Il donne un doublet non liant au carbone fonctionnel (électrophile) pour créer une liaison C–O.</div></div>
+    <div class="q"><p>Une flèche courbe part…</p>
+      <div class="opts"><button>de l'atome pauvre en électrons</button><button data-ok="1">d'un doublet d'électrons</button><button>du proton H⁺</button></div>
+      <div class="fb" hidden>Elle décrit le déplacement d'un doublet : elle part du doublet (non liant ou de liaison) et pointe vers l'endroit où il va.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">feuille d'exercices du chapitre 3</span></div>
+  <div class="ex"><h4>Exercice 1 · Reconnaître les fonctions chimiques (molécules A à E) <span class="tag">section 1</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>Repère chaque hétéroatome et regarde ses voisins. <span class="res">A : alcool (C<sub>7</sub>H<sub>16</sub>O) · B : aldéhyde (C=O en bout, avec un H) · C : cétone (C=O entre deux C) · D : ester (C=O lié à un O–C) · E : acide carboxylique + amine + alcool (8 C, C<sub>8</sub>H<sub>17</sub>NO<sub>3</sub>)</span>. Dans E, le –OH du –COOH appartient à la fonction acide : seul l'autre –OH est un alcool. Pour D (hexanoate de butyle) : CH<sub>3</sub>–(CH<sub>2</sub>)<sub>4</sub>–CO–O–(CH<sub>2</sub>)<sub>3</sub>–CH<sub>3</sub> ; hétéroatomes de E : N et O.</p></div></details></div>
+  <div class="ex"><h4>Exercice 2 · Bilan et rendement d'une estérification <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>Voir l'exemple corrigé de la section 2 : <span class="res">η = 67 %</span> ; à l'équilibre 0,033 mol d'acide et d'alcool, 0,067 mol d'ester et d'eau. Catalyseur : équilibre atteint plus vite, même composition. Retrait de l'eau : plus d'ester, rendement au-delà de 67 %.</p></div></details></div>
+  <div class="ex"><h4>Exercice 3 · Lire le mécanisme du cours <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>Protonation : l'O du C=O capte H⁺, il porte alors <span class="res">+1</span> (6 − (2 + 3)). Addition : nucléophile = O de l'alcool, électrophile = C fonctionnel. Avant l'addition, le carbone est lié à 3 atomes (somme des ordres 1 + 2 + 1 = 4) ; après, à 4 atomes par 4 liaisons simples (somme 4) : garder le C=O ferait 5 liaisons, soit 10 électrons, impossible. Élimination : –OH<sub>2</sub>⁺ part en H<sub>2</sub>O. Bilan : <span class="res">R–COOH + R′–OH ⇌ R–COO–R′ + H<sub>2</sub>O</span>, H⁺ régénéré.</p></div></details></div>
+  <div class="ex"><h4>Exercice 4 · Hydratation de l'éthanal (mécanisme inconnu) <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>Étape 1 : HO⁻ (nucléophile) attaque le C du C=O (électrophile), le doublet π part sur l'O, qui devient O⁻ (6 − (6 + 1) = −1). Étape 2 : l'eau (acide) cède H⁺ à l'O⁻ (base). Atomes et charges se conservent (charge −1 de chaque côté). Bilan : <span class="res">CH<sub>3</sub>–CHO + H<sub>2</sub>O → CH<sub>3</sub>–CH(OH)<sub>2</sub></span> ; intermédiaire CH<sub>3</sub>–CH(OH)–O⁻ ; HO⁻ est un catalyseur. Une flèche part toujours du doublet donneur (l'O de HO⁻), jamais du carbone.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=chimie&amp;ch=organique"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=chimie&amp;ch=organique"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=chimie&amp;ds=chimie"><b>DS blanc Chimie ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/chimie/molecules/"><small>◂ Chapitre 3</small>Molécules</a><a class="next" href="/cours/chimie/description/"><small>Chapitre 5 ▸</small>Isomérie</a></nav>
+</section>
+
+<p class="credit">Cours de chimie de S. Beaumont (HEI, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Chimie%20%C2%B7%20chapitre%204">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

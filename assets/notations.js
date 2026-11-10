@@ -127,8 +127,8 @@
       ['log<sub>b</sub> ; ln','Logarithme de base b ; népérien (base e)','—',[T,I]]
     ]})(),
     // Électricité (Fiolet) : profil « thermo » (indices seulement) ; complexes soulignés, vecteurs de Fresnel fléchés
-    elec:(()=>{const B='bases',C='continu',T='theoremes',S='sinusoidal';return [
-      ['u, i ; U, I','Minuscule : valeur instantanée (dépend du temps) ; majuscule : valeur constante ou efficace','V ; A',[B,C,T,S]],
+    elec:(()=>{const B='bases',C='continu',T='theoremes',S='sinusoidal',P='triphase';return [
+      ['u, i ; U, I','Minuscule : valeur instantanée (dépend du temps) ; majuscule : valeur constante ou efficace','V ; A',[B,C,T,S,P]],
       ['Q','Charge électrique (i = dQ/dt)','C',[B]],
       ['p(t) ; &lt;p(t)&gt; ; P','Puissance instantanée ; puissance moyenne = puissance active','W',[B,S]],
       ['w','Énergie','J (ou kWh)',[B,S]],
@@ -150,10 +150,15 @@
       ['L ; C','Inductance ; capacité','H ; F',[S]],
       ['Q ; S','Puissance réactive ; apparente','VAR ; VA',[S]],
       ['PF = cos φ','Facteur de puissance (power factor) = P/S','—',[S]],
-      ['η ; P<sub>U</sub> ; P<sub>A</sub>','Rendement ; puissance utile ; puissance absorbée','— ; W',[S]]
+      ['η ; P<sub>U</sub> ; P<sub>A</sub>','Rendement ; puissance utile ; puissance absorbée','— ; W',[S]],
+      ['L<sub>1</sub>, L<sub>2</sub>, L<sub>3</sub> ; N ; PE','Fils de phase ; fil de neutre ; fil de protection relié à la terre','—',[P]],
+      ['v<sub>1N</sub> (v<sub>1</sub>), v<sub>2N</sub>, v<sub>3N</sub> ; V','Tensions simples (phase – neutre) ; leur valeur efficace','V',[P]],
+      ['u<sub>13</sub>, u<sub>21</sub>, u<sub>32</sub> ; U','Tensions composées (entre deux phases, u<sub>13</sub> = v<sub>1</sub> − v<sub>3</sub>) ; leur valeur efficace','V',[P]],
+      ['ω ; θ = ωt','Pulsation ; angle (axe des courbes du cours)','rad·s⁻¹ ; ° ou rad',[P]],
+      ['<u>V</u><sub>1</sub> = [V ; 0°]','Tension simple en complexe (forme polaire : module ; argument)','—',[P]]
     ]})(),
     // Chimie (S. Beaumont) : profil « thermo » (indices seulement)
-    chimie:(()=>{const A='atome',C='classification',M='molecules';return [
+    chimie:(()=>{const A='atome',C='classification',M='molecules',O='organique',D='description';return [
       ['<sup>A</sup><sub>Z</sub>X','A : nombre de masse (nucléons) ; Z : numéro atomique (protons)','—',[A,C]],
       ['N = A − Z','Nombre de neutrons','—',[A]],
       ['u.m.a.','Unité de masse atomique : 1/12 de la masse d\'un atome de ¹²C = 1,66×10⁻²⁷ kg','kg',[A]],
@@ -172,7 +177,20 @@
       ['x','Valence : nombre de liaisons covalentes (x = 8 − N<sub>V</sub>)','—',[M]],
       ['δ ; p ; p<sub>D</sub>','Charge partielle ; moment dipolaire en C·m ; en debye (1 D = 3,33×10⁻³⁰ C·m)','C ; C·m ; D',[M]],
       ['I<sub>AB</sub>','Caractère ionique de la liaison AB','%',[M]],
-      ['AX<sub>n</sub>E<sub>m</sub>','VSEPR : atome central A, n atomes liés X, m doublets non liants E','—',[M]]
+      ['AX<sub>n</sub>E<sub>m</sub>','VSEPR : atome central A, n atomes liés X, m doublets non liants E','—',[M]],
+      ['R ; R′ (R<sub>1</sub>)','Groupes carbonés de l\'acide et de l\'alcool, inchangés pendant la réaction','—',[O]],
+      ['X','Halogène (chlore, brome ou iode)','—',[O]],
+      ['⇌','Réaction renversable (équilibre)','—',[O]],
+      ['A<sub>N</sub> + E','Mécanisme : addition nucléophile puis élimination','—',[O]],
+      ['n ; x ; x<sub>max</sub> ; η','Quantité de matière ; avancement ; avancement maximal ; rendement','mol ; — ; %',[O]],
+      ['C*','Carbone asymétrique (lié à quatre groupements différents)','—',[D]],
+      ['R ; S','Configuration absolue d\'un C* (rectus : sens horaire ; sinister : sens anti-horaire)','—',[D]],
+      ['Z ; E','Configuration d\'une double liaison C=C (zusammen : même côté ; entgegen : opposés)','—',[D]],
+      ['(+) ; (−)','Dextrogyre ; lévogyre','—',[D]],
+      ['α ; α<sub>0</sub>','Pouvoir rotatoire du mélange ; de l\'énantiomère A<sub>1</sub> pur à la même concentration','°',[D]],
+      ['C<sub>1</sub> ; C<sub>2</sub> ; C<sub>0</sub>','Concentrations des énantiomères A<sub>1</sub> et A<sub>2</sub> ; concentration totale','mol·L⁻¹',[D]],
+      ['p<sub>0</sub> ; p ; ee','Pureté optique ; pureté énantiomérique ; excès énantiomérique (ee = 100 p)','— ; — ; %',[D]],
+      ['a ; e','Position axiale ; équatoriale (cyclohexane)','—',[D]]
     ]})()
   };
   const HOWTO='<b>Comment répondre au mini-DS :</b> un nombre par case, virgule ou point acceptés, arrondi à 3 chiffres significatifs, sans unité (elle est écrite à côté). Garde le signe − des grandeurs négatives (composantes, travail reçu, chaleur cédée). Les angles sont en degrés.';

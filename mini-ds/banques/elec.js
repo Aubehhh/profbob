@@ -8,6 +8,11 @@ const sci=(x,d=2)=>{if(x===0)return '0';const e=Math.floor(Math.log10(Math.abs(x
 const par=(a,b)=>a*b/(a+b);
 const deg=Math.PI/180;
 
+const FILS=['fil de phase','fil de neutre','fil de protection (PE)'];
+const T_FIL=[['Fil noté L2 sur le schéma du réseau.','fil de phase'],['Fil relié à la terre, qui protège les personnes contre les chocs électriques.','fil de protection (PE)'],
+  ['Fil commun qui sert de référence aux trois tensions simples v_1N, v_2N, v_3N.','fil de neutre'],['Une tension composée se mesure entre deux de ces fils.','fil de phase'],
+  ['Fil noté N sur le schéma.','fil de neutre'],['Fil noté PE sur le schéma.','fil de protection (PE)'],['Il y en a trois dans un réseau triphasé.','fil de phase'],
+  ['Une tension simple se mesure entre un fil de phase et ce fil.','fil de neutre']];
 window.BANQUE_ELEC=[
 
 /* ---------- Chapitre 1 : notions de base ---------- */
@@ -245,7 +250,67 @@ I' = P / (U cos φ') = ${F.n(P/(U*c2),3)} A`}}},
       fields:[{label:'w_L',unit:'J',ans:w,d:4,tol:0,hint:H.pos}],sol:`w_L = ½ L i² = 0,5 × ${F.n(L)} × ${i}² = ${F.n(w,4)} J`}}
   const C=R.pick([100,470,1000,2200,4700]),u=R.pick([12,24,48,63,100,400]);const w=0.5*C*1e-6*u*u;
   return{v:{typ,x:C,y:u},text:`<p>Un condensateur C = ${C} µF est chargé sous ${u} V. Énergie stockée ?</p>`,
-    fields:[{label:'w_C',unit:'J',ans:w,d:4,tol:0,hint:H.pos}],sol:`w_C = ½ C u² = 0,5 × ${C}×10⁻⁶ × ${u}² = ${F.n(w,4)} J`}}}
+    fields:[{label:'w_C',unit:'J',ans:w,d:4,tol:0,hint:H.pos}],sol:`w_C = ½ C u² = 0,5 × ${C}×10⁻⁶ × ${u}² = ${F.n(w,4)} J`}}},
+
+/* ---------- Chapitre 5 : réseau triphasé (parties 5.1 à 5.3) ---------- */
+
+{id:'fils',chap:'Structure',pts:1,gen(R,F){
+  const k=R.int(0,T_FIL.length-1),[s,rep]=T_FIL[k],o=FILS.slice();
+  return{v:{k},text:`<p>${s}</p>`,
+    fields:[{label:'fil',type:'choix',options:o,ans:o.indexOf(rep)}],
+    sol:`Réseau triphasé : 3 fils de phase (L1, L2, L3) et le neutre N alimentent les récepteurs ; le PE, relié à la terre, protège les personnes
+réponse : ${rep}`}}},
+
+{id:'vsimple',chap:'Tensions simples',pts:3,gen(R,F){
+  const V=R.pick([127,220,230,240]),th=R.int(0,23)*15;
+  const z=x=>Math.abs(x)<1e-9?0:x;
+  const v=[0,120,240].map(d=>z(V*Math.SQRT2*Math.sin((th-d)*deg)));
+  return{v:{V,th},text:`<p>Réseau triphasé de tension simple efficace V = ${V} V. Valeurs instantanées v<sub>1</sub>, v<sub>2</sub>, v<sub>3</sub> pour θ = ωt = ${th}° ?</p>`,
+    fields:[{label:'v_1',unit:'V',ans:v[0],d:1,tol:0.6,hint:H.sig},{label:'v_2',unit:'V',ans:v[1],d:1,tol:0.6,hint:H.sig},{label:'v_3',unit:'V',ans:v[2],d:1,tol:0.6,hint:H.sig}],
+    sol:`V √2 = ${V} × √2 = ${F.n(V*Math.SQRT2,1)} V
+v_1 = V √2 sin ωt = ${F.n(V*Math.SQRT2,1)} × sin ${th}° = ${F.n(v[0],1)} V
+v_2 = V √2 sin(ωt − 2π/3) = ${F.n(V*Math.SQRT2,1)} × sin(${F.n(th-120)}°) = ${F.n(v[1],1)} V
+v_3 = V √2 sin(ωt − 4π/3) = ${F.n(V*Math.SQRT2,1)} × sin(${F.n(th-240)}°) = ${F.n(v[2],1)} V
+contrôle : v_1 + v_2 + v_3 = 0`,
+    note:`<p class="mds-note">Piège : V est la valeur efficace ; l'amplitude est V√2.</p>`}}},
+
+{id:'vcomplexe',chap:'Tensions simples',pts:2,gen(R,F){
+  const V=R.pick([127,220,230,240,400]),k=R.pick([2,3]),a=-120*(k-1);
+  const z=x=>Math.abs(x)<1e-9?0:x,re=z(V*Math.cos(a*deg)),im=z(V*Math.sin(a*deg));
+  return{v:{V,k},text:`<p>Tension simple efficace V = ${V} V. Écris <u>V</u><sub>${k}</sub> = [V ; ${F.n(a)}°] sous forme algébrique a + jb.</p>`,
+    fields:[{label:'a',unit:'V',ans:re,d:1,tol:0.3,hint:'partie réelle, avec son signe'},{label:'b',unit:'V',ans:im,d:1,tol:0.3,hint:'partie imaginaire, avec son signe'}],
+    sol:`<u>V</u>${k===2?'₂':'₃'} = [${V} ; ${F.n(a)}°] = ${V} cos(${F.n(a)}°) + j ${V} sin(${F.n(a)}°)
+= ${F.n(re,1)} ${im<0?'−':'+'} j ${F.n(Math.abs(im),1)} V`,
+    note:`<p class="mds-note">Rappel : −240° et +120° désignent le même angle.</p>`}}},
+
+{id:'ucompose',chap:'Tensions composées',pts:3,gen(R,F){
+  const V=R.pick([127,230,240]),th=R.int(0,23)*15,U=Math.sqrt(3)*V,A=U*Math.SQRT2;
+  const z=x=>Math.abs(x)<1e-9?0:x;
+  const u=[[30,'u_13','π/6'],[150,'u_21','5π/6'],[270,'u_32','3π/2']].map(([d,n,t])=>[z(A*Math.sin((th-d)*deg)),n,t,d]);
+  return{v:{V,th},text:`<p>Réseau de tension simple V = ${V} V, donc de tension composée U = √3 V = ${F.n(U,1)} V. Valeurs de u<sub>13</sub>, u<sub>21</sub> et u<sub>32</sub> pour θ = ωt = ${th}° ?</p>`,
+    fields:u.map(([x,n])=>({label:n,unit:'V',ans:x,d:1,tol:0.8,hint:H.sig})),
+    sol:`U √2 = ${F.n(U,1)} × √2 = ${F.n(A,1)} V
+`+u.map(([x,n,t,d])=>`${n} = U √2 sin(ωt − ${t}) = ${F.n(A,1)} × sin(${F.n(th-d)}°) = ${F.n(x,1)} V`).join('\n')+`
+contrôle : u_13 = v_1 − v_3, u_21 = v_2 − v_1, u_32 = v_3 − v_2`}}},
+
+{id:'ueff',chap:'Tensions composées',pts:2,gen(R,F){
+  const V=R.pick([127,220,230,240,400]),U=Math.sqrt(3)*V;
+  return{v:{V},text:`<p>Tension simple efficace V = ${V} V. En calculant <u>U</u><sub>13</sub> = <u>V</u><sub>1</sub> − <u>V</u><sub>3</sub>, trouve la valeur efficace U d'une tension composée, puis son amplitude.</p>`,
+    fields:[{label:'U',unit:'V',ans:U,d:1,hint:H.pos},{label:'U√2',unit:'V',ans:U*Math.SQRT2,d:1,hint:'amplitude'}],
+    sol:`<u>V</u>₁ − <u>V</u>₃ = V [(1 − cos 120°) − j sin 120°] = V (3/2 − j √3/2)
+module : V √(9/4 + 3/4) = √3 V
+U = √3 × ${V} = ${F.n(U,1)} V ;  amplitude U √2 = ${F.n(U*Math.SQRT2,1)} V`}}},
+
+{id:'dephasage',chap:'Tensions composées',pts:2,gen(R,F){
+  const T=[['v_1',0],['v_2',-120],['v_3',-240],['u_13',-30],['u_21',-150],['u_32',-270]];
+  const ij=R.shuffle([0,1,2,3,4,5]).slice(0,2),A=T[ij[0]],B=T[ij[1]];
+  let d=((A[1]-B[1])%360+540)%360-180;
+  return{v:{a:A[0],b:B[0]},text:`<p>Déphasage de ${A[0]} par rapport à ${B[0]} ? (positif si ${A[0]} est en avance)</p>`,
+    fields:[{label:'déphasage',unit:'°',ans:d,type:'angle',d:0,hint:'en degrés, entre −180 et 180'}],
+    sol:`phase de ${A[0]} : ${F.n(A[1])}° ;  phase de ${B[0]} : ${F.n(B[1])}°
+déphasage = ${F.n(A[1])}° − (${F.n(B[1])}°) = ${F.n(A[1]-B[1])}°  →  ${F.n(d)}° (ramené entre −180° et 180°)
+${d<0?A[0]+' est en retard sur '+B[0]:A[0]+' est en avance sur '+B[0]}`}}}
+
 
 ];
 })();

@@ -12,9 +12,9 @@ CFG = {
  'chimie': dict(dir='chimie', mid='chimie', nom='Chimie', slug='chimie', prof='S. Beaumont', credit="Cours de chimie de S. Beaumont (HEI, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.", ds='chimie'),
 'elec': dict(dir='elec', mid='elec', nom='Électricité', slug='electricite', prof='E. Fiolet', credit="Cours « Les bases de l'électricité » de E. Fiolet (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.", ds='elec'),
 'maths': dict(dir='maths', mid='outils', nom='Outils mathématiques', slug='mathematiques', prof='N. Coupier', credit="Cours « Outils mathématiques pour l'ingénieur 1 » de N. Coupier (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples corrigés et les remarques sont ajoutés par profbob.", ds='outils'),
-'web': dict(dsq=' · examen final',dir='web', mid='web', nom='Création de page Web', slug='pages-web', prof='R. Gosswiller', nota='aucun', credit="Cours « Développement et Architecture Web » de R. Gosswiller (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.", ds='web'),
-'embarque': dict(dsq=' · examen final',dir='embarque', mid='embarque', nom='Informatique embarquée', slug='informatique-embarquee', prof='D. Gheysens', nota='aucun', credit="Cours « Systèmes embarqués » de D. Gheysens (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.", ds='embarque'),
-'crea': dict(dsq=' · examen sur table',dir='crea', mid='crea', nom='Créativité et Innovation', slug='creativite-innovation', prof='B. Dufossé et F. Lefebvre', nota='aucun', credit="Cours « Créativité et innovation » de B. Dufossé et F. Lefebvre (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections et remarques sont ajoutés par profbob.", ds='crea'),
+'web': dict(dir='web', mid='web', nom='Création de page Web', slug='pages-web', prof='R. Gosswiller', nota='aucun', credit="Cours « Développement et Architecture Web » de R. Gosswiller (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.", ds='web'),
+'embarque': dict(dir='embarque', mid='embarque', nom='Informatique embarquée', slug='informatique-embarquee', prof='D. Gheysens', nota='aucun', credit="Cours « Systèmes embarqués » de D. Gheysens (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.", ds='embarque'),
+'crea': dict(dir='crea', mid='crea', nom='Créativité et Innovation', slug='creativite-innovation', prof='B. Dufossé et F. Lefebvre', nota='aucun', credit="Cours « Créativité et innovation » de B. Dufossé et F. Lefebvre (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections et remarques sont ajoutés par profbob.", ds='crea'),
 }[MAT]
 CHS = {}
 CHS['crea'] = [
@@ -83,6 +83,9 @@ CHS['elec'] = [
   dict(id='sinusoidal', titre='Circuits alimentés en sinusoïdal monophasé', court='Sinusoïdal',
        lead='Valeur efficace, Fresnel et complexes, R, L et C en alternatif, impédances, puissances P, Q, S, Boucherot et facteur de puissance.',
        duree='≈ 5 h', diapos='Chapitre 4'),
+  dict(id='triphase', titre='Structure et propriétés d\'un réseau triphasé équilibré', court='Triphasé',
+       lead='Les fils d\'un réseau triphasé, les trois tensions simples à 120° (courbes, Fresnel, complexes) et les tensions composées entre phases.',
+       duree='≈ 1 h 15', diapos='Chapitre 5, parties 5.1 à 5.3'),
 ]
 CHS['chimie'] = [
   dict(id='atome', titre='L\'atome', court='L\'atome',
@@ -94,6 +97,12 @@ CHS['chimie'] = [
   dict(id='molecules', titre='Structure électronique des molécules', court='Molécules',
        lead='Écrire la formule de Lewis d\'une molécule ou d\'un ion, prévoir sa forme avec la VSEPR et dire si elle est polaire.',
        duree='≈ 3 h 30', diapos='Chap. 2'),
+  dict(id='organique', titre='Introduction à la chimie organique', court='Chimie organique',
+       lead='Reconnaître les groupes fonctionnels et leur famille, puis comprendre l\'estérification : bilan, rendement et mécanisme avec les flèches courbes.',
+       duree='≈ 2 h', diapos='Chap. 3'),
+  dict(id='description', titre='Description des molécules organiques', court='Isomérie',
+       lead='Écrire une molécule (brute, semi-développée, topologique, Cram, Newman), puis reconnaître les isoméries : conformation, constitution, énantiomérie (R/S) et diastéréoisomérie (Z/E).',
+       duree='≈ 4 h', diapos='Chap. 4'),
 ]
 CHS['thermo'] = [
   dict(id='concepts', titre='Concepts et définitions d\'introduction', court='Concepts et définitions',

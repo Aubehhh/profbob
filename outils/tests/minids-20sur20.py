@@ -2,7 +2,7 @@ import asyncio,re,sys
 from playwright.async_api import async_playwright
 BASE='http://127.0.0.1:8765'
 async def run_one(page,m,ch):
-    await page.goto(f'{BASE}/mini-ds/?m={m}&ch={ch}')
+    await page.goto(f'{BASE}/mini-ds/?m={m}&'+(ch if '=' in ch else f'ch={ch}'))
     await page.wait_for_selector('#start')
     await page.click('#start')
     await page.wait_for_selector('.mds-q')
@@ -36,7 +36,7 @@ async def main():
         b=await p.chromium.launch(executable_path='/usr/bin/google-chrome')
         page=await b.new_page()
         errs=[];page.on('pageerror',lambda e: errs.append(str(e)))
-        for m,ch in [('crea','explorer'),('crea','imaginer'),('crea','innover'),('embarque','systemes'),('embarque','arduino'),('embarque','controle'),('embarque','temps'),('web','bases'),('web','structure'),('web','css'),('web','formulaires'),('outils','complexes'),('elec','sinusoidal')]:
+        for m,ch in [('crea','explorer'),('crea','imaginer'),('crea','innover'),('embarque','systemes'),('embarque','arduino'),('embarque','controle'),('embarque','temps'),('web','bases'),('web','structure'),('web','css'),('web','formulaires'),('outils','complexes'),('elec','sinusoidal'),('chimie','organique'),('chimie','description'),('elec','triphase'),('chimie','ds=chimie'),('elec','ds=elec'),('web','ds=web'),('embarque','ds=embarque'),('crea','ds=crea')]:
             for k in range(2):
                 note,n,qs=await run_one(page,m,ch)
                 print(ch,'essai',k+1,':',note,'·',n,'cases ·',', '.join(qs))

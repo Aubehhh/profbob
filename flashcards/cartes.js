@@ -128,7 +128,35 @@ window.FLASHCARDS={
     {ch:'molecules',q:'VSEPR : 2, 3, 4, 5, 6 doublets',r:'segment 180° ; triangle 120° ; tétraèdre 109,5°\nbipyramide triangulaire ; octaèdre 90°'},
     {ch:'molecules',q:'AX₃E et AX₂E₂ : formes',r:'AX₃E : pyramide à base triangulaire (NH₃)\nAX₂E₂ : coudée (H₂O)'},
     {ch:'molecules',q:'Effet d\'un doublet non liant sur les angles',r:'plus répulsif : ferme les angles X–A–X\nCH₄ 109,5° > NH₃ 106,5° > H₂O 104,5°'},
-    {ch:'molecules',q:'Molécule polaire',r:'somme vectorielle des moments de liaison non nulle\nH₂O polaire ; CO₂, BF₃ apolaires'}
+    {ch:'molecules',q:'Molécule polaire',r:'somme vectorielle des moments de liaison non nulle\nH₂O polaire ; CO₂, BF₃ apolaires'},
+    {ch:'organique',q:'Groupe fonctionnel, hétéroatome',r:'groupe qui remplace un ou plusieurs H d\'un alcane\ncontient un hétéroatome (ni C ni H : O, N, X…)'},
+    {ch:'organique',q:'Valence d\'une fonction',r:'nombre de H de l\'alcane remplacés sur un même carbone\nalcool : monovalente ; aldéhyde : divalente'},
+    {ch:'organique',q:'Fonctions monovalentes',r:'alcool, amine, halogénoalcane, alcène\nétheroxyde, organométallique, nitroalcane'},
+    {ch:'organique',q:'Fonctions divalentes',r:'aldéhyde (–CHO), cétone (C–CO–C), imine, alcyne'},
+    {ch:'organique',q:'Fonctions trivalentes et tétravalentes',r:'trivalentes : acide carboxylique, ester, amide, anhydride, chlorure d\'acyle, nitrile\ntétravalentes : carbonate, urée'},
+    {ch:'organique',q:'Estérification : bilan et caractéristiques',r:'R–COOH + R′–OH ⇌ R–COO–R′ + H₂O\nlente, athermique, renversable, limitée'},
+    {ch:'organique',q:'Rendement selon la classe de l\'alcool',r:'primaire 67 % ; secondaire 60 % ; tertiaire 5 %\n(mélange équimolaire)'},
+    {ch:'organique',q:'Améliorer le rendement d\'une estérification',r:'éliminer l\'eau (hétéroazéotrope)\nou distiller l\'ester s\'il est le plus volatil'},
+    {ch:'organique',q:'Mécanisme de l\'estérification',r:'A_N + E : protonation (H⁺), addition nucléophile de l\'alcool\nélimination d\'eau, déprotonation (H⁺ régénéré)'},
+    {ch:'organique',q:'Nucléophile, électrophile',r:'nucléophile : donne un doublet\nélectrophile : pauvre en électrons, reçoit un doublet'},
+    {ch:'organique',q:'Flèche courbe',r:'part d\'un doublet (non liant ou de liaison)\npointe vers l\'atome qui le reçoit'},
+    {ch:'description',q:'Les quatre formules planes',r:'brute (nombre d\'atomes) ; développée (toutes les liaisons)\nsemi-développée (sauf les H) ; topologique (zig-zag, sans C ni H)'},
+    {ch:'description',q:'Représentation de Cram',r:'trait plein : dans le plan\npointillé : en arrière ; triangle plein : en avant'},
+    {ch:'description',q:'Représentation de Newman',r:'vue dans l\'axe C_n–C_n+1\n1ᵉʳ carbone : un point ; 2ᵉ : un disque ; groupements à 120°'},
+    {ch:'description',q:'Conformère de l\'éthane, du butane, du cyclohexane',r:'éthane : décalée ; butane : anti (zig-zag)\ncyclohexane : chaise, substituant en équatorial'},
+    {ch:'description',q:'Cyclohexane disubstitué : cis, trans (exemples du cours)',r:'e/e ou a/a : trans\ne/a : cis'},
+    {ch:'description',q:'Isomérie de constitution',r:'même formule brute, enchaînement différent\nde chaîne, de position, de fonction'},
+    {ch:'description',q:'Énantiomères, molécule chirale',r:'images miroir non superposables\nchirale : ni centre, ni plan, ni axe inverse de symétrie'},
+    {ch:'description',q:'Carbone asymétrique',r:'C tétraédrique lié à quatre groupements différents\nun seul C* : molécule toujours chirale'},
+    {ch:'description',q:'Règles CIP',r:'1 : Z le plus grand prioritaire\n2 : égalité → atomes suivants\n3 : liaison multiple = liaisons simples dupliquées'},
+    {ch:'description',q:'Configuration R ou S',r:'n° 4 derrière, 1 → 2 → 3\nhoraire : R ; anti-horaire : S'},
+    {ch:'description',q:'Dextrogyre, lévogyre, racémique',r:'(+) dévie à droite ; (−) à gauche\nracémique : mélange équimolaire, inactif'},
+    {ch:'description',q:'Pureté optique et excès énantiomérique',r:'p_0 = α / α_0\np = (C_1 − C_2) / C_0 ; ee = 100 p'},
+    {ch:'description',q:'Isomérie Z et E',r:'prioritaires CIP du même côté : Z\nde part et d\'autre : E'},
+    {ch:'description',q:'Nombre de stéréoisomères, méso',r:'n C* : au maximum 2ⁿ\ndeux C* identiques : RR, SS et méso (achiral)'},
+    {ch:'description',q:'Énantiomères ou diastéréoisomères (deux C*)',r:'RR/SS et RS/SR : énantiomères\nles autres couples : diastéréoisomères'},
+    {ch:'description',q:'Réaction régiosélective, régiospécifique',r:'régiosélective : un isomère majoritaire (Markovnikov, Saïtzev)\nrégiospécifique : une seule direction de l\'espace'},
+    {ch:'description',q:'Réaction stéréosélective, stéréospécifique',r:'sélective : un stéréoisomère majoritaire\nspécifique : 2 réactifs stéréoisomères → 2 produits stéréoisomères'}
     ],
   // Électricité : formules des pages /cours/elec/…
   elec:[
@@ -169,7 +197,13 @@ window.FLASHCARDS={
     {ch:'sinusoidal',q:'Facteur de puissance',r:'PF = P / S = cos φ'},
     {ch:'sinusoidal',q:'Méthode de Boucherot',r:'P_T = ΣP ; Q_T = ΣQ\nS_T = √(P_T² + Q_T²) = U I_T\nles S ne s\'additionnent pas'},
     {ch:'sinusoidal',q:'Capacité pour relever le facteur de puissance',r:'C = P (tan φ − tan φ\') / (U² ω)\nP ne change pas, le courant diminue'},
-    {ch:'sinusoidal',q:'Rendement',r:'η = P_U / P_A\nP_A = P_U / η'}
+    {ch:'sinusoidal',q:'Rendement',r:'η = P_U / P_A\nP_A = P_U / η'},
+    {ch:'triphase',q:'Fils d\'un réseau triphasé',r:'3 phases L1, L2, L3 + neutre N (alimentation)\nPE relié à la terre (protection des personnes)'},
+    {ch:'triphase',q:'Tensions simples instantanées',r:'v_1 = V √2 sin ωt\nv_2 = V √2 sin(ωt − 2π/3)\nv_3 = V √2 sin(ωt − 4π/3)'},
+    {ch:'triphase',q:'Tensions simples en complexe',r:'V_1 = [V ; 0°]\nV_2 = [V ; −120°]\nV_3 = [V ; −240°]'},
+    {ch:'triphase',q:'Tensions composées en fonction des simples',r:'u_13 = v_1 − v_3\nu_21 = v_2 − v_1\nu_32 = v_3 − v_2'},
+    {ch:'triphase',q:'Tensions composées instantanées',r:'u_13 = U √2 sin(ωt − π/6)\nu_21 = U √2 sin(ωt − 5π/6)\nu_32 = U √2 sin(ωt − 3π/2)'},
+    {ch:'triphase',q:'Lien entre U et V',r:'U = √3 V (230 V → 400 V)'}
     ],
   // Outils mathématiques : formules des pages /cours/maths/…
   outils:[
