@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Chapitre 3 · Fonctions et structures de contrôle · Informatique embarquée · profbob.fr</title>
+<meta name="description" content="Informatique embarquée, chapitre 3 : créer une fonction, lire un bouton : pull-down et pull-up, if… else et conditions multiples, les boucles while et for. Cours, exemples corrigés et exercices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body data-cours="embarque-controle" data-matiere="embarque" data-ch="controle" data-nota-all data-nota-profil="aucun">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/informatique-embarquee/">← Informatique embarquée</a> · Chapitre 3 sur 4</div>
+  <h1>Fonctions et structures de contrôle</h1>
+  <p class="lead">Créer ses fonctions, lire un bouton (pull-up, pull-down), if… else, && et ||, les boucles while et for.</p>
+  <div class="chips"><span class="chip"><b>4</b> sections</span><span class="chip">≈ 2 h</span><span class="chip">Cours 2, diapos 1 à 26</span><span class="chip">Cours de D. Gheysens</span><span class="chip">Prérequis : <a href="/cours/embarque/arduino/">chapitre 2</a></span></div>
+  <div class="ctools"><a class="btn" href="/mini-ds/?m=embarque&amp;ch=controle">Mini-DS du chapitre ▸</a><a class="btn ghost" href="/flashcards/?m=embarque&amp;ch=controle">Flashcards</a></div>
+  <div class="cprog" id="cprog"><span class="bar"><i></i></span><span class="pv">0 section comprise</span></div>
+</header>
+</div>
+
+<nav class="ctoc" aria-label="Sommaire du chapitre"><div class="in">
+  <a href="#s1"><span class="n">1</span>Fonctions</a>
+  <a href="#s2"><span class="n">2</span>Boutons</a>
+  <a href="#s3"><span class="n">3</span>if, else, && et ||</a>
+  <a href="#s4"><span class="n">4</span>while et for</a>
+  <a href="#exos">Exercices</a>
+  <a href="#train">S'entraîner</a>
+</div></nav>
+
+<div class="wrap">
+<div data-notations="embarque"></div>
+
+<section class="csec" id="s1" data-toc="Fonctions">
+  <div class="shead"><span class="num">1</span><h2>Créer une fonction</h2><span class="meta">chapitre 2, diapos 3 à 8 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une fonction regroupe des instructions sous un nom, pour les réutiliser avec des paramètres différents au lieu de recopier le code.</div>
+  <pre class="code">void blink(int Number, int time) {   // type, nom, paramètres
+  digitalWrite(Number, HIGH);
+  delay(time);
+  digitalWrite(Number, LOW);
+  delay(time);
+}
+
+void loop() {
+  blink(8, 1000);    // LED du port 8 : 1 s
+  blink(9, 2000);    // LED du port 9 : 2 s
+}</pre>
+  <div class="formula key cours">1) type de retour : void (ne renvoie rien), int (un entier), boolean (vrai/faux)
+2) nom de la fonction
+3) paramètres : chacun avec un type et un nom, autant qu'on veut
+4) le contenu, entre accolades { }
+Un programme a au moins deux fonctions : setup() et loop()</div>
+  <div class="trap"><b>Piège.</b> Une fonction déclarée <code>int</code> doit se terminer par <code>return</code> suivi d'une valeur. Si elle ne renvoie rien (allumer une LED, par exemple), on la déclare <code>void</code>.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · quiz des diapos 3 et 4</div>
+    <p>Le programme <code>int Ledpin = 9; pinMode(Ledpin, OUTPUT); digitalWrite(Ledpin, HIGH); delay(2000); digitalWrite(Ledpin, LOW); delay(2000);</code> ne compile pas. Que manque-t-il, et que fait-il une fois corrigé ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <p>Il manque <b>setup()</b> (pour le pinMode) et <b>loop()</b> (pour le clignotement). Corrigé, il fait clignoter la LED du port 9 : 2 s allumée, 2 s éteinte, soit une période de 4 s.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Boutons">
+  <div class="shead"><span class="num">2</span><h2>Lire un bouton : pull-down et pull-up</h2><span class="meta">diapos 9 à 11 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un bouton se lit avec digitalRead. L'état HIGH ou LOW quand on appuie dépend du câblage, d'où les deux montages pull-down et pull-up.</div>
+  <pre class="code">int pinbutton = 8;
+bool value = 0;
+
+void setup() {
+  pinMode(pinbutton, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  value = digitalRead(pinbutton);   // HIGH (1) ou LOW (0)
+  Serial.println(value);
+  delay(1000);
+}</pre>
+  <div class="tw"><table>
+    <tr><th>Montage</th><th>Bouton relâché</th><th>Bouton appuyé</th></tr>
+    <tr><td><b>pull-down</b> (résistance vers 0 V)</td><td>LOW (0 V)</td><td>HIGH (5 V)</td></tr>
+    <tr><td><b>pull-up</b> (résistance vers 5 V)</td><td>HIGH (5 V)</td><td>LOW (0 V)</td></tr>
+  </table></div>
+  <div class="coquille"><b>Coquille du cours (diapo 9).</b> Le code affiché écrit <code>deaiy(1000)</code> : c'est <code>delay(1000)</code>.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="if, else, && et ||">
+  <div class="shead"><span class="num">3</span><h2>if… else et conditions multiples</h2><span class="meta">diapos 12 à 18 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> if teste une condition une seule fois : si elle est vraie, on exécute le bloc ; sinon, le bloc else. Avec && et ||, on combine plusieurs conditions.</div>
+  <div class="formula key cours">A == B   égal              A != B   différent
+A &gt; B    strictement supérieur    A &gt;= B   supérieur ou égal  (et &lt;, &lt;=)
+&amp;&amp;  ET : les deux conditions doivent être vraies
+||  OU : il suffit qu'une des deux soit vraie</div>
+  <div class="coquille"><b>Coquille du cours (diapos 12, 19 et 21).</b> « Différent de » s'écrit <b>!=</b>, pas <code>=!</code>. Écrit <code>A =! B</code>, le programme met « non B » dans A au lieu de comparer. Et attention : <code>=</code> affecte une valeur, <code>==</code> compare.</div>
+  <pre class="code">int value = 0;
+
+void loop() {
+  if (value &lt; 4) {
+    Serial.println(value);
+    delay(1000);
+    value = value + 1;
+  } else {
+    Serial.println("number too big");
+  }
+}
+// affiche 0, 1, 2, 3, puis « number too big » sans fin</pre>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices des diapos 14 et 17</div>
+    <p>Allumer une LED 1 s quand on appuie sur le bouton (montage : le bouton met le port à l'état haut). Puis allumer une LED quand les deux boutons des ports 8 et 9 sont appuyés, et enfin quand l'un des deux l'est.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">int button = 8;
+int led = 9;
+
+void setup() {
+  pinMode(button, INPUT);
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  if (digitalRead(button) == HIGH) {
+    digitalWrite(led, HIGH);
+    delay(1000);
+    digitalWrite(led, LOW);
+  }
+}
+
+// les deux boutons :      if (digitalRead(button1) == HIGH &amp;&amp; digitalRead(button2) == HIGH)
+// au moins un bouton :    if (digitalRead(button1) == HIGH || digitalRead(button2) == HIGH)</pre>
+      <p>Pour que la LED s'éteigne quand on relâche, ajoute un <code>else { digitalWrite(led, LOW); }</code>.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="while et for">
+  <div class="shead"><span class="num">4</span><h2>Les boucles while et for</h2><span class="meta">diapos 19 à 26 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> while répète tant que la condition est vraie ; for répète un nombre de fois connu, avec un compteur. if, while et for peuvent produire le même affichage, mais pas de la même façon.</div>
+  <pre class="code">int variable = 0;
+while (variable &lt; 4) {        // tant que la condition est vraie
+  Serial.println(variable);
+  delay(1000);
+  variable = variable + 1;
+}
+
+for (int i = 0; i &lt; 4; i = i + 1) {   // départ ; condition ; évolution
+  Serial.println(i);
+  delay(1000);
+}</pre>
+  <div class="formula key">for (départ ; condition ; évolution)
+   for (int i = a; i &lt; b; i++)  s'exécute b − a fois (i va de a à b − 1)
+   i n'existe qu'à l'intérieur de la boucle ;  i++ revient à i = i + 1
+while (condition) : la condition est testée avant chaque tour ;
+   si elle ne devient jamais fausse, la boucle ne s'arrête jamais</div>
+  <div class="tw"><table>
+    <tr><th>Programme qui compte jusqu'à 3, placé dans loop()</th><th>Affichage</th></tr>
+    <tr><td>if… else (la variable est déclarée en dehors de loop)</td><td>0 1 2 3, puis « too big » à chaque tour</td></tr>
+    <tr><td>while (variable déclarée en dehors de loop)</td><td>0 1 2 3 une seule fois, puis plus rien</td></tr>
+    <tr><td>for (i recréé à chaque entrée dans la boucle)</td><td>0 1 2 3, puis 0 1 2 3… à chaque tour de loop</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices de la diapo 24</div>
+    <p>1) Une fonction qui fait clignoter une LED un nombre de fois donné. 2) Refaire la fonction delay avec un while, en supposant qu'un tour de boucle dure 1 ms.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">void blink_number(int pin, int number) {
+  for (int i = 0; i &lt; number; i = i + 1) {
+    digitalWrite(pin, HIGH);
+    delay(1000);
+    digitalWrite(pin, LOW);
+    delay(1000);
+  }
+}
+// blink_number(9, 5) : la LED du port 9 clignote 5 fois (10 s en tout)
+
+void delay_while(int time) {
+  int value = 0;
+  while (value &lt; time) {
+    value = value + 1;          // on suppose 1 ms par tour
+  }
+}
+// delay_while(1000) attend environ 1 s</pre>
+      <p>En réalité, un tour de cette boucle dure bien moins d'une milliseconde : c'est pour cela qu'on utilise delay() ou millis(), qui s'appuient sur un timer.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 1 et TD 2</span></div>
+  <div class="ex"><h4>TD 1 · bouton qui inverse l'ordre des LED <span class="tag">sections 2 et 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Pour réagir à <b>un appui</b> (et non à un bouton maintenu), on compare l'état actuel à l'état précédent : <code>if (etatActuel == HIGH && etatAncien == LOW) { etat = !etat; }</code>, puis <code>etatAncien = etatActuel;</code>. C'est la détection de front montant.</p></div></details></div>
+  <div class="ex"><h4>TD 2 · « Hello » qui fait des allers-retours sur le LCD <span class="tag">sections 3 et 4</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>« Hello » fait 5 lettres : sur 16 colonnes, il peut commencer de la colonne 0 à la colonne 11. Une variable <code>sens</code> (+1 ou −1) suffit : à chaque tour, <code>col = col + sens</code>, et on change le signe quand col atteint 0 ou 11.</p></div></details></div>
+</section>
+
+<section class="csec" id="train">
+  <div class="shead"><h2>S'entraîner sur ce chapitre</h2></div>
+  <div class="train">
+    <a href="/mini-ds/?m=embarque&amp;ch=controle"><b>Mini-DS du chapitre ▸</b><span>Valeurs tirées au hasard, corrigé détaillé, note sur 20</span></a>
+    <a href="/flashcards/?m=embarque&amp;ch=controle"><b>Flashcards ▸</b><span>Les formules du chapitre à retourner</span></a>
+    <a href="/mini-ds/?m=embarque&amp;ds=embarque"><b>DS blanc Informatique embarquée ▸</b><span>Tous les chapitres, format DS · DS du 14 au 18 déc.</span></a>
+  </div>
+  <nav class="chnav" aria-label="Chapitres"><a href="/cours/embarque/arduino/"><small>◂ Chapitre 2</small>Arduino</a><a class="next" href="/cours/embarque/temps/"><small>Chapitre 4 ▸</small>Temps réel</a></nav>
+</section>
+
+<p class="credit">Cours « Systèmes embarqués » de D. Gheysens (HEI 1, JUNIA). Cette page en reprend le contenu pour réviser ; les exemples, corrections de TD et remarques sont ajoutés par profbob.</p>
+<footer class="site">Une erreur dans ce cours ? <a href="/contact/?type=erreur&amp;matiere=Informatique embarquée%20%C2%B7%20chapitre%203">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/notations.js"></script>
+<script src="/assets/cours.js"></script>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

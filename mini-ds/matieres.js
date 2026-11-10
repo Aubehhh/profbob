@@ -36,7 +36,6 @@ window.MINIDS_MATIERES=[
    ds:[
      {id:'thermo',nom:'DS Thermodynamique',detail:'Chapitres 1 à 5 · semaine du 14 au 18 déc.',chapitres:['concepts','premier-principe','proprietes','volume-controle','second-principe'],n:8,min:60}
    ]},
-  {id:'embarque',nom:'Informatique embarquée',couleur:'#15803d'},
   {id:'chimie',module:'chimie',nom:'Chimie',couleur:'#0f766e',nota:'thermo',
    banque:()=>window.BANQUE_CHIMIE,
    noms:{composition:'Protons, neutrons, électrons',massemoy:'Masse atomique moyenne',abondance:'Abondance de deux isotopes',photon:'Énergie d\'un photon',raie:'Raie de l\'atome d\'hydrogène',
@@ -95,5 +94,20 @@ window.MINIDS_MATIERES=[
    ],
    ds:[
      {id:'web',nom:'Entraînement Page Web',detail:'Les 4 cours · 10 questions',chapitres:['bases','structure','css','formulaires'],n:10,min:30}
+   ]},
+  {id:'embarque',module:'embarque',nom:'Informatique embarquée',couleur:'#15803d',nota:'aucun',
+   banque:()=>window.BANQUE_EMBARQUE,
+   noms:{bin2dec:'Binaire → décimal',dec2bin:'Décimal → binaire',signe:'Octet signé ou non',complement:'Complément à 2',plage:'Valeurs sur n bits',portes:'Portes logiques',ascii:'Code ASCII',
+     fonction:'Quelle fonction Arduino ?',blink:'Lire un programme Blink',type:'Taille des types',serie:'Lire un programme (moniteur série)',
+     boucle_for:'Lire une boucle for',boucle_while:'Lire une boucle while',ifelse:'Lire un if… else',logique:'Conditions && et ||',pullup:'Pull-up et pull-down',
+     millis:'Temporisation avec millis()',pwm:'PWM : rapport cyclique',pwminverse:'PWM : valeur à envoyer',analogread:'analogRead et conversion',interruption:'Mode d\'interruption',ports:'Ports PWM',timer:'Période d\'un timer'},
+   chapitres:[
+     {id:'systemes',nom:'Systèmes embarqués et binaire',detail:'Binaire, complément à 2, ASCII, portes logiques',q:['bin2dec','dec2bin','signe','complement','plage','portes','ascii']},
+     {id:'arduino',nom:'Premiers programmes Arduino',detail:'Fonctions de base, Blink, types, moniteur série',q:['fonction','blink','type','serie']},
+     {id:'controle',nom:'Fonctions et structures de contrôle',detail:'for, while, if… else, &&, ||, boutons',q:['boucle_for','boucle_while','ifelse','logique','pullup']},
+     {id:'temps',nom:'Temps réel',detail:'millis(), interruptions, analogique, PWM, timers',q:['millis','pwm','pwminverse','analogread','interruption','ports','timer']}
+   ],
+   ds:[
+     {id:'embarque',nom:'Entraînement examen final',detail:'Les 4 chapitres · concepts et lecture de code',chapitres:['systemes','arduino','controle','temps'],n:10,min:45}
    ]}
 ];

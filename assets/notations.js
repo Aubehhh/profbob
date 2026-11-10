@@ -61,6 +61,22 @@
       ['vc','Indice : volume de contrôle (E<sub>vc</sub>, m<sub>vc</sub>, P<sub>th,vc</sub>)','—',[VC]],
       ['Q<sub>C</sub> ; Q<sub>F</sub>','Chaleur échangée avec le réservoir chaud ; froid','J',[S2]]
     ]})(),
+    // Informatique embarquée (D. Gheysens) : vocabulaire et fonctions Arduino
+    embarque:(()=>{const Y='systemes',A='arduino',C='controle',T='temps';return [
+      ['bit ; octet','Chiffre binaire (0 ou 1) ; groupe de 8 bits','—',[Y,A]],
+      ['2ⁿ','Nombre de valeurs codables sur n bits','—',[Y,T]],
+      ['complément à 2','Codage des négatifs : bit de gauche = −128 sur 8 bits','—',[Y]],
+      ['ET, OU, XOR, NON','Portes logiques ; en code : &amp;&amp;, ||, !','—',[Y,C]],
+      ['setup() ; loop()','Exécutée une fois au démarrage ; répétée sans fin','—',[A,C]],
+      ['HIGH ; LOW','État haut (5 V) ; état bas (0 V)','—',[A,C,T]],
+      ['pinMode ; digitalWrite ; digitalRead','Sens d\'un port ; écrire ; lire un état','—',[A,C]],
+      ['delay(ms) ; millis()','Pause bloquante ; temps écoulé depuis le démarrage','ms',[A,C,T]],
+      ['== ; != ; = ','Comparer égal ; différent ; affecter une valeur','—',[C]],
+      ['ISR','Fonction appelée par une interruption (courte, sans delay)','—',[T]],
+      ['analogRead ; analogWrite','Lire 0 à 1023 (A0-A5) ; PWM 0 à 255 (ports ~)','—',[T]],
+      ['α (duty cycle)','Rapport cyclique = état / 255','%',[T]],
+      ['N (prédiviseur)','Divise la fréquence d\'horloge (16 MHz) d\'un timer','—',[T]]
+    ]})(),
     // Création de page Web (R. Gosswiller) : vocabulaire plutôt que notations
     web:(()=>{const B='bases',S='structure',C='css',F='formulaires';return [
       ['balise','Élément HTML entre chevrons : simple (&lt;br /&gt;) ou double (&lt;p&gt;…&lt;/p&gt;)','—',[B,S]],

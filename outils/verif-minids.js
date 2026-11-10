@@ -11,11 +11,11 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'..');
 const ctx={window:{},Math,console};ctx.window.window=ctx.window;vm.createContext(ctx);
-for(const f of ['assets/minids.js','ds/statique/mini-ds/banque.js','mini-ds/banques/thermo.js','mini-ds/banques/chimie.js','mini-ds/banques/elec.js','mini-ds/banques/outils.js','mini-ds/banques/web.js','mini-ds/matieres.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
+for(const f of ['assets/minids.js','ds/statique/mini-ds/banque.js','mini-ds/banques/thermo.js','mini-ds/banques/chimie.js','mini-ds/banques/elec.js','mini-ds/banques/outils.js','mini-ds/banques/web.js','mini-ds/banques/embarque.js','mini-ds/matieres.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
 const W=ctx.window,{F,makeR,_test:{parse,correct,judge}}=W.MiniDS;
 const N=+process.argv[2]||2000,ONLY=process.argv[3];
 // une banque par matière : global de la banque + solveurs indépendants (outils/solveurs/<id>.js)
-const MATS=[{id:'meca',bank:W.BANQUE_STATIQUE},{id:'thermo',bank:W.BANQUE_THERMO},{id:'chimie',bank:W.BANQUE_CHIMIE},{id:'elec',bank:W.BANQUE_ELEC},{id:'outils',bank:W.BANQUE_OUTILS},{id:'web',bank:W.BANQUE_WEB}].filter(m=>!ONLY||m.id===ONLY);
+const MATS=[{id:'meca',bank:W.BANQUE_STATIQUE},{id:'thermo',bank:W.BANQUE_THERMO},{id:'chimie',bank:W.BANQUE_CHIMIE},{id:'elec',bank:W.BANQUE_ELEC},{id:'outils',bank:W.BANQUE_OUTILS},{id:'web',bank:W.BANQUE_WEB},{id:'embarque',bank:W.BANQUE_EMBARQUE}].filter(m=>!ONLY||m.id===ONLY);
 const sig3=x=>{if(x===0)return 0;const e=Math.floor(Math.log10(Math.abs(x)))-2;return Math.round(x/10**e)*10**e};
 const frStr=x=>String(x).replace('.',',').replace('-','−');
 let err=0,total=0;const fail=(m)=>{if(err<40)console.log('  ✗ '+m);err++};

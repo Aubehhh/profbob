@@ -12,7 +12,8 @@
 module.exports={
   // liste « Nouveautés » de l'accueil (la plus récente en premier ; les 4 premières sont affichées)
   nouveautes:[
-    {date:'10 nov.',texte:'Création de page Web : HTML, structure, CSS et formulaires, avec mini-DS et flashcards',url:'/matieres/pages-web/',nouveau:true},
+    {date:'10 nov.',texte:'Informatique embarquée : binaire, Arduino, boucles, interruptions, PWM et timers, avec mini-DS et flashcards',url:'/matieres/informatique-embarquee/',nouveau:true},
+    {date:'10 nov.',texte:'Création de page Web : HTML, structure, CSS et formulaires, avec mini-DS et flashcards',url:'/matieres/pages-web/'},
     {date:'9 nov.',texte:'Outils mathématiques : complexes, dérivation, intégration et trigonométrie, avec mini-DS et flashcards',url:'/matieres/mathematiques/'},
     {date:'9 nov.',texte:'Électricité : les 4 chapitres (continu, théorèmes, sinusoïdal), avec mini-DS et flashcards',url:'/matieres/electricite/'},
     {date:'9 nov.',texte:'Chimie : l\'atome, la classification et les molécules, avec mini-DS et flashcards',url:'/matieres/chimie/'},
@@ -77,7 +78,13 @@ module.exports={
             liens:[['Ch. 1','/cours/thermo/concepts/'],['Ch. 2','/cours/thermo/premier-principe/'],['Ch. 3','/cours/thermo/proprietes/'],['Ch. 4','/cours/thermo/volume-controle/'],['Ch. 5','/cours/thermo/second-principe/'],['Flashcards','/flashcards/?m=thermo']],
             minids:'/mini-ds/?m=thermo&ds=thermo'}]}]},
     {id:'info',couleur:'#be185d',modules:[
-      {id:'embarque',slug:'informatique-embarquee',mono:'IE',chapitres:[],ds:[]},
+      {id:'embarque',slug:'informatique-embarquee',mono:'IE',
+       chapitres:[
+         {id:'systemes',titre:'Systèmes embarqués et codage binaire',url:'/cours/embarque/systemes/'},
+         {id:'arduino',titre:'Premiers programmes Arduino',url:'/cours/embarque/arduino/'},
+         {id:'controle',titre:'Fonctions et structures de contrôle',url:'/cours/embarque/controle/'},
+         {id:'temps',titre:'Temps réel : millis, interruptions, PWM et timers',url:'/cours/embarque/temps/'}],
+       ds:[]},
       {id:'web',slug:'pages-web',mono:'We',
        chapitres:[
          {id:'bases',titre:'Bases du web et du HTML',url:'/cours/web/bases/'},
