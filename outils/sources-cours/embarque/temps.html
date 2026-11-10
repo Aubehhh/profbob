@@ -1,0 +1,169 @@
+
+<section class="csec" id="s1" data-toc="millis()">
+  <div class="shead"><span class="num">1</span><h2>Ne plus bloquer le programme : millis()</h2><span class="meta">diapos 27 à 30 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pendant un delay(), le programme est figé : il ne voit pas un autre bouton. Avec millis(), on note l'heure d'un événement et, à chaque tour de loop, on regarde si le temps voulu est écoulé.</div>
+  <div class="formula key cours">millis() : nombre de millisecondes écoulées depuis le démarrage du programme (unsigned long)
+Principe :  à l'appui → temps1 = millis() et LED allumée
+            à chaque tour → si millis() &gt; temps1 + durée, LED éteinte</div>
+  <pre class="code">void loop() {
+  if (digitalRead(button1) == HIGH) {
+    digitalWrite(led1, HIGH);
+    time1 = millis();               // on retient l'instant de l'appui
+  }
+  if (digitalRead(button2) == HIGH) {
+    digitalWrite(led2, HIGH);
+    time2 = millis();
+  }
+  if (time1 + 1000 < millis()) digitalWrite(led1, LOW);   // 1 s après l'appui
+  if (time2 + 1000 < millis()) digitalWrite(led2, LOW);
+}</pre>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · scénario des diapos 29 et 30</div>
+    <p>Bouton 1 appuyé à 1200 ms, bouton 2 à 1500 ms, puis à nouveau le bouton 1 à 2000 ms. Chaque LED reste allumée 1000 ms après le dernier appui sur son bouton.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Sans le 2ᵉ appui : LED 1 éteinte à 1200 + 1000 = 2200 ms ;  LED 2 éteinte à 1500 + 1000 = 2500 ms
+Avec le 2ᵉ appui à 2000 ms : time1 = 2000  →  LED 1 éteinte à 3000 ms ;  LED 2 toujours à 2500 ms</div>
+      <p>Avec delay(), la LED 2 ne se serait même pas allumée : le programme était bloqué pendant la seconde de la LED 1.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 3 : trois LED à des rythmes différents</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">unsigned long previousTimeR = 0;
+unsigned long intervalR = 700;     // la LED rouge change d'état toutes les 700 ms
+bool ledStateR = LOW;
+
+void loop() {
+  unsigned long now = millis();
+  if (now - previousTimeR > intervalR) {
+    previousTimeR = now;
+    ledStateR = !ledStateR;          // on inverse l'état
+    digitalWrite(LedRouge, ledStateR);
+  }
+  // même bloc pour l'orange (1300 ms) et la verte (1700 ms)
+}</pre>
+      <p>Les trois LED clignotent chacune à leur rythme, en même temps, sans aucun delay(). On utilise des <code>unsigned long</code> : un int (16 bits) déborderait au bout de 32,8 s.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Interruptions">
+  <div class="shead"><span class="num">2</span><h2>Les interruptions</h2><span class="meta">diapos 31 à 33 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Au lieu de vérifier un bouton à chaque tour de loop, on demande au microcontrôleur de nous prévenir : dès que le port change, il interrompt le programme, exécute une petite fonction, puis reprend.</div>
+  <pre class="code">volatile bool value = LOW;
+
+void setup() {
+  pinMode(led, OUTPUT);
+  pinMode(button, INPUT);
+  attachInterrupt(digitalPinToInterrupt(button), blink, CHANGE);   // toujours dans setup()
+}
+
+void loop() {
+  digitalWrite(led, value);
+}
+
+void blink() {          // ISR : courte, sans valeur de retour, sans delay()
+  value = !value;
+}</pre>
+  <div class="formula key cours">attachInterrupt(port surveillé, fonction ISR, mode)
+   LOW      tant que le port est à l'état bas
+   CHANGE   à chaque changement d'état
+   RISING   quand le port passe de BAS à HAUT (front montant)
+   FALLING  quand le port passe de HAUT à BAS (front descendant)
+Si une interruption arrive pendant qu'une autre s'exécute, elle attend la fin de la première.</div>
+  <div class="coquille"><b>Coquille du cours (diapo 31).</b> Sur l'Uno, les ports d'interruption sont les ports <b>2 et 3</b> (comme le dit la diapo 24 du chapitre 1). « 0 et 1 » sont les numéros d'interruption correspondants (INT0, INT1), pas les ports : écris <code>digitalPinToInterrupt(2)</code> pour éviter la confusion.</div>
+  <div class="trap"><b>Pièges du TD 3 (compteur d'appuis).</b>
+    <ul>
+      <li><code>attachInterrupt</code> se place dans <b>setup()</b>, une seule fois, et non dans loop().</li>
+      <li>Une variable modifiée dans l'ISR doit être déclarée <b>volatile</b> (<code>volatile int compteur = 0;</code>).</li>
+      <li>On n'écrit pas sur l'écran LCD dans l'ISR, car c'est trop long : l'ISR incrémente le compteur, et loop() s'occupe de l'affichage.</li>
+    </ul></div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Analogique et PWM">
+  <div class="shead"><span class="num">3</span><h2>Entrée analogique et sortie PWM</h2><span class="meta">diapos 34 à 38 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> En entrée, le convertisseur transforme une tension de 0 à 5 V en un nombre de 0 à 1023. En sortie, on ne sait faire que 0 ou 5 V : on simule une tension intermédiaire en alternant très vite (PWM), et c'est la moyenne qui compte.</div>
+  <div class="formula key cours">analogRead(A0)          port A0 à A5 → valeur sur 10 bits, de 0 à 1023
+   valeur ≈ U × 1023 / 5
+analogWrite(port, état)  ports ~ seulement : 3, 5, 6, 9, 10, 11 → état sur 8 bits, de 0 à 255
+   rapport cyclique α = état / 255 = durée à 5 V / période
+   tension moyenne = α × 5 V        (analogWrite(motor, 150) : α = 59 %, soit 2,94 V)</div>
+  <div class="tw"><table>
+    <tr><th>analogWrite</th><th>0</th><th>64</th><th>127</th><th>191</th><th>255</th></tr>
+    <tr><td>rapport cyclique</td><td>0 %</td><td>25 %</td><td>50 %</td><td>75 %</td><td>100 %</td></tr>
+    <tr><td>tension moyenne</td><td>0 V</td><td>1,25 V</td><td>2,5 V</td><td>3,75 V</td><td>5 V</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice des diapos 37 et 38</div>
+    <p>Lire un capteur (0 à 1023) et transmettre la valeur à un moteur (0 à 255).</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">int motor = 6;
+int sensor = A0;
+int value = 0;
+
+void setup() {
+  pinMode(motor, OUTPUT);
+  pinMode(sensor, INPUT);
+}
+
+void loop() {
+  value = analogRead(sensor);          // 0 à 1023
+  value = value / 4;                   // ou map(value, 0, 1023, 0, 255)
+  analogWrite(motor, value);           // 0 à 255
+}</pre>
+      <p>Diviser par 4 donne 0 à 255 (1023 / 4 = 255 en division entière).</p>
+    </div></details>
+  </div>
+  <div class="coquille"><b>Coquille du cours (diapo 38) : la division entière.</b> La correction écrit <code>value = value * (255/1023);</code>. Entre deux entiers, <code>255/1023</code> vaut <b>0</b> en C : le moteur reçoit toujours 0. Il faut multiplier d'abord (<code>value * 255 / 1023</code>, en long, car 1023 × 255 dépasse la limite d'un int), diviser par 4, ou utiliser <code>map()</code>.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Timers">
+  <div class="shead"><span class="num">4</span><h2>Interruptions internes : les timers</h2><span class="meta">diapos 39 à 43 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un timer est un registre qui compte tout seul, au rythme de l'horloge, pendant que le programme fait autre chose. Quand il déborde (ou atteint une valeur choisie), il lève un drapeau qui peut déclencher une interruption.</div>
+  <div class="formula key cours">Horloge 16 MHz : un coup tous les 1/16×10⁶ = 62,5 ns
+Timer 8 bits : compte de 0 à 255, puis déborde (overflow) et repart à 0
+   débordement tous les 256 × 62,5 ns = 16 µs
+Prédiviseur N : divise la fréquence →  durée d'un pas = N / 16 MHz
+   période de débordement = 256 × N / 16×10⁶   (N = 1024 : 16,4 ms, soit environ 61 Hz)</div>
+  <div class="tw"><table>
+    <tr><th>Timer</th><th>Taille</th><th>Utilisé par</th></tr>
+    <tr><td>Timer0</td><td>8 bits</td><td>delay(), millis()</td></tr>
+    <tr><td>Timer1</td><td>16 bits</td><td>bibliothèque Servo</td></tr>
+    <tr><td>Timer2</td><td>8 bits</td><td>tone()</td></tr>
+  </table></div>
+  <ul>
+    <li>Registres du Timer2 : <b>TCNT2</b> (valeur du compteur), <b>TCCR2B</b> (contrôle, dont le prédiviseur), <b>TIFR2</b> (drapeaux), <b>TIMSK2</b> (autoriser les interruptions), <b>OCR2A / OCR2B</b> (valeurs de comparaison).</li>
+    <li><b>Mode normal</b> : le timer compte jusqu'à son maximum (255), signale le débordement et repart de 0.</li>
+    <li><b>Mode CTC</b> (Clear Timer on Compare) : il compte jusqu'à une valeur choisie (par exemple 175), signale puis repart de 0. On règle ainsi une période précise.</li>
+  </ul>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · périodes d'un timer 8 bits</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">N = 64 :   pas = 64 / 16×10⁶ = 4 µs ;      débordement = 256 × 4 µs = 1,024 ms
+N = 1024 : pas = 64 µs ;                       débordement = 256 × 64 µs = 16,384 ms (≈ 61 Hz)
+CTC à 175 avec N = 1024 : 176 pas (0 à 175) × 64 µs = 11,264 ms</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Le timer compte de 0 à 255, ce qui fait <b>256</b> pas, pas 255. Et en CTC jusqu'à OCR, il y a OCR + 1 pas.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 3 et quiz de la diapo 44</span></div>
+  <div class="ex"><h4>Quiz de révision <span class="tag">tout le chapitre</span></h4>
+    <details class="hint"><summary>Réponses</summary><div><p>Les 3 structures de contrôle : <span class="res">if… else, while, for</span>. Remplacer delay() : <span class="res">millis()</span>. Réagir à un événement : <span class="res">les interruptions</span>. Ports analogiques : <span class="res">A0 à A5 en entrée, 3, 5, 6, 9, 10, 11 (~) en sortie PWM</span>.</p></div></details></div>
+  <div class="ex"><h4>TD 3 · chronomètre sur l'écran LCD <span class="tag">section 1</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Compte des dixièmes de seconde, puis convertis : 10 dixièmes = 1 s, 60 s = 1 min, 60 min = 1 h. Un if suffit à chaque passage (<code>if (d >= 10) { d -= 10; s++; }</code>), il n'y a pas besoin de boucle for. Pour une vraie précision, utilise millis() plutôt que delay(100) : le temps d'affichage s'ajoute à chaque tour.</p></div></details></div>
+</section>
+
+<section class="csec" id="eval">
+  <div class="shead"><h2>Comment le module est noté</h2><span class="meta">diapo 45</span></div>
+  <ul>
+    <li><b>TP 5</b> : exercices en binôme, notés sur le fonctionnement du programme et la discussion.</li>
+    <li><b>Rapport de projet</b> (sessions des TP 7 et 8), à rendre quelques jours après le TP 8.</li>
+    <li><b>Examen final</b> : compréhension des concepts et lecture de code, avec <b>une feuille A4 manuscrite</b> autorisée. Le mini-DS et les flashcards de ce module servent à le préparer.</li>
+  </ul>
+</section>

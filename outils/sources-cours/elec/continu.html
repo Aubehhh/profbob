@@ -1,0 +1,208 @@
+
+<section class="csec" id="s1" data-toc="Dipôles et conventions">
+  <div class="shead"><span class="num">1</span><h2>Éléments d'un circuit et conventions de fléchage</h2><span class="meta">diapos 3 et 4 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> On repère la tension par une flèche <b>à côté</b> du dipôle et le courant par une flèche <b>sur le fil</b>. Le sens choisi pour ces flèches fixe le signe dans les formules.</div>
+  <ul>
+    <li>Un circuit comporte au minimum une <b>source</b> et un <b>récepteur</b> reliés par des connexions.</li>
+    <li>Dipôles de base : source de tension continue, source de courant continu, résistance, bobine, condensateur.</li>
+  </ul>
+  <div class="tw"><table>
+    <tr><th>Convention</th><th>Flèches tension et courant</th><th>Usage habituel</th></tr>
+    <tr><td><b>générateur</b></td><td>dans le <b>même sens</b></td><td>sources</td></tr>
+    <tr><td><b>récepteur</b></td><td>en <b>sens opposés</b></td><td>résistances, récepteurs</td></tr>
+  </table></div>
+  <div class="retiens">Changer de convention change le signe de la relation entre u et i : en récepteur u = R i, en générateur u = −R i pour la même résistance.</div>
+  <div class="formula key">Bilan de puissance : p = u × i
+   convention récepteur : p &gt; 0 → le dipôle reçoit (fonctionne en récepteur)
+   convention générateur : p &gt; 0 → le dipôle fournit (fonctionne en générateur)</div>
+  <div class="quiz">
+    <div class="q"><p>En convention récepteur, les flèches de u et de i sont :</p>
+      <div class="opts"><button>dans le même sens</button><button data-ok="1">de sens opposés</button><button>toujours perpendiculaires</button></div>
+      <div class="fb" hidden>Récepteur : sens opposés. Générateur : même sens.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Résistance d'un fil">
+  <div class="shead"><span class="num">2</span><h2>Résistance d'un conducteur et influence de la température</h2><span class="meta">diapos 5 à 10 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> La résistance d'un fil dépend du matériau (résistivité ρ), de sa longueur et de sa section : plus il est long et fin, plus il résiste. Elle augmente aussi avec la température.</div>
+  <p>Les isolants ont une résistance infinie. Dans les conducteurs, ce sont les électrons libres qui portent le courant. Pour transporter l'énergie en limitant les pertes par effet Joule, on choisit des matériaux très peu résistants (cuivre, aluminium) ; les supraconducteurs (résistance nulle) ne fonctionnent qu'à très basse température.</p>
+  <div class="formula key cours">R = ρ × l / S
+   R en Ω ; ρ (résistivité) en Ω·m ; l en m ; S en m²</div>
+  <div class="tw"><table>
+    <tr><th>Matériau</th><th>ρ₀ (Ω·m)</th><th>a₀ (°C⁻¹)</th></tr>
+    <tr><td>Argent</td><td>1,5×10⁻⁸</td><td>4,5×10⁻³</td></tr>
+    <tr><td>Cuivre</td><td>1,6×10⁻⁸</td><td>4×10⁻³</td></tr>
+    <tr><td>Aluminium</td><td>2,6×10⁻⁸</td><td>4,5×10⁻³</td></tr>
+    <tr><td>Tungstène</td><td>5×10⁻⁸</td><td>5×10⁻³</td></tr>
+    <tr><td>Fer</td><td>8,5×10⁻⁸</td><td>7×10⁻³</td></tr>
+    <tr><td>Laiton (Cu 60 %, Zn 40 %)</td><td>7,5×10⁻⁸</td><td>1,5×10⁻³</td></tr>
+    <tr><td>Ferronickel (Fe 75 %, Ni 25 %)</td><td>80×10⁻⁸</td><td>0,9×10⁻³</td></tr>
+  </table></div>
+  <div class="formula key cours">Résistivité à θ °C :  ρ_θ = ρ₀ (1 + a₀ θ)     (relation affine)
+Résistance à θ °C :   R_θ = R₀ (1 + a₀ θ)
+   ρ₀, R₀ : valeurs à 0 °C ; a₀ : coefficient de température (°C⁻¹) ; θ en °C</div>
+  <div class="trap"><b>Piège : on part toujours de 0 °C.</b> Si on connaît R à 15 °C, on ne peut pas écrire R₉₀ = R₁₅ (1 + a₀ × 75). Il faut d'abord revenir à R₀ = R₁₅ / (1 + a₀ × 15), puis repartir vers 90 °C.</div>
+  <div class="trap"><b>Piège : ligne bifilaire.</b> Une ligne « bifilaire » de 100 m comporte deux fils (aller et retour) : la longueur à mettre dans R = ρ l / S est 200 m.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices N°2 et N°3 (diapo 10)</div>
+    <p>N°2 : un rhéostat fait 620 Ω à 0 °C, a₀ = 0,004 °C⁻¹. Résistance à 50 °C ?<br>N°3 : un enroulement fait 0,424 Ω à 15 °C, puis 0,520 Ω après 2 h de fonctionnement (a₀ = 0,004 °C⁻¹). Température atteinte ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">N°2 : R₅₀ = 620 × (1 + 0,004 × 50) = 620 × 1,2 = 744 Ω
+
+N°3 : R₀ = 0,424 / (1 + 0,004 × 15) = 0,424 / 1,06 = 0,400 Ω
+      0,520 = 0,400 × (1 + 0,004 θ)  →  1 + 0,004 θ = 1,3  →  θ = 75 °C</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · la ligne bifilaire (diapo 7)</div>
+    <p>Une ligne bifilaire en cuivre a une longueur de 100 m et une section de 15 mm². Résistance de la ligne ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">l = 2 × 100 = 200 m ;  S = 15 mm² = 15×10⁻⁶ m²
+R = 1,6×10⁻⁸ × 200 / 15×10⁻⁶ = 0,213 Ω</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>On double la longueur d'un fil et on double sa section. Sa résistance :</p>
+      <div class="opts"><button>double</button><button data-ok="1">ne change pas</button><button>est divisée par 4</button></div>
+      <div class="fb" hidden>R = ρ l / S : l × 2 et S × 2 se compensent.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Ohm et associations">
+  <div class="shead"><span class="num">3</span><h2>Loi d'Ohm, associations série et parallèle</h2><span class="meta">diapos 11 à 16 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pour une résistance, la tension est proportionnelle au courant. Plusieurs résistances peuvent être remplacées par une seule, équivalente, pour simplifier les calculs.</div>
+  <div class="formula key cours">Loi d'Ohm (convention récepteur) :  u = R × i   ;  en continu : U = R × I
+   U en V ; R en Ω ; I en A</div>
+  <div class="formula key cours">Série (même courant) :        R_éq = R₁ + R₂ + R₃
+Parallèle (même tension) :    1/R_éq = 1/R₁ + 1/R₂ + 1/R₃
+   deux résistances en parallèle : R_éq = R₁R₂ / (R₁ + R₂)</div>
+  <div class="retiens"><b>Remarques du cours.</b> En série, R<sub>éq</sub> est toujours plus grande que la plus grande des résistances. En parallèle, R<sub>éq</sub> est toujours plus petite que la plus petite.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°4 (diapo 12)</div>
+    <p>À 20 °C, un rhéostat est traversé par 0,5 A sous 135 V. À chaud, il faut 160 V pour le même courant. a₀ = 0,004 °C⁻¹ ; fil de section 0,1 mm², ρ₀ = 80×10⁻⁸ Ω·m. Résistances à froid et à chaud, température atteinte, longueur du fil ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">R₂₀ = 135 / 0,5 = 270 Ω ;   R_chaud = 160 / 0,5 = 320 Ω
+R₀ = 270 / (1 + 0,004 × 20) = 270 / 1,08 = 250 Ω
+320 = 250 × (1 + 0,004 θ)  →  1 + 0,004 θ = 1,28  →  θ = 70 °C
+l = R₀ × S / ρ₀ = 250 × 0,1×10⁻⁶ / 80×10⁻⁸ = 31,25 m</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · l'exercice de la diapo 16</div>
+    <p>R₁ est en série avec l'ensemble (R₂ ∥ R₃). On donne R₁ + R₂ = 165 Ω, R₂ = 100 Ω, R₃ = 50 Ω.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">R_péq = R₂R₃ / (R₂ + R₃) = 100 × 50 / 150 = 33,3 Ω
+R₁ = 165 − 100 = 65 Ω
+R_séq = R₁ + R_péq = 65 + 33,3 = 98,3 Ω</div>
+      <p>« R₁ + R₂ = 165 Ω » est sans doute une coquille pour R₁ = 165 Ω. Dans ce cas, R<sub>séq</sub> = 165 + 33,3 = 198,3 Ω.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Deux résistances de 10 Ω en parallèle équivalent à :</p>
+      <div class="opts"><button>20 Ω</button><button>10 Ω</button><button data-ok="1">5 Ω</button></div>
+      <div class="fb" hidden>R₁R₂/(R₁+R₂) = 100/20 = 5 Ω : deux résistances égales en parallèle donnent la moitié.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Potentiomètre, rhéostat">
+  <div class="shead"><span class="num">4</span><h2>Potentiomètre et rhéostat</h2><span class="meta">diapos 17 et 18 · 10 min</span></div>
+  <div class="idee"><b>L'idée.</b> Même objet (une résistance avec un curseur), deux branchements : à 3 bornes, c'est un potentiomètre qui règle une tension ; à 2 bornes, c'est un rhéostat, une résistance réglable.</div>
+  <ul>
+    <li><b>Potentiomètre</b> : 3 connexions (A, B et le curseur C). La tension de sortie V<sub>s</sub> dépend de la position du curseur : <b>V<sub>s</sub> = V<sub>e</sub></b> curseur en A, <b>V<sub>s</sub> = 0</b> curseur en B. On obtient une tension continue réglable.</li>
+    <li><b>Rhéostat</b> : c'est un dipôle. Le curseur place en série une résistance réglable, ce qui modifie la tension aux bornes de la résistance R du circuit.</li>
+  </ul>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Lois de Kirchhoff">
+  <div class="shead"><span class="num">5</span><h2>Loi des mailles et loi des nœuds de Kirchhoff</h2><span class="meta">diapos 19 à 21 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> En faisant le tour d'une boucle, on revient au même potentiel : les tensions s'annulent. À un nœud, il ne s'accumule pas de charges : ce qui arrive repart.</div>
+  <div class="formula key cours">Loi des mailles (LMK) : la somme algébrique des tensions le long d'une maille est nulle.
+   On choisit un sens de parcours : une tension dont la flèche est dans ce sens compte +, sinon −.
+Loi des nœuds (LNK) : la somme algébrique des intensités à un nœud est nulle
+   (somme des courants qui arrivent = somme des courants qui partent).</div>
+  <p>Dans un circuit à une seule maille, tous les dipôles sont en série et traversés par le même courant i. Exemple de la diapo 21 : i₁ + i₅ + i₄ − i₂ − i₃ = 0, soit i₁ + i₅ + i₄ = i₂ + i₃.</p>
+  <figure>
+    <svg viewBox="0 0 360 230" width="360" role="img" aria-label="Maille à trois sources E1, E2, E3 et six résistances">
+      <g fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M60 40 H300 V190 H60 Z"/>
+      </g>
+      <g fill="var(--paper,#fff)" stroke="currentColor" stroke-width="1.6">
+        <rect x="90" y="32" width="40" height="16"/><rect x="220" y="32" width="40" height="16"/>
+        <rect x="52" y="65" width="16" height="36"/><rect x="292" y="65" width="16" height="36"/>
+        <rect x="120" y="182" width="40" height="16"/><rect x="200" y="182" width="40" height="16"/>
+        <circle cx="175" cy="40" r="13"/><circle cx="60" cy="145" r="13"/><circle cx="300" cy="145" r="13"/>
+      </g>
+      <g font-size="12" fill="currentColor" font-family="inherit">
+        <text x="100" y="24">R₂</text><text x="230" y="24">R₄</text><text x="22" y="88">R₁</text><text x="316" y="88">R₃</text>
+        <text x="130" y="216">R₆</text><text x="210" y="216">R₅</text>
+        <text x="168" y="70">E₂ ←</text><text x="14" y="150">E₁ ↑</text><text x="318" y="150">E₃ ↑</text>
+        <text x="66" y="34">← i</text>
+        <text x="120" y="120" fill="#1f9d55">sens de parcours : horaire</text>
+      </g>
+    </svg>
+    <figcaption>Le circuit de l'exercice de la diapo 20 : le courant i est fléché dans le sens anti-horaire, le sens de parcours est horaire.</figcaption>
+  </figure>
+  <div class="coquille"><b>Coquille du cours (diapo 19).</b> L'équation de maille est écrite « E₁ + R₁i + R₂i − E₁ + R₄i + R₃i − E₁ + R₅i + R₆i = 0 ». Les deux derniers « E₁ » sont en fait <b>E₂ et E₃</b> : E₁ − E₂ − E₃ + (R₁ + R₂ + R₃ + R₄ + R₅ + R₆) i = 0.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice de la diapo 20</div>
+    <p>E₁ = 24 V, E₂ = 7 V, E₃ = 11 V ; R₁ = 2 Ω, R₂ = 3,5 Ω, R₃ = 1 Ω, R₄ = 1,5 Ω, R₅ = 4 Ω, R₆ = 3 Ω. Calcule i, puis donne le mode de fonctionnement des trois sources.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Sens horaire : E₁ + R₁i + R₂i − E₂ + R₄i + R₃i − E₃ + R₅i + R₆i = 0
+ΣR = 2 + 3,5 + 1 + 1,5 + 4 + 3 = 15 Ω
+i = (E₂ + E₃ − E₁) / ΣR = (7 + 11 − 24) / 15 = −0,4 A</div>
+      <p>i &lt; 0 : le courant réel (0,4 A) circule dans le sens horaire, à l'inverse de la flèche. Il traverse E₁ dans le sens de sa flèche de tension : <b>E₁ est générateur</b> (elle fournit 24 × 0,4 = 9,6 W). Il traverse E₂ et E₃ contre leur flèche : <b>E₂ et E₃ sont récepteurs</b> (2,8 W et 4,4 W). Bilan : 2,8 + 4,4 + 15 × 0,4² = 9,6 W. ✓</p>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Un courant négatif n'est pas une erreur : il signifie que le courant réel circule dans le sens contraire de la flèche choisie. On garde le signe dans la suite des calculs.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Diviseurs">
+  <div class="shead"><span class="num">6</span><h2>Diviseur de tension et diviseur de courant</h2><span class="meta">diapos 22 et 23 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Deux résistances en série se partagent la tension, proportionnellement à leur valeur. Deux résistances en parallèle se partagent le courant, et c'est la plus petite qui en prend le plus.</div>
+  <div class="formula key cours">Diviseur de tension (R₁ et R₂ en série, sortie à vide : I_s = 0) :
+   V_s = V_e × R₂ / (R₁ + R₂)        (tension aux bornes de R₂)
+Diviseur de courant (R₁ et R₂ en parallèle, courant total I) :
+   i₁ = I × R₂ / (R₁ + R₂)            (courant dans R₁ : c'est l'AUTRE résistance au numérateur)</div>
+  <div class="retiens"><b>Pour mémoriser.</b> Tension : « la résistance dont on veut la tension, sur la somme ». Courant : « l'autre résistance, sur la somme ».</div>
+  <div class="trap"><b>Piège : le diviseur de tension suppose I<sub>s</sub> = 0.</b> Si une charge est branchée sur la sortie, elle est en parallèle avec R₂ : il faut remplacer R₂ par R₂ ∥ R<sub>charge</sub> avant d'appliquer la formule.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · les cas particuliers des diapos 22 et 23</div>
+    <p>a) V<sub>e</sub> = 12 V, R₁ = 1 kΩ, R₂ = 2 kΩ : V<sub>s</sub> à vide, puis avec une charge de 2 kΩ en parallèle sur R₂.<br>b) Diviseur de courant avec R₂ = 0 : que vaut i₁ ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">a) à vide : V_s = 12 × 2 / (1 + 2) = 8 V
+   avec charge : R₂ ∥ 2 kΩ = 1 kΩ  →  V_s = 12 × 1 / (1 + 1) = 6 V
+b) i₁ = I × 0 / (R₁ + 0) = 0 : tout le courant passe dans le court-circuit R₂ = 0.</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Un courant de 3 A se partage entre 10 Ω et 20 Ω en parallèle. Le courant dans 10 Ω vaut :</p>
+      <div class="opts"><button>1 A</button><button data-ok="1">2 A</button><button>1,5 A</button></div>
+      <div class="fb" hidden>i = 3 × 20 / 30 = 2 A : la plus petite résistance prend le plus de courant.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">feuille d'exercices complémentaires, N°1 à N°8</span></div>
+  <div class="ex"><h4>N°1 · résistivité d'un radiateur <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>ρ = R S / l = 32,3 × 0,8×10⁻⁶ / 2 : <span class="res">ρ = 1,29×10⁻⁵ Ω·m</span>.</p></div></details></div>
+  <div class="ex"><h4>N°2 · moteur à 90 °C <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Revenir à 0 °C : R₀ = 0,636 / 1,06 = 0,600 Ω, puis R₉₀ = 0,600 × 1,36 : <span class="res">R₉₀ = 0,816 Ω</span>.</p></div></details></div>
+  <div class="ex"><h4>N°3 · coefficient de température <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>R₀ = 120 / 2,48 = 48,39 Ω et R₆₀ = 120 / 2 = 60 Ω ; a₀ = (R₆₀/R₀ − 1)/60 : <span class="res">a₀ = 4,0×10⁻³ °C⁻¹</span>.</p></div></details></div>
+  <div class="ex"><h4>N°4 · rhéostat de 120 Ω <span class="tag">sections 2 et 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>U<sub>max</sub> = R I<sub>max</sub> = 120 × 2 = <span class="res">240 V</span>. Section S = π d²/4 = 7,85×10⁻⁷ m², ρ = R S / l : <span class="res">ρ = 3,14×10⁻⁶ Ω·m</span>.</p></div></details></div>
+  <div class="ex"><h4>N°5 · chute de tension en ligne <span class="tag">section 2</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Ligne bifilaire : l = 200 m. R = 1,7×10⁻⁸ × 200 / 15×10⁻⁶ = <span class="res">0,227 Ω</span> ; chute ΔU = R I = <span class="res">9,07 V</span> ; tension à l'arrivée 240 − 9,07 = <span class="res">230,9 V</span>.</p></div></details></div>
+  <div class="ex"><h4>N°6 · résistance inconnue en série <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>R<sub>éq</sub> = 120 / 4 = 30 Ω, donc <span class="res">R₂ = 30 − 7,5 − 13 = 9,5 Ω</span> ; tensions <span class="res">U₁ = 30 V, U₂ = 38 V, U₃ = 52 V</span> (somme 120 V ✓).</p></div></details></div>
+  <div class="ex"><h4>N°7 · courant partagé entre trois résistances <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>1/R<sub>éq</sub> = 1/14 + 1/7 + 1/4,2 → R<sub>éq</sub> = 2,21 Ω ; U = 19 × 2,21 = 42 V ; <span class="res">I₁ = 3 A, I₂ = 6 A, I₃ = 10 A</span>.</p></div></details></div>
+  <div class="ex"><h4>N°8 · résistance équivalente vue de A et C <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Repère les groupements sur le schéma : deux résistances branchées entre les mêmes nœuds sont en parallèle ; un seul chemin sans nœud intermédiaire, c'est de la série. Réduis le circuit pas à pas jusqu'à une seule résistance entre A et C. Si R₁ ∥ R₂ est entre A et B et R₃ ∥ R₄ entre B et C : R<sub>éq</sub> = 4,67 + 2,86 = 7,52 Ω.</p></div></details></div>
+</section>

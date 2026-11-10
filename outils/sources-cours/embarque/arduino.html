@@ -1,0 +1,167 @@
+
+<section class="csec" id="s1" data-toc="IDE et Arduino">
+  <div class="shead"><span class="num">1</span><h2>L'IDE et la carte Arduino Uno</h2><span class="meta">diapos 22 à 33 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> On écrit le programme sur l'ordinateur dans un IDE, qui le compile puis le téléverse dans la carte. La carte exécute ensuite le programme toute seule.</div>
+  <ul>
+    <li><b>IDE</b> (environnement de développement intégré) : écrire le code, le <b>compiler</b> (le traduire pour le microcontrôleur visé), le <b>téléverser</b> dans la carte. Il fournit aussi le moniteur série, la gestion des cartes et des bibliothèques, la console d'erreurs.</li>
+    <li>Arduino IDE utilise un langage proche du C++. Arduino est open source, avec une grande communauté (arduino.cc) et beaucoup de bibliothèques.</li>
+    <li>Avant de téléverser : choisir le type de carte et le port de l'ordinateur.</li>
+  </ul>
+  <div class="tw"><table>
+    <tr><th>Sur l'Arduino Uno</th><th>À retenir</th></tr>
+    <tr><td>5 V et GND (0 V, masse)</td><td>alimentation des montages</td></tr>
+    <tr><td>Entrées analogiques A0 à A5</td><td>tension de 0 à 5 V convertie sur 10 bits : de 0 à 1023</td></tr>
+    <tr><td>Entrées/sorties numériques</td><td>chacune en entrée ou en sortie, signaux 0 V / 5 V</td></tr>
+    <tr><td>Ports marqués ~ (3, 5, 6, 9, 10, 11)</td><td>sortie « analogique » PWM, valeur de 0 à 255</td></tr>
+    <tr><td>Ports 2 et 3</td><td>interruptions</td></tr>
+    <tr><td>Ports 0 et 1</td><td>communication série</td></tr>
+  </table></div>
+  <div class="retiens"><b>En TP :</b> couper l'alimentation avant de modifier un branchement, carte posée à plat sans rien dessous (court-circuit), et ni nourriture ni boisson sur la table.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Structure d'un programme">
+  <div class="shead"><span class="num">2</span><h2>Structure d'un programme Arduino</h2><span class="meta">diapos 34 à 37 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Trois parties : on déclare les variables, setup() s'exécute une fois au démarrage, puis loop() se répète à l'infini.</div>
+  <pre class="code">int variable1 = 11;          // 1) déclaration des variables
+
+void setup() {               // 2) une seule fois, au démarrage
+  Serial.begin(9600);        //    ouvre le moniteur série à 9600 bauds
+}
+
+void loop() {                // 3) en boucle, sans fin
+  Serial.println(variable1); //    affiche 11
+  delay(1000);               //    pause de 1000 ms = 1 s
+}</pre>
+  <div class="tw"><table>
+    <tr><th>Type</th><th>Taille sur Uno</th><th>Valeurs</th></tr>
+    <tr><td>byte</td><td>8 bits</td><td>0 à 255</td></tr>
+    <tr><td>int</td><td>16 bits</td><td>−32 768 à 32 767</td></tr>
+    <tr><td>unsigned long</td><td>32 bits</td><td>0 à 4 294 967 295 (pour millis())</td></tr>
+    <tr><td>bool (boolean)</td><td>1 octet</td><td>true / false</td></tr>
+    <tr><td>String</td><td>variable</td><td>du texte</td></tr>
+  </table></div>
+  <div class="coquille"><b>Coquille du cours (diapo 34).</b> Un booléen « sur 1 bit » : en mémoire, un bool Arduino occupe <b>1 octet</b> (8 bits), même s'il ne sert qu'à stocker vrai ou faux.</div>
+  <ul>
+    <li>Couleurs de l'IDE : fonctions connues en orange, constantes (HIGH, OUTPUT…) en bleu, commentaires en gris (<code>// commentaire</code>).</li>
+    <li><b>Chaque instruction se termine par un point-virgule.</b></li>
+  </ul>
+  <div class="trap"><b>Piège.</b> Sans delay(), loop() tourne des milliers de fois par seconde : le « 11 » s'affiche en continu, très vite. Avec <code>delay(1000)</code>, il s'affiche une fois par seconde.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Sorties, Blink">
+  <div class="shead"><span class="num">3</span><h2>Contrôler une sortie : le programme Blink</h2><span class="meta">diapos 38 à 41 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> On déclare le port en sortie avec pinMode, puis on l'allume et l'éteint avec digitalWrite. Il faut un délai après chaque changement, sinon le clignotement est trop rapide pour être vu.</div>
+  <pre class="code">int Ledpin = 11;
+
+void setup() {
+  pinMode(Ledpin, OUTPUT);       // le port 11 devient une sortie
+}
+
+void loop() {
+  digitalWrite(Ledpin, HIGH);    // 5 V : LED allumée
+  delay(1000);
+  digitalWrite(Ledpin, LOW);     // 0 V : LED éteinte
+  delay(1000);
+}</pre>
+  <div class="formula key">pinMode(port, OUTPUT ou INPUT)      choisir le sens du port (dans setup)
+digitalWrite(port, HIGH ou LOW)     sortie à 5 V ou 0 V
+delay(ms)                           pause en millisecondes
+Période du clignotement = durée allumée + durée éteinte ;  fréquence = 1 / période</div>
+  <p>L'IDE propose le même programme dans ses exemples (Blink), avec <code>LED_BUILTIN</code>, la LED soudée sur la carte.</p>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 1 : feu tricolore</div>
+    <p>Allumer la LED verte 3 s, puis l'orange 1 s, puis la rouge 5 s, avec une fonction <code>allumer(LED, temps)</code>.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">int LED_ROUGE = 8;
+int LED_ORANGE = 9;
+int LED_VERTE = 2;
+
+void allumer(int LED, int temps) {
+  digitalWrite(LED, HIGH);
+  delay(temps);
+  digitalWrite(LED, LOW);
+}
+
+void setup() {
+  pinMode(LED_ROUGE, OUTPUT);
+  pinMode(LED_ORANGE, OUTPUT);
+  pinMode(LED_VERTE, OUTPUT);
+}
+
+void loop() {
+  allumer(LED_VERTE, 3000);
+  allumer(LED_ORANGE, 1000);
+  allumer(LED_ROUGE, 5000);
+}</pre>
+      <p>Un cycle complet dure 3 + 1 + 5 = 9 s. Les erreurs fréquentes dans ce TD :</p>
+      <ul>
+        <li>oublier les points-virgules ;</li>
+        <li>remettre HIGH au lieu de LOW pour éteindre ;</li>
+        <li>oublier les types des paramètres (<code>int LED, int temps</code>) ;</li>
+        <li>oublier le <code>pinMode</code> de la LED verte ;</li>
+        <li>déclarer la fonction <code>int</code> alors qu'elle ne renvoie rien : il faut <code>void</code>.</li>
+      </ul>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Une LED reste allumée 500 ms et éteinte 500 ms. Combien de fois clignote-t-elle par minute ?</p>
+      <div class="opts"><button>120</button><button data-ok="1">60</button><button>30</button></div>
+      <div class="fb" hidden>Période = 500 + 500 = 1000 ms, donc 60 clignotements en 60 s.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Moniteur série, LCD">
+  <div class="shead"><span class="num">4</span><h2>Moniteur série et écran LCD (TD 2)</h2><span class="meta">TD 2 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pour voir ce que fait le programme, on affiche des valeurs sur le moniteur série de l'ordinateur, ou sur l'écran LCD de 16 colonnes et 2 lignes fourni avec la carte.</div>
+  <div class="formula key">Serial.begin(9600)        ouvrir la liaison série (dans setup)
+Serial.print(x)           afficher sans aller à la ligne
+Serial.println(x)         afficher puis aller à la ligne
+#include &lt;LiquidCrystal.h&gt;      bibliothèque de l'écran LCD
+lcd.begin(16, 2)          écran de 16 colonnes, 2 lignes
+lcd.setCursor(col, lig)   placer le curseur (col de 0 à 15, lig 0 ou 1)
+lcd.print("texte") ;  lcd.clear()</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 2, exercices 1 et 2</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">int compteur = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Hello Computer");
+}
+
+void loop() {
+  compteur = compteur + 1;
+  delay(1000);
+  Serial.print("*");          // une étoile par seconde
+  if (compteur == 10) {       // toutes les 10 étoiles…
+    compteur = 0;
+    Serial.println("");       // …on passe à la ligne
+  }
+}</pre>
+      <pre class="code">#include <LiquidCrystal.h>
+LiquidCrystal lcd(15, 14, 4, 5, 6, 7);
+
+void setup() {
+  lcd.begin(16, 2);
+  lcd.clear();
+  lcd.setCursor(0, 0);  lcd.print("Hello");   // en haut à gauche
+  lcd.setCursor(11, 1); lcd.print("World");   // en bas à droite : 11 + 5 lettres = 16 colonnes
+}
+
+void loop() { }</pre>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 1 et TD 2, quiz de la diapo 43</span></div>
+  <div class="ex"><h4>Quiz de révision <span class="tag">sections 1 à 3</span></h4>
+    <details class="hint"><summary>Réponses</summary><div><p>IDE : <span class="res">environnement pour développer, compiler et programmer une carte</span>. Structure : <span class="res">variables, setup() (configuration), loop() (boucle)</span>. Fonctions vues : <span class="res">pinMode, digitalWrite, delay, Serial.begin, Serial.println, setup, loop</span>.</p></div></details></div>
+  <div class="ex"><h4>TD 1 · clignotements avec une boucle <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Une fonction <code>clignoter(LED, allumer, eteindre, nombreCycle)</code> avec une boucle for : par exemple <code>clignoter(LED_ORANGE, 500, 500, 6)</code> fait 6 clignotements d'une seconde (6 s en tout). La boucle for est expliquée au chapitre suivant.</p></div></details></div>
+</section>

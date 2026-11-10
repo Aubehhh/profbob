@@ -1,0 +1,180 @@
+
+<section class="csec" id="s1" data-toc="Kirchhoff, plusieurs mailles">
+  <div class="shead"><span class="num">1</span><h2>Circuit à plusieurs mailles : la méthode de Kirchhoff</h2><span class="meta">diapos 3 et 4 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Autant d'inconnues (courants de branche) que d'équations indépendantes : on écrit juste ce qu'il faut de lois des nœuds, et le reste en lois des mailles.</div>
+  <div class="formula key cours">n nœuds, p courants inconnus (p branches) :
+   n − 1 équations de nœuds
+   p − (n − 1) équations de mailles
+   (les autres équations ne seraient pas indépendantes)</div>
+  <p>Le circuit d'exemple du cours a 2 nœuds (A et B) et 3 branches entre eux : la branche de R₁ seule, la branche (R₂, E₂) et la branche (R₃, E₃). Les trois courants i₁, i₂, i₃ sont fléchés vers le nœud A. Il faut 3 équations : 2 − 1 = 1 équation de nœud et 3 − 1 = 2 équations de mailles.</p>
+  <div class="formula key cours">Nœud A :                          i₁ + i₂ + i₃ = 0                 (1)
+Maille A R₁ B E₂ R₂ A :           −R₁i₁ + E₂ + R₂i₂ = 0             (2)
+Maille A R₂ E₂ B E₃ R₃ A :        −R₂i₂ − E₂ + E₃ + R₃i₃ = 0        (3)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · E₂ = 5 V, E₃ = 28 V, R₁ = 10 Ω, R₂ = 2,5 Ω, R₃ = 6 Ω</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(2) : i₁ = (5 + 2,5 i₂) / 10
+(3) : i₃ = (2,5 i₂ + 5 − 28) / 6 = (2,5 i₂ − 23) / 6
+(1) : i₂ + 0,5 + 0,25 i₂ + 0,4167 i₂ − 3,833 = 0  →  1,6667 i₂ = 3,333
+i₂ = 2 A ;  i₁ = (5 + 5)/10 = 1 A ;  i₃ = (5 − 23)/6 = −3 A
+Vérification (1) : 1 + 2 − 3 = 0 ✓</div>
+      <p>i₃ = −3 A : le courant réel dans la branche de E₃ sort du nœud A (E₃ fournit le courant aux deux autres branches).</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Superposition">
+  <div class="shead"><span class="num">2</span><h2>Théorème de superposition</h2><span class="meta">diapos 5 à 8 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Dans un circuit linéaire à plusieurs sources, chaque courant est la somme des courants que produirait chaque source agissant seule.</div>
+  <div class="formula key cours">i₁ = i₁E₂ + i₁E₃     (de même pour i₂ et i₃)
+Éteindre une source de tension = la remplacer par un fil (court-circuit)
+Éteindre une source de courant = la remplacer par un interrupteur ouvert</div>
+  <ol class="steps">
+    <li>Garder une seule source, éteindre les autres.</li>
+    <li>Simplifier par résistances équivalentes (série, parallèle).</li>
+    <li>Calculer le courant principal, puis les courants de branche avec le diviseur de courant.</li>
+    <li>Recommencer avec l'autre source, puis faire la <b>somme algébrique</b> (en respectant le sens des flèches).</li>
+  </ol>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · le même circuit (diapos 6 à 8)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">E₂ seule (E₃ remplacée par un fil) :
+   R₁ ∥ R₃ = 10 × 6 / 16 = 3,75 Ω ;  R_éq = 3,75 + 2,5 = 6,25 Ω
+   courant dans la branche de E₂ : 5 / 6,25 = 0,8 A
+   diviseur de courant : 0,8 × 6/16 = 0,3 A dans R₁ ;  0,8 × 10/16 = 0,5 A dans R₃
+   avec les flèches du cours : i₁E₂ = 0,3 A ; i₂E₂ = −0,8 A ; i₃E₂ = 0,5 A
+E₃ seule (E₂ remplacée par un fil) :
+   R₁ ∥ R₂ = 10 × 2,5 / 12,5 = 2 Ω ;  R_éq = 2 + 6 = 8 Ω
+   courant dans la branche de E₃ : 28 / 8 = 3,5 A
+   0,7 A dans R₁ ;  2,8 A dans R₂
+   avec les flèches du cours : i₁E₃ = 0,7 A ; i₂E₃ = 2,8 A ; i₃E₃ = −3,5 A
+Somme : i₁ = 0,3 + 0,7 = 1 A ;  i₂ = −0,8 + 2,8 = 2 A ;  i₃ = 0,5 − 3,5 = −3 A ✓</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège : la somme est algébrique.</b> Les diapos donnent les intensités en valeur (0,8 A, 3,5 A…). Avant d'additionner, regarde si chaque courant partiel va dans le sens de la flèche (+) ou contre (−).</div>
+  <div class="quiz">
+    <div class="q"><p>Pour éteindre une source de tension dans la superposition, on la remplace par :</p>
+      <div class="opts"><button data-ok="1">un fil</button><button>un circuit ouvert</button><button>une résistance de 1 Ω</button></div>
+      <div class="fb" hidden>Une source de tension nulle impose 0 V : c'est un fil.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Thévenin">
+  <div class="shead"><span class="num">3</span><h2>Théorème de Thévenin</h2><span class="meta">diapos 9 à 12 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Vu de deux bornes A et B, n'importe quel circuit de sources et de résistances se comporte comme une seule source parfaite E<sub>T</sub> en série avec une résistance R<sub>T</sub>.</div>
+  <ul>
+    <li><b>Source parfaite</b> : la tension à ses bornes reste la même quel que soit le courant fourni (caractéristique horizontale).</li>
+    <li><b>Source réelle</b> : la tension baisse quand le courant augmente. Sa caractéristique est une droite de pente −R<sub>T</sub>.</li>
+  </ul>
+  <div class="formula key cours">u = E_T − R_T × i
+   E_T : tension à vide (i = 0)
+   R_T : résistance interne = pente de la caractéristique
+   courant de court-circuit (u = 0) : I_cc = E_T / R_T</div>
+  <ol class="steps">
+    <li><b>E<sub>T</sub></b> : débrancher la charge, calculer la tension à vide entre A et B.</li>
+    <li><b>R<sub>T</sub></b> : éteindre les sources (tensions → fils), calculer la résistance vue entre A et B.</li>
+    <li>Rebrancher la charge R sur le modèle : i = E<sub>T</sub> / (R<sub>T</sub> + R).</li>
+  </ol>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°1 (diapo 11)</div>
+    <p>Essais d'une source : à vide 12 V ; 5,6 V pour 16 A ; 4 V pour 20 A. Modèle de Thévenin ? Courant et tension sur R<sub>c</sub> = 0,35 Ω ? Courant de court-circuit ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">pente = (5,6 − 12) / (16 − 0) = −0,4 Ω  (vérif. : 12 − 0,4 × 20 = 4 V ✓)
+E_T = 12 V ;  R_T = 0,4 Ω
+sur R_c = 0,35 Ω : i = 12 / (0,4 + 0,35) = 16 A ;  u = 0,35 × 16 = 5,6 V
+I_cc = 12 / 0,4 = 30 A</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice N°2 (diapo 12) : le courant dans R₁ par Thévenin</div>
+    <p>Même circuit que la section 1. On débranche R₁ et on modélise le reste (E₂, R₂, E₃, R₃) vu de A et B.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">R₁ débranchée : une seule maille (E₂, R₂, E₃, R₃), i₂ = −i₃
+   (3) : −2,5 i₂ − 5 + 28 − 6 i₂ = 0  →  i₂ = 23 / 8,5 = 2,706 A
+   E_T = E₂ + R₂ i₂ = 5 + 2,5 × 2,706 = 11,76 V
+Sources éteintes : R_T = R₂ ∥ R₃ = 2,5 × 6 / 8,5 = 1,765 Ω
+R₁ rebranchée : i₁ = E_T / (R_T + R₁) = 11,76 / 11,76 = 1,00 A ✓</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Une pile a une tension à vide de 4,5 V. Elle débite 0,2 A sous 3,5 V. Sa résistance interne vaut :</p>
+      <div class="opts"><button>17,5 Ω</button><button data-ok="1">5 Ω</button><button>22,5 Ω</button></div>
+      <div class="fb" hidden>R_T = (E_T − u) / i = (4,5 − 3,5) / 0,2 = 5 Ω.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Norton">
+  <div class="shead"><span class="num">4</span><h2>Théorème de Norton</h2><span class="meta">diapos 13 à 17 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le même circuit peut aussi être vu comme une source de courant parfaite I<sub>CC</sub> en <b>parallèle</b> avec une résistance R<sub>N</sub>. On passe de Thévenin à Norton sans rien recalculer.</div>
+  <ul>
+    <li><b>Source de courant parfaite</b> : elle fournit le même courant quelle que soit la tension à ses bornes (caractéristique verticale).</li>
+    <li>R<sub>C</sub> = 0 (court-circuit) : tout le courant passe dans la charge, i = I<sub>CC</sub>. R<sub>C</sub> infinie (à vide) : i = 0 et u = R<sub>N</sub> × I<sub>CC</sub>.</li>
+  </ul>
+  <div class="formula key cours">u = R_N × (I_CC − i)
+Passage Thévenin ↔ Norton :
+   I_CC = E_T / R_T        R_N = R_T        E_T = R_N × I_CC</div>
+  <ol class="steps">
+    <li><b>I<sub>CC</sub></b> : relier A et B par un fil, calculer le courant dans ce fil.</li>
+    <li><b>R<sub>N</sub></b> : éteindre les sources, calculer la résistance vue entre A et B (comme R<sub>T</sub>).</li>
+    <li>Charge R branchée : diviseur de courant, i = I<sub>CC</sub> × R<sub>N</sub> / (R<sub>N</sub> + R).</li>
+  </ol>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · point de fonctionnement (diapo 15)</div>
+    <p>I<sub>CC</sub> = 20 mA, R<sub>N</sub> = 500 Ω, charge R<sub>C</sub> = 300 Ω. Coordonnées du point de fonctionnement ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">i = I_CC × R_N / (R_N + R_C) = 20 × 500 / 800 = 12,5 mA
+u = R_C × i = 300 × 12,5×10⁻³ = 3,75 V
+(vérif. : u = R_N (I_CC − i) = 500 × 7,5×10⁻³ = 3,75 V ✓)</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · le circuit à deux sources par Norton (diapo 17)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">A et B en court-circuit : chaque branche débite seule dans le fil
+   I_CC = E₂/R₂ + E₃/R₃ = 5/2,5 + 28/6 = 2 + 4,667 = 6,667 A
+Sources éteintes : R_N = R₂ ∥ R₃ = 1,765 Ω
+i₁ = I_CC × R_N / (R_N + R₁) = 6,667 × 1,765 / 11,765 = 1,00 A
+i₂ = (R₁ i₁ − E₂) / R₂ = (10 − 5) / 2,5 = 2 A ;   i₃ = −i₁ − i₂ = −3 A</div>
+      <p>On retrouve les résultats de Kirchhoff (section 1) et de Thévenin (section 3) : E<sub>T</sub> = R<sub>N</sub> × I<sub>CC</sub> = 1,765 × 6,667 = 11,76 V ✓.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Un modèle de Thévenin E<sub>T</sub> = 12 V, R<sub>T</sub> = 3 Ω équivaut au modèle de Norton :</p>
+      <div class="opts"><button>I<sub>CC</sub> = 36 A, R<sub>N</sub> = 3 Ω</button><button data-ok="1">I<sub>CC</sub> = 4 A, R<sub>N</sub> = 3 Ω</button><button>I<sub>CC</sub> = 4 A, R<sub>N</sub> = 1/3 Ω</button></div>
+      <div class="fb" hidden>I_CC = E_T / R_T = 4 A et R_N = R_T = 3 Ω.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">feuille d'exercices complémentaires, N°9 à N°22</span></div>
+  <div class="ex"><h4>N°9 · recharge d'une batterie <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>La batterie reçoit : U = E + R I. <span class="res">I = (110 − 80) / 1,5 = 20 A</span> ; pour 12 A : <span class="res">U = 80 + 1,5 × 12 = 98 V</span>.</p></div></details></div>
+  <div class="ex"><h4>N°10 · 60 accumulateurs en charge <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>En série : E = 60 e, R = 60 × 0,01 = 0,6 Ω. Début : <span class="res">U = 108 + 0,6 × 8 = 112,8 V</span> ; fin : <span class="res">U = 138 + 4,8 = 142,8 V</span>.</p></div></details></div>
+  <div class="ex"><h4>N°11 · pile de lampe de poche <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p><span class="res">R<sub>T</sub> = (4,5 − 3,5) / 0,2 = 5 Ω</span>.</p></div></details></div>
+  <div class="ex"><h4>N°12 · accumulateur en récepteur <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>u = E<sub>T</sub> + R<sub>T</sub> i : <span class="res">106 V pour 10 A, 112 V pour 20 A</span> ; pour u = 117 V : <span class="res">i = 17 / 0,6 = 28,3 A</span>.</p></div></details></div>
+  <div class="ex"><h4>N°13 · générateur de 240 V <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p><span class="res">U₁ = 240 − 0,5 × 80 = 200 V</span> ; <span class="res">I₂ = (240 − 220) / 0,5 = 40 A</span>.</p></div></details></div>
+  <div class="ex"><h4>N°14 · résistance interne <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p><span class="res">R = (33 − 27,5) / 11 = 0,5 Ω</span> ; sur 5 Ω : I = 33 / 5,5 = 6 A, <span class="res">U = 30 V</span>.</p></div></details></div>
+  <div class="ex"><h4>N°15 · 12 piles en série <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>E = 18 V, R = 6 Ω : <span class="res">I = 18 / 24 = 0,75 A</span> ; <span class="res">U = 13,5 V</span>, soit 1,125 V par pile.</p></div></details></div>
+  <div class="ex"><h4>N°16 · piles en parallèle <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Une pile sur 2 Ω : <span class="res">I₁ = 0,6 A, U₁ = 1,2 V</span>. 10 piles en parallèle : E = 1,5 V, R = 0,05 Ω, donc sur 2 Ω, I = 0,73 A : <b>non</b>, le courant n'est pas multiplié par 10. Pour 6 A : <span class="res">R<sub>C2</sub> = 1,5/6 − 0,05 = 0,2 Ω</span>.</p></div></details></div>
+  <div class="ex"><h4>N°17 · générateur et trois résistances en parallèle <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p><span class="res">R<sub>éq</sub> = 6 Ω</span> ; <span class="res">I = 120 / 7,5 = 16 A</span> ; <span class="res">U = 96 V</span> ; <span class="res">I₁ = 8,73 A, I₂ = 4,36 A, I₃ = 2,91 A</span>.</p></div></details></div>
+  <div class="ex"><h4>N°18 et N°19 · groupements de piles <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>N°18 : <span class="res">E = 15 V, r = 0,1 Ω</span> ; sur 0,1 Ω : <span class="res">I = 75 A, U = 7,5 V</span>. N°19 : 4 en série → 6 V, 0,04 Ω ; 3 branches identiques en parallèle → <span class="res">E = 6 V, r = 0,0133 Ω</span>.</p></div></details></div>
+  <div class="ex"><h4>N°20 · générateur, ligne et batterie <span class="tag">sections 1 et 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Ligne (2 × 100 m) : <span class="res">R = 0,5 Ω</span>. Une seule maille : <span class="res">I = (235 − 196) / (1,2 + 0,5 + 1,3) = 13 A</span> ; batterie : <span class="res">U = 196 + 1,3 × 13 = 212,9 V</span> ; chute en ligne <span class="res">6,5 V</span>.</p></div></details></div>
+  <div class="ex"><h4>N°21 · deux générateurs en parallèle (Thévenin) <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>R<sub>C</sub> débranchée : E<sub>T</sub> = (E₁/R₁ + E₂/R₂)/(1/R₁ + 1/R₂) = 125 V ; R<sub>T</sub> = R₁ ∥ R₂ = 0,667 Ω. <span class="res">i<sub>C</sub> = 125 / 6,667 = 18,75 A</span>, <span class="res">U = 112,5 V</span>, <span class="res">i₁ = 7,5 A, i₂ = 11,25 A</span>.</p></div></details></div>
+  <div class="ex"><h4>N°22 · deux générateurs et une batterie (Norton) <span class="tag">section 4</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>I<sub>cc1</sub> = 126 A, R<sub>N1</sub> = 1 Ω ; I<sub>cc2</sub> = 66 A, R<sub>N2</sub> = 2 Ω ; I<sub>cc3</sub> = 113 A, R<sub>N3</sub> = 1 Ω. R<sub>éq</sub> = 0,4 Ω ; <span class="res">u = (126 + 66 + 113) × 0,4 = 122 V</span> ; <span class="res">i₃ = (u − E₃)/R₃ = 9 A</span> (la batterie se charge).</p></div></details></div>
+</section>

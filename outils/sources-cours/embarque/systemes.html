@@ -1,0 +1,105 @@
+
+<section class="csec" id="s1" data-toc="Système embarqué">
+  <div class="shead"><span class="num">1</span><h2>Qu'est-ce qu'un système embarqué ?</h2><span class="meta">diapos 2 à 8 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un système embarqué est un petit ordinateur spécialisé, caché dans un objet plus grand (voiture, robot, machine), qui fait une seule tâche avec peu de place, peu de mémoire et peu d'énergie.</div>
+  <div class="formula key cours">Système embarqué : système électronique et informatique autonome, conçu pour une tâche,
+avec des contraintes d'encombrement, de mémoire, de puissance de calcul, de sécurité et de consommation.
+   conçu pour une application spécifique ; non programmable par l'utilisateur final ;
+   généralement intégré à un système plus grand.</div>
+  <ul>
+    <li>Il réunit informatique, électronique, mécanique, automatique et traitement du signal.</li>
+    <li>Ce n'est pas récent : l'Apollo Guidance Computer (1966) guidait les missions Apollo. Avec la miniaturisation, ces systèmes sont partout (robotique, transports, industrie…).</li>
+    <li>Le cœur est un <b>microcontrôleur</b> : un circuit intégré qui réunit un microprocesseur (CPU), de la mémoire (RAM vive, ROM morte) et des périphériques d'entrées/sorties.</li>
+    <li>Chaîne type : <b>capteurs</b> (son, infrarouge, angle, lumière, ultrason, gyroscope…) → conversion → microcontrôleur → conversion → <b>actionneurs</b> (moteurs, LED…), avec la communication et l'interface homme-machine (IHM).</li>
+  </ul>
+  <div class="quiz">
+    <div class="q"><p>Lequel n'est pas une caractéristique d'un système embarqué ?</p>
+      <div class="opts"><button>conçu pour une tâche précise</button><button data-ok="1">reprogrammé librement par l'utilisateur final</button><button>intégré à un système plus grand</button></div>
+      <div class="fb" hidden>L'utilisateur final ne le reprogramme pas : il utilise l'objet (la voiture, le lave-linge…).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Binaire">
+  <div class="shead"><span class="num">2</span><h2>La notation binaire</h2><span class="meta">diapos 9 à 13 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> À l'intérieur, le microcontrôleur ne manipule que des 0 et des 1. Chaque position d'un nombre binaire vaut une puissance de 2 : on additionne les puissances là où il y a un 1.</div>
+  <div class="formula key cours">Poids des 8 bits (de gauche à droite) :  2⁷  2⁶  2⁵  2⁴  2³  2²  2¹  2⁰
+                                         128  64  32  16   8   4   2   1
+Binaire → décimal : 01100111 = 64 + 32 + 4 + 2 + 1 = 103
+Décimal → binaire : divisions successives par 2, on lit les restes de bas en haut
+   58 → 29 r0 → 14 r1 → 7 r0 → 3 r1 → 1 r1 → 0 r1   donc 58 = 111010
+Avec n bits : 2ⁿ valeurs ;  un octet (8 bits) : de 0 à 255</div>
+  <ul>
+    <li>Un <b>mot</b> est l'unité traitée par le microprocesseur ; sa taille s'exprime en bits. Sur une architecture 8 bits, 00010100 est un mot.</li>
+  </ul>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices des diapos 10 à 12</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">01100111 = 0×128 + 1×64 + 1×32 + 0×16 + 0×8 + 1×4 + 1×2 + 1×1 = 103
+58 = 32 + 16 + 8 + 2  →  00111010
+01011101 = 64 + 16 + 8 + 4 + 1 = 93
+117 = 64 + 32 + 16 + 4 + 1  →  01110101</div>
+      <p>Méthode rapide pour décimal → binaire : enlève la plus grande puissance de 2 possible, recommence avec le reste, et mets un 1 à chaque puissance utilisée.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Combien de valeurs différentes peut-on coder sur 10 bits ?</p>
+      <div class="opts"><button>1000</button><button data-ok="1">1024</button><button>1023</button></div>
+      <div class="fb" hidden>2¹⁰ = 1024 valeurs, de 0 à 1023 : c'est la résolution de analogRead sur Arduino.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Nombres négatifs, ASCII">
+  <div class="shead"><span class="num">3</span><h2>Nombres négatifs (complément à 2) et code ASCII</h2><span class="meta">diapos 13 à 18 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le même octet peut représenter deux nombres selon la convention : non signé (0 à 255) ou signé. En signé, le bit de gauche « vaut » −128 au lieu de +128.</div>
+  <div class="formula key cours">Signé (complément à 2) : poids  −128  64  32  16  8  4  2  1      plage : −128 à 127
+   10010110 = 150 (non signé)  ou  −128 + 16 + 4 + 2 = −106 (signé)
+Écrire −n : écrire n en binaire, inverser chaque bit, puis ajouter 1
+   106 = 01101010  →  inversé 10010101 (= −107)  →  +1  →  10010110 = −106</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 16 et 43</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">71 = 64 + 4 + 2 + 1  →  01000111
+−71 : inverser → 10111000, ajouter 1 → 10111001   (vérif : −128 + 32 + 16 + 8 + 1 = −71 ✓)
+11100111 : non signé 128 + 64 + 32 + 4 + 2 + 1 = 231 ;  signé −128 + 103 = −25</div>
+      <p>Astuce : en signé, valeur = valeur non signée − 256 quand le bit de gauche vaut 1 (231 − 256 = −25).</p>
+    </div></details>
+  </div>
+  <p><b>Code ASCII.</b> Chaque caractère a un numéro : 01101010 = 106 = « j ». Les lettres se suivent (a = 97, b = 98…, A = 65), et les chiffres aussi (« 0 » = 48).</p>
+  <div class="retiens"><b>Quand tu programmes, pose-toi trois questions :</b> avec quel type de données je travaille ? comment est-il codé ? combien de mémoire occupe-t-il ?</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Portes logiques">
+  <div class="shead"><span class="num">4</span><h2>Portes logiques, registres et langage machine</h2><span class="meta">diapos 19 à 21 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Tout calcul du processeur est construit avec des portes logiques. Les valeurs sont rangées dans des registres, et chaque instruction (charger, additionner, stocker) est elle-même un code binaire.</div>
+  <div class="tw"><table>
+    <tr><th>A</th><th>B</th><th>ET</th><th>OU</th><th>XOR</th><th>NON A</th></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+  </table></div>
+  <ul>
+    <li><b>OUI</b> recopie l'entrée ; <b>NON</b> l'inverse ; <b>ET</b> vaut 1 si A et B valent 1 ; <b>OU</b> si au moins l'un vaut 1 ; <b>XOR</b> si exactement un des deux vaut 1.</li>
+    <li>En combinant des portes, on fabrique des fonctions, par exemple l'additionneur (somme et retenue) : somme = A XOR B, retenue = A ET B.</li>
+    <li>Un <b>registre</b> est une toute petite mémoire, très rapide, intégrée au processeur.</li>
+  </ul>
+  <pre class="code">LOAD 10010110    récupère la valeur à l'adresse 150
+ADD  01101010    ajoute la valeur de l'adresse 106
+STO  01100111    stocke la somme à l'adresse 103</pre>
+  <p>C'est du langage <b>assembleur</b> ; en <b>langage machine</b>, les mots LOAD, ADD et STO sont eux aussi des codes binaires (01010, 10111, 01110).</p>
+  <div class="quiz">
+    <div class="q"><p>A = 1, B = 1. La porte XOR donne :</p>
+      <div class="opts"><button>1</button><button data-ok="1">0</button></div>
+      <div class="fb" hidden>XOR = « l'un ou l'autre, mais pas les deux ».</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">quiz de révision, diapo 43</span></div>
+  <div class="ex"><h4>Quiz de révision <span class="tag">sections 1 à 3</span></h4>
+    <details class="hint"><summary>Réponses</summary><div><p>Système embarqué : <span class="res">système électronique et informatique autonome conçu pour une tâche</span>. 11100111 : <span class="res">231 sans signe, −25 avec signe</span>.</p></div></details></div>
+</section>

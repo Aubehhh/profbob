@@ -1,0 +1,201 @@
+
+<section class="csec" id="s1" data-toc="Énergie d'un système">
+  <div class="shead"><span class="num">1</span><h2>L'énergie d'un système et ses variations</h2><span class="meta">diapos 26 à 33 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> L'énergie d'un système a trois morceaux : le mouvement d'ensemble (cinétique), l'altitude (potentielle) et tout ce qui se passe à l'intérieur (énergie interne). Seules les <b>variations</b> comptent.</div>
+  <p>Pour un système fermé, l'énergie ne traverse la frontière que de deux façons : par <b>travail</b> et par <b>chaleur</b>. Et elle se conserve : c'est le <b>premier principe</b>.</p>
+  <div class="formula key cours">ΔE_c = E_c2 − E_c1 = ½ m (V_2² − V_1²)        (Eq. 2.5)    V = vitesse
+ΔE_p = E_p2 − E_p1 = m g (z_2 − z_1)          (Eq. 2.10)   z = altitude
+Énergie interne : U (massique u, molaire U_m), lue dans les tables
+
+E_2 − E_1 = (U_2 − U_1) + (E_c2 − E_c1) + (E_p2 − E_p1)   (Eq. 2.27a)
+ΔE = ΔU + ΔE_c + ΔE_p                                     (Eq. 2.27b)</div>
+  <p>Le symbole Δ veut dire « valeur finale moins valeur initiale ». La valeur de E dans un état n'a pas de sens physique (on peut choisir E<sub>1</sub> arbitrairement) : seules les différences d'énergie en ont.</p>
+  <div class="trap"><b>Piège.</b> Dans ½ m V², la vitesse est en m/s (108 km/h = 30 m/s) et le résultat en J : divise par 1000 pour avoir des kJ avant de l'ajouter à des énergies tirées des tables.</div>
+  <div class="quiz">
+    <div class="q"><p>Une voiture de 1200 kg passe de 10 m/s à 30 m/s. ΔE<sub>c</sub> ?</p>
+      <div class="opts"><button>240 kJ</button><button data-ok="1">480 kJ</button><button>12 kJ</button></div>
+      <div class="fb" hidden>½ × 1200 × (900 − 100) = 480 000 J = 480 kJ.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Travail et chaleur">
+  <div class="shead"><span class="num">2</span><h2>Travail et chaleur : les conventions de signe</h2><span class="meta">diapos 34 à 38 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> En thermo de l'ingénieur, on s'intéresse aux machines qui <b>produisent</b> du travail et qui <b>reçoivent</b> de la chaleur. Les signes sont choisis pour que ces deux cas soient positifs.</div>
+  <div class="formula key cours">W &gt; 0 : travail fourni par le système        W &lt; 0 : travail fourni sur le système
+Q &gt; 0 : chaleur reçue par le système          Q &lt; 0 : chaleur cédée par le système</div>
+  <ul>
+    <li>Le travail en thermo est plus large qu'en mécanique : comprimer un ressort, agiter un gaz avec une hélice, charger une batterie, ce sont tous des transferts par travail.</li>
+    <li>La chaleur n'est due qu'à une <b>différence de température</b>, et va toujours du chaud vers le froid.</li>
+    <li>Une transformation sans transfert de chaleur est dite <b>adiabatique</b> (Q = 0).</li>
+  </ul>
+  <div class="trap"><b>Piège n°1 de l'examen.</b> Les deux conventions sont « opposées » : le travail est compté positif quand il <i>sort</i>, la chaleur quand elle <i>entre</i>. Un gaz que l'on comprime a W &lt; 0 ; une hélice qui brasse un gaz donne W &lt; 0 pour le gaz.</div>
+  <div class="quiz">
+    <div class="q"><p>Un gaz est comprimé (il reçoit 30 kJ de travail) et cède 10 kJ de chaleur. W et Q ?</p>
+      <div class="opts"><button>W = 30, Q = 10</button><button data-ok="1">W = −30, Q = −10</button><button>W = 30, Q = −10</button></div>
+      <div class="fb" hidden>Travail reçu : W &lt; 0. Chaleur cédée : Q &lt; 0. Donc ΔU = Q − W = −10 − (−30) = +20 kJ.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Bilan d'énergie">
+  <div class="shead"><span class="num">3</span><h2>Le bilan d'énergie du système fermé</h2><span class="meta">diapos 39 et 40 · 20 min</span></div>
+  <div class="formula key cours">E_2 − E_1 = Q − W                    (Eq. 2.35a)
+ΔE_c + ΔE_p + ΔU = Q − W             (Eq. 2.35b)
+
+Forme temporelle (bilan de puissances) :
+dE/dt = P_th − P_méca                (Eq. 2.37)</div>
+  <p>En mots : la variation d'énergie du système = la chaleur reçue − le travail fourni. Le bilan de puissances dit la même chose à chaque instant : P<sub>th</sub> est la puissance thermique échangée avec l'environnement, P<sub>méca</sub> la puissance mécanique.</p>
+  <ol class="steps">
+    <li>Définis le système et dessine sa frontière.</li>
+    <li>Écris le bilan complet, puis barre ce qui est nul ou négligeable (souvent ΔE<sub>c</sub> et ΔE<sub>p</sub>, Q si adiabatique, W si le volume est constant sans hélice ni résistance).</li>
+    <li>Mets un signe à Q et W d'après les phrases de l'énoncé (« cède », « reçoit », « fournit »).</li>
+    <li>Résous, puis vérifie que le signe du résultat a du sens.</li>
+  </ol>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · réservoir chauffé</div>
+    <p>Un réservoir rigide contient 5 kg d'huile. Une résistance lui fournit 1 kW, et il perd 0,2 kW de chaleur. Variation d'énergie interne en 10 min ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">La résistance fournit du travail électrique AU système : P_méca = −1 kW
+Les pertes sont de la chaleur cédée : P_th = −0,2 kW
+dE/dt = P_th − P_méca = −0,2 − (−1) = +0,8 kW
+ΔU = 0,8 kW × 600 s = 480 kJ</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Travail de détente">
+  <div class="shead"><span class="num">4</span><h2>Travail de détente et de compression</h2><span class="meta">diapos 41 à 48 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un gaz qui pousse un piston fournit un travail force × déplacement. Avec F = p A et A dx = dV, ce travail devient l'<b>aire sous la courbe</b> dans le diagramme p–V.</div>
+  <div class="formula key cours">F = p × A        W = ∫ F dx = ∫ p A dx
+
+W = ∫ p dV   (de V_1 à V_2)                 (Eq. 2.17)</div>
+  <p>Pour une compression, dV &lt; 0 et le travail est négatif, conformément à la convention. Pour calculer l'intégrale, il faut une relation entre p et V : on suppose un <b>processus de quasi-équilibre</b>, où le gaz passe par une suite d'états d'équilibre. Le travail réel ne peut que s'en approcher.</p>
+  <h3>Transformation polytropique</h3>
+  <div class="formula key cours">p Vⁿ = constante
+
+n = 1 :  W = (constante) ln(V_2 / V_1)    avec constante = p_1 V_1 = p_2 V_2</div>
+  <p>Les deux autres cas utilisés dans les exercices se déduisent de l'Eq. 2.17 :</p>
+  <div class="formula key">n = 0 (p constante) :  W = p (V_2 − V_1)
+n ≠ 1 :                W = (p_2 V_2 − p_1 V_1) / (1 − n)    avec p_2 = p_1 (V_1 / V_2)ⁿ</div>
+  <div class="trap"><b>Piège.</b> Les pressions en Pa et les volumes en m³ donnent des J. Avec des bar, multiplie par 10⁵. Et la formule en ln ne marche que pour n = 1 : pour n = 1 la formule (1 − n) diviserait par zéro.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 1 (diapo 48)</div>
+    <p>Détente polytropique p V<sup>n</sup> = constante, p<sub>1</sub> = 3,0 bar, V<sub>1</sub> = 0,1 m³, V<sub>2</sub> = 0,2 m³. Travail pour (a) n = 1,5, (b) n = 1, (c) n = 0 ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(a) p_2 = 3 × (0,1/0,2)^1,5 = 1,061 bar
+    W = (1,061×10⁵ × 0,2 − 3×10⁵ × 0,1) / (1 − 1,5) = (21 213 − 30 000) / (−0,5) = 17 574 J
+(b) W = p_1 V_1 ln(V_2/V_1) = 30 000 × ln 2 = 20 794 J
+(c) W = p (V_2 − V_1) = 3×10⁵ × 0,1 = 30 000 J</div>
+      <p>Réponse : <span class="res">(a) 17,6 kJ · (b) 20,8 kJ · (c) 30 kJ</span>. Plus n est grand, plus la pression chute vite et plus l'aire sous la courbe est petite.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 2 (diapo 56)</div>
+    <p>0,4 kg de gaz, p V<sup>1,5</sup> = constante, mêmes p<sub>1</sub>, V<sub>1</sub>, V<sub>2</sub> qu'à l'exercice 1, u<sub>2</sub> − u<sub>1</sub> = −55 kJ/kg, pas de variation d'énergie cinétique ni potentielle. Chaleur Q ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Bilan : ΔU = Q − W   →   Q = m (u_2 − u_1) + W
+W = 17,57 kJ (exercice 1, cas a)
+Q = 0,4 × (−55) + 17,57 = −22 + 17,57 = −4,43 kJ</div>
+      <p>Réponse : <span class="res">Q = −4,4 kJ</span> : le gaz cède de la chaleur pendant la détente.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Sur un diagramme p–V, le travail de la transformation est…</p>
+      <div class="opts"><button>la pente de la courbe</button><button data-ok="1">l'aire sous la courbe</button><button>p<sub>2</sub> − p<sub>1</sub></button></div>
+      <div class="fb" hidden>W = ∫ p dV : l'aire entre la courbe et l'axe des V (en quasi-équilibre).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Transferts de chaleur">
+  <div class="shead"><span class="num">5</span><h2>Les modes de transfert de chaleur</h2><span class="meta">diapos 49 à 57 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> La chaleur passe de trois façons : de proche en proche dans la matière (conduction), par ondes électromagnétiques même dans le vide (rayonnement), ou emportée par un fluide qui bouge (convection).</div>
+  <h3>Conduction : loi de Fourier</h3>
+  <div class="formula key cours">Q̇_x = −κ A dT/dx                  (Eq. 2.31)
+
+Mur plan en régime permanent :  dT/dx = (T_2 − T_1)/L (&lt; 0)   →   Q̇_x = −κ A (T_2 − T_1)/L</div>
+  <p>κ (ou k) est la conductivité thermique du matériau, A l'aire du mur, L son épaisseur. Le signe − vient du fait que la chaleur va vers les températures décroissantes.</p>
+  <h3>Rayonnement : loi de Stefan-Boltzmann</h3>
+  <div class="formula key cours">Φ = ε σ A (T_b⁴ − T_s⁴)            (Eq. 2.33)    σ = 5,67×10⁻⁸ W/(m²·K⁴)</div>
+  <p>Échange net entre une surface d'aire A, d'émissivité ε, à T<sub>b</sub>, et une surface beaucoup plus grande qui l'entoure à T<sub>s</sub>.</p>
+  <h3>Convection : loi de refroidissement de Newton</h3>
+  <div class="formula key cours">Φ_conv = h A (T_b − T_f)            (Eq. 2.34)</div>
+  <p>h est le coefficient de transfert par convection, T<sub>b</sub> la température de la surface, T<sub>f</sub> celle du fluide.</p>
+  <div class="trap"><b>Piège des kelvins.</b> Dans le rayonnement, T est à la puissance 4 : les températures doivent être en <b>kelvins</b>. Avec des °C, le résultat est faux (et pas qu'un peu). En conduction et convection, seule une différence intervient : °C ou K donnent le même résultat.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 3 (diapo 57)</div>
+    <p>Puce de silicium de 5 mm × 5 mm, puissance électrique 0,225 W en régime permanent, fluide à 20 °C, h = 150 W/(m²·K), pas de conduction vers le substrat. Température de surface ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Régime permanent : toute la puissance électrique repart par convection
+Φ_conv = 0,225 W     A = 0,005 × 0,005 = 25×10⁻⁶ m²
+T_b = T_f + Φ_conv / (h A) = 20 + 0,225 / (150 × 25×10⁻⁶) = 20 + 60</div>
+      <p>Réponse : <span class="res">T<sub>b</sub> = 80 °C</span>.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Le rayonnement thermique peut-il traverser le vide ?</p>
+      <div class="opts"><button data-ok="1">Oui</button><button>Non</button></div>
+      <div class="fb" hidden>Oui : ce sont des ondes électromagnétiques, elles ne demandent aucun milieu (c'est ainsi que le Soleil nous chauffe).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Cycles">
+  <div class="shead"><span class="num">6</span><h2>Les cycles thermodynamiques</h2><span class="meta">diapos 58 à 72 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un cycle revient à son état de départ, donc ΔE<sub>cycle</sub> = 0 : tout ce qui entre ressort. Dans les cycles, Q<sub>in</sub>, Q<sub>out</sub> et W<sub>cycle</sub> sont tous <b>positifs dans le sens de leur flèche</b>.</div>
+  <div class="formula key cours">ΔE_cycle = Q_cycle − W_cycle = 0         (Eq. 2.39)</div>
+  <div class="tw"><table>
+    <tr><th>Cycle</th><th>Bilan</th><th>Performance</th></tr>
+    <tr><td><b>Moteur</b><br>reçoit Q<sub>in</sub> du chaud, fournit W</td><td>W<sub>cycle</sub> = Q<sub>in</sub> − Q<sub>out</sub> (Eq. 2.41)</td><td>η = W<sub>cycle</sub>/Q<sub>in</sub> = 1 − Q<sub>out</sub>/Q<sub>in</sub> (Eq. 2.42–2.43), η &lt; 1</td></tr>
+    <tr><td><b>Réfrigération</b><br>but : retirer Q<sub>in</sub> au froid</td><td>W<sub>cycle</sub> = Q<sub>out</sub> − Q<sub>in</sub> (Eq. 2.44)</td><td>β = Q<sub>in</sub>/W<sub>cycle</sub> = Q<sub>in</sub>/(Q<sub>out</sub> − Q<sub>in</sub>) (Eq. 2.45–2.46)</td></tr>
+    <tr><td><b>Pompe à chaleur</b><br>but : fournir Q<sub>out</sub> au chaud</td><td>W<sub>cycle</sub> = Q<sub>out</sub> − Q<sub>in</sub> (Eq. 2.44)</td><td>γ = Q<sub>out</sub>/W<sub>cycle</sub> = Q<sub>out</sub>/(Q<sub>out</sub> − Q<sub>in</sub>) (Eq. 2.47–2.48)</td></tr>
+  </table></div>
+  <div class="retiens"><b>Comment ne pas se tromper.</b> La performance = ce qu'on veut ÷ ce qu'on paie. Moteur : on veut W, on paie Q<sub>in</sub>. Frigo : on veut Q<sub>in</sub> (le froid), on paie W. Pompe à chaleur : on veut Q<sub>out</sub> (le chaud), on paie W. Donc γ = β + 1 &gt; 1.</div>
+  <div class="example">
+    <div class="eyebrow">Exemples corrigés · diapos 62 et 69</div>
+    <p>(a) Un moteur reçoit 1000 kJ des gaz chauds et cède 600 kJ à l'atmosphère. (b) Une pompe à chaleur cède 900 kJ à une maison et reçoit 600 kJ de l'air extérieur. Travail et performance ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(a) W_cycle = 1000 − 600 = 400 kJ        η = 400/1000 = 0,40 = 40 %
+(b) W_cycle = 900 − 600 = 300 kJ (reçu)   γ = 900/300 = 3,0</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercice 4 (diapo 70)</div>
+    <p>Cycle : 1-2 à p = 1,4 bar avec V<sub>1</sub> = 0,028 m³ et W<sub>12</sub> = 10,5 kJ ; 2-3 compression p V = constante avec U<sub>3</sub> = U<sub>2</sub> ; 3-1 à volume constant avec U<sub>1</sub> − U<sub>3</sub> = −26,4 kJ. Travail net et Q<sub>12</sub> ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">1-2 : W_12 = p (V_2 − V_1)  →  V_2 = 0,028 + 10 500/140 000 = 0,103 m³
+2-3 : V_3 = V_1 (3-1 est isochore) ;  W_23 = p_2 V_2 ln(V_3/V_2) = 140 000 × 0,103 × ln(0,028/0,103) = −18,78 kJ
+3-1 : volume constant  →  W_31 = 0
+W_net = 10,5 − 18,78 + 0 = −8,28 kJ   (négatif : ce n'est pas un cycle moteur)
+U_2 − U_1 = U_3 − U_1 = +26,4 kJ   →   Q_12 = (U_2 − U_1) + W_12 = 26,4 + 10,5 = 36,9 kJ</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices 5 et 6 (diapos 71 et 72)</div>
+    <p>(5) Collecteur solaire : 2 MW de chaleur vers un cycle moteur de rendement 36 %, 4380 h de fonctionnement, travail vendu 0,069 €/kWh. (6) Climatiseur : 0,434 kW électrique, β = 6,22, électricité 0,2 €/kWh, 24 h.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(5) Puissance : 0,36 × 2 = 0,72 MW     Travail : 0,72 × 4380 = 3153,6 MW·h
+    Valeur : 3 153 600 kW·h × 0,069 = 217 598 €
+(6) Chaleur extraite : β × W = 6,22 × 0,434 = 2,70 kW
+    Coût : 0,434 kW × 24 h × 0,2 €/kW·h = 2,08 €</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Une pompe à chaleur peut-elle avoir γ &lt; 1 ?</p>
+      <div class="opts"><button>Oui</button><button data-ok="1">Non</button></div>
+      <div class="fb" hidden>γ = Q<sub>out</sub>/W avec Q<sub>out</sub> = W + Q<sub>in</sub> &gt; W : γ est toujours supérieur à 1. C'est pour ça qu'elle bat un radiateur électrique.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices supplémentaires</h2><span class="meta">PDF « exercices supplémentaires » du prof</span></div>
+  <div class="ex"><h4>Exercice 2 · pression linéaire puis constante <span class="tag">section 4</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Le travail est l'aire sous la courbe p–V : un trapèze pour la partie linéaire, (p<sub>a</sub> + p<sub>b</sub>)/2 × ΔV, puis un rectangle pour la partie à p constante. Compression : volumes décroissants, donc W &lt; 0.</p></div></details></div>
+  <div class="ex"><h4>Exercice 3 · transistor refroidi par convection <span class="tag">section 5</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>En régime permanent, Φ<sub>conv</sub> = 3 W (toute la puissance électrique). Puis T<sub>b</sub> = T<sub>f</sub> + Φ<sub>conv</sub>/(h A) avec A = 5×10⁻⁴ m², h = 100 W/(m²·K) : T<sub>b</sub> = 25 + 60 = 85 °C.</p></div></details></div>
+  <div class="ex"><h4>Exercices 4 et 5 · cycles à trois transformations <span class="tag">sections 3, 4 et 6</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Tableau par transformation : W (aire sous la courbe, 0 si isochore), ΔU, puis Q = ΔU + W. Vérifie que ΣQ = ΣW sur le cycle, puis η = W<sub>net</sub>/Q<sub>in</sub> où Q<sub>in</sub> est la somme des Q positifs.</p></div></details></div>
+</section>

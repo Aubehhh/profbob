@@ -1,0 +1,95 @@
+
+<section class="csec" id="s1" data-toc="Production et usages">
+  <div class="shead"><span class="num">1</span><h2>Production et usages de l'énergie électrique</h2><span class="meta">diapos 7 à 12 · 5 min</span></div>
+  <div class="idee"><b>L'idée.</b> L'électricité n'est presque jamais une source d'énergie en soi : on la produit à partir d'une autre énergie, on la transporte sur le réseau, puis on la retransforme chez l'utilisateur.</div>
+  <ul>
+    <li><b>Production</b> : centrales nucléaires et thermiques (une turbine entraîne un alternateur), hydraulique (barrages), énergies renouvelables (éolien, solaire photovoltaïque).</li>
+    <li><b>Transport</b> : le réseau monte la tension (jusqu'à 400 000 V) pour transporter, puis la redescend par étapes jusqu'à 230 V chez le particulier.</li>
+    <li><b>Stockage</b> : piles, batteries, véhicules électriques, hydrogène.</li>
+    <li><b>Usages</b> : éclairage, chauffage, force motrice (trains, moteurs, ascenseurs…).</li>
+  </ul>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Tension et courant">
+  <div class="shead"><span class="num">2</span><h2>Tension et courant électrique</h2><span class="meta">diapo 13 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> La tension se mesure <b>entre deux bornes</b> (c'est une différence) ; le courant traverse un dipôle (c'est un débit de charges).</div>
+  <ul>
+    <li><b>Tension</b> entre deux bornes d'un dipôle : elle résulte de la différence du nombre de charges électriques entre ces bornes. Unité : le <b>volt (V)</b>.</li>
+    <li><b>Courant</b> : déplacement d'ensemble, ordonné, de charges électriques. Unité de l'intensité : l'<b>ampère (A)</b>.</li>
+  </ul>
+  <div class="formula key cours">i(t) = dQ(t) / dt
+   i en A ; Q en coulombs (C) ; t en s</div>
+  <div class="retiens"><b>Majuscules et minuscules.</b> Une grandeur qui dépend du temps s'écrit en minuscule (u, i, p). Une grandeur constante s'écrit en majuscule (U, I, P).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · débit de charges</div>
+    <p>Une charge de 90 C traverse un fil en 1 minute, à débit constant. Intensité du courant ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">I = Q / t = 90 / 60 = 1,5 A</div>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Une charge de 1 C traverse un fil en 1 s. Le courant vaut :</p>
+      <div class="opts"><button>1 V</button><button data-ok="1">1 A</button><button>1 W</button></div>
+      <div class="fb" hidden>1 ampère = 1 coulomb par seconde.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Continu et alternatif">
+  <div class="shead"><span class="num">3</span><h2>Tension continue (DC) et tension alternative (AC)</h2><span class="meta">diapos 14 à 16 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Ce qui distingue DC et AC, c'est la <b>valeur moyenne</b> : un signal alternatif a une composante continue nulle (aires égales au-dessus et en dessous de l'axe).</div>
+  <div class="tw"><table>
+    <tr><th>Type</th><th>Allure</th><th>Composante continue (valeur moyenne)</th></tr>
+    <tr><td>DC parfaite</td><td>droite horizontale (pile de 1,5 V)</td><td>égale à la tension</td></tr>
+    <tr><td>DC variable</td><td>varie mais garde un signe (redressée, créneaux positifs)</td><td>non nulle</td></tr>
+    <tr><td>AC</td><td>sinus, triangle, carré, dent de scie…</td><td><b>nulle</b> : aires égales</td></tr>
+  </table></div>
+  <div class="trap"><b>Attention.</b> Les signaux AC ne sont pas tous sinusoïdaux : un carré symétrique ou un triangle sont aussi alternatifs.</div>
+  <div class="quiz">
+    <div class="q"><p>Un signal créneau qui vaut +5 V la moitié du temps et 0 V l'autre moitié est :</p>
+      <div class="opts"><button>alternatif</button><button data-ok="1">continu variable (valeur moyenne 2,5 V)</button><button>continu parfait</button></div>
+      <div class="fb" hidden>Sa valeur moyenne vaut 2,5 V, pas zéro : ce n'est pas un signal alternatif.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Puissance et énergie">
+  <div class="shead"><span class="num">4</span><h2>Relations puissance / énergie</h2><span class="meta">diapos 17 à 20 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> L'énergie, c'est l'<b>aire sous la courbe</b> de la puissance en fonction du temps. La puissance moyenne est la hauteur du rectangle de même aire.</div>
+  <div class="formula key cours">Puissance constante :            w = P × T
+Constante par intervalles :       w = P₁T₁ + P₂T₂ + P₃T₃ + … = &lt;p(t)&gt; × T
+Cas général :                     w = ∫₀ᵀ p(t) dt = &lt;p(t)&gt; × T
+Puissance moyenne (active) :      &lt;p(t)&gt; = (1/T) ∫₀ᵀ p(t) dt
+   w en J ; P en W ; T en s   (1 kWh = 3,6×10⁶ J)</div>
+  <div class="retiens">La puissance moyenne est aussi appelée <b>puissance active</b>. Elle est proportionnelle à l'aire algébrique entre l'axe et la courbe de p(t).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · l'exercice du cours (diapos 19 et 20)</div>
+    <p>Un fer à repasser (P<sub>fer</sub> = 1000 W, 35 min), un lave-vaisselle (P<sub>lave</sub> = 1500 W, 10 min) et 3 lampes de 15 W chacune (50 min). Énergies consommées, puissance moyenne et puissance maximale à fournir, si les récepteurs fonctionnent l'un après l'autre (cas 1), puis tous en même temps (cas 2).</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">W_fer    = 1000 × 35×60 = 2,10×10⁶ J
+W_lave   = 1500 × 10×60 = 0,90×10⁶ J
+W_lampes = 3 × 15 × 50×60 = 0,135×10⁶ J
+W_totale = 3,135×10⁶ J  (≈ 0,871 kWh)
+
+Cas 1, l'un après l'autre : T = 35 + 10 + 50 = 95 min = 5700 s
+   &lt;p&gt;₁ = 3,135×10⁶ / 5700 = 550 W ;  P̂₁ = 1500 W (le lave-vaisselle)
+Cas 2, en même temps : l'énergie ne change pas (mêmes durées)
+   T = 50 min = 3000 s (le récepteur le plus long)
+   &lt;p&gt;₂ = 3,135×10⁶ / 3000 = 1045 W ;  P̂₂ = 1000 + 1500 + 45 = 2545 W</div>
+      <p><b>Conclusion :</b> même énergie, mais en faisant tout fonctionner en même temps, le réseau doit fournir un pic de puissance bien plus grand (2545 W au lieu de 1500 W). On a pris 15 W par lampe ; si l'énoncé veut dire 15 W pour les trois lampes ensemble, remplace 45 W par 15 W.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Un radiateur de 2000 W fonctionne 3 h. Il consomme :</p>
+      <div class="opts"><button>667 Wh</button><button data-ok="1">6 kWh</button><button>6000 J</button></div>
+      <div class="fb" hidden>w = P × T = 2 kW × 3 h = 6 kWh (= 2,16×10⁷ J).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">diapos 19 et 20</span></div>
+  <div class="ex"><h4>Fer, lave-vaisselle et lampes <span class="tag">section 4</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>Trace p(t) en marches d'escalier, puis l'énergie cumulée w(t) (des droites dont la pente est la puissance). Énergie totale 3,135×10⁶ J dans les deux cas ; <span class="res">&lt;p&gt;₁ = 550 W, &lt;p&gt;₂ = 1045 W, P̂₁ = 1500 W, P̂₂ = 2545 W</span>. La correction détaillée est dans l'exemple de la section 4.</p></div></details></div>
+</section>

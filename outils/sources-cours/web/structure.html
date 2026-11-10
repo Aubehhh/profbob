@@ -1,0 +1,122 @@
+
+<section class="csec" id="s1" data-toc="Doctype, head, body">
+  <div class="shead"><span class="num">1</span><h2>Structure d'une page : doctype, head, body</h2><span class="meta">diapos 4 à 9 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une page HTML a trois parties : le <b>doctype</b> (quelle version du HTML), le <b>head</b> (les informations sur la page, invisibles) et le <b>body</b> (ce qui s'affiche).</div>
+  <ul>
+    <li><b>Doctype</b> : en-tête du fichier. Il déclare la version HTML (et donc les règles que le validateur W3C applique). En HTML5, il s'écrit simplement <code>&lt;!DOCTYPE html&gt;</code>. Le cours montre aussi l'ancien doctype HTML 4.01, avec sa DTD (Document Type Definition, le « dictionnaire » des balises autorisées).</li>
+    <li><b>Head</b> : méta-informations. Encodage (charset), mots-clés de recherche, titre de l'onglet, feuilles de style CSS, scripts JavaScript, détection du type d'appareil…</li>
+    <li><b>Body</b> : le contenu de la page.</li>
+  </ul>
+  <pre class="code"><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="keywords" content="test, page, web" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PAGE TITLE</title>
+  <script> /* scripts JS */ </script>
+  <style> /* styles CSS */ </style>
+</head>
+<body>
+  <h1>Hello world !</h1>
+  <p>This is my first page</p>
+</body>
+</html></pre>
+  <div class="coquille"><b>Coquilles du cours (diapos 7 et 8) et des corrections de TD.</b>
+    <ul>
+      <li>La feuille de style est liée par <code>&lt;link rel="stylesheet" href="chemin/style.css" /&gt;</code> : rel indique le <b>type de lien</b>, et le chemin du fichier va dans <b>href</b>, pas dans rel.</li>
+      <li>Le body se ferme avec <code>&lt;/body&gt;</code>, pas <code>&lt;body&gt;</code>.</li>
+      <li>Le doctype commence par <code>&lt;!</code> : les corrections des TD 2 et 3 écrivent <code>&lt;DOCTYPE …&gt;</code>, sans le point d'exclamation.</li>
+      <li>Pas d'espace dans <code>utf-8</code> ni dans les valeurs d'attributs (<code>"utf -8"</code>, <code>"keywords "</code> sont des fautes de recopie).</li>
+    </ul></div>
+  <div class="quiz">
+    <div class="q"><p>Le titre affiché dans l'onglet du navigateur se met :</p>
+      <div class="opts"><button>dans le body, avec &lt;h1&gt;</button><button data-ok="1">dans le head, avec &lt;title&gt;</button><button>dans le doctype</button></div>
+      <div class="fb" hidden>&lt;title&gt; est une méta-information : elle va dans le head. &lt;h1&gt; est un titre visible dans la page.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Liens et ancres">
+  <div class="shead"><span class="num">2</span><h2>Liens et ancres</h2><span class="meta">diapo 10 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un lien envoie vers une autre page ; une ancre envoie vers un endroit précis de la même page, repéré par un <b>id</b>.</div>
+  <pre class="code"><a href="page.html">Texte</a>         affiche « Texte », cliquable, et ouvre page.html
+
+<a href="#keyword">Ancre</a>          saute à l'élément dont l'id vaut keyword
+<p id="keyword">Autre ancre</p></pre>
+  <div class="trap"><b>Piège.</b> Dans le lien, on met un <b>#</b> devant le nom (<code>href="#keyword"</code>). Dans l'élément visé, on écrit l'id <b>sans #</b> (<code>id="keyword"</code>).</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Iframes et tableaux">
+  <div class="shead"><span class="num">3</span><h2>Mise en page : iframes et tableaux</h2><span class="meta">diapos 12 à 15 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pour découper une page en zones, on a d'abord utilisé des cadres (frames, iframes), puis des tableaux. Ces méthodes marchent mais sont rigides : on les remplace aujourd'hui par des blocs.</div>
+  <pre class="code"><iframe src="maPage.html" width="600" height="400"></iframe></pre>
+  <p>Une <b>iframe</b> affiche une autre page dans une zone de la page. C'est rigide et vieillissant.</p>
+  <div class="tw"><table>
+    <tr><th>Balise</th><th>Rôle</th></tr>
+    <tr><td><code>&lt;table&gt;</code></td><td>le tableau entier</td></tr>
+    <tr><td><code>&lt;tr&gt;</code></td><td>une ligne (table row)</td></tr>
+    <tr><td><code>&lt;td&gt;</code></td><td>une cellule (table data)</td></tr>
+    <tr><td><code>&lt;thead&gt;</code> · <code>&lt;tbody&gt;</code> · <code>&lt;tfoot&gt;</code></td><td>en-tête · corps · pied du tableau</td></tr>
+  </table></div>
+  <p><b>Attributs utiles</b> : <code>colspan</code> / <code>rowspan</code> (une cellule qui s'étend sur plusieurs colonnes / lignes), <code>width</code> / <code>height</code>, et <code>bgcolor</code>, <code>border</code>, <code>cellspacing</code>, que l'on fait plutôt en CSS.</p>
+  <pre class="code"><table>
+  <thead><tr><td>Col 1</td><td>Col 2</td></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+        <table>
+          <tr><td>Cont 1</td><td>Cont 2</td></tr>
+        </table>
+      </td>
+      <td>Cont 3</td>
+    </tr>
+  </tbody>
+  <tfoot><tr><td colspan="2">Footer</td></tr></tfoot>
+</table></pre>
+  <p>Ici, le pied de tableau tient sur les 2 colonnes (<code>colspan="2"</code>), et la première cellule du corps contient elle-même un tableau.</p>
+  <div class="tw"><table>
+    <tr><th>Tableaux : avantages</th><th>Tableaux : inconvénients</th></tr>
+    <tr><td>simple, plus souple que les frames ; la page devient un ensemble de cellules ; idéal pour de grandes quantités de données</td><td>structure globale peu souple, cellules liées entre elles, code lourd et peu réutilisable</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 2 : page « en trois colonnes »</div>
+    <p>Un tableau de trois cellules de 150, 600 et 100 px ; du texte dans les colonnes de côté ; la page du TD 1 dans une iframe au centre.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code"><table>
+  <tr>
+    <td width="150"><p>Lorem ipsum…</p></td>
+    <td width="600"><iframe src="TD1.html" width="600" height="600"></iframe></td>
+    <td width="100"><p>Lorem ipsum…</p></td>
+  </tr>
+</table></pre>
+      <p><b>Exercice 3 :</b> les textes des deux colonnes n'ont pas la même hauteur ; par défaut, le contenu d'une cellule est centré verticalement, donc ils ne sont pas alignés en haut. <b>Exercice 4 :</b> un clic sur un lien dans l'iframe ouvre la nouvelle page <b>dans l'iframe</b>, pas dans toute la fenêtre.</p>
+      <p>Une iframe se ferme par <code>&lt;/iframe&gt;</code> : la forme <code>/&gt;&lt;/iframe&gt;</code> du cours et de la correction mélange balise simple et balise double.</p>
+    </div></details>
+  </div>
+  <div class="quiz">
+    <div class="q"><p>Pour une cellule qui occupe la largeur de 3 colonnes, on écrit :</p>
+      <div class="opts"><button>&lt;td rowspan="3"&gt;</button><button data-ok="1">&lt;td colspan="3"&gt;</button><button>&lt;td width="3"&gt;</button></div>
+      <div class="fb" hidden>colspan = nombre de colonnes couvertes ; rowspan = nombre de lignes.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Blocs">
+  <div class="shead"><span class="num">4</span><h2>Mise en page par blocs</h2><span class="meta">diapos 16 et 17 · 10 min</span></div>
+  <div class="idee"><b>L'idée.</b> La méthode moderne : on découpe la page en blocs indépendants avec <code>&lt;div&gt;</code>, puis on les place et on les met en forme en CSS (chapitre suivant).</div>
+  <ul>
+    <li>Chaque <code>&lt;div&gt;</code> est une zone dédiée (un rectangle dans la page).</li>
+    <li>Les blocs se hiérarchisent : un bloc peut en contenir d'autres.</li>
+    <li>Position, taille, couleurs : tout se règle en CSS.</li>
+  </ul>
+  <div class="retiens"><b>Conclusion du cours.</b> Une page = doctype, head, puis body. Le body est découpé en blocs, et la méthode la plus souple (div + CSS) est la meilleure.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 2</span></div>
+  <div class="ex"><h4>TD 2 · format en trois colonnes <span class="tag">sections 1 et 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Commence par le squelette complet (doctype, html, head avec charset et title, body), puis le tableau d'une ligne et trois cellules. La correction est dans l'exemple de la section 3.</p></div></details></div>
+</section>

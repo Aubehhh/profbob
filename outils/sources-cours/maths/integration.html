@@ -1,0 +1,191 @@
+
+<section class="csec" id="s1" data-toc="Primitives">
+  <div class="shead"><span class="num">1</span><h2>Primitives</h2><span class="meta">diapos 3 à 7 et formulaire · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Intégrer, c'est faire la dérivation à l'envers : trouver F telle que F' = f. Toutes les primitives diffèrent d'une constante, d'où le « + C ».</div>
+  <div class="formula key cours">F primitive de f sur I :  F'(x) = f(x) pour tout x ∈ I
+∫ f(x) dx = F(x) + C        (intégrale indéfinie)
+Linéarité :  ∫ (λf + μg) = λ ∫ f + μ ∫ g</div>
+  <div class="tw"><table>
+    <tr><th>f(x)</th><th>primitive</th><th>f(x)</th><th>primitive</th></tr>
+    <tr><td>xⁿ (n ≠ −1)</td><td>xⁿ⁺¹/(n + 1)</td><td>sin x</td><td>−cos x</td></tr>
+    <tr><td>1/x</td><td>ln |x|</td><td>cos x</td><td>sin x</td></tr>
+    <tr><td>eˣ</td><td>eˣ</td><td>sec² x = 1/cos² x</td><td>tan x</td></tr>
+    <tr><td>e<sup>kx</sup></td><td>e<sup>kx</sup>/k</td><td>csc² x</td><td>−cot x</td></tr>
+    <tr><td>aˣ</td><td>aˣ / ln a</td><td>1/√(1 − x²)</td><td>arcsin x</td></tr>
+    <tr><td>ln x</td><td>x ln x − x</td><td>1/(1 + x²)</td><td>arctan x</td></tr>
+    <tr><td>(ax + b)ⁿ (n ≠ −1)</td><td>(ax + b)ⁿ⁺¹ / (a(n + 1))</td><td>sinh x ; cosh x</td><td>cosh x ; sinh x</td></tr>
+    <tr><td>sin(ax + b)</td><td>−cos(ax + b)/a</td><td>cos(ax + b)</td><td>sin(ax + b)/a</td></tr>
+  </table></div>
+  <div class="coquille"><b>Coquille du cours (diapo 6).</b> La condition de ∫ xⁿ dx = xⁿ⁺¹/(n + 1) est écrite « x ≠ −1 » : c'est <b>n ≠ −1</b> (pour n = −1, la primitive de 1/x est ln |x|).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 7</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">A = ∫ (2eˣ − 3 sin x + 4/x) dx = 2eˣ + 3 cos x + 4 ln |x| + C
+B = ∫ 2x (x² − 1)³ dx : c'est u' u³ avec u = x² − 1  →  B = (x² − 1)⁴ / 4 + C</div>
+    </div></details>
+  </div>
+  <div class="trap"><b>Piège.</b> Repère la forme u' × (fonction de u) avant de te lancer dans un calcul long : 2x(x² − 1)³ s'intègre directement.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Intégrale définie">
+  <div class="shead"><span class="num">2</span><h2>Intégrale définie et propriétés</h2><span class="meta">diapos 8 à 11 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> ∫ₐᵇ f est un nombre : l'aire <b>signée</b> sous la courbe entre a et b. Les parties où f &lt; 0 comptent négativement.</div>
+  <div class="formula key cours">∫ₐᵇ f(x) dx = F(b) − F(a)
+Inversion des bornes :  ∫ₐᵇ f = −∫ᵦᵃ f        bornes égales :  ∫ₐᵃ f = 0
+Chasles :  ∫ₐᵇ f = ∫ₐᶜ f + ∫꜀ᵇ f
+Positivité :  f ≥ 0 sur [a, b] ⇒ ∫ₐᵇ f ≥ 0
+Valeur moyenne :  f̄ = (1/(b − a)) ∫ₐᵇ f(x) dx</div>
+  <div class="quiz">
+    <div class="q"><p>∫₀^(2π) sin x dx vaut :</p>
+      <div class="opts"><button>4</button><button data-ok="1">0</button><button>2π</button></div>
+      <div class="fb" hidden>[−cos x]₀^(2π) = −1 + 1 = 0 : les deux arches s'annulent (aire signée).</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Riemann, escalier">
+  <div class="shead"><span class="num">3</span><h2>Sommes de Riemann et fonctions en escalier</h2><span class="meta">diapos 12 à 18 et 22 à 24 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> On découpe [a, b] en n bandes, on remplace la courbe par un rectangle sur chaque bande (hauteur prise à gauche, à droite ou au milieu), et on additionne. Plus n est grand, meilleure est l'approximation.</div>
+  <div class="formula key cours">Δx = (b − a)/n
+Somme par la droite :   S_n = Δx × Σ (k = 1 à n) f(a + kΔx)
+Somme par la gauche :   S_n = Δx × Σ (k = 0 à n − 1) f(a + kΔx)
+Intégrale de Riemann :  ∫ₐᵇ f(x) dx = lim (n→∞) ((b − a)/n) Σ f(a + k(b − a)/n)
+Fonction en escalier (valeur c_i sur [x_i ; x_(i+1)[) :  ∫ₐᵇ φ = Σ c_i (x_(i+1) − x_i)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 18</div>
+    <p>f(x) = x³ − 4x + 1 sur [1, 4], somme de Riemann par la droite avec 6 sous-intervalles.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Δx = 0,5 ; points 1,5 ; 2 ; 2,5 ; 3 ; 3,5 ; 4
+f : −1,625 ; 1 ; 6,625 ; 16 ; 29,875 ; 49   (somme 100,875)
+S₆ = 0,5 × 100,875 = 50,44
+Valeur exacte : [x⁴/4 − 2x² + x]₁⁴ = 36 − (−0,75) = 36,75
+Avec 12 sous-intervalles : S₁₂ = 43,36 (plus proche)</div>
+      <p>Par la droite, la somme surestime ici : f est croissante sur [1, 4] (à partir de x ≈ 1,15), donc le bord droit de chaque bande est le plus haut.</p>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fonctions en escalier (diapos 22 et 24)</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">f = 2 sur [0 ; 2[, 3 sur [2 ; 4[, 1 sur [4 ; 6] :  ∫₀⁶ f = 2×2 + 3×2 + 1×2 = 12
+I : 3 sur [0 ; 1/4[, −1 sur [1/4 ; 1/2[, 0 sur [1/2 ; 3/4[, −4 sur [3/4 ; 1[
+   I = 3 × 1/4 − 1 × 1/4 + 0 − 4 × 1/4 = −1/2</div>
+    </div></details>
+  </div>
+  <div class="coquille"><b>Coquille du cours (diapo 24).</b> Le dernier intervalle est écrit [1/2 ; 1[, qui chevauche [1/2 ; 3/4[ : il s'agit de <b>[3/4 ; 1[</b>.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Théorème fondamental">
+  <div class="shead"><span class="num">4</span><h2>Théorème fondamental de l'analyse</h2><span class="meta">diapos 19 à 21 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> L'aire accumulée depuis a, vue comme fonction de x, a pour dérivée f(x) : intégrer et dériver sont des opérations réciproques.</div>
+  <div class="formula key cours">f continue sur [a, b], F(x) = ∫ₐˣ f(t) dt   ⇒   F'(x) = f(x)
+F primitive de f  ⇒  ∫ₐᵇ f(x) dx = F(b) − F(a)
+   (1) trouver une primitive ; (2) l'évaluer aux bornes ; (3) faire la différence</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 20 et fiche 3, exercice 2</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">F(x) = ∫₀ˣ 3t² dt = x³  →  F'(x) = 3x² = f(x) ✓
+Voiture : v(t) = 240t(1 − t) km/h, 0 ≤ t ≤ 1 h
+   v'(t) = 240(1 − 2t) = 0 → t = 0,5 h ;  v_max = 240 × 0,5 × 0,5 = 60 km/h
+   distance = ∫₀¹ 240(t − t²) dt = 240 (1/2 − 1/3) = 40 km</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Changement de variable, IPP">
+  <div class="shead"><span class="num">5</span><h2>Changement de variable et intégration par parties</h2><span class="meta">diapos 25 à 28 · 45 min</span></div>
+  <div class="idee"><b>L'idée.</b> Changement de variable : on reconnaît une fonction composée et on pose u = l'intérieur. Intégration par parties : on transforme un produit en dérivant le facteur qui se simplifie.</div>
+  <div class="formula key cours">Changement de variable :  u = g(x),  du = g'(x) dx,  on intègre en u, puis on remplace u par g(x)
+Intégration par parties :  ∫ u dv = uv − ∫ v du
+   ∫ₐᵇ u v' = [uv]ₐᵇ − ∫ₐᵇ u' v
+Règle ALPES pour choisir u (on dérive u) : Arcsin… → Log → Polynôme → Exponentielle → Sinus/cosinus
+   u = la fonction la plus à gauche de ALPES ; dv = le reste</div>
+  <div class="coquille"><b>Coquille du cours (diapo 28).</b> La diapo dit « choisir v le plus à gauche de ALPES » et que sinus/cosinus sont « idéales pour u ». C'est l'inverse : on choisit <b>u</b> le plus à gauche (ce qu'on dérive), et sin, cos, exp, faciles à intégrer, vont dans <b>dv</b>.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 27 et 28</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">I = ∫ 3x² (x³ + 2)⁴ dx ;  u = x³ + 2, du = 3x² dx  →  I = u⁵/5 + C = (x³ + 2)⁵/5 + C
+J = ∫ dx / √(4x − x²) ;  4x − x² = 4 − (x − 2)², u = (x − 2)/2  →  J = arcsin((x − 2)/2) + C
+I₁ = ∫ x² ln x dx ;  u = ln x, dv = x² dx  →  I₁ = (x³/3) ln x − x³/9 + C
+I₂ = ∫ e^(2x) sin x dx ;  deux IPP, on retombe sur I₂ :
+   I₂ = e^(2x) (2 sin x − cos x) / 5 + C</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fiche 3, exercices 3 et 4</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">A = ∫ 3x / (x² + 1)⁷ dx ;  u = x² + 1, du = 2x dx
+   A = (3/2) ∫ u⁻⁷ du = (3/2) × u⁻⁶/(−6) = −1 / (4(x² + 1)⁶) + C
+∫₀^(π/2) x cos x dx = [x sin x]₀^(π/2) − ∫₀^(π/2) sin x dx = π/2 − 1 ≈ 0,571
+∫₅¹⁰ ln x dx = [x ln x − x]₅¹⁰ = 10 ln 10 − 5 ln 5 − 5 ≈ 9,979</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Éléments simples">
+  <div class="shead"><span class="num">6</span><h2>Décomposition en éléments simples</h2><span class="meta">diapos 29 et 30 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une fraction rationnelle compliquée se casse en une somme de fractions simples, que l'on sait intégrer (en ln ou en arctan).</div>
+  <div class="formula key cours">Un facteur (x − a) au dénominateur        →  A/(x − a)
+Un facteur (x − a)² au dénominateur       →  A/(x − a) + B/(x − a)²   (une fraction par degré)
+Un facteur x² + px + q sans racine réelle →  (Bx + C)/(x² + px + q)
+On trouve les numérateurs en remettant au même dénominateur (ou en remplaçant x par les racines).</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 29 et 30</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">1/((x − 1)(x + 1)) = A/(x − 1) + B/(x + 1) ;  1 = A(x + 1) + B(x − 1)  →  A = 1/2, B = −1/2
+   ∫ = ½ ln |x − 1| − ½ ln |x + 1| + C
+(3x + 1)/(x + 1)² = A/(x + 1) + B/(x + 1)² ;  3x + 1 = A(x + 1) + B  →  A = 3, B = −2
+   ∫₀¹ = [3 ln(x + 1) + 2/(x + 1)]₀¹ = 3 ln 2 + 1 − 2 = 3 ln 2 − 1 ≈ 1,079</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fiche 3, exercice 5c</div>
+    <p>∫ (3x + 5) / ((x² + 1)(x − 2)) dx</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">(3x + 5)/((x² + 1)(x − 2)) = A/(x − 2) + (Bx + C)/(x² + 1)
+x = 2 : 11 = 5A → A = 11/5 ;  terme en x² : 0 = A + B → B = −11/5 ;  constante : 5 = A − 2C → C = −7/5
+∫ = (11/5) ln |x − 2| − (11/10) ln(x² + 1) − (7/5) arctan x + C</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s7" data-toc="Doubles, applications">
+  <div class="shead"><span class="num">7</span><h2>Intégrales doubles et applications</h2><span class="meta">diapos 31 à 33 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une intégrale double se calcule comme deux intégrales simples emboîtées : on intègre d'abord par rapport à une variable (l'autre est une constante), puis par rapport à l'autre.</div>
+  <div class="formula key cours">∬_R f(x, y) dA = ∫ₐᵇ ( ∫꜀ᵈ f(x, y) dy ) dx      (R = [a, b] × [c, d])
+Si les bornes de y dépendent de x, on garde l'intégrale en y à l'intérieur.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 32</div>
+    <p>∫₀² ∫₀^(2−x) (x + y²) dy dx (triangle sous la droite y = 2 − x).</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">intégrale en y : [xy + y³/3]₀^(2−x) = x(2 − x) + (2 − x)³/3
+∫₀² x(2 − x) dx = [x² − x³/3]₀² = 4 − 8/3 = 4/3
+∫₀² (2 − x)³/3 dx = [−(2 − x)⁴/12]₀² = 16/12 = 4/3
+Total = 8/3 ≈ 2,667</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapo 33</div>
+    <p>Projectile lancé à 50 m/s à 30° ; gaz parfait (n = 2 mol, T = 300 K) détendu de 1 à 3 m³ à température constante.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">v_y(t) = 50 sin 30° − g t = 25 − 9,81 t = 0  →  t = 2,55 s
+h_max = ∫₀^2,55 v_y dt = 25²/(2 × 9,81) = 31,9 m
+W = ∫ p dV = ∫ nRT/V dV = nRT ln(V₂/V₁) = 2 × 8,314 × 300 × ln 3 ≈ 5480 J</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s7"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">fiche d'exercices 3</span></div>
+  <div class="ex"><h4>Exercice 1 · somme de Riemann <span class="tag">section 3</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>Δx = 1, points 1, 2, 3, 4 (radians) : S₄ = f(1) + f(2) + f(3) + f(4) = <span class="res">15,59</span>. Valeur exacte : [2x − 1,5 cos 2x + x²/4]₀⁴ = 13,5 − 1,5 cos 8 ≈ <span class="res">13,72</span>.</p></div></details></div>
+  <div class="ex"><h4>Exercices 2 à 4 <span class="tag">sections 4 et 5</span></h4>
+    <details class="hint"><summary>Résultats</summary><div><p><span class="res">v<sub>max</sub> = 60 km/h, d = 40 km</span> ; <span class="res">A = −1/(4(x² + 1)⁶) + C</span> ; <span class="res">π/2 − 1</span> ; <span class="res">10 ln 10 − 5 ln 5 − 5 ≈ 9,98</span>. Détails dans les exemples des sections 4 et 5.</p></div></details></div>
+  <div class="ex"><h4>Exercice 5 · méthode au choix <span class="tag">sections 5 et 6</span></h4>
+    <details class="hint"><summary>Méthode et résultats</summary><div><p>a. Forme u' e^u : <span class="res">∫ 2x e^(x²) dx = e^(x²) + C</span>. b. Intégrer d'abord en x : ∫₀¹ sin(xy) dx = (1 − cos y)/y, puis ∫₀¹ (1 − cos y)/y dy n'a pas de primitive usuelle ; on l'approche numériquement : <span class="res">≈ 0,240</span>. c. Éléments simples, voir la section 6.</p></div></details></div>
+</section>

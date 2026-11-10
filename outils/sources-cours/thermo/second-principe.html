@@ -1,0 +1,66 @@
+
+<section class="csec" id="s1" data-toc="Énoncés">
+  <div class="shead"><span class="num">1</span><h2>Les énoncés du second principe</h2><span class="meta">diapos 166 à 170 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le premier principe dit que l'énergie se conserve. Le second dit dans quel <b>sens</b> les choses se passent : la chaleur ne remonte pas seule du froid vers le chaud, et on ne transforme jamais toute la chaleur en travail.</div>
+  <p>Il n'existe pas d'énoncé unique ; le cours en donne trois.</p>
+  <ul>
+    <li><b>Clausius</b> : il est impossible pour un système de fonctionner de sorte que le <i>seul</i> résultat soit un transfert de chaleur d'un corps froid vers un corps chaud. (Un frigo y arrive, mais en consommant du travail.)</li>
+    <li><b>Kelvin-Planck</b> : il est impossible pour un système, en cycle, de fournir un travail net à son environnement en recevant de la chaleur d'un <i>seul</i> réservoir thermique.</li>
+    <li><b>Entropie</b> : il est impossible pour un système de fonctionner de manière à <i>détruire</i> l'entropie. L'entropie est une propriété extensive (chapitre 6) qui, contrairement à la masse et à l'énergie, ne se conserve pas : elle est produite dès qu'il y a frottement ou autre non-idéalité.</li>
+  </ul>
+  <div class="retiens"><b>Réservoir thermique.</b> Un système qui garde une température constante malgré les échanges de chaleur : l'atmosphère, un lac, l'océan, un gros bloc de cuivre.</div>
+  <div class="quiz">
+    <div class="q"><p>Un bateau qui avancerait en prenant de la chaleur à l'océan seul et en la changeant entièrement en travail viole…</p>
+      <div class="opts"><button>le premier principe</button><button data-ok="1">l'énoncé de Kelvin-Planck</button><button>rien du tout</button></div>
+      <div class="fb" hidden>L'énergie serait conservée (premier principe respecté), mais un seul réservoir et du travail net en cycle : c'est interdit par Kelvin-Planck.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Irréversibilités">
+  <div class="shead"><span class="num">2</span><h2>Irréversibilités, processus réversibles et irréversibles</h2><span class="meta">diapos 171 à 177 · 25 min</span></div>
+  <p>Le second principe sert à trouver les <b>performances théoriques optimales</b> d'un système, calculées sur des processus idéalisés. Les processus réels s'en écartent à cause des <b>irréversibilités</b> :</p>
+  <ul>
+    <li>transfert de chaleur à travers une différence de température finie ;</li>
+    <li>détente libre d'un gaz ou d'un liquide vers une pression plus basse ;</li>
+    <li>réaction chimique spontanée ; mélange spontané de matières différentes ;</li>
+    <li>frottement (glissement, écoulement des fluides) ;</li>
+    <li>courant électrique dans une résistance ; déformation inélastique.</li>
+  </ul>
+  <div class="tw"><table>
+    <tr><th>Processus</th><th>Irréversibilités</th></tr>
+    <tr><td>Irréversible</td><td>présentes dans le système et/ou son environnement. <b>Tous les processus réels.</b></td></tr>
+    <tr><td>Réversible</td><td>aucune, ni dans le système ni dans l'environnement. Parfaitement idéal.</td></tr>
+    <tr><td>Réversible en interne</td><td>aucune dans le système (il peut y en avoir dehors). C'est un processus de quasi-équilibre.</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple du cours · diapo 177</div>
+    <p>De l'eau s'évapore à 100 °C dans un piston-cylindre, chauffée par des gaz à 500 °C. L'eau passe par une suite d'états d'équilibre : <b>pas d'irréversibilité interne</b>. Mais le transfert de chaleur spontané entre 500 °C et 100 °C est une <b>irréversibilité externe</b>.</p>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Cycles et rendement">
+  <div class="shead"><span class="num">3</span><h2>Kelvin-Planck en équation et rendement entre deux réservoirs</h2><span class="meta">diapos 178 et 179 · 20 min</span></div>
+  <div class="formula key cours">Un seul réservoir :   W_cycle ≤ 0                     (Eq. 5.3)
+   &lt; 0 : des irréversibilités internes sont présentes
+   = 0 : aucune irréversibilité interne</div>
+  <p>Pour un cycle moteur qui échange avec deux réservoirs, un chaud (Q<sub>C</sub> reçue) et un froid (Q<sub>F</sub> cédée) :</p>
+  <div class="formula key cours">W_cycle = Q_C − Q_F
+
+η = W_cycle / Q_C = 1 − Q_F / Q_C           (Eq. 5.4)</div>
+  <div class="retiens"><b>Pourquoi η &lt; 1.</b> Si Q<sub>F</sub> valait 0, le moteur fonctionnerait avec un seul réservoir et fournirait du travail : Kelvin-Planck l'interdit. Il faut donc toujours rejeter une partie de la chaleur, et η &lt; 100 %.</div>
+  <div class="coquille"><b>Notations.</b> Au chapitre 2, les mêmes chaleurs s'appellent Q<sub>in</sub> et Q<sub>out</sub> ; au chapitre 5, Q<sub>C</sub> (chaud) et Q<sub>F</sub> (froid). Ce sont les mêmes formules.</div>
+  <div class="quiz">
+    <div class="q"><p>Un moteur reçoit Q<sub>C</sub> = 500 kJ et rejette Q<sub>F</sub> = 300 kJ. η ?</p>
+      <div class="opts"><button>60 %</button><button data-ok="1">40 %</button><button>166 %</button></div>
+      <div class="fb" hidden>η = 1 − 300/500 = 0,40. Et W<sub>cycle</sub> = 200 kJ.</div></div>
+  </div>
+  <div class="idee"><b>À venir.</b> La suite du chapitre 5 (corollaires de Carnot, échelle Kelvin, cycle de Carnot, inégalité de Clausius) sera ajoutée quand le prof aura donné la partie 2.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Pour s'entraîner</h2></div>
+  <p>Ce début de chapitre est surtout du cours : entraîne-toi à reconnaître l'énoncé violé dans les questions rapides et le mini-DS, et à calculer η avec Q<sub>C</sub> et Q<sub>F</sub>.</p>
+</section>

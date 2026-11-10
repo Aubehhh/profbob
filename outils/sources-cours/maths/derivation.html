@@ -1,0 +1,190 @@
+
+<section class="csec" id="s1" data-toc="Continuité">
+  <div class="shead"><span class="num">1</span><h2>Continuité</h2><span class="meta">diapos 4 à 6 · 20 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une fonction est continue en c si on peut tracer sa courbe autour de c sans lever le crayon : quand x se rapproche de c, f(x) se rapproche de f(c).</div>
+  <div class="formula key cours">f continue en c :  ∀ε &gt; 0, ∃η &gt; 0, ∀x ∈ D_f,  |x − c| &lt; η  ⇒  |f(x) − f(c)| &lt; ε
+   c'est-à-dire  lim (x→c) f(x) = f(c)
+continue à gauche : même chose avec c − η &lt; x &lt; c ;  à droite : avec c &lt; x &lt; c + η</div>
+  <ul>
+    <li>Les fonctions polynômes, rationnelles, circulaires, racines, puissances, logarithmes et exponentielles sont continues sur leur domaine de définition.</li>
+    <li>Sommes, produits et quotients (quand ils sont définis) de fonctions continues sont continus.</li>
+  </ul>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fiche d'exercices 2, exercice 1</div>
+    <p>g(t) = arctan(t)/t. Domaine, et valeur de g(0) qui rend g continue en 0 ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">D_g = ℝ* (division par t)
+arctan(t)/t = (arctan t − arctan 0)/(t − 0) → arctan'(0) = 1/(1 + 0²) = 1
+On pose g(0) = 1 : g est alors continue en 0 (prolongement par continuité).</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Dérivées usuelles">
+  <div class="shead"><span class="num">2</span><h2>Dérivabilité et dérivées usuelles</h2><span class="meta">diapos 7 à 13 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le nombre dérivé f'(a) est la pente de la tangente en a : la limite du taux d'accroissement. Dérivable implique continue, mais pas l'inverse (|x| est continue en 0 sans y être dérivable).</div>
+  <div class="formula key cours">f'(a) = lim (h→0) [f(a + h) − f(a)] / h
+Développement limité d'ordre 1 :  f(x) = f(a) + (x − a) f'(a) + (x − a) ε(x),  ε(x) → 0 en a
+Classe Cⁿ sur I : les n premières dérivées existent et sont continues sur I  (eˣ est C^∞)</div>
+  <div class="tw"><table>
+    <tr><th>f(x)</th><th>f'(x)</th><th>f(x)</th><th>f'(x)</th></tr>
+    <tr><td>c</td><td>0</td><td>sin x</td><td>cos x</td></tr>
+    <tr><td>xⁿ</td><td>n xⁿ⁻¹</td><td>cos x</td><td>−sin x</td></tr>
+    <tr><td>eˣ</td><td>eˣ</td><td>tan x</td><td>sec² x = 1 + tan² x</td></tr>
+    <tr><td>ln x</td><td>1/x</td><td>sec x</td><td>sec x tan x</td></tr>
+    <tr><td>arcsin x</td><td>1/√(1 − x²)</td><td>csc x</td><td>−csc x cot x</td></tr>
+    <tr><td>arccos x</td><td>−1/√(1 − x²)</td><td>cot x</td><td>−csc² x</td></tr>
+    <tr><td>arctan x</td><td>1/(1 + x²)</td><td>sinh x, cosh x</td><td>cosh x, sinh x</td></tr>
+    <tr><td>tanh x</td><td>sech² x</td><td>coth x</td><td>−csch² x</td></tr>
+  </table></div>
+  <p>Avec sec x = 1/cos x, csc x = 1/sin x, cot x = 1/tan x (et de même sech, csch, coth pour les fonctions hyperboliques).</p>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Règles de dérivation">
+  <div class="shead"><span class="num">3</span><h2>Règles : composée, produit (Leibniz), dérivées partielles</h2><span class="meta">diapos 14 à 17 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Pour une fonction composée, on dérive l'extérieur en gardant l'intérieur, puis on multiplie par la dérivée de l'intérieur. Pour une fonction de plusieurs variables, on dérive par rapport à une variable en figeant les autres.</div>
+  <div class="formula key cours">Dérivation en chaîne :  [f(g(x))]' = f'(g(x)) · g'(x)      dy/dx = dy/du · du/dx
+Produit (Leibniz, n = 1) :  (fg)' = f'g + fg'
+Dérivée partielle :  ∂f/∂x (x, y) = lim (h→0) [f(x + h, y) − f(x, y)] / h   (y figé)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 14, 16 et 17</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">f(x) = (2x³ − 5x + 4)⁵   → f'(x) = 5(2x³ − 5x + 4)⁴ (6x² − 5)
+g(x) = (ln x)⁷           → g'(x) = 7 (ln x)⁶ / x
+h(x) = sin²(3x)          → h'(x) = 2 sin(3x) × 3 cos(3x) = 3 sin(6x)
+f(x) = eˣ arcsin x       → f'(x) = eˣ arcsin x + eˣ / √(1 − x²)
+g(x) = x² ln(1 + x²)     → g'(x) = 2x ln(1 + x²) + 2x³/(1 + x²)
+f(x, y) = x² + 3xy + 2y² → ∂f/∂x = 2x + 3y ;  ∂f/∂y = 3x + 4y</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fiche d'exercices 2, exercices 2 et 3</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">sin(3x² + 2x) : ℝ, dérivable sur ℝ, dérivée (6x + 2) cos(3x² + 2x)
+√(x² + 1)      : ℝ (x² + 1 &gt; 0), dérivable sur ℝ, dérivée x / √(x² + 1)
+arctan(2x − 1) : ℝ, dérivable sur ℝ, dérivée 2 / (1 + (2x − 1)²)
+f paire ⇒ f' impaire ;  f impaire ⇒ f' paire  (dériver f(−x) = ±f(x))</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Étude de fonction">
+  <div class="shead"><span class="num">4</span><h2>Étude de fonction, Rolle et accroissements finis</h2><span class="meta">diapos 18 à 21 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le signe de f' donne le sens de variation. Un extremum (où f est dérivable) annule f', mais f'(a) = 0 ne suffit pas : x³ en 0 n'a pas d'extremum.</div>
+  <div class="formula key cours">f' &gt; 0 sur I ⇒ f strictement croissante ;  f' &lt; 0 sur I ⇒ f strictement décroissante
+Point critique : f'(a) = 0, ou f' n'existe pas en a (f définie en a)
+Fermat : extremum local en a et f dérivable en a ⇒ f'(a) = 0  (réciproque fausse)
+Sur [a, b] fermé (f continue) : les extrema sont aux points critiques de ]a, b[ ou en a, b
+Rolle : f continue sur [a, b], dérivable sur ]a, b[, f(a) = f(b) ⇒ ∃ c ∈ ]a, b[, f'(c) = 0
+Accroissements finis : ∃ c ∈ ]a, b[,  f(b) − f(a) = f'(c)(b − a)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · fiche d'exercices 2, exercice 4</div>
+    <p>f(x) = x³ − 3ax, a &gt; 0. Points critiques, variations, extrema ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">f'(x) = 3x² − 3a = 3(x − √a)(x + √a)  →  points critiques ±√a
+f croissante sur ]−∞, −√a], décroissante sur [−√a, √a], croissante sur [√a, +∞[
+maximum local f(−√a) = 2a√a ;  minimum local f(√a) = −2a√a
+a = 0 : f(x) = x³, f'(0) = 0 mais pas d'extremum (f toujours croissante)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s5" data-toc="Dérivées n-ièmes, convexité">
+  <div class="shead"><span class="num">5</span><h2>Dérivées d'ordre supérieur, convexité</h2><span class="meta">diapos 22 à 31 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> f' est la vitesse de variation, f'' l'accélération (la courbure). Si f'' ≥ 0, la courbe est tournée vers le haut : f est convexe et reste au-dessus de ses tangentes.</div>
+  <div class="formula key cours">(eˣ)⁽ⁿ⁾ = eˣ        (cos x)⁽ⁿ⁾ = cos(x + nπ/2)        (sin x)⁽ⁿ⁾ = sin(x + nπ/2)
+(x^p)⁽ⁿ⁾ = p(p − 1)…(p − n + 1) x^(p−n) si n &lt; p ;  p! si n = p ;  0 si n &gt; p
+(1/x^p)⁽ⁿ⁾ = (−1)ⁿ p(p + 1)…(p + n − 1) / x^(p+n)
+Leibniz :  (fg)⁽ⁿ⁾ = Σ (k = 0 à n) C(n, k) f⁽ᵏ⁾ g⁽ⁿ⁻ᵏ⁾      C(n, k) = n! / (k!(n − k)!)</div>
+  <div class="formula key cours">Convexe : f((1 − λ)x + λy) ≤ (1 − λ)f(x) + λf(y)  (courbe sous ses cordes)
+Concave : inégalité inverse (courbe au-dessus de ses cordes) ;  ax + b est les deux
+f deux fois dérivable :  f'' ≥ 0 sur I ⇔ f convexe ;  f'' ≤ 0 sur I ⇔ f concave
+Convexe ⇒ pentes des sécantes croissantes :  a &lt; b &lt; c ⇒
+   [f(b) − f(a)]/(b − a) ≤ [f(c) − f(a)]/(c − a) ≤ [f(c) − f(b)]/(c − b)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 26, 28 et 30</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Leibniz n = 2 : (fg)'' = f''g + 2f'g' + fg''
+Leibniz n = 3 : (fg)''' = f'''g + 3f''g' + 3f'g'' + fg'''
+f(x) = x² eˣ : seuls k = 0, 1, 2 comptent (x² dérivé 3 fois = 0)
+   f⁽ⁿ⁾(x) = eˣ (x² + 2nx + n(n − 1))
+|x| est convexe sur ℝ (inégalité triangulaire), sans être dérivable en 0
+ln x ≤ x − 1 : ln'' = −1/x² &lt; 0, ln est concave, donc sous sa tangente en 1 (y = x − 1)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s5"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s6" data-toc="Approximation, erreurs">
+  <div class="shead"><span class="num">6</span><h2>Approximation linéaire, différentielle, propagation d'erreur</h2><span class="meta">diapos 32 à 39 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> Tout près de a, la courbe se confond avec sa tangente : on remplace f par une fonction affine, facile à calculer. La même idée donne l'erreur sur un résultat calculé à partir de mesures imprécises.</div>
+  <div class="formula key cours">Linéarisation en a :  f(a + h) ≈ f(a) + f'(a) h   (h petit)
+Différentielle :      df = f'(x) dx ;   Δf ≈ df
+Erreur absolue :      |Δy| ≈ |f'(x)| |Δx|
+Erreur relative :     |Δy|/|y| ≈ |x f'(x) / f(x)| × |Δx|/|x|</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 33 et 35</div>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">Avion : h(31) ≈ h(30) + h'(30) × 1 = 330 + 11,7 = 341,7 m
+√4,1 : f(x) = √x, a = 4, f(4) = 2, f'(4) = 1/(2√4) = 1/4
+   √4,1 ≈ 2 + 0,1/4 = 2,025   (valeur exacte 2,02485…)</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · diapos 38 et 39</div>
+    <p>R = U/I avec U = 12,0 V (dU = 0,1 V) et I = 2,00 A (dI = 0,02 A). Puis E = ½mv², m = 1000 kg, v = 100 m/s, dv = 2 m/s.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">R = 12 / 2 = 6 Ω
+dR = dU/I − U dI/I²  →  majoration : |ΔR| ≈ 0,1/2 + 12 × 0,02/4 = 0,05 + 0,06 = 0,11 Ω
+   (en relatif : ΔR/R ≈ ΔU/U + ΔI/I = 0,83 % + 1 % = 1,83 %)
+E(102) − E(100) = ½ × 1000 × (102² − 100²) = 202 000 J
+dE = m v dv = 1000 × 100 × 2 = 200 000 J   (écart de 1 % : l'approximation est bonne)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s6"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s7" data-toc="Optimisation">
+  <div class="shead"><span class="num">7</span><h2>Optimisation et phénomènes de variation</h2><span class="meta">diapos 40 à 44 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> On traduit la situation en une fonction d'une seule variable, on fixe son domaine, puis on cherche où la dérivée s'annule (et on compare avec les bornes).</div>
+  <div class="formula key cours">Équation différentielle simple :  y' = ky  →  y(t) = y(0) e^(kt)   (croissance de population)
+Refroidissement :  T'(t) = −k (T(t) − T_amb),  k &gt; 0  →  T(t) = T_amb + (T₀ − T_amb) e^(−kt)</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · le panier (diapo 41)</div>
+    <p>Plaque de 20 × 30 cm ; on découpe un carré de côté x à chaque coin et on plie les bords.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">0 &lt; x &lt; 10  (la largeur 20 − 2x doit rester positive)
+V(x) = x (20 − 2x)(30 − 2x) = 4x³ − 100x² + 600x
+V'(x) = 12x² − 200x + 600 = 0  →  x = (200 − √11 200)/24 ≈ 3,92 cm
+   (l'autre racine, 12,7 cm, sort du domaine)
+V_max ≈ 1056 cm³</div>
+    </div></details>
+  </div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · la boîte cylindrique (diapo 44)</div>
+    <p>Cylindre fermé de volume V = 1000 cm³ : dimensions qui minimisent la surface de métal ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">V = πr²h = 1000  →  h = 1000 / (πr²)
+S(r) = 2πr² + 2πrh = 2πr² + 2000/r
+S'(r) = 4πr − 2000/r² = 0  →  r³ = 500/π  →  r ≈ 5,42 cm ;  h = 2r ≈ 10,84 cm
+S_min ≈ 554 cm²  (la hauteur optimale est égale au diamètre)</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s7"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">fiche d'exercices 2 et TD 1 « corps céleste »</span></div>
+  <div class="ex"><h4>Fiche 2, exercice 1a · continuité de eˣ sin x <span class="tag">section 1</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>eˣ et sin x sont continues sur ℝ, et un produit de fonctions continues est continu.</p></div></details></div>
+  <div class="ex"><h4>Fiche 2, exercices 1b à 4 <span class="tag">sections 1 à 4</span></h4>
+    <details class="hint"><summary>Résultats</summary><div><p>Les corrections détaillées sont dans les exemples des sections 1, 3 et 4 : <span class="res">g(0) = 1</span> ; <span class="res">(6x + 2) cos(3x² + 2x)</span>, <span class="res">x/√(x² + 1)</span>, <span class="res">2/(1 + (2x − 1)²)</span> ; <span class="res">max 2a√a en −√a, min −2a√a en √a</span>.</p></div></details></div>
+  <div class="ex"><h4>TD 1, partie III · lemme de Rolle <span class="tag">section 4</span></h4>
+    <details class="hint"><summary>Méthode et résultat</summary><div><p>ℓ est la droite passant par (0, r(0)) et (6, r(6)), donc g(0) = g(6) = 0 et Rolle donne c. r'(t) = −½ e^(−t/12) et ℓ' = (6e^(−1/2) − 6)/6 = e^(−1/2) − 1. r'(c) = ℓ' donne <span class="res">c = −12 ln(2(1 − e^(−1/2))) ≈ 2,87 jours</span> : la tangente y est parallèle à la corde.</p></div></details></div>
+  <div class="ex"><h4>TD 1, parties IV et V · approximation et incertitude <span class="tag">sections 5 et 6</span></h4>
+    <details class="hint"><summary>Résultats</summary><div><p>v(r) = √(μ/r), v'(r) = −√μ / (2 r^(3/2)) &lt; 0 : la vitesse diminue quand le rayon augmente. Avec μ = 16 : <span class="res">v(4) = 2, v'(4) = −1/4</span> ; tangente v ≈ 2 − (r − 4)/4 ; <span class="res">v(3,92) ≈ 2,02</span> (valeur exacte 2,0203). v'' &gt; 0 : v est convexe, au-dessus de sa tangente, donc l'approximation est <b>sous-estimée</b>. Incertitude : <span class="res">Δv ≈ 0,25 × 0,04 = 0,01</span> ; Δr/r = 1 %, Δv/v = 0,5 %.</p></div></details></div>
+</section>

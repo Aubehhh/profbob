@@ -1,0 +1,163 @@
+
+<section class="csec" id="s1" data-toc="Fonctions">
+  <div class="shead"><span class="num">1</span><h2>Créer une fonction</h2><span class="meta">chapitre 2, diapos 3 à 8 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> Une fonction regroupe des instructions sous un nom, pour les réutiliser avec des paramètres différents au lieu de recopier le code.</div>
+  <pre class="code">void blink(int Number, int time) {   // type, nom, paramètres
+  digitalWrite(Number, HIGH);
+  delay(time);
+  digitalWrite(Number, LOW);
+  delay(time);
+}
+
+void loop() {
+  blink(8, 1000);    // LED du port 8 : 1 s
+  blink(9, 2000);    // LED du port 9 : 2 s
+}</pre>
+  <div class="formula key cours">1) type de retour : void (ne renvoie rien), int (un entier), boolean (vrai/faux)
+2) nom de la fonction
+3) paramètres : chacun avec un type et un nom, autant qu'on veut
+4) le contenu, entre accolades { }
+Un programme a au moins deux fonctions : setup() et loop()</div>
+  <div class="trap"><b>Piège.</b> Une fonction déclarée <code>int</code> doit se terminer par <code>return</code> suivi d'une valeur. Si elle ne renvoie rien (allumer une LED, par exemple), on la déclare <code>void</code>.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · quiz des diapos 3 et 4</div>
+    <p>Le programme <code>int Ledpin = 9; pinMode(Ledpin, OUTPUT); digitalWrite(Ledpin, HIGH); delay(2000); digitalWrite(Ledpin, LOW); delay(2000);</code> ne compile pas. Que manque-t-il, et que fait-il une fois corrigé ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <p>Il manque <b>setup()</b> (pour le pinMode) et <b>loop()</b> (pour le clignotement). Corrigé, il fait clignoter la LED du port 9 : 2 s allumée, 2 s éteinte, soit une période de 4 s.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Boutons">
+  <div class="shead"><span class="num">2</span><h2>Lire un bouton : pull-down et pull-up</h2><span class="meta">diapos 9 à 11 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un bouton se lit avec digitalRead. L'état HIGH ou LOW quand on appuie dépend du câblage, d'où les deux montages pull-down et pull-up.</div>
+  <pre class="code">int pinbutton = 8;
+bool value = 0;
+
+void setup() {
+  pinMode(pinbutton, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  value = digitalRead(pinbutton);   // HIGH (1) ou LOW (0)
+  Serial.println(value);
+  delay(1000);
+}</pre>
+  <div class="tw"><table>
+    <tr><th>Montage</th><th>Bouton relâché</th><th>Bouton appuyé</th></tr>
+    <tr><td><b>pull-down</b> (résistance vers 0 V)</td><td>LOW (0 V)</td><td>HIGH (5 V)</td></tr>
+    <tr><td><b>pull-up</b> (résistance vers 5 V)</td><td>HIGH (5 V)</td><td>LOW (0 V)</td></tr>
+  </table></div>
+  <div class="coquille"><b>Coquille du cours (diapo 9).</b> Le code affiché écrit <code>deaiy(1000)</code> : c'est <code>delay(1000)</code>.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="if, else, && et ||">
+  <div class="shead"><span class="num">3</span><h2>if… else et conditions multiples</h2><span class="meta">diapos 12 à 18 · 35 min</span></div>
+  <div class="idee"><b>L'idée.</b> if teste une condition une seule fois : si elle est vraie, on exécute le bloc ; sinon, le bloc else. Avec && et ||, on combine plusieurs conditions.</div>
+  <div class="formula key cours">A == B   égal              A != B   différent
+A &gt; B    strictement supérieur    A &gt;= B   supérieur ou égal  (et &lt;, &lt;=)
+&amp;&amp;  ET : les deux conditions doivent être vraies
+||  OU : il suffit qu'une des deux soit vraie</div>
+  <div class="coquille"><b>Coquille du cours (diapos 12, 19 et 21).</b> « Différent de » s'écrit <b>!=</b>, pas <code>=!</code>. Écrit <code>A =! B</code>, le programme met « non B » dans A au lieu de comparer. Et attention : <code>=</code> affecte une valeur, <code>==</code> compare.</div>
+  <pre class="code">int value = 0;
+
+void loop() {
+  if (value < 4) {
+    Serial.println(value);
+    delay(1000);
+    value = value + 1;
+  } else {
+    Serial.println("number too big");
+  }
+}
+// affiche 0, 1, 2, 3, puis « number too big » sans fin</pre>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices des diapos 14 et 17</div>
+    <p>Allumer une LED 1 s quand on appuie sur le bouton (montage : le bouton met le port à l'état haut). Puis allumer une LED quand les deux boutons des ports 8 et 9 sont appuyés, et enfin quand l'un des deux l'est.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">int button = 8;
+int led = 9;
+
+void setup() {
+  pinMode(button, INPUT);
+  pinMode(led, OUTPUT);
+}
+
+void loop() {
+  if (digitalRead(button) == HIGH) {
+    digitalWrite(led, HIGH);
+    delay(1000);
+    digitalWrite(led, LOW);
+  }
+}
+
+// les deux boutons :      if (digitalRead(button1) == HIGH && digitalRead(button2) == HIGH)
+// au moins un bouton :    if (digitalRead(button1) == HIGH || digitalRead(button2) == HIGH)</pre>
+      <p>Pour que la LED s'éteigne quand on relâche, ajoute un <code>else { digitalWrite(led, LOW); }</code>.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="while et for">
+  <div class="shead"><span class="num">4</span><h2>Les boucles while et for</h2><span class="meta">diapos 19 à 26 · 40 min</span></div>
+  <div class="idee"><b>L'idée.</b> while répète tant que la condition est vraie ; for répète un nombre de fois connu, avec un compteur. if, while et for peuvent produire le même affichage, mais pas de la même façon.</div>
+  <pre class="code">int variable = 0;
+while (variable < 4) {        // tant que la condition est vraie
+  Serial.println(variable);
+  delay(1000);
+  variable = variable + 1;
+}
+
+for (int i = 0; i < 4; i = i + 1) {   // départ ; condition ; évolution
+  Serial.println(i);
+  delay(1000);
+}</pre>
+  <div class="formula key">for (départ ; condition ; évolution)
+   for (int i = a; i &lt; b; i++)  s'exécute b − a fois (i va de a à b − 1)
+   i n'existe qu'à l'intérieur de la boucle ;  i++ revient à i = i + 1
+while (condition) : la condition est testée avant chaque tour ;
+   si elle ne devient jamais fausse, la boucle ne s'arrête jamais</div>
+  <div class="tw"><table>
+    <tr><th>Programme qui compte jusqu'à 3, placé dans loop()</th><th>Affichage</th></tr>
+    <tr><td>if… else (la variable est déclarée en dehors de loop)</td><td>0 1 2 3, puis « too big » à chaque tour</td></tr>
+    <tr><td>while (variable déclarée en dehors de loop)</td><td>0 1 2 3 une seule fois, puis plus rien</td></tr>
+    <tr><td>for (i recréé à chaque entrée dans la boucle)</td><td>0 1 2 3, puis 0 1 2 3… à chaque tour de loop</td></tr>
+  </table></div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · exercices de la diapo 24</div>
+    <p>1) Une fonction qui fait clignoter une LED un nombre de fois donné. 2) Refaire la fonction delay avec un while, en supposant qu'un tour de boucle dure 1 ms.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code">void blink_number(int pin, int number) {
+  for (int i = 0; i < number; i = i + 1) {
+    digitalWrite(pin, HIGH);
+    delay(1000);
+    digitalWrite(pin, LOW);
+    delay(1000);
+  }
+}
+// blink_number(9, 5) : la LED du port 9 clignote 5 fois (10 s en tout)
+
+void delay_while(int time) {
+  int value = 0;
+  while (value < time) {
+    value = value + 1;          // on suppose 1 ms par tour
+  }
+}
+// delay_while(1000) attend environ 1 s</pre>
+      <p>En réalité, un tour de cette boucle dure bien moins d'une milliseconde : c'est pour cela qu'on utilise delay() ou millis(), qui s'appuient sur un timer.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 1 et TD 2</span></div>
+  <div class="ex"><h4>TD 1 · bouton qui inverse l'ordre des LED <span class="tag">sections 2 et 3</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Pour réagir à <b>un appui</b> (et non à un bouton maintenu), on compare l'état actuel à l'état précédent : <code>if (etatActuel == HIGH && etatAncien == LOW) { etat = !etat; }</code>, puis <code>etatAncien = etatActuel;</code>. C'est la détection de front montant.</p></div></details></div>
+  <div class="ex"><h4>TD 2 · « Hello » qui fait des allers-retours sur le LCD <span class="tag">sections 3 et 4</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>« Hello » fait 5 lettres : sur 16 colonnes, il peut commencer de la colonne 0 à la colonne 11. Une variable <code>sens</code> (+1 ou −1) suffit : à chaque tour, <code>col = col + sens</code>, et on change le signe quand col atteint 0 ou 11.</p></div></details></div>
+</section>

@@ -1,0 +1,106 @@
+
+<section class="csec" id="s1" data-toc="La balise form">
+  <div class="shead"><span class="num">1</span><h2>La balise form : GET et POST</h2><span class="meta">diapos 4 et 5 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Un formulaire fait passer des données du client vers le serveur. La balise <code>&lt;form&gt;</code> dit <b>comment</b> les envoyer (method) et <b>à quelle page</b> (action).</div>
+  <pre class="code"><form method="get" action="dest.html">
+  <!-- champs du formulaire -->
+</form></pre>
+  <ul>
+    <li><b>method</b> : GET ou POST.</li>
+    <li><b>action</b> : la page qui reçoit les données (en général une page PHP).</li>
+  </ul>
+  <div class="tw"><table>
+    <tr><th>GET</th><th>POST</th></tr>
+    <tr><td>données écrites en clair dans l'adresse (URL), donc visibles et modifiables à la main</td><td>données envoyées hors de l'URL : non visibles dans l'adresse, non modifiables directement</td></tr>
+    <tr><td>pratique pour une recherche, un filtre, un lien partageable</td><td>pour un mot de passe, des données personnelles, un envoi qui modifie quelque chose</td></tr>
+  </table></div>
+  <div class="formula key">URL envoyée en GET :  page?nom1=valeur1&amp;nom2=valeur2
+   ? sépare l'adresse des données ;  &amp; sépare deux champs ;  nom = attribut name du champ</div>
+  <div class="coquille"><b>Coquilles du cours (diapo 5).</b> L'exemple d'URL « www.url.com/?=variable="42" » s'écrit <b>www.url.com/?variable=42</b> : le nom, puis =, puis la valeur, sans guillemets. Et POST cache les données de l'adresse, mais ce n'est pas une protection à lui seul : elles restent visibles dans les outils du navigateur. Ce qui chiffre l'envoi, c'est le <b>https</b>.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · URL d'un envoi en GET</div>
+    <p>Un formulaire <code>method="get" action="inscription.php"</code> contient deux champs, name="prenom" (rempli avec Lou) et name="promo" (rempli avec hei). Adresse obtenue ?</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <div class="formula">inscription.php?prenom=Lou&amp;promo=hei</div>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s1"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s2" data-toc="Champs et labels">
+  <div class="shead"><span class="num">2</span><h2>Les éléments : input, label et leurs attributs</h2><span class="meta">diapo 6 · 25 min</span></div>
+  <div class="idee"><b>L'idée.</b> Chaque champ est un <code>&lt;input&gt;</code> dont l'attribut <b>type</b> choisit la forme. Son <b>name</b> devient le nom de la donnée envoyée, et un <code>&lt;label&gt;</code> lui donne un texte cliquable.</div>
+  <div class="formula key cours">type  : text, checkbox, radio, range, password, button, submit…
+id    : identifiant (pour le CSS et pour relier le label)
+name  : nom de la variable envoyée au serveur
+value : valeur par défaut (ou valeur envoyée pour checkbox et radio)
+&lt;label for="X"&gt; est relié au champ dont l'id vaut X</div>
+  <pre class="code"><label for="nom">Veuillez entrer votre nom :</label>
+<input type="text" id="nom" name="myTextbox" value="votre nom" /></pre>
+  <div class="coquille"><b>Coquille du cours (diapo 6).</b> Le label y est écrit <code>for="name"</code> alors que le champ a <code>id="css_id"</code> : ils ne sont pas reliés. L'attribut for doit avoir <b>exactement la même valeur que l'id</b> du champ (ici, les deux valent « nom »).</div>
+  <div class="trap"><b>Piège : id et name n'ont pas le même rôle.</b> L'id sert dans la page (CSS, label, ancre). Le name sert au serveur : un champ sans name n'est <b>pas envoyé</b>.</div>
+  <label class="checkrow"><input type="checkbox" data-s="s2"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s3" data-toc="Types de champs">
+  <div class="shead"><span class="num">3</span><h2>Cases à cocher, boutons radio, curseurs et autres types</h2><span class="meta">diapos 7 à 10 · 30 min</span></div>
+  <div class="idee"><b>L'idée.</b> Checkbox : plusieurs choix possibles, chacun indépendant. Radio : un seul choix parmi un groupe ; c'est le <b>même name</b> qui forme le groupe.</div>
+  <pre class="code"><label for="theme">Mode sombre</label>
+<input type="checkbox" name="theme" id="theme" checked />
+         → si elle est cochée, envoie theme=on (rien sinon)
+
+<input type="radio" name="promo" id="un" value="hei" />
+<label for="un">HEI</label>
+<input type="radio" name="promo" id="deux" value="cpi" />
+<label for="deux">CPI</label>
+         → même name « promo » : un seul choix possible ; envoie promo=hei ou promo=cpi
+
+<input type="range" id="volume" name="volume" min="0" max="11" />
+<label for="volume">Volume</label></pre>
+  <div class="tw"><table>
+    <tr><th>Besoin</th><th>type</th></tr>
+    <tr><td>une couleur</td><td>color</td></tr>
+    <tr><td>une date, une heure, une semaine, un mois</td><td>date, time, week, month, datetime-local</td></tr>
+    <tr><td>un texte au bon format</td><td>email, url, tel</td></tr>
+    <tr><td>envoyer un fichier</td><td>file</td></tr>
+    <tr><td>un nombre</td><td>number, range</td></tr>
+    <tr><td>un mot de passe (caractères masqués)</td><td>password</td></tr>
+    <tr><td>plus avancé</td><td>hidden, reset, search, image</td></tr>
+  </table></div>
+  <div class="coquille"><b>Coquilles du cours (diapos 7 et 8).</b> Dans les labels des boutons radio, il manque le signe égal : <code>&lt;label for="un"&gt;</code>. L'attribut <code>switch</code> sur la checkbox n'est pas du HTML standard, il est ignoré par la plupart des navigateurs.</div>
+  <div class="quiz">
+    <div class="q"><p>Trois boutons radio « oui », « non », « peut-être » doivent s'exclure. Ils doivent avoir :</p>
+      <div class="opts"><button>le même id</button><button data-ok="1">le même name</button><button>la même value</button></div>
+      <div class="fb" hidden>C'est name qui forme le groupe ; les id restent tous différents, et chaque value dit ce qui sera envoyé.</div></div>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s3"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="s4" data-toc="Envoyer">
+  <div class="shead"><span class="num">4</span><h2>Terminer un formulaire : le bouton submit</h2><span class="meta">diapos 11 et 12 · 15 min</span></div>
+  <div class="idee"><b>L'idée.</b> Le bouton submit agit comme un lien vers la page de l'attribut action, mais il emporte avec lui les données du formulaire.</div>
+  <pre class="code"><button type="submit">Valider</button></pre>
+  <div class="retiens"><b>Conclusion du cours.</b> form (method + action), puis des input et un bouton. Pour exploiter les données reçues, il faut en général du PHP côté serveur.</div>
+  <div class="example">
+    <div class="eyebrow">Exemple corrigé · TD 4, exercices 2 et 3</div>
+    <p>Un formulaire avec un champ « id », un champ « password » masqué et un bouton Valider, testé en GET puis en POST.</p>
+    <details class="sol"><summary>Voir la correction</summary><div>
+      <pre class="code"><form method="post" action="https://formtester.goodbytes.be/post.php">
+  <label for="id">Identifiant</label>
+  <input type="text" id="id" name="id" />
+  <label for="password">Mot de passe</label>
+  <input type="password" id="password" name="password" />
+  <button type="submit">Valider</button>
+</form></pre>
+      <p>En <b>GET</b> (action vers une page d'un TD précédent), l'adresse devient <code>…TD3.html?id=…&amp;password=…</code> : le mot de passe apparaît en clair dans l'URL. En <b>POST</b>, l'adresse ne change pas et la page de test affiche les données reçues. L'énoncé du TD écrit <code>method="get"</code> pour le test POST : il faut bien mettre <b>method="post"</b>.</p>
+      <p><b>Exercice 3 :</b> on peut mettre une image à la place du texte : <code>&lt;button type="submit"&gt;&lt;img src="ok.png" alt="Valider" /&gt;&lt;/button&gt;</code>. Le bouton devient l'image, et un clic envoie toujours le formulaire.</p>
+    </div></details>
+  </div>
+  <label class="checkrow"><input type="checkbox" data-s="s4"> J'ai compris cette section</label>
+</section>
+
+<section class="csec" id="exos">
+  <div class="shead"><h2>Exercices du chapitre</h2><span class="meta">TD 4</span></div>
+  <div class="ex"><h4>TD 4 · formulaire de connexion <span class="tag">sections 1 à 4</span></h4>
+    <details class="hint"><summary>Méthode</summary><div><p>Squelette complet (doctype, head, h1, un paragraphe), puis le form. Pense à vider le cache (Ctrl + F5) : certains navigateurs gardent les valeurs déjà saisies. La correction est dans l'exemple de la section 4.</p></div></details></div>
+</section>
