@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Fiche formulaire · Mécanique 1 (Statique) · profbob.fr</title>
+<meta name="description" content="Mécanique 1 (Statique) : toutes les formules et les points à retenir du cours sur une fiche, à imprimer ou à garder sur ton téléphone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<link rel="stylesheet" href="/assets/formulaire.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body class="fiche" data-cours="statique-formulaire" data-matiere="meca" data-nota-all>
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mecanique/">← Mécanique 1 (Statique)</a> · Fiche formulaire</div>
+  <h1>Fiche formulaire · Mécanique 1 (Statique)</h1>
+  <p class="lead">Les 34 formules et points à retenir des 3 chapitres, dans l'ordre du cours. Clique sur un titre pour revenir à la section du cours.</p>
+  <div class="ctools"><button class="btn" type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn ghost" href="/flashcards/?m=meca">Flashcards</a><a class="btn ghost" href="/mini-ds/?m=meca">Mini-DS</a></div>
+</header>
+
+<section class="fch">
+  <h2><a href="/cours/statique/vecteurs/">Chapitre 1 · Principes généraux et outils mathématiques</a></h2>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s1">Principes généraux</a></h3>
+    <div class="retiens"><b>La démarche du cours en 5 étapes.</b> 1. Lire et relier la situation à la théorie. 2. Tabuler les données, faire un grand schéma. 3. Appliquer les principes en vérifiant l'homogénéité des unités. 4. Résoudre et donner la réponse avec <b>3 chiffres significatifs au maximum</b>. 5. Vérifier que le résultat est raisonnable.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s3">Additionner deux forces : parallélogramme et trigonométrie</a></h3>
+    <div class="formula key">C = √(A² + B² − 2AB cos(c))                (loi des cosinus)
+
+A / sin(a) = B / sin(b) = C / sin(c)         (loi des sinus)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s4">Système coplanaire : composantes et notation cartésienne</a></h3>
+    <div class="formula key">Fx = F cos(θ)        Fy = F sin(θ)</div>
+    <div class="formula key">Fx = F (a / c)        Fy = −F (b / c)</div>
+    <div class="formula key">F = Fx i + Fy j</div>
+    <div class="retiens"><b>Signes.</b> Le signe + ou − ne sert qu'au calcul. Sur un schéma, c'est la pointe de la flèche qui indique le sens, et l'intensité écrite à côté est toujours positive.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s5">Résultante de forces coplanaires : méthode analytique</a></h3>
+    <div class="formula key">(F_R)x = ΣFx        (F_R)y = ΣFy
+
+F_R = √((F_R)x² + (F_R)y²)
+
+θ = tan⁻¹ |(F_R)y / (F_R)x|</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s6">Vecteurs cartésiens en 3D</a></h3>
+    <div class="formula key">A = Ax i + Ay j + Az k
+
+A = √(Ax² + Ay² + Az²)</div>
+    <div class="formula key">cos α = Ax / A        cos β = Ay / A        cos γ = Az / A</div>
+    <div class="formula key">u_A = A / A = (Ax / A) i + (Ay / A) j + (Az / A) k = cos α i + cos β j + cos γ k
+
+cos² α + cos² β + cos² γ = 1
+
+A = A u_A = A cos α i + A cos β j + A cos γ k</div>
+    <div class="formula key">Az = A cos φ          A' = A sin φ   (projection dans le plan xy)
+Ax = A' cos θ = A sin φ cos θ
+Ay = A' sin θ = A sin φ sin θ
+
+A = A sin φ cos θ i + A sin φ sin θ j + A cos φ k</div>
+    <div class="formula key">R = A + B = (Ax + Bx) i + (Ay + By) j + (Az + Bz) k
+
+F_R = ΣF = ΣFx i + ΣFy j + ΣFz k</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s7">Vecteur position et force dirigée le long d'une droite</a></h3>
+    <div class="formula key">r = x i + y j + z k</div>
+    <div class="formula key">r = (xB − xA) i + (yB − yA) j + (zB − zA) k</div>
+    <div class="retiens"><b>Règle pratique.</b> Coordonnées de la <b>tête</b> (B) moins coordonnées de la <b>queue</b> (A). La norme de <span class="v">r</span> donne la longueur du câble, et <span class="m">u = r / r</span> sa direction.</div>
+    <div class="formula key">F = F u = F (r / r)
+
+F = F [ (xB − xA) i + (yB − yA) j + (zB − zA) k ] / √((xB − xA)² + (yB − yA)² + (zB − zA)²)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/vecteurs/#s8">Produit scalaire</a></h3>
+    <div class="formula key">A · B = A B cos θ        avec 0° ≤ θ ≤ 180°</div>
+    <div class="formula key">A · B = Ax Bx + Ay By + Az Bz</div>
+    <div class="formula key">θ = cos⁻¹( A · B / (A B) )        0° ≤ θ ≤ 180°</div>
+    <div class="formula key">A_a = A cos θ = A · u_a           (composante parallèle, projection)
+A_a (vecteur) = A_a u_a
+A_⊥ = A sin θ = √(A² − A_a²)       (composante perpendiculaire)</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/statique/equilibre/">Chapitre 2 · Équilibre statique</a></h2>
+  <div class="fsec"><h3><a href="/cours/statique/equilibre/#s1">Condition d'équilibre</a></h3>
+    <div class="formula key">ΣF = 0</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/equilibre/#s2">Le diagramme du corps libre (DCL)</a></h3>
+    <div class="formula key">F = k s          s = l − l0</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/equilibre/#s3">Systèmes de forces coplanaires (2D)</a></h3>
+    <div class="formula key">ΣFx i + ΣFy j = 0
+
+ΣFx = 0
+ΣFy = 0</div>
+    <div class="retiens"><b>Sens inconnu.</b> Sur le DCL, on peut <i>supposer</i> le sens d'une force inconnue. Si le calcul donne un scalaire négatif, le sens réel est simplement opposé à celui supposé.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/equilibre/#s4">Systèmes de forces en 3 dimensions</a></h3>
+    <div class="formula key">ΣFx = 0
+ΣFy = 0
+ΣFz = 0</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/statique/moments/">Chapitre 3 · Moment d'une force</a></h2>
+  <div class="fsec"><h3><a href="/cours/statique/moments/#s1">Définition : moment et bras de levier</a></h3>
+    <div class="formula key">M_O = F d          (en N·m ou lb·ft)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/moments/#s2">Le produit vectoriel</a></h3>
+    <div class="formula key">        | i    j    k  |
+A × B = | Ax   Ay   Az |
+        | Bx   By   Bz |
+
+Composante i :    i (Ay Bz − Az By)
+Composante j :   −j (Ax Bz − Az Bx)      ← attention au signe négatif !
+Composante k :    k (Ax By − Ay Bx)
+
+A × B = (Ay Bz − Az By) i − (Ax Bz − Az Bx) j + (Ax By − Ay Bx) k</div>
+    <div class="retiens"><b>Vérification gratuite.</b> Le résultat est perpendiculaire à A et à B : <span class="m">(A × B) · A = 0</span> et <span class="m">(A × B) · B = 0</span>. Si ce n'est pas le cas, il y a une erreur de signe.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/moments/#s3">Moment par le produit vectoriel</a></h3>
+    <div class="formula key">M_O = r × F
+
+M_O = r F sin θ        (θ = angle entre r et F)
+d = r sin θ   →   M_O = F d</div>
+    <div class="formula key">M_x = ry F_z − rz F_y
+M_y = rz F_x − rx F_z
+M_z = rx F_y − ry F_x</div>
+    <div class="formula key">M_R = Σ (r_i × F_i)
+
+M_Rx = Σ M_xi      M_Ry = Σ M_yi      M_Rz = Σ M_zi</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/moments/#s4">Théorème de Varignon</a></h3>
+    <div class="formula key" data-nonota><span class="vec">M</span><sub>O</sub> = <span class="vec">r</span> × (<span class="vec">F</span><sub>1</sub> + <span class="vec">F</span><sub>2</sub>) = <span class="vec">r</span> × <span class="vec">F</span><sub>1</sub> + <span class="vec">r</span> × <span class="vec">F</span><sub>2</sub></div>
+    <div class="formula key">M_O = F_x y − F_y x</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/statique/moments/#s5">Moment par rapport à un axe</a></h3>
+    <div class="formula key">M_a = u_a · (r × F)         (un nombre, en N·m)</div>
+  </div>
+</section>
+
+<p class="credit">D'après . Fiche construite automatiquement à partir des pages du site.</p>
+<footer class="site">Une formule manque ou est fausse ? <a href="/contact/?type=erreur&amp;matiere=M%C3%A9canique%201%20(Statique)%20%C2%B7%20fiche%20formulaire">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

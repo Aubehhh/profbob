@@ -131,7 +131,7 @@
       root.innerHTML='';
       const el=h(`<div>
         <div class="mds-bar"><div class="in"><span class="mds-time" id="mds-t">--:--</span><span class="meta grow">Sujet ${seed} · ${esc(fmt.label)} · ${total} pts</span>
-          <button class="btn ghost" id="mds-quit">Abandonner</button><button class="btn" id="mds-submit">Rendre ma copie</button></div></div>
+          <button class="btn ghost mds-print" type="button" onclick="window.print()" title="Imprimer le sujet pour le faire sur papier">Imprimer</button><button class="btn ghost" id="mds-quit">Abandonner</button><button class="btn" id="mds-submit">Rendre ma copie</button></div></div>
         <div id="mds-qs">${cfg.notations||''}${subject.map(q=>`<div class="mds-q" data-q="${q.num}">
           <h3>Question ${q.num} <span class="tag">${esc(q.chap)}</span><span class="mds-pts">${q.pts} pt${q.pts>1?'s':''}</span></h3>
           ${q.text}
@@ -181,7 +181,10 @@
           }
           return cell;
         });
-        box.appendChild(h(`<details open><summary>Correction</summary><div><div class="formula">${q.sol}</div><div data-nota>${q.note||''}</div></div></details>`));
+        // correction rédigée : méthode (mini-ds/methodes.js), calcul, résultat encadré
+        const meth=(cfg.methodes||{})[String(q.id).split('~')[0]];
+        const resu=q.fields.map(f=>`<span data-nota>${f.label}</span> = <b>${esc(shown(f)).trim()}</b>`).join(' ; ');
+        box.appendChild(h(`<details open class="mds-corr"><summary>Correction rédigée</summary><div>${meth?`<p class="mds-meth" data-nota><b>Méthode.</b> ${esc(meth)}</p>`:''}<div class="formula">${q.sol}</div><p class="mds-res"><b>Résultat :</b> ${resu}</p><div data-nota>${q.note||''}</div></div></details>`));
         return {q,box,r};
       });
       function paint(c){
@@ -206,6 +209,7 @@
           <button class="btn" id="mds-again">Nouveau sujet</button>
           <button class="btn ghost" id="mds-redo">Refaire ce sujet</button>
           <button class="btn ghost" id="mds-share2">Partager ce sujet</button>
+          <button class="btn ghost" type="button" onclick="window.print()">Imprimer la copie corrigée</button>
           <button class="btn ghost" id="mds-home">${cfg.onHome?'Changer les réglages':'Retour'}</button>
           ${mail?`<a class="btn ghost" href="${mail}">Signaler une erreur</a>`:''}
         </div>

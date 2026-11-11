@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Fiche formulaire · Création de page Web · profbob.fr</title>
+<meta name="description" content="Création de page Web : toutes les formules et les points à retenir du cours sur une fiche, à imprimer ou à garder sur ton téléphone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<link rel="stylesheet" href="/assets/formulaire.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body class="fiche" data-cours="web-formulaire" data-matiere="web" data-nota-all data-nota-profil="aucun">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/pages-web/">← Création de page Web</a> · Fiche formulaire</div>
+  <h1>Fiche formulaire · Création de page Web</h1>
+  <p class="lead">Les 11 formules et points à retenir des 4 chapitres, dans l'ordre du cours. Clique sur un titre pour revenir à la section du cours.</p>
+  <div class="ctools"><button class="btn" type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn ghost" href="/flashcards/?m=web">Flashcards</a><a class="btn ghost" href="/mini-ds/?m=web">Mini-DS</a></div>
+</header>
+
+<section class="fch">
+  <h2><a href="/cours/web/bases/">Chapitre 1 · Bases du web et du HTML</a></h2>
+  <div class="fsec"><h3><a href="/cours/web/bases/#s1">Le web : client, serveur et LAMP</a></h3>
+    <div class="retiens"><b>LAMP</b> = Linux + Apache + MySQL + PHP. <b>Back-end</b> : le serveur envoie les bonnes informations (bases de données, architecture). <b>Front-end</b> : le client affiche correctement (design, interactivité). C'est le front-end qu'on fait dans ce cours.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/web/bases/#s3">Les balises</a></h3>
+    <div class="retiens"><b>Imbrication.</b> On peut ouvrir une balise à l'intérieur de n'importe quelle balise double, à condition de fermer d'abord la plus intérieure : <code>&lt;p&gt;&lt;b&gt;…&lt;/b&gt;&lt;/p&gt;</code>, jamais <code>&lt;p&gt;&lt;b&gt;…&lt;/p&gt;&lt;/b&gt;</code>. On indente le code pour qu'il reste lisible.</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/web/structure/">Chapitre 2 · Structures en HTML</a></h2>
+  <div class="fsec"><h3><a href="/cours/web/structure/#s4">Mise en page par blocs</a></h3>
+    <div class="retiens"><b>Conclusion du cours.</b> Une page = doctype, head, puis body. Le body est découpé en blocs, et la méthode la plus souple (div + CSS) est la meilleure.</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/web/css/">Chapitre 3 · CSS</a></h2>
+  <div class="fsec"><h3><a href="/cours/web/css/#s1">Le CSS et son intégration</a></h3>
+    <div class="retiens"><b>Le débogueur du navigateur</b> (F12, ou F8 selon le navigateur) montre la structure HTML, le CSS appliqué à chaque élément et la console d'erreurs JavaScript. C'est l'outil n°1 pour comprendre pourquoi un style ne s'applique pas.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/web/css/#s2">Syntaxe, blocs, id et class, sélecteurs</a></h3>
+    <div class="formula key">nom de balise   →  p { … }         toutes les balises p
+id (unique)     →  #test { … }     l'élément qui a id="test"        (symbole #)
+class           →  .reddiv { … }   tous les éléments de class="reddiv" (symbole .)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/web/css/#s3">Unités et propriétés principales</a></h3>
+    <div class="formula key">Couleurs :
+   mots-clés           blue, white, yellow…
+   hexadécimal         #RRGGBB   (#00FF32 : rouge 00, vert FF, bleu 32)
+   hexadécimal court   #RGB      (#F80 = #FF8800)
+   rgb(0-255, 0-255, 0-255)  et  rgba(…, opacité de 0 à 1)
+   autres : hsl, hsla…</div>
+    <div class="formula key">Hexadécimal → décimal : chaque paire de chiffres est un nombre de 0 à 255
+   chiffres 0-9 puis A=10, B=11, C=12, D=13, E=14, F=15
+   « 3C » = 3 × 16 + 12 = 60 ;   « FF » = 15 × 16 + 15 = 255</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/web/css/#s4">Responsive design et media queries</a></h3>
+    <div class="formula key">@media type and (contrainte) { règles CSS }
+   type : screen, print, all…
+   contraintes : max-width, min-width, combinées avec and</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/web/formulaires/">Chapitre 4 · Formulaires</a></h2>
+  <div class="fsec"><h3><a href="/cours/web/formulaires/#s1">La balise form : GET et POST</a></h3>
+    <div class="formula key">URL envoyée en GET :  page?nom1=valeur1&amp;nom2=valeur2
+   ? sépare l'adresse des données ;  &amp; sépare deux champs ;  nom = attribut name du champ</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/web/formulaires/#s2">Les éléments : input, label et leurs attributs</a></h3>
+    <div class="formula key">type  : text, checkbox, radio, range, password, button, submit…
+id    : identifiant (pour le CSS et pour relier le label)
+name  : nom de la variable envoyée au serveur
+value : valeur par défaut (ou valeur envoyée pour checkbox et radio)
+&lt;label for="X"&gt; est relié au champ dont l'id vaut X</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/web/formulaires/#s4">Terminer un formulaire : le bouton submit</a></h3>
+    <div class="retiens"><b>Conclusion du cours.</b> form (method + action), puis des input et un bouton. Pour exploiter les données reçues, il faut en général du PHP côté serveur.</div>
+  </div>
+</section>
+
+<p class="credit">D'après le cours « Développement et Architecture Web » de R. Gosswiller (HEI 1, JUNIA). Fiche construite automatiquement à partir des pages du site.</p>
+<footer class="site">Une formule manque ou est fausse ? <a href="/contact/?type=erreur&amp;matiere=Cr%C3%A9ation%20de%20page%20Web%20%C2%B7%20fiche%20formulaire">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

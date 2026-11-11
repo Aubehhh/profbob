@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Fiche formulaire · Informatique embarquée · profbob.fr</title>
+<meta name="description" content="Informatique embarquée : toutes les formules et les points à retenir du cours sur une fiche, à imprimer ou à garder sur ton téléphone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<link rel="stylesheet" href="/assets/formulaire.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body class="fiche" data-cours="embarque-formulaire" data-matiere="embarque" data-nota-all data-nota-profil="aucun">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/informatique-embarquee/">← Informatique embarquée</a> · Fiche formulaire</div>
+  <h1>Fiche formulaire · Informatique embarquée</h1>
+  <p class="lead">Les 14 formules et points à retenir des 4 chapitres, dans l'ordre du cours. Clique sur un titre pour revenir à la section du cours.</p>
+  <div class="ctools"><button class="btn" type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn ghost" href="/flashcards/?m=embarque">Flashcards</a><a class="btn ghost" href="/mini-ds/?m=embarque">Mini-DS</a></div>
+</header>
+
+<section class="fch">
+  <h2><a href="/cours/embarque/systemes/">Chapitre 1 · Systèmes embarqués et codage binaire</a></h2>
+  <div class="fsec"><h3><a href="/cours/embarque/systemes/#s1">Qu'est-ce qu'un système embarqué ?</a></h3>
+    <div class="formula key">Système embarqué : système électronique et informatique autonome, conçu pour une tâche,
+avec des contraintes d'encombrement, de mémoire, de puissance de calcul, de sécurité et de consommation.
+   conçu pour une application spécifique ; non programmable par l'utilisateur final ;
+   généralement intégré à un système plus grand.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/systemes/#s2">La notation binaire</a></h3>
+    <div class="formula key">Poids des 8 bits (de gauche à droite) :  2⁷  2⁶  2⁵  2⁴  2³  2²  2¹  2⁰
+                                         128  64  32  16   8   4   2   1
+Binaire → décimal : 01100111 = 64 + 32 + 4 + 2 + 1 = 103
+Décimal → binaire : divisions successives par 2, on lit les restes de bas en haut
+   58 → 29 r0 → 14 r1 → 7 r0 → 3 r1 → 1 r1 → 0 r1   donc 58 = 111010
+Avec n bits : 2ⁿ valeurs ;  un octet (8 bits) : de 0 à 255</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/systemes/#s3">Nombres négatifs (complément à 2) et code ASCII</a></h3>
+    <div class="formula key">Signé (complément à 2) : poids  −128  64  32  16  8  4  2  1      plage : −128 à 127
+   10010110 = 150 (non signé)  ou  −128 + 16 + 4 + 2 = −106 (signé)
+Écrire −n : écrire n en binaire, inverser chaque bit, puis ajouter 1
+   106 = 01101010  →  inversé 10010101 (= −107)  →  +1  →  10010110 = −106</div>
+    <div class="retiens"><b>Quand tu programmes, pose-toi trois questions :</b> avec quel type de données je travaille ? comment est-il codé ? combien de mémoire occupe-t-il ?</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/embarque/arduino/">Chapitre 2 · Premiers programmes Arduino</a></h2>
+  <div class="fsec"><h3><a href="/cours/embarque/arduino/#s1">L'IDE et la carte Arduino Uno</a></h3>
+    <div class="retiens"><b>En TP :</b> couper l'alimentation avant de modifier un branchement, carte posée à plat sans rien dessous (court-circuit), et ni nourriture ni boisson sur la table.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/arduino/#s3">Contrôler une sortie : le programme Blink</a></h3>
+    <div class="formula key">pinMode(port, OUTPUT ou INPUT)      choisir le sens du port (dans setup)
+digitalWrite(port, HIGH ou LOW)     sortie à 5 V ou 0 V
+delay(ms)                           pause en millisecondes
+Période du clignotement = durée allumée + durée éteinte ;  fréquence = 1 / période</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/arduino/#s4">Moniteur série et écran LCD (TD 2)</a></h3>
+    <div class="formula key">Serial.begin(9600)        ouvrir la liaison série (dans setup)
+Serial.print(x)           afficher sans aller à la ligne
+Serial.println(x)         afficher puis aller à la ligne
+#include &lt;LiquidCrystal.h&gt;      bibliothèque de l'écran LCD
+lcd.begin(16, 2)          écran de 16 colonnes, 2 lignes
+lcd.setCursor(col, lig)   placer le curseur (col de 0 à 15, lig 0 ou 1)
+lcd.print("texte") ;  lcd.clear()</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/embarque/controle/">Chapitre 3 · Fonctions et structures de contrôle</a></h2>
+  <div class="fsec"><h3><a href="/cours/embarque/controle/#s1">Créer une fonction</a></h3>
+    <div class="formula key">1) type de retour : void (ne renvoie rien), int (un entier), boolean (vrai/faux)
+2) nom de la fonction
+3) paramètres : chacun avec un type et un nom, autant qu'on veut
+4) le contenu, entre accolades { }
+Un programme a au moins deux fonctions : setup() et loop()</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/controle/#s3">if… else et conditions multiples</a></h3>
+    <div class="formula key">A == B   égal              A != B   différent
+A &gt; B    strictement supérieur    A &gt;= B   supérieur ou égal  (et &lt;, &lt;=)
+&amp;&amp;  ET : les deux conditions doivent être vraies
+||  OU : il suffit qu'une des deux soit vraie</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/controle/#s4">Les boucles while et for</a></h3>
+    <div class="formula key">for (départ ; condition ; évolution)
+   for (int i = a; i &lt; b; i++)  s'exécute b − a fois (i va de a à b − 1)
+   i n'existe qu'à l'intérieur de la boucle ;  i++ revient à i = i + 1
+while (condition) : la condition est testée avant chaque tour ;
+   si elle ne devient jamais fausse, la boucle ne s'arrête jamais</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/embarque/temps/">Chapitre 4 · Temps réel : millis, interruptions, PWM et timers</a></h2>
+  <div class="fsec"><h3><a href="/cours/embarque/temps/#s1">Ne plus bloquer le programme : millis()</a></h3>
+    <div class="formula key">millis() : nombre de millisecondes écoulées depuis le démarrage du programme (unsigned long)
+Principe :  à l'appui → temps1 = millis() et LED allumée
+            à chaque tour → si millis() &gt; temps1 + durée, LED éteinte</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/temps/#s2">Les interruptions</a></h3>
+    <div class="formula key">attachInterrupt(port surveillé, fonction ISR, mode)
+   LOW      tant que le port est à l'état bas
+   CHANGE   à chaque changement d'état
+   RISING   quand le port passe de BAS à HAUT (front montant)
+   FALLING  quand le port passe de HAUT à BAS (front descendant)
+Si une interruption arrive pendant qu'une autre s'exécute, elle attend la fin de la première.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/temps/#s3">Entrée analogique et sortie PWM</a></h3>
+    <div class="formula key">analogRead(A0)          port A0 à A5 → valeur sur 10 bits, de 0 à 1023
+   valeur ≈ U × 1023 / 5
+analogWrite(port, état)  ports ~ seulement : 3, 5, 6, 9, 10, 11 → état sur 8 bits, de 0 à 255
+   rapport cyclique α = état / 255 = durée à 5 V / période
+   tension moyenne = α × 5 V        (analogWrite(motor, 150) : α = 59 %, soit 2,94 V)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/embarque/temps/#s4">Interruptions internes : les timers</a></h3>
+    <div class="formula key">Horloge 16 MHz : un coup tous les 1/16×10⁶ = 62,5 ns
+Timer 8 bits : compte de 0 à 255, puis déborde (overflow) et repart à 0
+   débordement tous les 256 × 62,5 ns = 16 µs
+Prédiviseur N : divise la fréquence →  durée d'un pas = N / 16 MHz
+   période de débordement = 256 × N / 16×10⁶   (N = 1024 : 16,4 ms, soit environ 61 Hz)</div>
+  </div>
+</section>
+
+<p class="credit">D'après le cours « Systèmes embarqués » de D. Gheysens (HEI 1, JUNIA). Fiche construite automatiquement à partir des pages du site.</p>
+<footer class="site">Une formule manque ou est fausse ? <a href="/contact/?type=erreur&amp;matiere=Informatique%20embarqu%C3%A9e%20%C2%B7%20fiche%20formulaire">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

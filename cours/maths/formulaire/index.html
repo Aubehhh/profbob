@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Fiche formulaire · Outils mathématiques pour l'ingénieur 1 · profbob.fr</title>
+<meta name="description" content="Outils mathématiques pour l'ingénieur 1 : toutes les formules et les points à retenir du cours sur une fiche, à imprimer ou à garder sur ton téléphone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<link rel="stylesheet" href="/assets/formulaire.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body class="fiche" data-cours="maths-formulaire" data-matiere="outils" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/mathematiques/">← Outils mathématiques pour l'ingénieur 1</a> · Fiche formulaire</div>
+  <h1>Fiche formulaire · Outils mathématiques pour l'ingénieur 1</h1>
+  <p class="lead">Les 33 formules et points à retenir des 4 chapitres, dans l'ordre du cours. Clique sur un titre pour revenir à la section du cours.</p>
+  <div class="ctools"><button class="btn" type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn ghost" href="/flashcards/?m=outils">Flashcards</a><a class="btn ghost" href="/mini-ds/?m=outils">Mini-DS</a></div>
+</header>
+
+<section class="fch">
+  <h2><a href="/cours/maths/complexes/">Chapitre 1 · Nombres complexes</a></h2>
+  <div class="fsec"><h3><a href="/cours/maths/complexes/#s1">Définition et opérations</a></h3>
+    <div class="formula key">z = a + ib  avec a, b ∈ ℝ  et  i² = −1
+   a = Re(z) : partie réelle ;  b = Im(z) : partie imaginaire
+z = z'  ⇔  Re(z) = Re(z') et Im(z) = Im(z')
+Conjugué :  z* = z̄ = a − ib</div>
+    <div class="formula key">Propriétés du conjugué :
+   conj(z̄) = z        Re z = (z + z̄)/2        Im z = (z − z̄)/(2i)
+   z ∈ ℝ ⇔ Im z = 0 ⇔ z = z̄        z ∈ iℝ ⇔ Re z = 0 ⇔ z = −z̄
+   conj(z + z') = z̄ + z̄'    conj(z z') = z̄ z̄'    conj(z'/z) = z̄'/z̄
+   z z̄ = (Re z)² + (Im z)² = a² + b²</div>
+    <div class="formula key">Addition :        (a₁ + ib₁) + (a₂ + ib₂) = (a₁ + a₂) + i(b₁ + b₂)
+Multiplication :  (a₁ + ib₁)(a₂ + ib₂) = (a₁a₂ − b₁b₂) + i(a₁b₂ + b₁a₂)
+Division : on multiplie en haut et en bas par le conjugué du dénominateur
+   z₁/z₂ = [(a₁a₂ + b₁b₂) + i(b₁a₂ − a₁b₂)] / (a₂² + b₂²)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/complexes/#s2">Plan complexe, module, argument, forme trigonométrique</a></h3>
+    <div class="formula key">Module :     |z| = √(a² + b²)          (Pythagore)
+Argument :   θ = arg(z), en radians,  tan θ = b/a
+Forme trigonométrique :  z = r(cos θ + i sin θ)  avec r = |z|, θ = arg(z)
+   a = r cos θ ;  b = r sin θ</div>
+    <div class="formula key">Produit :  |z₁z₂| = |z₁| |z₂|   et   arg(z₁z₂) = arg z₁ + arg z₂</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/complexes/#s3">Forme exponentielle, formule d'Euler, De Moivre</a></h3>
+    <div class="formula key">Formule d'Euler :      e^(iθ) = cos θ + i sin θ
+Forme exponentielle :  z = r e^(iθ)
+|e^(iθ)| = 1      conj(e^(iθ)) = e^(−iθ) = 1/e^(iθ)      e^(i(θ+θ')) = e^(iθ) e^(iθ')
+e^(iθ) = 1  ⇔  θ = 2kπ, k ∈ ℤ          identité d'Euler : e^(iπ) + 1 = 0</div>
+    <div class="formula key">r₁e^(iθ) × r₂e^(iθ') = (r₁r₂) e^(i(θ+θ'))
+r₂e^(iθ) / r₁e^(iθ') = (r₂/r₁) e^(i(θ−θ'))
+zⁿ = (re^(iθ))ⁿ = rⁿ e^(inθ)
+De Moivre :  (cos θ + i sin θ)ⁿ = cos(nθ) + i sin(nθ)
+Exponentielle complexe :  e^z = e^(Re z) e^(i Im z)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/complexes/#s5">Racines carrées et racines n-ièmes</a></h3>
+    <div class="formula key">Racine carrée Z = A + iB de z = a + ib  (Z² = z) :
+   A² + B² = √(a² + b²)      (|Z|² = |z|)
+   A² − B² = a               (Re Z² = Re z)
+   AB du signe de b          (Im Z² = 2AB = b)</div>
+    <div class="formula key">Racines n-ièmes de l'unité (zⁿ = 1) :   z_k = e^(i2kπ/n),  k = 0, 1, …, n − 1
+Racines n-ièmes de ω = re^(iθ) :          z_k = r^(1/n) e^(i(θ + 2kπ)/n),  k = 0, …, n − 1</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/complexes/#s6">Équations du second degré et polynômes</a></h3>
+    <div class="formula key">az² + bz + c = 0  (a, b, c ∈ ℂ, a ≠ 0) ;  Δ = b² − 4ac
+   Δ = 0 : racine double z₀ = −b/(2a)
+   Δ ≠ 0 : δ une racine carrée de Δ  →  z₁ = (−b − δ)/(2a) ;  z₂ = (−b + δ)/(2a)</div>
+    <div class="formula key">Division euclidienne :  A = BQ + R  avec  deg R &lt; deg B  (Q et R uniques)
+Hörner (racine r connue) : on recopie le 1er coefficient, puis à chaque colonne
+   (nombre du bas à gauche) × r + coefficient du haut ;  la dernière case doit valoir 0
+   la ligne du bas donne les coefficients de P(x)/(x − r)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/complexes/#s7">Applications aux circuits : phaseurs et impédances</a></h3>
+    <div class="formula key">v(t) = V_m cos(ωt + φ)  →  phaseur  Ṽ = V_m e^(jφ) = V_m ∠φ = V_m cos φ + j V_m sin φ
+Loi d'Ohm :  Ṽ = Z Ĩ  (convention récepteur)
+Z_R = R      Z_L = jLω (tension en avance de π/2)      Z_C = 1/(jCω) = −j/(Cω) (courant en avance de π/2)
+Série :  Z = Σ Z_k        Parallèle :  1/Z = Σ 1/Z_k   (admittance Y = 1/Z)</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/maths/derivation/">Chapitre 2 · Calcul différentiel</a></h2>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s1">Continuité</a></h3>
+    <div class="formula key">f continue en c :  ∀ε &gt; 0, ∃η &gt; 0, ∀x ∈ D_f,  |x − c| &lt; η  ⇒  |f(x) − f(c)| &lt; ε
+   c'est-à-dire  lim (x→c) f(x) = f(c)
+continue à gauche : même chose avec c − η &lt; x &lt; c ;  à droite : avec c &lt; x &lt; c + η</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s2">Dérivabilité et dérivées usuelles</a></h3>
+    <div class="formula key">f'(a) = lim (h→0) [f(a + h) − f(a)] / h
+Développement limité d'ordre 1 :  f(x) = f(a) + (x − a) f'(a) + (x − a) ε(x),  ε(x) → 0 en a
+Classe Cⁿ sur I : les n premières dérivées existent et sont continues sur I  (eˣ est C^∞)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s3">Règles : composée, produit (Leibniz), dérivées partielles</a></h3>
+    <div class="formula key">Dérivation en chaîne :  [f(g(x))]' = f'(g(x)) · g'(x)      dy/dx = dy/du · du/dx
+Produit (Leibniz, n = 1) :  (fg)' = f'g + fg'
+Dérivée partielle :  ∂f/∂x (x, y) = lim (h→0) [f(x + h, y) − f(x, y)] / h   (y figé)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s4">Étude de fonction, Rolle et accroissements finis</a></h3>
+    <div class="formula key">f' &gt; 0 sur I ⇒ f strictement croissante ;  f' &lt; 0 sur I ⇒ f strictement décroissante
+Point critique : f'(a) = 0, ou f' n'existe pas en a (f définie en a)
+Fermat : extremum local en a et f dérivable en a ⇒ f'(a) = 0  (réciproque fausse)
+Sur [a, b] fermé (f continue) : les extrema sont aux points critiques de ]a, b[ ou en a, b
+Rolle : f continue sur [a, b], dérivable sur ]a, b[, f(a) = f(b) ⇒ ∃ c ∈ ]a, b[, f'(c) = 0
+Accroissements finis : ∃ c ∈ ]a, b[,  f(b) − f(a) = f'(c)(b − a)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s5">Dérivées d'ordre supérieur, convexité</a></h3>
+    <div class="formula key">(eˣ)⁽ⁿ⁾ = eˣ        (cos x)⁽ⁿ⁾ = cos(x + nπ/2)        (sin x)⁽ⁿ⁾ = sin(x + nπ/2)
+(x^p)⁽ⁿ⁾ = p(p − 1)…(p − n + 1) x^(p−n) si n &lt; p ;  p! si n = p ;  0 si n &gt; p
+(1/x^p)⁽ⁿ⁾ = (−1)ⁿ p(p + 1)…(p + n − 1) / x^(p+n)
+Leibniz :  (fg)⁽ⁿ⁾ = Σ (k = 0 à n) C(n, k) f⁽ᵏ⁾ g⁽ⁿ⁻ᵏ⁾      C(n, k) = n! / (k!(n − k)!)</div>
+    <div class="formula key">Convexe : f((1 − λ)x + λy) ≤ (1 − λ)f(x) + λf(y)  (courbe sous ses cordes)
+Concave : inégalité inverse (courbe au-dessus de ses cordes) ;  ax + b est les deux
+f deux fois dérivable :  f'' ≥ 0 sur I ⇔ f convexe ;  f'' ≤ 0 sur I ⇔ f concave
+Convexe ⇒ pentes des sécantes croissantes :  a &lt; b &lt; c ⇒
+   [f(b) − f(a)]/(b − a) ≤ [f(c) − f(a)]/(c − a) ≤ [f(c) − f(b)]/(c − b)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s6">Approximation linéaire, différentielle, propagation d'erreur</a></h3>
+    <div class="formula key">Linéarisation en a :  f(a + h) ≈ f(a) + f'(a) h   (h petit)
+Différentielle :      df = f'(x) dx ;   Δf ≈ df
+Erreur absolue :      |Δy| ≈ |f'(x)| |Δx|
+Erreur relative :     |Δy|/|y| ≈ |x f'(x) / f(x)| × |Δx|/|x|</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/derivation/#s7">Optimisation et phénomènes de variation</a></h3>
+    <div class="formula key">Équation différentielle simple :  y' = ky  →  y(t) = y(0) e^(kt)   (croissance de population)
+Refroidissement :  T'(t) = −k (T(t) − T_amb),  k &gt; 0  →  T(t) = T_amb + (T₀ − T_amb) e^(−kt)</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/maths/integration/">Chapitre 3 · Techniques fondamentales du calcul intégral</a></h2>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s1">Primitives</a></h3>
+    <div class="formula key">F primitive de f sur I :  F'(x) = f(x) pour tout x ∈ I
+∫ f(x) dx = F(x) + C        (intégrale indéfinie)
+Linéarité :  ∫ (λf + μg) = λ ∫ f + μ ∫ g</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s2">Intégrale définie et propriétés</a></h3>
+    <div class="formula key">∫ₐᵇ f(x) dx = F(b) − F(a)
+Inversion des bornes :  ∫ₐᵇ f = −∫ᵦᵃ f        bornes égales :  ∫ₐᵃ f = 0
+Chasles :  ∫ₐᵇ f = ∫ₐᶜ f + ∫꜀ᵇ f
+Positivité :  f ≥ 0 sur [a, b] ⇒ ∫ₐᵇ f ≥ 0
+Valeur moyenne :  f̄ = (1/(b − a)) ∫ₐᵇ f(x) dx</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s3">Sommes de Riemann et fonctions en escalier</a></h3>
+    <div class="formula key">Δx = (b − a)/n
+Somme par la droite :   S_n = Δx × Σ (k = 1 à n) f(a + kΔx)
+Somme par la gauche :   S_n = Δx × Σ (k = 0 à n − 1) f(a + kΔx)
+Intégrale de Riemann :  ∫ₐᵇ f(x) dx = lim (n→∞) ((b − a)/n) Σ f(a + k(b − a)/n)
+Fonction en escalier (valeur c_i sur [x_i ; x_(i+1)[) :  ∫ₐᵇ φ = Σ c_i (x_(i+1) − x_i)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s4">Théorème fondamental de l'analyse</a></h3>
+    <div class="formula key">f continue sur [a, b], F(x) = ∫ₐˣ f(t) dt   ⇒   F'(x) = f(x)
+F primitive de f  ⇒  ∫ₐᵇ f(x) dx = F(b) − F(a)
+   (1) trouver une primitive ; (2) l'évaluer aux bornes ; (3) faire la différence</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s5">Changement de variable et intégration par parties</a></h3>
+    <div class="formula key">Changement de variable :  u = g(x),  du = g'(x) dx,  on intègre en u, puis on remplace u par g(x)
+Intégration par parties :  ∫ u dv = uv − ∫ v du
+   ∫ₐᵇ u v' = [uv]ₐᵇ − ∫ₐᵇ u' v
+Règle ALPES pour choisir u (on dérive u) : Arcsin… → Log → Polynôme → Exponentielle → Sinus/cosinus
+   u = la fonction la plus à gauche de ALPES ; dv = le reste</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s6">Décomposition en éléments simples</a></h3>
+    <div class="formula key">Un facteur (x − a) au dénominateur        →  A/(x − a)
+Un facteur (x − a)² au dénominateur       →  A/(x − a) + B/(x − a)²   (une fraction par degré)
+Un facteur x² + px + q sans racine réelle →  (Bx + C)/(x² + px + q)
+On trouve les numérateurs en remettant au même dénominateur (ou en remplaçant x par les racines).</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/integration/#s7">Intégrales doubles et applications</a></h3>
+    <div class="formula key">∬_R f(x, y) dA = ∫ₐᵇ ( ∫꜀ᵈ f(x, y) dy ) dx      (R = [a, b] × [c, d])
+Si les bornes de y dépendent de x, on garde l'intégrale en y à l'intérieur.</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/maths/trigonometrie/">Chapitre 4 · Trigonométrie et fonctions usuelles</a></h2>
+  <div class="fsec"><h3><a href="/cours/maths/trigonometrie/#s1">Cercle trigonométrique et fonctions circulaires</a></h3>
+    <div class="formula key">sin θ = opposé/hypoténuse   cos θ = adjacent/hypoténuse   tan θ = opposé/adjacent
+csc θ = 1/sin θ    sec θ = 1/cos θ    cot θ = 1/tan θ
+Cercle trigonométrique : x² + y² = 1
+x ≡ y [2π]  ⇔  ∃k ∈ ℤ, x = y + 2kπ</div>
+    <div class="formula key">cos' = −sin ;  sin' = cos ;   |sin x| ≤ |x|
+tan x = sin x / cos x  pour x ≠ π/2 + kπ ;   tan' x = 1 + tan² x = 1/cos² x</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/trigonometrie/#s2">Identités et formules de trigonométrie</a></h3>
+    <div class="formula key">Pythagore :  sin² θ + cos² θ = 1 ;  1 + tan² θ = sec² θ ;  1 + cot² θ = csc² θ
+Sommes et différences :
+   sin(A ± B) = sin A cos B ± cos A sin B
+   cos(A ± B) = cos A cos B ∓ sin A sin B
+   tan(A ± B) = (tan A ± tan B) / (1 ∓ tan A tan B)
+Angles doubles :  sin 2θ = 2 sin θ cos θ ;  cos 2θ = cos² θ − sin² θ ;  tan 2θ = 2 tan θ / (1 − tan² θ)
+Angles moitiés :  sin(θ/2) = ±√((1 − cos θ)/2) ;  cos(θ/2) = ±√((1 + cos θ)/2)
+Produits :  2 cos a cos b = cos(a + b) + cos(a − b)
+            2 sin a cos b = sin(a + b) + sin(a − b)
+            2 sin a sin b = cos(a − b) − cos(a + b)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/trigonometrie/#s4">Équations trigonométriques</a></h3>
+    <div class="formula key">sin x = sin a  ⇔  x = a + 2kπ  ou  x = π − a + 2kπ
+cos x = cos a  ⇔  x = a + 2kπ  ou  x = −a + 2kπ
+tan x = tan a  ⇔  x = a + kπ</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/trigonometrie/#s5">Puissances, exponentielle et logarithmes</a></h3>
+    <div class="formula key">(xy)ⁿ = xⁿyⁿ ;  x^(m+n) = x^m xⁿ ;  (x^m)ⁿ = x^(mn) ;  racine n-ième : x^(1/n)
+eˣ = lim (n→∞) (1 + x/n)ⁿ ;  domaine ℝ, image ]0, +∞[ ;  (eˣ)' = eˣ ;  ∫ eˣ dx = eˣ + C
+   lim (x→−∞) eˣ = 0 ;  lim (x→+∞) eˣ = +∞
+log_b(x) défini pour x &gt; 0 :  log_b(1) = 0 ;  log_b(b) = 1
+   log_b(xy) = log_b x + log_b y ;  log_b(xⁿ) = n log_b x
+   (log_b x)' = 1/(x ln b) ;  ∫ log_b x dx = (x ln x − x)/ln b + C
+ln = log_e :  domaine ]0, +∞[, image ℝ ;  (ln x)' = 1/x ;  ∫ ln x dx = x ln x − x + C ;  lim (x→0⁺) ln x = −∞</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/maths/trigonometrie/#s6">Fonctions hyperboliques</a></h3>
+    <div class="formula key">sinh x = (eˣ − e⁻ˣ)/2        cosh x = (eˣ + e⁻ˣ)/2        tanh x = sinh x / cosh x
+coth x = cosh x / sinh x     sech x = 1/cosh x            csch x = 1/sinh x
+cosh² x − sinh² x = 1
+sinh' = cosh ;  cosh' = sinh ;  tanh' = sech² ;  coth' = −csch² ;  sech' = −sech tanh ;  csch' = −csch coth
+∫ sinh = cosh + C ;  ∫ cosh = sinh + C ;  ∫ tanh = ln(cosh x) + C ;  ∫ sech² = tanh + C
+sinh 2x = 2 sinh x cosh x ;  cosh 2x = cosh² x + sinh² x = 2 cosh² x − 1 = 1 + 2 sinh² x
+tanh 2x = 2 tanh x / (1 + tanh² x)</div>
+  </div>
+</section>
+
+<p class="credit">D'après le cours « Outils mathématiques pour l'ingénieur 1 » de N. Coupier (HEI 1, JUNIA). Fiche construite automatiquement à partir des pages du site.</p>
+<footer class="site">Une formule manque ou est fausse ? <a href="/contact/?type=erreur&amp;matiere=Outils%20math%C3%A9matiques%20pour%20l'ing%C3%A9nieur%201%20%C2%B7%20fiche%20formulaire">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+/* Fiche formulaire (/cours/<matière>/formulaire/) : écran et impression. */
+.fiche .fch{margin-top:30px}
+.fiche .fch h2{font-size:1.35rem;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.fiche .fch h2 a,.fiche .fsec h3 a{color:inherit;text-decoration:none}
+.fiche .fch h2 a:hover,.fiche .fsec h3 a:hover{color:var(--vec)}
+.fiche .fsec h3{font-size:1.02rem;margin:18px 0 6px}
+.fiche .fsec .formula{margin:8px 0}
+.fiche .fsec .retiens{margin:8px 0}
+.fiche .vide{color:var(--muted)}
+@media print{
+  @page{margin:12mm}
+  html,body{background:#fff!important;color:#000!important}
+  .topbar,.fiche .ctools,.fiche footer.site,.pwa-install,.fiche .chero .lead{display:none!important}
+  .fiche .wrap{max-width:none;padding:0}
+  .fiche .chero{padding:0}
+  .fiche .chero h1{font-size:16pt;margin:0}
+  .fiche .chero .eyebrow{display:none}
+  .fiche{font-size:9pt}
+  .fiche .fch{margin-top:10px;columns:2;column-gap:8mm}
+  .fiche .fch h2{column-span:all;font-size:12pt;margin:6px 0 4px;padding-bottom:2px;border-bottom:1px solid #999}
+  .fiche .fsec{break-inside:avoid}
+  .fiche .fsec h3{font-size:9.5pt;margin:6px 0 2px}
+  .fiche .formula{font-size:8.5pt;padding:4px 6px;margin:3px 0;background:#f4f4f4!important;color:#000!important;white-space:pre-wrap;break-inside:avoid;border-left:2px solid #555}
+  .fiche .retiens{font-size:8.5pt;padding:4px 6px;margin:3px 0;border:1px solid #bbb;break-inside:avoid;max-width:none}
+  .fiche .credit{font-size:7.5pt;color:#444}
+  a{color:inherit!important;text-decoration:none!important}
+}

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Fiche formulaire · Thermodynamique · profbob.fr</title>
+<meta name="description" content="Thermodynamique : toutes les formules et les points à retenir du cours sur une fiche, à imprimer ou à garder sur ton téléphone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<link rel="stylesheet" href="/assets/formulaire.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body class="fiche" data-cours="thermo-formulaire" data-matiere="thermo" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/thermodynamique/">← Thermodynamique</a> · Fiche formulaire</div>
+  <h1>Fiche formulaire · Thermodynamique</h1>
+  <p class="lead">Les 36 formules et points à retenir des 5 chapitres, dans l'ordre du cours. Clique sur un titre pour revenir à la section du cours.</p>
+  <div class="ctools"><button class="btn" type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn ghost" href="/flashcards/?m=thermo">Flashcards</a><a class="btn ghost" href="/mini-ds/?m=thermo">Mini-DS</a></div>
+</header>
+
+<section class="fch">
+  <h2><a href="/cours/thermo/concepts/">Chapitre 1 · Concepts et définitions d'introduction</a></h2>
+  <div class="fsec"><h3><a href="/cours/thermo/concepts/#s2">Variables d'état, état et transformation</a></h3>
+    <div class="retiens"><b>Test rapide.</b> Coupe le système en deux moitiés : ce qui est divisé par 2 est extensif (m, V, U), ce qui ne change pas est intensif (p, T, ρ, v).</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/concepts/#s3">Unités, masse volumique et volume spécifique</a></h3>
+    <div class="formula key">F = m a                          (Eq. 1.1)
+SI : 1 N = (1 kg)(1 m/s²) = 1 kg·m/s²   (Eq. 1.2)
+
+ρ = lim (m / V)   quand V → V'          (Eq. 1.3)   en kg/m³
+v = 1/ρ                                            en m³/kg</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/concepts/#s4">La pression</a></h3>
+    <div class="formula key">p = lim (F_normale / A)   quand A → A'   (Eq. 1.4)
+
+1 Pa = 1 N/m²     1 kPa = 10³ N/m²     1 bar = 10⁵ N/m²     1 MPa = 10⁶ N/m²</div>
+    <div class="formula key">p(relative) = p(absolue) − p_atm(absolue)     (Eq. 1.5)   si p &gt; p_atm
+p(vide) = p_atm(absolue) − p(absolue)         (Eq. 1.6)   si p &lt; p_atm</div>
+    <div class="formula key">Colonne de liquide de hauteur L :   Δp = ρ g L
+Piston de masse m et d'aire A à l'équilibre :   p A = p_atm A + m g   →   p = p_atm + m g / A</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/concepts/#s5">La température</a></h3>
+    <div class="formula key">T(°C) = T(K) − 273,15     (Eq. 1.7)</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/thermo/premier-principe/">Chapitre 2 · L'énergie et le premier principe</a></h2>
+  <div class="fsec"><h3><a href="/cours/thermo/premier-principe/#s1">L'énergie d'un système et ses variations</a></h3>
+    <div class="formula key">ΔE_c = E_c2 − E_c1 = ½ m (V_2² − V_1²)        (Eq. 2.5)    V = vitesse
+ΔE_p = E_p2 − E_p1 = m g (z_2 − z_1)          (Eq. 2.10)   z = altitude
+Énergie interne : U (massique u, molaire U_m), lue dans les tables
+
+E_2 − E_1 = (U_2 − U_1) + (E_c2 − E_c1) + (E_p2 − E_p1)   (Eq. 2.27a)
+ΔE = ΔU + ΔE_c + ΔE_p                                     (Eq. 2.27b)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/premier-principe/#s2">Travail et chaleur : les conventions de signe</a></h3>
+    <div class="formula key">W &gt; 0 : travail fourni par le système        W &lt; 0 : travail fourni sur le système
+Q &gt; 0 : chaleur reçue par le système          Q &lt; 0 : chaleur cédée par le système</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/premier-principe/#s3">Le bilan d'énergie du système fermé</a></h3>
+    <div class="formula key">E_2 − E_1 = Q − W                    (Eq. 2.35a)
+ΔE_c + ΔE_p + ΔU = Q − W             (Eq. 2.35b)
+
+Forme temporelle (bilan de puissances) :
+dE/dt = P_th − P_méca                (Eq. 2.37)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/premier-principe/#s4">Travail de détente et de compression</a></h3>
+    <div class="formula key">F = p × A        W = ∫ F dx = ∫ p A dx
+
+W = ∫ p dV   (de V_1 à V_2)                 (Eq. 2.17)</div>
+    <div class="formula key">p Vⁿ = constante
+
+n = 1 :  W = (constante) ln(V_2 / V_1)    avec constante = p_1 V_1 = p_2 V_2</div>
+    <div class="formula key">n = 0 (p constante) :  W = p (V_2 − V_1)
+n ≠ 1 :                W = (p_2 V_2 − p_1 V_1) / (1 − n)    avec p_2 = p_1 (V_1 / V_2)ⁿ</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/premier-principe/#s5">Les modes de transfert de chaleur</a></h3>
+    <div class="formula key">Q̇_x = −κ A dT/dx                  (Eq. 2.31)
+
+Mur plan en régime permanent :  dT/dx = (T_2 − T_1)/L (&lt; 0)   →   Q̇_x = −κ A (T_2 − T_1)/L</div>
+    <div class="formula key">Φ = ε σ A (T_b⁴ − T_s⁴)            (Eq. 2.33)    σ = 5,67×10⁻⁸ W/(m²·K⁴)</div>
+    <div class="formula key">Φ_conv = h A (T_b − T_f)            (Eq. 2.34)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/premier-principe/#s6">Les cycles thermodynamiques</a></h3>
+    <div class="formula key">ΔE_cycle = Q_cycle − W_cycle = 0         (Eq. 2.39)</div>
+    <div class="retiens"><b>Comment ne pas se tromper.</b> La performance = ce qu'on veut ÷ ce qu'on paie. Moteur : on veut W, on paie Q<sub>in</sub>. Frigo : on veut Q<sub>in</sub> (le froid), on paie W. Pompe à chaleur : on veut Q<sub>out</sub> (le chaud), on paie W. Donc γ = β + 1 &gt; 1.</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/thermo/proprietes/">Chapitre 3 · Évaluation des propriétés thermodynamiques</a></h2>
+  <div class="fsec"><h3><a href="/cours/thermo/proprietes/#s1">Phase, substance pure et principe d'état</a></h3>
+    <div class="retiens"><b>Principe d'état.</b> Pour un système compressible simple, <b>deux propriétés intensives indépendantes</b> suffisent à fixer toutes les autres. Les couples (T, v) et (p, v) sont souvent pratiques. Attention : dans un mélange liquide-vapeur, p et T ne sont <b>pas</b> indépendantes.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/proprietes/#s3">Le changement de phase et le titre en vapeur</a></h3>
+    <div class="formula key">x = m_vapeur / m_totale       0 ≤ x ≤ 1
+liquide saturé : x = 0          vapeur saturée : x = 1</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/proprietes/#s4">Lire les tables et interpoler</a></h3>
+    <div class="formula key">h = u + p v        (Eq. 3.4)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/proprietes/#s5">Propriétés d'un mélange liquide-vapeur</a></h3>
+    <div class="formula key">V = V_liq + V_vap     →     v = V/m = (1 − x) v_f + x v_g
+
+v = (1 − x) v_f + x v_g = v_f + x (v_g − v_f)      (Eq. 3.2)
+u = (1 − x) u_f + x u_g = u_f + x (u_g − u_f)      (Eq. 3.6)
+h = (1 − x) h_f + x h_g = h_f + x (h_g − h_f)      (Eq. 3.7)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/proprietes/#s7">Chaleurs massiques, liquides et incompressibles</a></h3>
+    <div class="formula key">c_v = (∂u/∂T)_v      c_p = (∂h/∂T)_p      k = c_p / c_v      (Eq. 3.8, 3.9, 3.10)</div>
+    <div class="formula key">v(T, p) ≈ v_f(T)        u(T, p) ≈ u_f(T)        (Eq. 3.11, 3.12)
+h(T, p) ≈ h_f(T) + v_f(T) [p − p_sat(T)]     (Eq. 3.13)
+h(T, p) ≈ h_f(T)   si le terme entre crochets est petit   (Eq. 3.14)</div>
+    <div class="formula key">u_2 − u_1 = c (T_2 − T_1)                     (Eq. 3.20a)
+h_2 − h_1 = c (T_2 − T_1) + v (p_2 − p_1)      (Eq. 3.20b)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/proprietes/#s8">Le modèle du gaz parfait</a></h3>
+    <div class="formula key">p V = n R T       (Eq. 3.35)    R = 8,314 J/(mol·K)
+p V = m r T       (Eq. 3.33)    n = m/M,  r = R/M
+p v = r T         (Eq. 3.32)    v = V/m</div>
+    <div class="formula key">u = u(T)                        (Eq. 3.36)
+h = u + p v = u(T) + r T        (Eq. 3.37)
+c_v(T) = du/dT    c_p(T) = dh/dT          (Eq. 3.38, 3.41)
+Chaleurs massiques constantes :
+u(T_2) − u(T_1) = c_v [T_2 − T_1]         (Eq. 3.50)
+h(T_2) − h(T_1) = c_p [T_2 − T_1]         (Eq. 3.51)</div>
+    <div class="formula key">p Vⁿ = constante   (Eq. 3.52)
+n = 0 : isobare      n = ±∞ : isochore      n = 1 (gaz parfait) : isotherme</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/thermo/volume-controle/">Chapitre 4 · Analyse par volume de contrôle fondée sur l'énergie</a></h2>
+  <div class="fsec"><h3><a href="/cours/thermo/volume-controle/#s1">Bilan des débits massiques</a></h3>
+    <div class="formula key">dm_vc/dt = q_m,e − q_m,s                    (Eq. 4.1)
+dm_vc/dt = Σ_e q_m,e − Σ_s q_m,s            (Eq. 4.2)   plusieurs entrées / sorties
+
+Débit massique (écoulement 1D) :   q_m = A V / v      (Eq. 4.4b)
+   A : section, V : vitesse moyenne, v : volume massique
+
+Régime permanent :   Σ_e q_m,e = Σ_s q_m,s            (Eq. 4.6)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/volume-controle/#s2">Bilan de puissance pour un volume de contrôle</a></h3>
+    <div class="formula key">dE_vc/dt = P_th − P_méca + q_m,e (u_e + V_e²/2 + g z_e) − q_m,s (u_s + V_s²/2 + g z_s)   (Eq. 4.9)
+
+Puissance mécanique :  P_méca = P_méca,vc + q_m,s (p_s v_s) − q_m,e (p_e v_e)       (Eq. 4.12)
+   P_méca,vc : arbres tournants, déplacement de frontière, effets électriques
+   q_m (p v) : travail d'écoulement en sortie et en entrée
+
+Avec h = u + p v :
+dE_vc/dt = P_th,vc − P_méca,vc + Σ_e q_m,e (h_e + V_e²/2 + g z_e) − Σ_s q_m,s (h_s + V_s²/2 + g z_s)   (Eq. 4.15)</div>
+    <div class="formula key">0 = P_th,vc − P_méca,vc + q_m [ (h_e − h_s) + (V_e² − V_s²)/2 + g (z_e − z_s) ]   (Eq. 4.20a)
+
+En divisant par le débit :
+0 = Q_vc − W_vc + (h_e − h_s) + (V_e² − V_s²)/2 + g (z_e − z_s)                (Eq. 4.20b)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/volume-controle/#s4">Échangeurs de chaleur, détendeurs et intégration</a></h3>
+    <div class="formula key">0 = Σ_e q_m,e h_e − Σ_s q_m,s h_s</div>
+    <div class="formula key">h_e = h_s        (Eq. 4.22)</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/thermo/second-principe/">Chapitre 5 · Le second principe de la thermodynamique</a></h2>
+  <div class="fsec"><h3><a href="/cours/thermo/second-principe/#s1">Les énoncés du second principe</a></h3>
+    <div class="retiens"><b>Réservoir thermique.</b> Un système qui garde une température constante malgré les échanges de chaleur : l'atmosphère, un lac, l'océan, un gros bloc de cuivre.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/thermo/second-principe/#s3">Kelvin-Planck en équation et rendement entre deux réservoirs</a></h3>
+    <div class="formula key">Un seul réservoir :   W_cycle ≤ 0                     (Eq. 5.3)
+   &lt; 0 : des irréversibilités internes sont présentes
+   = 0 : aucune irréversibilité interne</div>
+    <div class="formula key">W_cycle = Q_C − Q_F
+
+η = W_cycle / Q_C = 1 − Q_F / Q_C           (Eq. 5.4)</div>
+    <div class="retiens"><b>Pourquoi η &lt; 1.</b> Si Q<sub>F</sub> valait 0, le moteur fonctionnerait avec un seul réservoir et fournirait du travail : Kelvin-Planck l'interdit. Il faut donc toujours rejeter une partie de la chaleur, et η &lt; 100 %.</div>
+  </div>
+</section>
+
+<p class="credit">D'après . Fiche construite automatiquement à partir des pages du site.</p>
+<footer class="site">Une formule manque ou est fausse ? <a href="/contact/?type=erreur&amp;matiere=Thermodynamique%20%C2%B7%20fiche%20formulaire">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

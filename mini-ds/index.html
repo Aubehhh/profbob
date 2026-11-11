@@ -171,6 +171,7 @@
 <script src="/mini-ds/banques/crea.js"></script>
 <script src="/assets/ue-s1.js"></script>
 <script src="matieres.js"></script>
+<script src="methodes.js"></script>
 <script>
 (function(){
   const MAT=window.MINIDS_MATIERES;
@@ -296,7 +297,7 @@
     if(m.nota)runEl.dataset.notaProfil=m.nota;else delete runEl.dataset.notaProfil;
     MiniDS.start({
       id:S.m+':'+(S.mode==='err'?'err-'+base.map(b=>b.id).join('+'):chs.join('+'))+':'+S.n, histKey:'minids-'+S.m, errKey:'minids-err-'+S.m,
-      mount:runEl, bank:P, report:'/contact/', startNow:true,
+      mount:runEl, bank:P, report:'/contact/', startNow:true, methodes:(window.MINIDS_METHODES||{})[S.m]||{},
       notations:window.Notations?Notations.html(S.m,{howto:true,title:'Notations et comment répondre'}):'',
       formats:[{id:'c',label,min:S.t,n:S.n}],
       onHome(){runEl.hidden=true;runEl.innerHTML='';cfgEl.hidden=false;S.seed=null;

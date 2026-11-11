@@ -11,7 +11,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const ROOT=path.join(__dirname,'..');
 const ctx={window:{},Math,console};ctx.window.window=ctx.window;vm.createContext(ctx);
-for(const f of ['assets/minids.js','ds/statique/mini-ds/banque.js','mini-ds/banques/thermo.js','mini-ds/banques/chimie.js','mini-ds/banques/elec.js','mini-ds/banques/outils.js','mini-ds/banques/web.js','mini-ds/banques/embarque.js','mini-ds/banques/crea.js','mini-ds/matieres.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
+for(const f of ['assets/minids.js','ds/statique/mini-ds/banque.js','mini-ds/banques/thermo.js','mini-ds/banques/chimie.js','mini-ds/banques/elec.js','mini-ds/banques/outils.js','mini-ds/banques/web.js','mini-ds/banques/embarque.js','mini-ds/banques/crea.js','mini-ds/matieres.js','mini-ds/methodes.js'])vm.runInContext(fs.readFileSync(path.join(ROOT,f),'utf8'),ctx,{filename:f});
 const W=ctx.window,{F,makeR,_test:{parse,correct,judge}}=W.MiniDS;
 const N=+process.argv[2]||2000,ONLY=process.argv[3];
 // une banque par matière : global de la banque + solveurs indépendants (outils/solveurs/<id>.js)
@@ -52,6 +52,8 @@ for(const q of BANK){
   }
   console.log(`${err?'·':'✓'} ${q.id.padEnd(11)} ${String(q.chap).padEnd(18)} ${N} sujets, écart max au recalcul ${worst.toExponential(1)}`);
 }
+for(const q of BANK)if(!((W.MINIDS_METHODES||{})[MAT.id]||{})[q.id])fail('pas de phrase de méthode pour '+MAT.id+'/'+q.id+' (mini-ds/methodes.js)');
+for(const k of Object.keys((W.MINIDS_METHODES||{})[MAT.id]||{}))if(!BANK.find(q=>q.id===k))fail('mini-ds/methodes.js : '+MAT.id+'/'+k+' ne correspond à aucune question');
 for(const id of declared)if(!BANK.find(q=>q.id===id))fail('mini-ds/matieres.js déclare '+id+' qui n\'existe pas dans la banque');
 // une copie entière : chaque DS de 8 questions, toutes cases justes → 20/20
 let copies=0;for(let s=1;s<=200;s++){const R=makeR(s);const idx=R.shuffle(BANK.map((_,i)=>i)).slice(0,8);

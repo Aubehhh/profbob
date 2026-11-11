@@ -8,6 +8,10 @@
   const get=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return {}}};
   const put=o=>{try{localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}};
 
+  // lien vers la fiche formulaire de la matière (/cours/<matière>/formulaire/)
+  (function(){const t=document.querySelector('.chero .ctools');if(!t||!/^\/cours\/[^/]+\/[^/]+\/$/.test(location.pathname))return;
+    const a=document.createElement('a');a.className='btn ghost';a.textContent='Fiche formulaire';a.href=location.pathname.replace(/[^/]+\/$/,'formulaire/');t.appendChild(a)})();
+
   // légende des notations du chapitre (assets/notations.js)
   document.querySelectorAll('[data-notations]').forEach(el=>{
     if(!window.Notations)return;

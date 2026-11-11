@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#2453b8">
+<link rel="apple-touch-icon" href="/assets/icon-192.png">
+<title>Fiche formulaire · Bases de l'électricité · profbob.fr</title>
+<meta name="description" content="Bases de l'électricité : toutes les formules et les points à retenir du cours sur une fiche, à imprimer ou à garder sur ton téléphone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/notation.css">
+<link rel="stylesheet" href="/assets/cours.css">
+<link rel="stylesheet" href="/assets/formulaire.css">
+<script src="/assets/notation.js" defer></script>
+</head>
+<body class="fiche" data-cours="elec-formulaire" data-matiere="elec" data-nota-all data-nota-profil="thermo">
+<header class="topbar"><div class="in">
+  <a class="brand" href="/"><i>p</i>profbob</a>
+  <nav aria-label="Navigation du site">
+    <a href="/">Accueil</a>
+    <a href="/matieres/" aria-current="page">Matières</a>
+    <a href="/notes/">Notes</a>
+    <a class="opt" href="/mini-ds/">Mini-DS</a>
+    <a href="/contact/">Contact</a>
+    <a class="srch" href="/recherche/" aria-label="Rechercher" title="Rechercher (touche /)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></a>
+  </nav>
+</div></header>
+
+<div class="wrap">
+<header class="chero">
+  <div class="eyebrow"><a href="/matieres/electricite/">← Bases de l'électricité</a> · Fiche formulaire</div>
+  <h1>Fiche formulaire · Bases de l'électricité</h1>
+  <p class="lead">Les 40 formules et points à retenir des 5 chapitres, dans l'ordre du cours. Clique sur un titre pour revenir à la section du cours.</p>
+  <div class="ctools"><button class="btn" type="button" onclick="window.print()">Imprimer ou enregistrer en PDF</button><a class="btn ghost" href="/flashcards/?m=elec">Flashcards</a><a class="btn ghost" href="/mini-ds/?m=elec">Mini-DS</a></div>
+</header>
+
+<section class="fch">
+  <h2><a href="/cours/elec/bases/">Chapitre 1 · Notions de base en électricité</a></h2>
+  <div class="fsec"><h3><a href="/cours/elec/bases/#s2">Tension et courant électrique</a></h3>
+    <div class="formula key">i(t) = dQ(t) / dt
+   i en A ; Q en coulombs (C) ; t en s</div>
+    <div class="retiens"><b>Majuscules et minuscules.</b> Une grandeur qui dépend du temps s'écrit en minuscule (u, i, p). Une grandeur constante s'écrit en majuscule (U, I, P).</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/bases/#s4">Relations puissance / énergie</a></h3>
+    <div class="formula key">Puissance constante :            w = P × T
+Constante par intervalles :       w = P₁T₁ + P₂T₂ + P₃T₃ + … = &lt;p(t)&gt; × T
+Cas général :                     w = ∫₀ᵀ p(t) dt = &lt;p(t)&gt; × T
+Puissance moyenne (active) :      &lt;p(t)&gt; = (1/T) ∫₀ᵀ p(t) dt
+   w en J ; P en W ; T en s   (1 kWh = 3,6×10⁶ J)</div>
+    <div class="retiens">La puissance moyenne est aussi appelée <b>puissance active</b>. Elle est proportionnelle à l'aire algébrique entre l'axe et la courbe de p(t).</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/elec/continu/">Chapitre 2 · Circuits alimentés en continu</a></h2>
+  <div class="fsec"><h3><a href="/cours/elec/continu/#s1">Éléments d'un circuit et conventions de fléchage</a></h3>
+    <div class="retiens">Changer de convention change le signe de la relation entre u et i : en récepteur u = R i, en générateur u = −R i pour la même résistance.</div>
+    <div class="formula key">Bilan de puissance : p = u × i
+   convention récepteur : p &gt; 0 → le dipôle reçoit (fonctionne en récepteur)
+   convention générateur : p &gt; 0 → le dipôle fournit (fonctionne en générateur)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/continu/#s2">Résistance d'un conducteur et influence de la température</a></h3>
+    <div class="formula key">R = ρ × l / S
+   R en Ω ; ρ (résistivité) en Ω·m ; l en m ; S en m²</div>
+    <div class="formula key">Résistivité à θ °C :  ρ_θ = ρ₀ (1 + a₀ θ)     (relation affine)
+Résistance à θ °C :   R_θ = R₀ (1 + a₀ θ)
+   ρ₀, R₀ : valeurs à 0 °C ; a₀ : coefficient de température (°C⁻¹) ; θ en °C</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/continu/#s3">Loi d'Ohm, associations série et parallèle</a></h3>
+    <div class="formula key">Loi d'Ohm (convention récepteur) :  u = R × i   ;  en continu : U = R × I
+   U en V ; R en Ω ; I en A</div>
+    <div class="formula key">Série (même courant) :        R_éq = R₁ + R₂ + R₃
+Parallèle (même tension) :    1/R_éq = 1/R₁ + 1/R₂ + 1/R₃
+   deux résistances en parallèle : R_éq = R₁R₂ / (R₁ + R₂)</div>
+    <div class="retiens"><b>Remarques du cours.</b> En série, R<sub>éq</sub> est toujours plus grande que la plus grande des résistances. En parallèle, R<sub>éq</sub> est toujours plus petite que la plus petite.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/continu/#s5">Loi des mailles et loi des nœuds de Kirchhoff</a></h3>
+    <div class="formula key">Loi des mailles (LMK) : la somme algébrique des tensions le long d'une maille est nulle.
+   On choisit un sens de parcours : une tension dont la flèche est dans ce sens compte +, sinon −.
+Loi des nœuds (LNK) : la somme algébrique des intensités à un nœud est nulle
+   (somme des courants qui arrivent = somme des courants qui partent).</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/continu/#s6">Diviseur de tension et diviseur de courant</a></h3>
+    <div class="formula key">Diviseur de tension (R₁ et R₂ en série, sortie à vide : I_s = 0) :
+   V_s = V_e × R₂ / (R₁ + R₂)        (tension aux bornes de R₂)
+Diviseur de courant (R₁ et R₂ en parallèle, courant total I) :
+   i₁ = I × R₂ / (R₁ + R₂)            (courant dans R₁ : c'est l'AUTRE résistance au numérateur)</div>
+    <div class="retiens"><b>Pour mémoriser.</b> Tension : « la résistance dont on veut la tension, sur la somme ». Courant : « l'autre résistance, sur la somme ».</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/elec/theoremes/">Chapitre 3 · Modèles électriques équivalents</a></h2>
+  <div class="fsec"><h3><a href="/cours/elec/theoremes/#s1">Circuit à plusieurs mailles : la méthode de Kirchhoff</a></h3>
+    <div class="formula key">n nœuds, p courants inconnus (p branches) :
+   n − 1 équations de nœuds
+   p − (n − 1) équations de mailles
+   (les autres équations ne seraient pas indépendantes)</div>
+    <div class="formula key">Nœud A :                          i₁ + i₂ + i₃ = 0                 (1)
+Maille A R₁ B E₂ R₂ A :           −R₁i₁ + E₂ + R₂i₂ = 0             (2)
+Maille A R₂ E₂ B E₃ R₃ A :        −R₂i₂ − E₂ + E₃ + R₃i₃ = 0        (3)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/theoremes/#s2">Théorème de superposition</a></h3>
+    <div class="formula key">i₁ = i₁E₂ + i₁E₃     (de même pour i₂ et i₃)
+Éteindre une source de tension = la remplacer par un fil (court-circuit)
+Éteindre une source de courant = la remplacer par un interrupteur ouvert</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/theoremes/#s3">Théorème de Thévenin</a></h3>
+    <div class="formula key">u = E_T − R_T × i
+   E_T : tension à vide (i = 0)
+   R_T : résistance interne = pente de la caractéristique
+   courant de court-circuit (u = 0) : I_cc = E_T / R_T</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/theoremes/#s4">Théorème de Norton</a></h3>
+    <div class="formula key">u = R_N × (I_CC − i)
+Passage Thévenin ↔ Norton :
+   I_CC = E_T / R_T        R_N = R_T        E_T = R_N × I_CC</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/elec/sinusoidal/">Chapitre 4 · Circuits alimentés en sinusoïdal monophasé</a></h2>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s1">Le signal sinusoïdal et sa représentation de Fresnel</a></h3>
+    <div class="formula key">v(t) = V̂ sin(ωt + φ) = V √2 sin(ωt + φ)
+   V̂ (= V_max) : amplitude ; V : valeur efficace
+   ω = 2πf = 2π/T : pulsation (rad·s⁻¹) ; f = 1/T (Hz) ; T : période (s)
+   φ : phase à l'origine (rad)
+   réseau : f = 50 Hz, T = 20 ms, V = 230 V, V̂ = 325 V</div>
+    <div class="retiens"><b>Fresnel.</b> On dessine un vecteur de longueur proportionnelle à la <b>valeur efficace</b>, faisant avec l'axe un angle égal à la <b>phase à l'origine</b>. On note la grandeur avec une flèche : V⃗₁. C'est pratique pour ajouter ou soustraire des tensions, mais cela ne marche qu'à fréquence commune et pour des sinus parfaits, et on ne peut pas dessiner un produit de deux vecteurs.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s2">L'outil mathématique : les nombres complexes</a></h3>
+    <div class="formula key">Forme algébrique :      V = a + j b
+Forme polaire :         V = [ρ ; θ] = ρ (cos θ + j sin θ) = ρ e^(jθ)
+   ρ = √(a² + b²)  (module = longueur du vecteur)
+   a = ρ cos θ ;  b = ρ sin θ ;  θ = arctan(b/a)  (argument)
+   j = [1 ; π/2] : imaginaire pur de module 1, j² = −1</div>
+    <div class="formula key">Addition, soustraction : sur la forme algébrique  V₁ ± V₂ = (a₁ ± a₂) + j(b₁ ± b₂)
+Multiplication :         V₁ × V₂ = [ρ₁ρ₂ ; θ₁ + θ₂]
+Division :               V₁ / V₂ = [ρ₁/ρ₂ ; θ₁ − θ₂]</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s3">Le résistor et la valeur efficace</a></h3>
+    <div class="formula key">u_R(t) = R i_R(t)       (continu : U_R = R I_R)
+En complexes : U_R = Z_R I_R  avec  Z_R = R = [R ; 0]
+φ_R = arg U_R − arg I_R = 0 : tension et courant en phase
+p_R(t) = u_R(t) × i_R(t) = R i_R²(t) = u_R²(t)/R ≥ 0</div>
+    <div class="formula key">Puissance active : P = &lt;p(t)&gt; = (1/T) ∫₀ᵀ p(t) dt     (à mi-hauteur entre p_max et p_min)
+Pour une résistance :  P_R = Û_R² / (2R) = U_R² / R = R I_R² = U_R × I_R
+Valeur efficace (RMS) : U = √( (1/T) ∫₀ᵀ u²(t) dt ) = √&lt;u²(t)&gt;
+En sinusoïdal :        U = Û / √2</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s4">L'inductance d'une bobine</a></h3>
+    <div class="formula key">u_L(t) = L × di_L(t)/dt
+Continu établi : u_L = 0 → la bobine se comporte comme un fil
+Sinusoïdal :     U_L = Lω × I_L ;   Z_L = jLω = [Lω ; π/2]
+                 le courant est en retard de π/2 (quadrature retard) sur la tension
+Énergie stockée : w_L(t) = ½ L i_L²(t)</div>
+    <div class="formula key">Puissances d'une inductance :
+   P_L = U_L I_L cos(π/2) = 0
+   Q_L = U_L I_L = Lω I_L² = U_L² / (Lω)  > 0 (consommée)   [VAR]
+   S_L = Q_L = U_L I_L ;  facteur de puissance = 0
+Associations :  série  L_éq = L₁ + L₂ + L₃ ;   parallèle  1/L_éq = 1/L₁ + 1/L₂ + 1/L₃</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s5">Le condensateur</a></h3>
+    <div class="formula key">i_C(t) = C × du_C(t)/dt
+Continu : i_C = 0 → circuit ouvert
+Sinusoïdal :   I_C = Cω × U_C ;   Z_C = 1/(jCω) = −j/(Cω) = [1/(Cω) ; −π/2]
+               le courant est en avance de π/2 (quadrature avance) sur la tension
+Énergie stockée : w_C(t) = ½ C u_C²(t)</div>
+    <div class="formula key">Puissances d'un condensateur :
+   P_C = 0
+   Q_C = −U_C I_C = −I_C² / (Cω) = −U_C² Cω  &lt; 0 (fournie)   [VAR]
+   S_C = U_C I_C = |Q_C| ;  facteur de puissance = 0
+Associations :  série  1/C_éq = 1/C₁ + 1/C₂ + 1/C₃ ;   parallèle  C_éq = C₁ + C₂ + C₃</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s6">Associations d'impédances et circuit RLC série</a></h3>
+    <div class="formula key">Loi d'Ohm complexe :  U = Z I
+Série :      Z_éq = Z₁ + Z₂ + Z₃
+Parallèle :  1/Z_éq = 1/Z₁ + 1/Z₂ + 1/Z₃
+RLC série :  Z_s = R + j(Lω − 1/(Cω))
+   |Z_s| = √(R² + (Lω − 1/(Cω))²) ;   φ = arg Z_s = arctan((Lω − 1/(Cω)) / R)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s7">Modèle de Thévenin d'une source sinusoïdale</a></h3>
+    <div class="formula key">Source parfaite : U reste constante quel que soit I
+Source réelle :   U = E_T − Z_T × I
+Avec une charge Z_C :  I = E_T / (Z_T + Z_C) ;   U = E_T × Z_C / (Z_T + Z_C)  (diviseur de tension)</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s8">Triangle des puissances et méthode de Boucherot</a></h3>
+    <div class="formula key">S = U × I = √(P² + Q²)     [VA]   (sert à dimensionner les fils)
+P = U I cos φ = S cos φ     [W]
+Q = U I sin φ = S sin φ     [VAR]
+tan φ = Q / P ;  facteur de puissance PF = P / S = cos φ</div>
+    <div class="formula key">Méthode de Boucherot (n récepteurs alimentés sous la même tension U) :
+   P_T = P₁ + P₂ + … + P_N
+   Q_T = Q₁ + Q₂ + … + Q_N      (Q &gt; 0 bobine, Q &lt; 0 condensateur)
+   S_T = √(P_T² + Q_T²) = U × I_T      cos φ_T = P_T / S_T</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/sinusoidal/#s9">Relever le facteur de puissance, appareils de mesure</a></h3>
+    <div class="formula key">Rendement : η = P_U / P_A  →  P_A = P_U / η
+Condensateur pour passer de φ à φ' (P inchangée) :
+   Q_C = −P (tan φ − tan φ')     C = P (tan φ − tan φ') / (U² ω)
+Courant après relèvement :  I' = P / (U cos φ')</div>
+  </div>
+</section>
+
+<section class="fch">
+  <h2><a href="/cours/elec/triphase/">Chapitre 5 · Structure et propriétés d'un réseau triphasé équilibré</a></h2>
+  <div class="fsec"><h3><a href="/cours/elec/triphase/#s1">Structure d'un réseau triphasé</a></h3>
+    <div class="formula key">Réseau triphasé : 3 fils de phases (L1, L2, L3) + 1 fil de neutre (N) pour alimenter les récepteurs
++ 1 fil de protection (PE) relié à la terre pour protéger les personnes</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/triphase/#s2">Les tensions simples</a></h3>
+    <div class="formula key">v_1(t) = V √2 sin ωt
+v_2(t) = V √2 sin(ωt − 2π/3)
+v_3(t) = V √2 sin(ωt − 4π/3)</div>
+    <div class="formula key"><u>V</u>₁ = [V ; 0°]      <u>V</u>₂ = [V ; −120°]      <u>V</u>₃ = [V ; −240°]</div>
+    <div class="retiens"><b>À retenir.</b> Les trois vecteurs ont même longueur et sont à 120° : leur somme est nulle. À chaque instant, v<sub>1</sub> + v<sub>2</sub> + v<sub>3</sub> = 0.</div>
+  </div>
+  <div class="fsec"><h3><a href="/cours/elec/triphase/#s3">Les tensions composées</a></h3>
+    <div class="formula key">u_13(t) = v_1(t) − v_3(t)
+u_21(t) = v_2(t) − v_1(t)
+u_32(t) = v_3(t) − v_2(t)</div>
+    <div class="formula key">u_13(t) = U √2 sin(ωt − π/6)
+u_21(t) = U √2 sin(ωt − 5π/6)
+u_32(t) = U √2 sin(ωt − 3π/2)</div>
+  </div>
+</section>
+
+<p class="credit">D'après le cours « Les bases de l'électricité » de E. Fiolet (HEI 1, JUNIA). Fiche construite automatiquement à partir des pages du site.</p>
+<footer class="site">Une formule manque ou est fausse ? <a href="/contact/?type=erreur&amp;matiere=Bases%20de%20l'%C3%A9lectricit%C3%A9%20%C2%B7%20fiche%20formulaire">Signale-la ici</a>.</footer>
+</div>
+<script src="/assets/stats.js" defer></script>
+<script src="/assets/pwa.js" defer></script>
+</body>
+</html>

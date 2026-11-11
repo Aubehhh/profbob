@@ -48,3 +48,25 @@
 /* code dans un énoncé (mini-DS d'informatique) */
 .mds-q pre.mds-code{font-family:var(--mono);font-size:.85rem;line-height:1.5;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;overflow-x:auto;white-space:pre;margin:8px 0 12px}
 .mds-q code{font-family:var(--mono);font-size:.9em;background:var(--tint);padding:1px 5px;border-radius:4px}
+
+/* correction rédigée */
+.mds-corr .mds-meth{margin:4px 0 8px;max-width:75ch}
+.mds-corr .mds-meth b{font-family:var(--display);color:var(--vec)}
+.mds-corr .mds-res{margin:8px 0 0;padding:8px 12px;border:1.5px solid var(--ok);border-radius:8px;display:inline-block;max-width:100%}
+.mds-corr .mds-res b:first-child{font-family:var(--display);color:var(--ok)}
+/* impression : sujet (pendant l'épreuve) ou copie corrigée (après) */
+@media print{
+  @page{margin:12mm}
+  html,body{background:#fff!important;color:#000!important}
+  .topbar,.mds-bar,.mds-row,.mds-note,.mds-force,footer.site,#cfg,.pwa-install,.mds-print{display:none!important}
+  .mds-q{border:1px solid #bbb!important;box-shadow:none!important;margin:6px 0!important;padding:8px 10px!important}
+  .mds-q h3,.mds-fields,.mds-corr .mds-res,.mds-corr .formula{break-inside:avoid}
+  .hero,#mds-qs>details.nota{display:none!important}
+  .mds-q h3{font-size:11pt}
+  .mds-field input,.mds-field select{border:1px solid #888!important;background:#fff!important;color:#000!important}
+  .mds-score{background:#fff!important;border:1px solid #999;padding:8px 12px}
+  .mds-corr .formula{background:#f4f4f4!important;color:#000!important;white-space:pre-wrap;font-size:9pt}
+  .mds-corr summary{list-style:none}
+  details.mds-corr>summary::-webkit-details-marker{display:none}
+  a{color:inherit!important;text-decoration:none!important}
+}

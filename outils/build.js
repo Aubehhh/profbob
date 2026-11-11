@@ -70,7 +70,8 @@ for(const u of UES)for(const m of u.modules){
   const others=u.modules.filter(x=>x!==m);
   const notes=m.poids?`<div class="poids"><span class="pill strong">${fr(m.poids)} % de l'UE</span>${m.ep.map(([k,lab,w])=>`<span class="pill">${esc(lab)} · ${fr(w)} %</span>`).join('')}<a class="pill link" href="/notes/#ue-${u.id}">Simuler mes notes ▸</a></div>`:'<div class="poids"><span class="pill">Module non noté</span></div>';
   const md=MD.find(x=>x.module===m.id);
-  const outils=md?`<div class="tools2"><a class="btn" href="/mini-ds/?m=${md.id}">Mini-DS ▸</a>${FC[md.id]?`<a class="btn ghost" href="/flashcards/?m=${md.id}">Flashcards · ${FC[md.id].length} formules</a>`:''}</div>`:'';
+  const fdos=(m.chapitres.find(c=>c.url&&c.url.startsWith('/cours/'))||{url:''}).url.split('/')[2];
+  const outils=md?`<div class="tools2"><a class="btn" href="/mini-ds/?m=${md.id}">Mini-DS ▸</a>${FC[md.id]?`<a class="btn ghost" href="/flashcards/?m=${md.id}">Flashcards · ${FC[md.id].length} formules</a>`:''}${fdos?`<a class="btn ghost" href="/cours/${fdos}/formulaire/">Fiche formulaire</a>`:''}</div>`:'';
   const chap=m.chapitres.length?`<div class="progsum" id="prog-sum" hidden></div><ol class="chaps">${m.chapitres.map((c,i)=>c.url?`<li data-chap="${c.id}"><a href="${c.url}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="go">▸</span></a></li>`:`<li class="soon" data-chap="${c.id}"><span class="n">${i+1}</span><span class="tt">${esc(c.titre)}</span><span class="tag">bientôt</span></li>`).join('')}</ol>`
     :m.rien?`<div class="empty-state"><b>Rien ce semestre.</b><p>Pas de cours de ${esc(m.nom)} à réviser au semestre 1.</p></div>`
     :`<div class="empty-state"><b>Les chapitres arrivent bientôt.</b><p>Le cours de ${esc(m.nom)} sera ajouté chapitre par chapitre.</p><a class="btn ghost" href="/contact/?type=chapitre&amp;matiere=${encodeURIComponent(m.nom)}%20%C2%B7%20">Proposer un chapitre ou envoyer un cours</a></div>`;
@@ -223,4 +224,6 @@ const pages=base.concat(ALL.map(m=>['p-matieres_'+m.slug.replace(/[^a-z0-9]+/g,'
   ALL.flatMap(m=>m.chapitres.filter(c=>c.url&&c.url.startsWith('/cours/')).map((c,i)=>['p-'+c.url.replace(/^\/|\/$/g,'').replace(/[^a-z0-9]+/gi,'_').toLowerCase(),'Cours · '+c.titre])));
 const pa=ad.indexOf('/*PAGES:debut*/'),pb=ad.indexOf('/*PAGES:fin*/');
 if(pa>=0&&pb>=0){ad=ad.slice(0,pa)+'/*PAGES:debut*/'+JSON.stringify(pages)+ad.slice(pb);fs.writeFileSync(ap,ad)}
-console.log('ok :',ALL.length,'modules,',UES.length,'UE');
+// --- fiches formulaire (une par matière avec des pages chapitre) ---
+const FICHES=require('./gen-formulaires.js').gen(ALL,ROOT);
+console.log('ok :',ALL.length,'modules,',UES.length,'UE,',FICHES.length,'fiches formulaire');
